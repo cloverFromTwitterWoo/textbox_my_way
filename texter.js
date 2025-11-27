@@ -116,6 +116,7 @@ function draw_canvas()
 			awesome_canvas.height = 152 + 12
 			awesome_canvas.width = 578 + 12
 			offset = [6,6]
+			ctx.fillRect(0,0,canvas.width,canvas.height)
 		}
 		else
 		{
@@ -127,7 +128,6 @@ function draw_canvas()
 		}
 		ctx.imageSmoothingEnabled = false
 		canvas.imageSmoothingEnabled = false
-		ctx.fillRect(0,0,canvas.width,canvas.height)
 		ctx.drawImage(image_i_use,offset[0],offset[1])
 		ctx.drawImage(portrait_i_use, 6+offset[0], 6+offset[1], 134,140)
 		draw_text(144+offset[0],26+offset[1],textbox_text.value)
@@ -144,28 +144,29 @@ function draw_canvas()
 
 function box_stack_add()
 {
-	alert("LOL0-")
+	//alert("LOL0-")
 	const img = document.createElement('img');
-	alert("LOL-1")
+	//alert("LOL-1")
 	img.src = awesome_canvas.src;
 	document.body.appendChild(img);
 	img.style.display = 'none'
 	bonus_boxes.push(img)
 	canvas_stack.height = (152 + 12)*bonus_boxes.length
 	ctx_stack.fillRect(0,0,canvas_stack.width,canvas_stack.height)
-	alert("LOL0")
+	//alert("LOL0")
 	for (let i = 0; i < bonus_boxes.length; i++) {
 		alert(i)
 		if(marge.checked)
-  		{alert("m");
+  		{//alert("m");
 ctx_stack.draw_image(bonus_boxes[i].src, 0, (152 + 12)*i)}
 		else
-  		{alert("m");ctx_stack.draw_image(bonus_boxes[i].src, 6, 6+(152 + 12)*i)}
+  		{//alert("m");
+ctx_stack.draw_image(bonus_boxes[i].src, 6, 6+(152 + 12)*i)}
 	}
-	alert("LOL1")
+	//alert("LOL1")
 
 	const dataURL = canvas_stack.toDataURL('image/png');
-	alert("LOL")
+	//alert("LOL")
 	awesome_canvas_Stacked.style.display = 'block'
 	awesome_canvas_Stacked.src = dataURL;
 }
