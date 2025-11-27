@@ -180,7 +180,7 @@ function draw_canvas()
 
 function box_stack_update()
 {
-	alert(box_size)
+	//alert(box_size)
 	canvas_stack.height = (box_size[3] + 12)*bonus_boxes.length
 	canvas_stack.width = (box_size[2] + 12)
 	ctx_stack.fillRect(0,0,canvas_stack.width,canvas_stack.height)
