@@ -13,7 +13,7 @@ function loadImage(filePath)
 	return my_tempo
 }
 
-//awesome_canvas.style.display = 'none'
+canvas.style.display = 'none'
 
 let textbox_bg = document.getElementById("text_bg")
 let textbox_text = document.getElementById("text_input")
