@@ -157,9 +157,10 @@ function box_stack_add()
 	for (let i = 0; i < bonus_boxes.length; i++) {
 		alert(i)
 		if(marge.checked)
-  		{ctx_stack.draw_image(bonus_boxes[i], 0, (152 + 12)*i)}
+  		{alert("m");
+ctx_stack.draw_image(bonus_boxes[i].src, 0, (152 + 12)*i)}
 		else
-  		{ctx_stack.draw_image(bonus_boxes[i], 6, 6+(152 + 12)*i)}
+  		{alert("m");ctx_stack.draw_image(bonus_boxes[i].src, 6, 6+(152 + 12)*i)}
 	}
 	alert("LOL1")
 
