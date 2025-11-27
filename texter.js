@@ -1,8 +1,8 @@
 const canvas = document.getElementById("textbox_work");
 const ctx = canvas.getContext("2d");
 
-//const canvas_stack = document.getElementById("stack_work");
-//const ctx_stack = canvas_stack.getContext("2d");
+const canvas_stack = document.getElementById("stack_work");
+const ctx_stack = canvas_stack.getContext("2d");
 
 ctx.fillStyle = "black"
 ctx.fillRect(0,0,canvas.width,canvas.height)
@@ -48,6 +48,10 @@ function letter_to_index(letta, index)
 	{return code+15}
 	else if(code == 33)
 	{return 53}
+	else if(code == 46)
+	{return 68}
+	else if(code == 44)
+	{return 69}
 	else
 	{return 67}
 }
@@ -115,7 +119,7 @@ function draw_canvas()
 	}
 }
 
-/*function box_stack_add()
+function box_stack_add()
 {
 	const dataURL = canvas_stack.toDataURL('image/png');
 	canvas_stack.height += 164
@@ -127,6 +131,6 @@ function draw_canvas()
 function stack_reset()
 {
 	canvas_stack.height = 0
-}*/
+}
 
 draw_canvas()
