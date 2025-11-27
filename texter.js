@@ -8,6 +8,7 @@ ctx.fillStyle = "black"
 ctx.fillRect(0,0,canvas.width,canvas.height)
 
 let awesome_canvas = document.getElementById("canvasTrue");
+let awesome_canvas_Stacked = document.getElementById("canvasStack");
 
 const marge = document.getElementById("margesimpson");
 
@@ -146,9 +147,12 @@ function box_stack_add()
 	const img = document.createElement('img');
 	img.src = awesome_canvas.src;
 	document.body.appendChild(img);
+	img.style.display = 'none'
 	bonus_boxes.push(img)
 	canvas_stack.height = (152 + 12)*bonus_boxes.length
 	ctx_stack.fillRect(0,0,canvas_stack.width,canvas_stack.height)
+	const dataURL = canvas_stack.toDataURL('image/png');
+	awesome_canvas_Stacked.src = dataURL;
 }
 
 function stack_reset()
@@ -158,6 +162,7 @@ function stack_reset()
 		document.body.removeChild(bonus_boxes[0])
 		bonus_boxes.shift()
 	}
+	awesome_canvas_Stacked.style.display = 'none'
 }
 
 const exp_options = {
