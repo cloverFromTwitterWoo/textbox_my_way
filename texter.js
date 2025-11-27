@@ -80,8 +80,10 @@ function draw_canvas()
 	{
 		ctx.drawImage(image_i_use,0,0)
 		draw_text(144,26,textbox_text.value)
+		canvas.style.display = 'none'
 		const dataURL = canvas.toDataURL('image/png');
 		awesome_canvas.src = dataURL;
+		canvas.style.display = 'none'
 	}
 	else
 	{
