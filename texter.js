@@ -169,7 +169,7 @@ function draw_canvas()
 			portrait_blacka.imageSmoothingEnabled = false
 			canvas.imageSmoothingEnabled = false
 			portrait_blacka.clearRect(0,0,134,140)
-			portrait_blacka.drawImage(portrait_i_use,-30,-20)
+			portrait_blacka.drawImage(portrait_i_use,0,0,134,140)
 			alert("M")
 			var cool_pixels = portrait_blacka.getImageData(0,0, 134,140)
 			alert(cool_pixels.data)
@@ -182,9 +182,11 @@ function draw_canvas()
 					cool_pixels.data[i-1] = 0
 				}
 			}
-			alert("O")
-			portrait_blacka.putImageData(cool_pixels, 0, 0);
-			alert("P")
+			portrait_blacka.putImageData(cool_pixels, 0, 0)
+			ctx.drawImage(portrait_blacka, 6+offset[0]+box_size[0]-1, 6+offset[1]+box_size[1]-1, 134,140)
+			ctx.drawImage(portrait_blacka, 6+offset[0]+box_size[0]-1, 6+offset[1]+box_size[1]+1, 134,140)
+			ctx.drawImage(portrait_blacka, 6+offset[0]+box_size[0]+1, 6+offset[1]+box_size[1]-1, 134,140)
+			ctx.drawImage(portrait_blacka, 6+offset[0]+box_size[0]+1, 6+offset[1]+box_size[1]+1, 134,140)
 			ctx.drawImage(portrait_i_use, 6+offset[0]+box_size[0], 6+offset[1]+box_size[1], 134,140)
 		}
 		if(textbox_chr.value == "none")
