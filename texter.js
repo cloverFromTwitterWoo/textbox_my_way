@@ -147,12 +147,13 @@ function box_stack_add()
 	const img = document.createElement('img');
 	img.src = awesome_canvas.src;
 	document.body.appendChild(img);
-	img.style.display = 'none'
+	//img.style.display = 'none'
 	bonus_boxes.push(img)
 	canvas_stack.height = (152 + 12)*bonus_boxes.length
 	ctx_stack.fillRect(0,0,canvas_stack.width,canvas_stack.height)
 	for (let i = 0; i < bonus_boxes.length; i++) {
-  		ctx_stack.draw_image(bonus_boxes[i], 6, 6+(152 + 12)*i)
+  		ctx_stack.draw_image(bonus_boxes[i], 0, (152 + 12)*i)
+  		ctx_stack.draw_image(bonus_boxes[i].src, 0, (152 + 12)*i)
 	}
 
 	const dataURL = canvas_stack.toDataURL('image/png');
