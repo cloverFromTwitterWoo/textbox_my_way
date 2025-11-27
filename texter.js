@@ -1,8 +1,8 @@
 const canvas = document.getElementById("textbox_work");
 const ctx = canvas.getContext("2d");
 
-//const canvas_stack = document.getElementById("stack_work");
-//const ctx_stack = canvas_stack.getContext("2d");
+const canvas_stack = document.getElementById("stack_work");
+const ctx_stack = canvas_stack.getContext("2d");
 
 ctx.fillStyle = "black"
 ctx.fillRect(0,0,canvas.width,canvas.height)
@@ -143,19 +143,21 @@ function draw_canvas()
 
 function box_stack_add()
 {
-	alert("go on")
 	const img = document.createElement('img');
-	alert("go on2")
 	img.src = awesome_canvas.src;
-	alert("go on3")
 	document.body.appendChild(img);
-	alert("go on4")
 	bonus_boxes.push(img)
+	canvas_stack.height = (152 + 12)*bonus_boxes.length
+	ctx_stack.fillRect(0,0,canvas_stack.width,canvas_stack.height)
 }
 
 function stack_reset()
 {
-	canvas_stack.height = 0
+	while(bonus_boxes.length > 0)
+	{
+		document.body.removeChild(bonus_boxes[0])
+		bonus_boxes.shift()
+	}
 }
 
 const exp_options = {
