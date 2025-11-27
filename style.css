@@ -4,7 +4,7 @@ html, body {
   background-color: gray;
 }
 canvas {
-  /*display: none;*/
+  display: none;
   image-rendering: pixelated;
   font-smooth: never;
   -webkit-font-smoothing: none;
