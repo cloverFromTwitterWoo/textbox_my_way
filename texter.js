@@ -36,6 +36,7 @@ let textbox_exp_alt = document.getElementById("text_exp_alt")
 let textbox_exp_txt_1 = document.getElementById(id="exp_txt")
 
 let font_dt_mono = loadImage("assets/determination_mono.png")
+let font_dt_mono_ol = loadImage("assets/determination_mono_outline.png")
 
 let boxes_in = []
 
@@ -93,6 +94,10 @@ function draw_text(x,y,str)
 			i += 2
 		}
 		var cur_letter = letter_to_index(str, i)
+   		ctx.drawImage(font_dt_mono_ol,(cur_letter%10)*18,Math.floor(cur_letter/10)*26,18,26, draw_pos_x[0]-1, draw_pos_y[0]-1, 18, 26)
+   		ctx.drawImage(font_dt_mono_ol,(cur_letter%10)*18,Math.floor(cur_letter/10)*26,18,26, draw_pos_x[0]-1, draw_pos_y[0]+1, 18, 26)
+   		ctx.drawImage(font_dt_mono_ol,(cur_letter%10)*18,Math.floor(cur_letter/10)*26,18,26, draw_pos_x[0]+1, draw_pos_y[0]-1, 18, 26)
+   		ctx.drawImage(font_dt_mono_ol,(cur_letter%10)*18,Math.floor(cur_letter/10)*26,18,26, draw_pos_x[0]+1, draw_pos_y[0]+1, 18, 26)
    		ctx.drawImage(font_dt_mono,(cur_letter%10)*18,Math.floor(cur_letter/10)*26,18,26, draw_pos_x[0], draw_pos_y[0], 18, 26)
 		i++
 		draw_pos_x[0] += 16
