@@ -59,6 +59,10 @@ function letter_to_index(letta, index)
 	{return 68}
 	else if(code == 44)
 	{return 69}
+	else if(code == 39)
+	{return 70}
+	else if(code == 34)
+	{return 71}
 	else
 	{return 67}
 }
@@ -149,7 +153,9 @@ function stack_reset()
 	canvas_stack.height = 0
 }*/
 
-const exp_options = {"clover": '<option value="default">Default</option><option value="neutral">Neutral</option><option value="bummed">Bummed</option>',"toriel": '<option value="default">Default</option><option value="looking-away">Looking Away</option><option value="sad">Sad</option>'}
+const exp_options = {
+"clover": '<option value="default">Default</option><option value="neutral">Neutral</option><option value="bummed">Bummed</option>',
+"toriel": '<option value="default">Default</option><option value="looking-away">Looking Away</option><option value="sad">Sad</option>'}
 textbox_exp.innerHTML=exp_options[textbox_chr.value]
 textbox_chr.addEventListener("change", (event) => {textbox_exp.innerHTML=exp_options[textbox_chr.value]})
 
