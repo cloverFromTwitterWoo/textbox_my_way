@@ -22,6 +22,8 @@ function loadImage(filePath)
 //canvas.style.display = 'none'
 
 let bonus_boxes = []
+let bonus_buttons = []
+let bonus_breaks = []
 
 let textbox_bg = document.getElementById("text_bg")
 let textbox_text = document.getElementById("text_input")
@@ -148,13 +150,8 @@ portrait_i_use = thatExists}
 	}
 }
 
-function box_stack_add()
+function box_stack_update()
 {
-	const img = document.createElement('img');
-	img.src = awesome_canvas.src;
-	document.body.appendChild(img);
-	img.style.display = 'none'
-	bonus_boxes.push(img)
 	canvas_stack.height = (152 + 12)*bonus_boxes.length
 	ctx_stack.fillRect(0,0,canvas_stack.width,canvas_stack.height)
 	for (let i = 0; i < bonus_boxes.length; i++) {
@@ -168,12 +165,53 @@ function box_stack_add()
 	awesome_canvas_Stacked.src = dataURL;
 }
 
+function box_stack_remove(which)
+{
+	document.body.removeChild(bonus_boxes[which])
+	document.body.removeChild(bonus_buttons[which])
+	document.body.removeChild(bonus_breaks[which])
+	bonus_boxes.splice(which, 1)
+	bonus_buttons.splice(which, 1)
+	bonus_breaks.splice(which, 1)
+	for (let i = which; i < bonus_buttons.length; i++)
+	{
+		bonus_buttons[i].value -= 1
+	}
+	if(bonus_boxes.length > 0)
+	{box_stack_update()}
+	else
+	{stack_reset()}
+}
+
+function box_stack_add()
+{
+	const img = document.createElement('img');
+	img.src = awesome_canvas.src;
+	document.body.appendChild(img);
+	//img.style.display = 'none'
+	bonus_boxes.push(img)
+	const button = document.createElement('button')
+	button.innerHTML = "Remove"
+	button.value = bonus_boxes.length-1
+	button.onclick = function() {box_stack_remove(this.value)}
+	document.body.appendChild(button);
+	bonus_buttons.push(button)
+	const br = document.createElement('br')
+	document.body.appendChild(br);
+	bonus_breaks.push(br)
+	box_stack_update()
+}
+
 function stack_reset()
 {
 	while(bonus_boxes.length > 0)
 	{
 		document.body.removeChild(bonus_boxes[0])
+		document.body.removeChild(bonus_breaks[0])
+		document.body.removeChild(bonus_buttons[0])
 		bonus_boxes.shift()
+		bonus_buttons.shift()
+		bonus_breaks.shift()
 	}
 	canvas_stack.height = (152 + 12)*bonus_boxes.length
 	awesome_canvas_Stacked.style.display = 'none'
