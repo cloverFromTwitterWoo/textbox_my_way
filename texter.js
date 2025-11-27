@@ -175,6 +175,7 @@ function draw_canvas()
 			alert("N")
 			for(var i = 3; i < cool_pixels.length; i += 4)
 			{
+				alert(cool_pixels[i])
 				if(cool_pixels[i] == 255)
 				{
 					cool_pixels[i-3] = 0
@@ -184,6 +185,7 @@ function draw_canvas()
 			}
 			alert("O")
 			portrait_blacka.putImageData(cool_pixels, 0, 0);
+			alert("P")
 			ctx.drawImage(portrait_i_use, 6+offset[0]+box_size[0], 6+offset[1]+box_size[1], 134,140)
 		}
 		if(textbox_chr.value == "none")
