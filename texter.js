@@ -150,29 +150,20 @@ portrait_i_use = thatExists}
 
 function box_stack_add()
 {
-	//alert("LOL0-")
 	const img = document.createElement('img');
-	//alert("LOL-1")
 	img.src = awesome_canvas.src;
 	document.body.appendChild(img);
 	img.style.display = 'none'
 	bonus_boxes.push(img)
 	canvas_stack.height = (152 + 12)*bonus_boxes.length
 	ctx_stack.fillRect(0,0,canvas_stack.width,canvas_stack.height)
-	//alert("LOL0")
 	for (let i = 0; i < bonus_boxes.length; i++) {
-		alert(i)
 		if(marge.checked)
-  		{//alert("m");
-ctx_stack.draw_image(bonus_boxes[i].src, 0, (152 + 12)*i)}
+  		{ctx_stack.drawImage(bonus_boxes[i], 0, (152 + 12)*i)}
 		else
-  		{//alert("m");
-ctx_stack.draw_image(bonus_boxes[i].src, 6, 6+(152 + 12)*i)}
-	}
-	//alert("LOL1")
+  		{ctx_stack.drawImage(bonus_boxes[i], 6, 6+(152 + 12)*i)}}
 
 	const dataURL = canvas_stack.toDataURL('image/png');
-	//alert("LOL")
 	awesome_canvas_Stacked.style.display = 'block'
 	awesome_canvas_Stacked.src = dataURL;
 }
