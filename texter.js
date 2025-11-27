@@ -11,7 +11,6 @@ let awesome_canvas = document.getElementById("canvasTrue");
 let awesome_canvas_Stacked = document.getElementById("canvasStack");
 
 const marge = document.getElementById("margesimpson");
-const homer = document.getElementById("dark");
 
 function loadImage(filePath)
 {
@@ -38,7 +37,6 @@ let textbox_exp_txt_1 = document.getElementById(id="exp_txt")
 
 let font_dt_mono = loadImage("assets/determination_mono.png")
 let font_dt_mono_ol = loadImage("assets/determination_mono_outline.png")
-let font_dt_mono_dw = loadImage("assets/determination_mono_dw.png")
 
 let boxes_in = []
 
@@ -48,8 +46,6 @@ canvas.imageSmoothingEnabled = false
 let portraits_in = []
 
 let offset = [0,0]
-
-let box_size = [144,26,578,152]
 
 function letter_to_index(letta, index)
 {
@@ -98,17 +94,10 @@ function draw_text(x,y,str)
 			i += 2
 		}
 		var cur_letter = letter_to_index(str, i)
-		if(!homer.checked)
-		{
-   			ctx.drawImage(font_dt_mono_ol,(cur_letter%10)*18,Math.floor(cur_letter/10)*26,18,26, draw_pos_x[0]-1, draw_pos_y[0]-1, 18, 26)
-   			ctx.drawImage(font_dt_mono_ol,(cur_letter%10)*18,Math.floor(cur_letter/10)*26,18,26, draw_pos_x[0]-1, draw_pos_y[0]+1, 18, 26)
-   			ctx.drawImage(font_dt_mono_ol,(cur_letter%10)*18,Math.floor(cur_letter/10)*26,18,26, draw_pos_x[0]+1, draw_pos_y[0]-1, 18, 26)
-   			ctx.drawImage(font_dt_mono_ol,(cur_letter%10)*18,Math.floor(cur_letter/10)*26,18,26, draw_pos_x[0]+1, draw_pos_y[0]+1, 18, 26)
-		}
-		else
-		{
-			ctx.drawImage(font_dt_mono_dw,(cur_letter%10)*18,Math.floor(cur_letter/10)*26,18,26, draw_pos_x[0]+1, draw_pos_y[0]+1, 18, 26)
-		}
+   		ctx.drawImage(font_dt_mono_ol,(cur_letter%10)*18,Math.floor(cur_letter/10)*26,18,26, draw_pos_x[0]-1, draw_pos_y[0]-1, 18, 26)
+   		ctx.drawImage(font_dt_mono_ol,(cur_letter%10)*18,Math.floor(cur_letter/10)*26,18,26, draw_pos_x[0]-1, draw_pos_y[0]+1, 18, 26)
+   		ctx.drawImage(font_dt_mono_ol,(cur_letter%10)*18,Math.floor(cur_letter/10)*26,18,26, draw_pos_x[0]+1, draw_pos_y[0]-1, 18, 26)
+   		ctx.drawImage(font_dt_mono_ol,(cur_letter%10)*18,Math.floor(cur_letter/10)*26,18,26, draw_pos_x[0]+1, draw_pos_y[0]+1, 18, 26)
    		ctx.drawImage(font_dt_mono,(cur_letter%10)*18,Math.floor(cur_letter/10)*26,18,26, draw_pos_x[0], draw_pos_y[0], 18, 26)
 		i++
 		draw_pos_x[0] += 16
@@ -144,19 +133,19 @@ function draw_canvas()
 	{
 		if(marge.checked)
 		{
-			canvas.height = box_size[3] + 12
-			canvas.width = box_size[2] + 12
-			awesome_canvas.height = box_size[3] + 12
-			awesome_canvas.width = box_size[2] + 12
+			canvas.height = 152 + 12
+			canvas.width = 578 + 12
+			awesome_canvas.height = 152 + 12
+			awesome_canvas.width = 578 + 12
 			offset = [6,6]
 			ctx.fillRect(0,0,canvas.width,canvas.height)
 		}
 		else
 		{
-			canvas.height = box_size[3]
-			canvas.width = box_size[2]
-			awesome_canvas.height = box_size[3]
-			awesome_canvas.width = box_size[2]
+			canvas.height = 152
+			canvas.width = 578
+			awesome_canvas.height = 152
+			awesome_canvas.width = 578
 			offset = [0,0]
 		}
 		ctx.imageSmoothingEnabled = false
@@ -166,7 +155,7 @@ function draw_canvas()
 		{ctx.drawImage(portrait_i_use, 6+offset[0], 6+offset[1], 134,140)}
 		if(textbox_chr.value == "none")
 		{offset[0] -= 144-28}
-		draw_text(box_size[0]+offset[0],box_size[1]+offset[1],textbox_text.value)
+		draw_text(144+offset[0],26+offset[1],textbox_text.value)
 		//canvas.style.display = 'none'
 		const dataURL = canvas.toDataURL('image/png');
 		awesome_canvas.src = dataURL;
@@ -180,16 +169,13 @@ function draw_canvas()
 
 function box_stack_update()
 {
-	canvas_stack.height = (222 + 12)*bonus_boxes.length
-	//canvas_stack.width = (box_sizes[2] + 12)
+	canvas_stack.height = (152 + 12)*bonus_boxes.length
 	ctx_stack.fillRect(0,0,canvas_stack.width,canvas_stack.height)
-	for (let i = 0; i < bonus_boxes.length; i++) 
-	{
+	for (let i = 0; i < bonus_boxes.length; i++) {
 		if(marge.checked)
-  		{ctx_stack.drawImage(bonus_boxes[i], 0, (12 + 12)*i)}
+  		{ctx_stack.drawImage(bonus_boxes[i], 0, (152 + 12)*i)}
 		else
-  		{ctx_stack.drawImage(bonus_boxes[i], 6, 6+(12 + 12)*i)}
-	}
+  		{ctx_stack.drawImage(bonus_boxes[i], 6, 6+(152 + 12)*i)}}
 
 	const dataURL = canvas_stack.toDataURL('image/png');
 	awesome_canvas_Stacked.style.display = 'block'
@@ -244,7 +230,7 @@ function stack_reset()
 		bonus_buttons.shift()
 		bonus_breaks.shift()
 	}
-	canvas_stack.height = (box_sizes[3] + 12)*bonus_boxes.length
+	canvas_stack.height = (152 + 12)*bonus_boxes.length
 	awesome_canvas_Stacked.style.display = 'none'
 }
 
@@ -286,7 +272,7 @@ textbox_bg_alt.addEventListener('change', function(ev) {
           image.src = e.target.result;
           document.body.appendChild(image);
 		thatExistsAlso = image
-		thatExistsAlso.style.display='none'
+		//thatExistsAlso.style.display='none'
 	}
 	else
 	{
@@ -325,11 +311,6 @@ textbox_chr.addEventListener("change", (event) => {
 	}
 })
 
-const box_sizes = {
-"undertale": [144,26,578,152],
-"outertale": [144,26,578,152],
-"transparent": [144,26,578,152],
-"deltarune": [152,36,594,168]}
 
 textbox_bg.addEventListener("change", (event) => {
 	if(textbox_bg.value == "custom")
@@ -338,7 +319,6 @@ textbox_bg.addEventListener("change", (event) => {
 	}
 	else
 	{
-		box_size = box_sizes[textbox_bg.value]
 		textbox_bg_alt.style.display = "none"
 	}
 })
