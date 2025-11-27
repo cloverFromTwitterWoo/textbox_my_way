@@ -20,6 +20,8 @@ function loadImage(filePath)
 
 //canvas.style.display = 'none'
 
+let bonus_boxes = []
+
 let textbox_bg = document.getElementById("text_bg")
 let textbox_text = document.getElementById("text_input")
 let textbox_chr = document.getElementById("text_chr")
@@ -57,9 +59,9 @@ function letter_to_index(letta, index)
 	{return 53}
 	else if(code == 46)
 	{return 68}
-	else if(code == 44)
+	else if(code == 44 || code == 8220 || code == 8221)
 	{return 69}
-	else if(code == 39)
+	else if(code == 39 || code == 8216)
 	{return 70}
 	else if(code == 34)
 	{return 71}
@@ -139,19 +141,18 @@ function draw_canvas()
 	}
 }
 
-/*function box_stack_add()
+function box_stack_add()
 {
-	const dataURL = canvas_stack.toDataURL('image/png');
-	canvas_stack.height += 164
-	ctx_stack.drawImage(dataURL,0,0)
-	ctx_stack.fillRect(0,canvas_stack.height-164,canvas_stack.width,164)
-	ctx_stack.drawImage(awesome_canvas,6,canvas_stack.height-164+6)
+	var funny_thing = document.createElement("img");
+	const dataURL = canvas.toDataURL('image/png');
+	awesome_canvas.src = dataURL;
+	document.appendChild(funny_thing);
 }
 
 function stack_reset()
 {
 	canvas_stack.height = 0
-}*/
+}
 
 const exp_options = {
 "clover": '<option value="default">Default</option><option value="neutral">Neutral</option><option value="bummed">Bummed</option>',
