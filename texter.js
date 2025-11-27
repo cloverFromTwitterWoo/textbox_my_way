@@ -22,10 +22,17 @@ function loadImage(filePath)
 
 let textbox_bg = document.getElementById("text_bg")
 let textbox_text = document.getElementById("text_input")
+let textbox_chr = document.getElementById("text_chr")
+let textbox_exp = document.getElementById("text_exp")
 
 let font_dt_mono = loadImage("assets/determination_mono.png")
 
 let boxes_in = []
+
+ctx.imageSmoothingEnabled = false
+canvas.imageSmoothingEnabled = false
+
+let portraits_in = []
 
 let offset = [0,0]
 
@@ -82,10 +89,16 @@ function draw_canvas()
 {
 	var draw_it = true
 	var image_i_use = loadImage("assets/textboxes/"+textbox_bg.value+".png")
+	var portrait_i_use = loadImage("assets/characters/"+textbox_chr.value+"/"+textbox_exp.value+".png")
 	if(!boxes_in.includes(textbox_bg.value))
 	{
 		draw_it = false
 		boxes_in.push(textbox_bg.value)
+	}
+	if(!portraits_in.includes(textbox_chr.value + "-" + textbox_exp.value))
+	{
+		draw_it = false
+		portraits_in.push(textbox_chr.value + "-" + textbox_exp.value)
 	}
 	if(draw_it)
 	{
@@ -105,8 +118,11 @@ function draw_canvas()
 			awesome_canvas.width = 578
 			offset = [0,0]
 		}
+		ctx.imageSmoothingEnabled = false
+		canvas.imageSmoothingEnabled = false
 		ctx.fillRect(0,0,canvas.width,canvas.height)
 		ctx.drawImage(image_i_use,offset[0],offset[1])
+		ctx.drawImage(portrait_i_use, 6+offset[0], 6+offset[1], 134,140)
 		draw_text(144+offset[0],26+offset[1],textbox_text.value)
 		//canvas.style.display = 'none'
 		const dataURL = canvas.toDataURL('image/png');
@@ -132,5 +148,9 @@ function stack_reset()
 {
 	canvas_stack.height = 0
 }*/
+
+const exp_options = {"clover": '<option value="default">Default</option><option value="neutral">Neutral</option><option value="bummed">Bummed</option>',"toriel": '<option value="default">Default</option><option value="looking-away">Looking Away</option><option value="sad">Sad</option>'}
+textbox_exp.innerHTML=exp_options[textbox_chr.value]
+textbox_chr.addEventListener("change", (event) => {textbox_exp.innerHTML=exp_options[textbox_chr.value]})
 
 draw_canvas()
