@@ -26,10 +26,14 @@ let bonus_buttons = []
 let bonus_breaks = []
 
 let textbox_bg = document.getElementById("text_bg")
+let textbox_bg_alt = document.getElementById("text_bg_alt")
 let textbox_text = document.getElementById("text_input")
 let textbox_chr = document.getElementById("text_chr")
 let textbox_exp = document.getElementById("text_exp")
 let textbox_exp_alt = document.getElementById("text_exp_alt")
+
+
+let textbox_exp_txt_1 = document.getElementById(id="exp_txt")
 
 let font_dt_mono = loadImage("assets/determination_mono.png")
 
@@ -98,10 +102,12 @@ function draw_text(x,y,str)
 function draw_canvas()
 {
 	var draw_it = true
-	var image_i_use = loadImage("assets/textboxes/"+textbox_bg.value+".png")
+	if(textbox_bg.value == "custom")
+	{image_i_use = thatExistsAlso}
+	else
+	{var image_i_use = loadImage("assets/textboxes/"+textbox_bg.value+".png")}
 	if(textbox_chr.value == "custom")
-	{
-portrait_i_use = thatExists}
+	{portrait_i_use = thatExists}
 	else
 	{var portrait_i_use = loadImage("assets/characters/"+textbox_chr.value+"/"+textbox_exp.value+".png")}
 	//alert(portrait_i_use)
@@ -110,10 +116,13 @@ portrait_i_use = thatExists}
 		draw_it = false
 		boxes_in.push(textbox_bg.value)
 	}
-	if(!portraits_in.includes(textbox_chr.value + "-" + textbox_exp.value))
+	if(textbox_chr.value != "none")
 	{
-		draw_it = false
-		portraits_in.push(textbox_chr.value + "-" + textbox_exp.value)
+		if(!portraits_in.includes(textbox_chr.value + "-" + textbox_exp.value))
+		{
+			draw_it = false
+			portraits_in.push(textbox_chr.value + "-" + textbox_exp.value)
+		}
 	}
 	if(draw_it)
 	{
@@ -137,7 +146,10 @@ portrait_i_use = thatExists}
 		ctx.imageSmoothingEnabled = false
 		canvas.imageSmoothingEnabled = false
 		ctx.drawImage(image_i_use,offset[0],offset[1])
-		ctx.drawImage(portrait_i_use, 6+offset[0], 6+offset[1], 134,140)
+		if(textbox_chr.value != "none")
+		{ctx.drawImage(portrait_i_use, 6+offset[0], 6+offset[1], 134,140)}
+		if(textbox_chr.value == "none")
+		{offset[0] -= 144-28}
 		draw_text(144+offset[0],26+offset[1],textbox_text.value)
 		//canvas.style.display = 'none'
 		const dataURL = canvas.toDataURL('image/png');
@@ -241,18 +253,69 @@ textbox_exp_alt.addEventListener('change', function(ev) {
    }
 });
 
+let thatExistsAlso = false
+
+textbox_bg_alt.addEventListener('change', function(ev) {
+   if(ev.target.files) {
+      let file = ev.target.files[0];
+      var reader  = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onloadend = function (e) {
+	if(thatExistsAlso == false)
+	{
+          var image = new Image();
+          image.src = e.target.result;
+          document.body.appendChild(image);
+		thatExistsAlso = image
+		//thatExistsAlso.style.display='none'
+	}
+	else
+	{
+	thatExistsAlso.src=e.target.result;
+	}
+      }
+   }
+});
+
 const exp_options = {
 "clover": '<option value="default">Default</option><option value="neutral">Neutral</option><option value="bummed">Bummed</option>',
 "toriel": '<option value="default">Default</option><option value="looking-away">Looking Away</option><option value="sad">Sad</option>'}
 textbox_exp.innerHTML=exp_options[textbox_chr.value]
 textbox_chr.addEventListener("change", (event) => {
-if(textbox_chr.value == "custom")
-{textbox_exp.style.display = "none";
-textbox_exp_alt.style.display = "inline";}
-else
-{textbox_exp.style.display = "inline";
-textbox_exp_alt.style.display = "none";
-textbox_exp.innerHTML=exp_options[textbox_chr.value]}
+	if(textbox_chr.value == "none")
+	{
+		textbox_exp_txt_1.style.display = "none"
+		textbox_exp.style.display = "none"
+		textbox_exp_alt.style.display = "none"
+	}
+	else
+	{
+		textbox_exp_txt_1.style.display = "inline"
+		textbox_exp.style.display = "inline"
+		if(textbox_chr.value == "custom")
+		{
+			textbox_exp.style.display = "none";
+			textbox_exp_alt.style.display = "inline";
+		}
+		else
+		{
+			textbox_exp.style.display = "inline";
+			textbox_exp_alt.style.display = "none";
+			textbox_exp.innerHTML=exp_options[textbox_chr.value]
+		}
+	}
+})
+
+
+textbox_bg.addEventListener("change", (event) => {
+	if(textbox_bg.value == "custom")
+	{
+		textbox_bg_alt.style.display = "inline"
+	}
+	else
+	{
+		textbox_bg_alt.style.display = "none"
+	}
 })
 
 draw_canvas()
