@@ -51,7 +51,7 @@ let portraits_in = []
 
 let offset = [0,0]
 
-let box_size = [144,26,578,152]
+let box_size = [0,0,578,152]
 
 function letter_to_index(letta, index)
 {
@@ -173,6 +173,17 @@ function draw_canvas()
 			alert("M")
 			var cool_pixels = portrait_blacka.getImageData(0,0, 134,140)
 			alert("N")
+			for(var i = 3; i < cool_pixels.length; i += 4)
+			{
+				if(cool_pixels[i] == 255)
+				{
+					cool_pixels[i-3] = 0
+					cool_pixels[i-2] = 0
+					cool_pixels[i-1] = 0
+				}
+			}
+			alert("O")
+			portrait_blacka.putImageData(cool_pixels, 0, 0);
 			ctx.drawImage(portrait_i_use, 6+offset[0]+box_size[0], 6+offset[1]+box_size[1], 134,140)
 		}
 		if(textbox_chr.value == "none")
@@ -350,7 +361,8 @@ textbox_bg.addEventListener("change", (event) => {
 	}
 	else
 	{
-		box_size = box_sizes[textbox_bg.value]
+		if(textbox_bg.value != "transparent")
+		{box_size = box_sizes[textbox_bg.value]}
 		textbox_bg_alt.style.display = "none"
 	}
 })
