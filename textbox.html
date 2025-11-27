@@ -11,6 +11,7 @@
 	<select id="text_bg">
 	<option value="undertale">Undertale</option>
 	<option value="outertale">Outertale</option>
+	<option value="deltarune">Deltarune</option>
 	<option value="transparent">Transparent</option>
 	<option value="custom">Custom</option>
 	</select>
@@ -33,10 +34,13 @@
 	<span>Margin:</span>
 	<input type="checkbox" id="margesimpson">
 	<br>
+	<span>DW:</span>
+	<input type="checkbox" id="dark">
+	<br>
 	<span>Text:</span>
 	<input type="text" id="text_input" value="* Type in your text here!"></input>
 	<br>
-	<canvas id="textbox_work" style="display:none" width="578" height="152"></canvas>
+	<canvas id="textbox_work" style="display:inline" width="578" height="152"></canvas>
 	<img id="canvasTrue" src="assets/textboxes/undertale.png"></img>
 	<br>
 	<button onclick="draw_canvas()">Generate Box</button>
@@ -44,7 +48,8 @@
 	<hr>
 	<button onclick="box_stack_add()">Add to Stack</button> <button onclick="stack_reset()">Clear box stack</button> 
 	<br>
-	<canvas id="stack_work" style="display:none" width="590" height="0"></canvas>
+	<div>FUCK</div>
+	<canvas id="stack_work" style="display:block" width="590" height="0"></canvas>
 	<img id="canvasStack" style="display:none"></img>
 	<hr>
     </main>
