@@ -137,19 +137,13 @@ function draw_canvas()
 	}
 	else
 	{
-		setTimeout(draw_canvas, 100)
+		setTimeout(draw_canvas, 160)
 	}
 }
 
 function box_stack_add()
 {
 	alert("go on")
-	const dataURL = canvas.toDataURL('image/png');
-	const faux_img = document.createElement('img');
-	alert("test")
-	faux_img.src = dataURL;
-	document.body.appendChild(faux_img);
-	bonus_boxes.push(faux_img)
 }
 
 function stack_reset()
