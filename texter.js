@@ -61,11 +61,11 @@ function letter_to_index(letta, index)
 	{return 53}
 	else if(code == 46)
 	{return 68}
-	else if(code == 44 || code == 8220 || code == 8221 || code == 8217)
+	else if(code == 44)
 	{return 69}
-	else if(code == 39 || code == 8216)
+	else if(code == 39 || code == 8216 || code == 8217)
 	{return 70}
-	else if(code == 34)
+	else if(code == 34 || code == 8220 || code == 8221)
 	{return 71}
 	else
 	{return 67}
