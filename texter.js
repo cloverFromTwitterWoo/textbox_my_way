@@ -175,9 +175,9 @@ function draw_canvas()
 			alert(cool_pixels.data)
 			for(var i = 3; i < cool_pixels.data.length; i += 4)
 			{
-				alert(cool_pixels.data[i])
 				if(cool_pixels[i] == 255)
 				{
+					alert(cool_pixels.data[i])
 					cool_pixels.data[i-3] = 0
 					cool_pixels.data[i-2] = 0
 					cool_pixels.data[i-1] = 0
