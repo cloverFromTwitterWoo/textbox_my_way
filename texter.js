@@ -163,10 +163,10 @@ function draw_canvas()
 		canvas.imageSmoothingEnabled = false
 		ctx.drawImage(image_i_use,offset[0],offset[1])
 		if(textbox_chr.value != "none")
-		{ctx.drawImage(portrait_i_use, 6+offset[0], 6+offset[1], 134,140)}
+		{ctx.drawImage(portrait_i_use, 6+offset[0]+box_size[0], 6+offset[1]+box_size[1], 134,140)}
 		if(textbox_chr.value == "none")
 		{offset[0] -= 144-28}
-		draw_text(box_size[0]+offset[0],box_size[1]+offset[1],textbox_text.value)
+		draw_text(144+box_size[0]+offset[0],26+box_size[1]+offset[1],textbox_text.value)
 		//canvas.style.display = 'none'
 		const dataURL = canvas.toDataURL('image/png');
 		awesome_canvas.src = dataURL;
@@ -327,10 +327,10 @@ textbox_chr.addEventListener("change", (event) => {
 })
 
 const box_sizes = {
-"undertale": [144,26,578,152],
-"outertale": [144,26,578,152],
-"transparent": [144,26,578,152],
-"deltarune": [152,36,594,168]}
+"undertale": [0,0,578,152],
+"outertale": [0,0,578,152],
+"transparent": [0,0,578,152],
+"deltarune": [8,10,594,168]}
 
 textbox_bg.addEventListener("change", (event) => {
 	if(textbox_bg.value == "custom")
