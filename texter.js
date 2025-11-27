@@ -82,6 +82,38 @@ function letter_to_index(letta, index)
 	{return 70}
 	else if(code == 34 || code == 8220 || code == 8221)
 	{return 71}
+	else if(code == 58 || code == 69)
+	{return code+(80-58)}
+	else if(code == 94)
+	{return 82}
+	else if(code == 38)
+	{return 83}
+	else if(code == 64)
+	{return 84}
+	else if(code == 95)
+	{return 85}
+	else if(code == 91)
+	{return 86}
+	else if(code == 93)
+	{return 87}
+	else if(code == 93)
+	{return 86}
+	else if(code == 60)
+	{return 72}
+	else if(code == 62)
+	{return 73}
+	else if(code == 43)
+	{return 74}
+	else if(code == 45)
+	{return 75}
+	else if(code == 47)
+	{return 76}
+	else if(code == 37)
+	{return 77}
+	else if(code == 36)
+	{return 78}
+	else if(code == 61)
+	{return 89}
 	else
 	{return 67}
 }
