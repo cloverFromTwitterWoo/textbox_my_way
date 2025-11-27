@@ -9,6 +9,8 @@ ctx.fillRect(0,0,canvas.width,canvas.height)
 
 let awesome_canvas = document.getElementById("canvasTrue");
 
+const marge = document.getElementById("margesimpson");
+
 function loadImage(filePath)
 {
 	my_tempo = new Image()
@@ -24,6 +26,8 @@ let textbox_text = document.getElementById("text_input")
 let font_dt_mono = loadImage("assets/determination_mono.png")
 
 let boxes_in = []
+
+let offset = [0,0]
 
 function letter_to_index(letta, index)
 {
@@ -81,8 +85,25 @@ function draw_canvas()
 	}
 	if(draw_it)
 	{
-		ctx.drawImage(image_i_use,0,0)
-		draw_text(144,26,textbox_text.value)
+		if(marge.checked)
+		{
+			canvas.height = 152 + 12
+			canvas.width = 578 + 12
+			awesome_canvas.height = 152 + 12
+			awesome_canvas.width = 578 + 12
+			offset = [6,6]
+		}
+		else
+		{
+			canvas.height = 152
+			canvas.width = 578
+			awesome_canvas.height = 152
+			awesome_canvas.width = 578
+			offset = [0,0]
+		}
+		ctx.fillRect(0,0,canvas.width,canvas.height)
+		ctx.drawImage(image_i_use,offset[0],offset[1])
+		draw_text(144+offset[0],26+offset[1],textbox_text.value)
 		//canvas.style.display = 'none'
 		const dataURL = canvas.toDataURL('image/png');
 		awesome_canvas.src = dataURL;
