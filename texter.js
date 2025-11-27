@@ -27,6 +27,7 @@ let textbox_bg = document.getElementById("text_bg")
 let textbox_text = document.getElementById("text_input")
 let textbox_chr = document.getElementById("text_chr")
 let textbox_exp = document.getElementById("text_exp")
+let textbox_exp_alt = document.getElementById("text_exp_alt")
 
 let font_dt_mono = loadImage("assets/determination_mono.png")
 
@@ -96,7 +97,12 @@ function draw_canvas()
 {
 	var draw_it = true
 	var image_i_use = loadImage("assets/textboxes/"+textbox_bg.value+".png")
-	var portrait_i_use = loadImage("assets/characters/"+textbox_chr.value+"/"+textbox_exp.value+".png")
+	if(textbox_chr.value == "custom")
+	{
+portrait_i_use = thatExists}
+	else
+	{var portrait_i_use = loadImage("assets/characters/"+textbox_chr.value+"/"+textbox_exp.value+".png")}
+	//alert(portrait_i_use)
 	if(!boxes_in.includes(textbox_bg.value))
 	{
 		draw_it = false
@@ -182,10 +188,42 @@ function stack_reset()
 	awesome_canvas_Stacked.style.display = 'none'
 }
 
+let thatExists = false
+
+textbox_exp_alt.addEventListener('change', function(ev) {
+   if(ev.target.files) {
+      let file = ev.target.files[0];
+      var reader  = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onloadend = function (e) {
+	if(thatExists == false)
+	{
+          var image = new Image();
+          image.src = e.target.result;
+          document.body.appendChild(image);
+		thatExists = image
+		thatExists.style.display='none'
+	}
+	else
+	{
+	thatExists.src=e.target.result;
+	}
+      }
+   }
+});
+
 const exp_options = {
 "clover": '<option value="default">Default</option><option value="neutral">Neutral</option><option value="bummed">Bummed</option>',
 "toriel": '<option value="default">Default</option><option value="looking-away">Looking Away</option><option value="sad">Sad</option>'}
 textbox_exp.innerHTML=exp_options[textbox_chr.value]
-textbox_chr.addEventListener("change", (event) => {textbox_exp.innerHTML=exp_options[textbox_chr.value]})
+textbox_chr.addEventListener("change", (event) => {
+if(textbox_chr.value == "custom")
+{textbox_exp.style.display = "none";
+textbox_exp_alt.style.display = "inline";}
+else
+{textbox_exp.style.display = "inline";
+textbox_exp_alt.style.display = "none";
+textbox_exp.innerHTML=exp_options[textbox_chr.value]}
+})
 
 draw_canvas()
