@@ -144,6 +144,12 @@ function draw_canvas()
 function box_stack_add()
 {
 	alert("go on")
+	const dataURL = canvas.toDataURL('image/png');
+
+	const img = document.createElement('img');
+	img.src = dataURL;
+	document.body.appendChild(img);
+	bonus_boxes.push(img)
 }
 
 function stack_reset()
