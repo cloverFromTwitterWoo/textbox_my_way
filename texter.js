@@ -11,6 +11,7 @@ let awesome_canvas = document.getElementById("canvasTrue");
 let awesome_canvas_Stacked = document.getElementById("canvasStack");
 
 let portrait_blacka = document.getElementById("portrait_outline").getContext("2d");
+let portrait_blacked = document.getElementById("portrait_outline");
 
 const marge = document.getElementById("margesimpson");
 const homer = document.getElementById("dark");
@@ -182,7 +183,7 @@ function draw_canvas()
 			}
 			portrait_blacka.putImageData(cool_pixels, 0, 0)
 			alert("M")
-			var blacked_out = canvas.toDataURL('image/png');
+			var blacked_out = portrait_blacked.toDataURL('image/png');
 			
 			alert("aM")
 			ctx.drawImage(blacked_out, 6+offset[0]+box_size[0]-1, 6+offset[1]+box_size[1]-1, 134,140)
