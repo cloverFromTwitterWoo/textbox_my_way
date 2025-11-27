@@ -1,8 +1,8 @@
 const canvas = document.getElementById("textbox_work");
 const ctx = canvas.getContext("2d");
 
-const canvas_stack = document.getElementById("stack_work");
-const ctx_stack = canvas_stack.getContext("2d");
+//const canvas_stack = document.getElementById("stack_work");
+//const ctx_stack = canvas_stack.getContext("2d");
 
 ctx.fillStyle = "black"
 ctx.fillRect(0,0,canvas.width,canvas.height)
@@ -119,7 +119,7 @@ function draw_canvas()
 	}
 }
 
-function box_stack_add()
+/*function box_stack_add()
 {
 	const dataURL = canvas_stack.toDataURL('image/png');
 	canvas_stack.height += 164
@@ -131,6 +131,6 @@ function box_stack_add()
 function stack_reset()
 {
 	canvas_stack.height = 0
-}
+}*/
 
 draw_canvas()
