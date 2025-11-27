@@ -182,7 +182,7 @@ function draw_canvas()
 			}
 			portrait_blacka.putImageData(cool_pixels, 0, 0)
 			alert("M")
-			const blacked_out = portrait_blacka.toDataURL('image/png');
+			var blacked_out = canvas.toDataURL('image/png');
 			
 			alert("aM")
 			ctx.drawImage(blacked_out, 6+offset[0]+box_size[0]-1, 6+offset[1]+box_size[1]-1, 134,140)
