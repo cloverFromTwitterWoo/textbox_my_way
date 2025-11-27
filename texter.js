@@ -169,7 +169,7 @@ function draw_canvas()
 			portrait_blacka.imageSmoothingEnabled = false
 			canvas.imageSmoothingEnabled = false
 			portrait_blacka.clearRect(0,0,134,140)
-			portrait_blacka.drawImage(portrait_i_use, 0,0, 134,140)
+			portrait_blacka.drawImage(portrait_i_use,-30,-20)
 			alert("M")
 			var cool_pixels = portrait_blacka.getImageData(0,0, 134,140)
 			alert(cool_pixels.data)
