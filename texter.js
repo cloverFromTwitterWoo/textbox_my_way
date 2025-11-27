@@ -15,6 +15,7 @@ let portrait_blacked = document.getElementById("portrait_outline");
 
 const marge = document.getElementById("margesimpson");
 const homer = document.getElementById("dark");
+const bart = document.getElementById("outtheline");
 
 function loadImage(filePath)
 {
@@ -167,30 +168,32 @@ function draw_canvas()
 		ctx.drawImage(image_i_use,offset[0],offset[1])
 		if(textbox_chr.value != "none")
 		{
-			portrait_blacka.imageSmoothingEnabled = false
-			canvas.imageSmoothingEnabled = false
-			portrait_blacka.clearRect(0,0,134,140)
-			portrait_blacka.drawImage(portrait_i_use,0,0,134,140)
-			var cool_pixels = portrait_blacka.getImageData(0,0, 134,140)
-			for(var i = 3; i < cool_pixels.data.length; i += 4)
+			if(bart.checked)
 			{
-				if(cool_pixels.data[i] == 255)
+				portrait_blacka.imageSmoothingEnabled = false
+				canvas.imageSmoothingEnabled = false
+				portrait_blacka.clearRect(0,0,134,140)
+				portrait_blacka.drawImage(portrait_i_use,0,0,134,140)
+				var cool_pixels = portrait_blacka.getImageData(0,0, 134,140)
+				for(var i = 3; i < cool_pixels.data.length; i += 4)
 				{
-					cool_pixels.data[i-3] = 0
-					cool_pixels.data[i-2] = +0
-					cool_pixels.data[i-1] = 0
+					if(cool_pixels.data[i] == 255)
+					{
+						cool_pixels.data[i-3] = 0
+						cool_pixels.data[i-2] = +0
+						cool_pixels.data[i-1] = 0
+					}
 				}
-			}
-			portrait_blacka.putImageData(cool_pixels, 0, 0)
-			alert("M")
-			var blacked_out = portrait_blacked.toDataURL('image/png');
+				portrait_blacka.putImageData(cool_pixels, 0, 0)
+				var blacked_out = portrait_blacked.toDataURL('image/png');
 			
-			alert("aM")
-			//ctx.drawImage(blacked_out, 6+offset[0]+box_size[0]-1, 6+offset[1]+box_size[1]-1, 134,140)
+				alert("aM")
+				ctx.drawImage(blacked_out, 6+offset[0]+box_size[0]-1, 6+offset[1]+box_size[1]-1, 134,140)
 			//ctx.drawImage(blacked_out, 6+offset[0]+box_size[0]-1, 6+offset[1]+box_size[1]+1, 134,140)
 			//ctx.drawImage(blacked_out, 6+offset[0]+box_size[0]+1, 6+offset[1]+box_size[1]-1, 134,140)
 			//ctx.drawImage(blacked_out, 6+offset[0]+box_size[0]+1, 6+offset[1]+box_size[1]+1, 134,140)
-			alert("wtf you mean")
+				alert("wtf you mean")
+			}
 			ctx.drawImage(portrait_i_use, 6+offset[0]+box_size[0], 6+offset[1]+box_size[1], 134,140)
 		}
 		if(textbox_chr.value == "none")
