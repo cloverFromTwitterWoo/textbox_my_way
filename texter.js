@@ -143,10 +143,13 @@ function draw_canvas()
 
 function box_stack_add()
 {
-	var funny_thing = document.createElement("img");
+	alert("go on")
 	const dataURL = canvas.toDataURL('image/png');
-	awesome_canvas.src = dataURL;
-	document.appendChild(funny_thing);
+	const faux_img = document.createElement('img');
+	alert("test")
+	faux_img.src = dataURL;
+	document.body.appendChild(faux_img);
+	bonus_boxes.push(faux_img)
 }
 
 function stack_reset()
