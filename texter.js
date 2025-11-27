@@ -145,10 +145,13 @@ function box_stack_add()
 {
 	alert("go on")
 	const dataURL = canvas.toDataURL('image/png');
-
+	alert("go on1")
 	const img = document.createElement('img');
+	alert("go on2")
 	img.src = dataURL;
+	alert("go on3")
 	document.body.appendChild(img);
+	alert("go on4")
 	bonus_boxes.push(img)
 }
 
