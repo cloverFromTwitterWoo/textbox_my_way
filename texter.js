@@ -190,6 +190,7 @@ function draw_canvas()
 			ctx.drawImage(blacked_out, 6+offset[0]+box_size[0]-1, 6+offset[1]+box_size[1]+1, 134,140)
 			ctx.drawImage(blacked_out, 6+offset[0]+box_size[0]+1, 6+offset[1]+box_size[1]-1, 134,140)
 			ctx.drawImage(blacked_out, 6+offset[0]+box_size[0]+1, 6+offset[1]+box_size[1]+1, 134,140)
+			alert("wtf you mean")
 			ctx.drawImage(portrait_i_use, 6+offset[0]+box_size[0], 6+offset[1]+box_size[1], 134,140)
 		}
 		if(textbox_chr.value == "none")
