@@ -10,6 +10,8 @@ ctx.fillRect(0,0,canvas.width,canvas.height)
 let awesome_canvas = document.getElementById("canvasTrue");
 let awesome_canvas_Stacked = document.getElementById("canvasStack");
 
+let portrait_blacka = document.getElementById("portrait_outline").getContext("2d");
+
 const marge = document.getElementById("margesimpson");
 const homer = document.getElementById("dark");
 
@@ -163,7 +165,16 @@ function draw_canvas()
 		canvas.imageSmoothingEnabled = false
 		ctx.drawImage(image_i_use,offset[0],offset[1])
 		if(textbox_chr.value != "none")
-		{ctx.drawImage(portrait_i_use, 6+offset[0]+box_size[0], 6+offset[1]+box_size[1], 134,140)}
+		{
+			portrait_blacka.imageSmoothingEnabled = false
+			canvas.imageSmoothingEnabled = false
+			portrait_blacka.clearRect(0,0,134,140)
+			portrait_blacka.drawImage(portrait_i_use, 0,0, 134,140)
+			alert("M")
+			var cool_pixels = portrait_blacka.getImageData(0,0, 134,140)
+			alert("N")
+			ctx.drawImage(portrait_i_use, 6+offset[0]+box_size[0], 6+offset[1]+box_size[1], 134,140)
+		}
 		if(textbox_chr.value == "none")
 		{offset[0] -= 144-28}
 		draw_text(144+box_size[0]+offset[0],26+box_size[1]+offset[1],textbox_text.value)
