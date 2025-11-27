@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <meta charset="utf-8" />
+
+  </head>
+  <body>
+    <main>
+	<span>Style:</span>
+	<select id="text_bg">
+	<option value="undertale">Undertale</option>
+	<option value="outertale">Outertale</option>
+	</select>
+	<br>
+	<span>Character:</span>
+	<select>
+	<option>Clover</option>
+	</select>
+	<br>
+	<span>Expression:</span>
+	<select>
+	<option>Clover</option>
+	</select>
+	<br>
+	<span>Text:</span>
+	<input type="text" id="text_input" value="* Type in your text here!"></input>
+	<br>
+	<br>
+	<canvas id="textbox_work" width="578" height="152"></canvas>
+	<img id="canvasTrue"></img>
+	<br>
+	<button onclick="draw_canvas()">Generate Box</button>
+    </main>
+    <script src="texter.js"></script>
+  </body>
+</html>

@@ -1,0 +1,18 @@
+html, body {
+  margin: 20;
+  padding: 20;
+  background-color: gray;
+}
+canvas {
+  display: block;
+  image-rendering: pixelated;
+  font-smooth: never;
+  -webkit-font-smoothing: none;
+  visible: false;
+}
+
+@font-face {
+  font-family: "Determination";
+  src:
+    local("Determination Mono"),
+}
