@@ -151,12 +151,14 @@ function box_stack_add()
 	bonus_boxes.push(img)
 	canvas_stack.height = (152 + 12)*bonus_boxes.length
 	ctx_stack.fillRect(0,0,canvas_stack.width,canvas_stack.height)
+	alert("LOL0")
 	for (let i = 0; i < bonus_boxes.length; i++) {
 		if(marge.checked)
   		{ctx_stack.draw_image(bonus_boxes[i], 0, (152 + 12)*i)}
 		else
   		{ctx_stack.draw_image(bonus_boxes[i], 6, 6+(152 + 12)*i)}
 	}
+	alert("LOL1")
 
 	const dataURL = canvas_stack.toDataURL('image/png');
 	alert("LOL")
