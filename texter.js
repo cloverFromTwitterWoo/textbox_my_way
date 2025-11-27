@@ -1,6 +1,9 @@
 const canvas = document.getElementById("textbox_work");
 const ctx = canvas.getContext("2d");
 
+const canvas_stack = document.getElementById("stack_work");
+const ctx_stack = canvas_stack.getContext("2d");
+
 ctx.fillStyle = "black"
 ctx.fillRect(0,0,canvas.width,canvas.height)
 
@@ -13,7 +16,7 @@ function loadImage(filePath)
 	return my_tempo
 }
 
-canvas.style.display = 'none'
+//canvas.style.display = 'none'
 
 let textbox_bg = document.getElementById("text_bg")
 let textbox_text = document.getElementById("text_input")
@@ -80,15 +83,29 @@ function draw_canvas()
 	{
 		ctx.drawImage(image_i_use,0,0)
 		draw_text(144,26,textbox_text.value)
-		canvas.style.display = 'none'
+		//canvas.style.display = 'none'
 		const dataURL = canvas.toDataURL('image/png');
 		awesome_canvas.src = dataURL;
-		canvas.style.display = 'none'
+		//canvas.style.display = 'none'
 	}
 	else
 	{
 		setTimeout(draw_canvas, 100)
 	}
+}
+
+function box_stack_add()
+{
+	const dataURL = canvas_stack.toDataURL('image/png');
+	canvas_stack.height += 164
+	ctx_stack.drawImage(dataURL,0,0)
+	ctx_stack.fillRect(0,canvas_stack.height-164,canvas_stack.width,164)
+	ctx_stack.drawImage(awesome_canvas,6,canvas_stack.height-164+6)
+}
+
+function stack_reset()
+{
+	canvas_stack.height = 0
 }
 
 draw_canvas()
