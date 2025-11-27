@@ -172,15 +172,15 @@ function draw_canvas()
 			portrait_blacka.drawImage(portrait_i_use, 0,0, 134,140)
 			alert("M")
 			var cool_pixels = portrait_blacka.getImageData(0,0, 134,140)
-			alert(cool_pixels)
-			for(var i = 3; i < cool_pixels.length; i += 4)
+			alert(cool_pixels.data)
+			for(var i = 3; i < cool_pixels.data.length; i += 4)
 			{
-				alert(cool_pixels[i])
+				alert(cool_pixels.data[i])
 				if(cool_pixels[i] == 255)
 				{
-					cool_pixels[i-3] = 0
-					cool_pixels[i-2] = 0
-					cool_pixels[i-1] = 0
+					cool_pixels.data[i-3] = 0
+					cool_pixels.data[i-2] = 0
+					cool_pixels.data[i-1] = 0
 				}
 			}
 			alert("O")
