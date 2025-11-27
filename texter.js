@@ -151,6 +151,10 @@ function box_stack_add()
 	bonus_boxes.push(img)
 	canvas_stack.height = (152 + 12)*bonus_boxes.length
 	ctx_stack.fillRect(0,0,canvas_stack.width,canvas_stack.height)
+	for (let i = 0; i < bonus_boxes.length; i++) {
+  		ctx_stack.draw_image(bonus_boxes[i], 6, 6+(152 + 12)*i)
+	}
+
 	const dataURL = canvas_stack.toDataURL('image/png');
 	awesome_canvas_Stacked.src = dataURL;
 }
@@ -162,6 +166,7 @@ function stack_reset()
 		document.body.removeChild(bonus_boxes[0])
 		bonus_boxes.shift()
 	}
+	canvas_stack.height = (152 + 12)*bonus_boxes.length
 	awesome_canvas_Stacked.style.display = 'none'
 }
 
