@@ -186,11 +186,12 @@ function draw_canvas()
 				}
 				portrait_blacka.putImageData(cool_pixels, 0, 0)
 				var blacked_out = portrait_blacked.toDataURL('image/png');
-			
+				const img_a = document.createElement('img');
+				img_a.src = blacked_out;
 				alert("aM")
 				//ctx.drawImage(portrait_i_use, 6+offset[0]+box_size[0]-1, 6+offset[1]+box_size[1]-1, 134,140)
 				//ctx.drawImage(blacked_out, 6+offset[0]+box_size[0]-1, 6+offset[1]+box_size[1]+1, 134,140)
-				ctx.drawImage(portrait_i_use, 6+offset[0]+box_size[0]+1, 6+offset[1]+box_size[1]-1, 134,140)
+				ctx.drawImage(img_a, 6+offset[0]+box_size[0]+1, 6+offset[1]+box_size[1]-1, 134,140)
 				//ctx.drawImage(blacked_out, 6+offset[0]+box_size[0]+1, 6+offset[1]+box_size[1]+1, 134,140)
 				alert("wtf you mean")
 			}
