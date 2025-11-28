@@ -323,9 +323,9 @@ function box_stack_update()
 	for (let i = 0; i < bonus_boxes.length; i++) 
 	{
 		if(marge.checked)
-  		{ctx_stack.drawImage(bonus_boxes[i], 0, (box_size[3] + 12)*i)}
+  		{ctx_stack.drawImage(bonus_boxes[i], box_size[2]*(i%stack_width), (box_size[3] + 12)*i)}
 		else
-  		{ctx_stack.drawImage(bonus_boxes[i], 6, 6+(box_size[3] + 12)*i)}
+  		{ctx_stack.drawImage(bonus_boxes[i], 6+(6+box_size[2])*(i%stack_width), 6+(box_size[3] + 12)*i)}
 	}
 
 	const dataURL = canvas_stack.toDataURL('image/png');
