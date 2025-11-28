@@ -48,6 +48,11 @@ let textbox_exp = document.getElementById("text_exp")
 let textbox_exp_alt = document.getElementById("text_exp_alt")
 let textbox_exp_c = document.getElementById("text_exp_color")
 
+let textbox_bg_x = document.getElementById("origin_x")
+let textbox_bg_y = document.getElementById("origin_y")
+let textbox_bg_w = document.getElementById("origin_w")
+let textbox_bg_h = document.getElementById("origin_h")
+let textbox_bg_c = document.getElementById("origin_c")
 
 let textbox_exp_txt_1 = document.getElementById(id="exp_txt")
 
@@ -189,6 +194,7 @@ function draw_canvas()
 	}
 	if(draw_it)
 	{
+		box_size = [Number(textbox_bg_x.value), Number(textbox_bg_y.value), Number(textbox_bg_w.value), Number(textbox_bg_h.value)]
 		if(marge.checked)
 		{
 			canvas.height = box_size[3] + 12
@@ -208,9 +214,37 @@ function draw_canvas()
 		}
 		ctx.imageSmoothingEnabled = false
 		canvas.imageSmoothingEnabled = false
-		ctx.drawImage(image_i_use,offset[0],offset[1])
+		if(textbox_bg_c.value == "#ffffff")
+		{ctx.drawImage(image_i_use,offset[0],offset[1])}
+		else
+		{
+			portrait_blacked.width = box_size[2]
+			portrait_blacked.height = box_size[3]
+			portrait_blacka.clearRect(0,0,box_size[2],box_size[3])
+			new_color = hexToRgb(textbox_bg_c.value)
+			portrait_blacka.imageSmoothingEnabled = false
+			canvas.imageSmoothingEnabled = false
+			portrait_blacka.drawImage(image_i_use,0,0)
+			var cool_pixels = portrait_blacka.getImageData(0,0,box_size[2],box_size[3])
+			for(var i = 3; i < cool_pixels.data.length; i += 4)
+			{
+				if(cool_pixels.data[i] == 255 && cool_pixels.data[i-3] == 255 && cool_pixels.data[i-2] == 255 && cool_pixels.data[i-1] == 255)
+				{
+					cool_pixels.data[i-3] = new_color.r
+					cool_pixels.data[i-2] = new_color.g
+					cool_pixels.data[i-1] = new_color.b
+				}
+			}
+			portrait_blacka.putImageData(cool_pixels, 0, 0)
+			var blacked_out = portrait_blacked.toDataURL('image/png');
+			const img_a = document.createElement('img');
+			img_a.src = blacked_out;
+			ctx.drawImage(img_a, offset[0], offset[1])
+		}
 		if(textbox_chr.value != "none")
 		{
+			portrait_blacked.width = 134
+			portrait_blacked.height = 140
 			if(bart.checked)
 			{
 				portrait_blacka.imageSmoothingEnabled = false
@@ -440,7 +474,13 @@ textbox_bg.addEventListener("change", (event) => {
 	else
 	{
 		if(textbox_bg.value != "transparent")
-		{box_size = box_sizes[textbox_bg.value]}
+		{
+			box_size = box_sizes[textbox_bg.value]
+			textbox_bg_x.value = box_size[0]
+			textbox_bg_y.value = box_size[1]
+			textbox_bg_w.value = box_size[2]
+			textbox_bg_h.value = box_size[3]
+		}
 		textbox_bg_alt.style.display = "none"
 	}
 })
