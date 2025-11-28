@@ -85,6 +85,8 @@ let cur_dw = new Image()
 function generate_font(new_fnt)
 {
 	cur_font = loadImage(new_fnt)
+	cur_outline = loadImage(new_fnt)
+	cur_dw = loadImage(new_fnt)
 	alert("huh")
 	portrait_blacked.width = cur_font.width
 	portrait_blacked.height = cur_font.height
@@ -94,13 +96,14 @@ function generate_font(new_fnt)
 	portrait_blacka.drawImage(cur_font,0,0)
 	alert("inteesting")
 	var cool_pixels = portrait_blacka.getImageData(0,0,cur_font.width,cur_font.height)
+	alert("Mhm")
 	for(var i = 3; i < cool_pixels.data.length; i += 4)
 	{
-		if(cool_pixels.data[i] == 255 && cool_pixels.data[i-3] == 255 && cool_pixels.data[i-2] == 255 && cool_pixels.data[i-1] == 255)
+		if(cool_pixels.data[i] == 255)
 		{
-			cool_pixels.data[i-3] = new_color.r
-			cool_pixels.data[i-2] = new_color.g
-			cool_pixels.data[i-1] = new_color.b
+			cool_pixels.data[i-3] = 0
+			cool_pixels.data[i-2] = 0
+			cool_pixels.data[i-1] = 0
 		}
 	}
 	alert("wwww")
