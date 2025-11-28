@@ -85,11 +85,14 @@ let cur_dw = new Image()
 function generate_font(new_fnt)
 {
 	cur_font = loadImage(new_fnt)
+	alert("huh")
 	portrait_blacked.width = cur_font.width
 	portrait_blacked.height = cur_font.height
 	portrait_blacka.clearRect(0,0,cur_font.width,cur_font.height)
+	alert("okay")
 	portrait_blacka.imageSmoothingEnabled = false
 	portrait_blacka.drawImage(cur_font,0,0)
+	alert("inteesting")
 	var cool_pixels = portrait_blacka.getImageData(0,0,cur_font.width,cur_font.height)
 	for(var i = 3; i < cool_pixels.data.length; i += 4)
 	{
