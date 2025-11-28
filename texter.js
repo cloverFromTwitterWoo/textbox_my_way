@@ -225,6 +225,10 @@ function draw_text(x,y,str)
    			ctx.drawImage(cur_outline,(cur_letter%10)*18,Math.floor(cur_letter/10)*26,18,26, draw_pos_x[0]-1, draw_pos_y[0]+1, 18, 26)
    			ctx.drawImage(cur_outline,(cur_letter%10)*18,Math.floor(cur_letter/10)*26,18,26, draw_pos_x[0]+1, draw_pos_y[0]-1, 18, 26)
    			ctx.drawImage(cur_outline,(cur_letter%10)*18,Math.floor(cur_letter/10)*26,18,26, draw_pos_x[0]+1, draw_pos_y[0]+1, 18, 26)
+			ctx.drawImage(cur_outline,(cur_letter%10)*18,Math.floor(cur_letter/10)*26,18,26, draw_pos_x[0]-1, draw_pos_y[0], 18, 26)
+   			ctx.drawImage(cur_outline,(cur_letter%10)*18,Math.floor(cur_letter/10)*26,18,26, draw_pos_x[0]-1, draw_pos_y[0], 18, 26)
+   			ctx.drawImage(cur_outline,(cur_letter%10)*18,Math.floor(cur_letter/10)*26,18,26, draw_pos_x[0], draw_pos_y[0]-1, 18, 26)
+   			ctx.drawImage(cur_outline,(cur_letter%10)*18,Math.floor(cur_letter/10)*26,18,26, draw_pos_x[0], draw_pos_y[0]+1, 18, 26)
 		}
 		else
 		{
@@ -384,6 +388,10 @@ function draw_canvas()
 				ctx.drawImage(img_a, 6+offset[0]+box_size[0]-1, 6+offset[1]+box_size[1]+1, 134,140)
 				ctx.drawImage(img_a, 6+offset[0]+box_size[0]+1, 6+offset[1]+box_size[1]-1, 134,140)
 				ctx.drawImage(img_a, 6+offset[0]+box_size[0]+1, 6+offset[1]+box_size[1]+1, 134,140)
+				ctx.drawImage(img_a, 6+offset[0]+box_size[0]-1, 6+offset[1]+box_size[1], 134,140)
+				ctx.drawImage(img_a, 6+offset[0]+box_size[0]+1, 6+offset[1]+box_size[1], 134,140)
+				ctx.drawImage(img_a, 6+offset[0]+box_size[0], 6+offset[1]+box_size[1]-1, 134,140)
+				ctx.drawImage(img_a, 6+offset[0]+box_size[0], 6+offset[1]+box_size[1]+1, 134,140)
 			}
 			if(textbox_exp_c.value == "#ffffff")
 			{ctx.drawImage(portrait_i_use, 6+offset[0]+box_size[0], 6+offset[1]+box_size[1], 134,140)}
