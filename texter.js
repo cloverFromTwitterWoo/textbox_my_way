@@ -84,7 +84,7 @@ let cur_dw = new Image()
 
 function generate_font(new_fnt)
 {
-	cur_font = loadImage(new_fnt)
+	//cur_font = loadImage(new_fnt)
 	//cur_outline = loadImage(new_fnt)
 	//cur_dw = loadImage(new_fnt)
 	portrait_blacked.width = cur_font.width
@@ -125,7 +125,9 @@ function generate_font(new_fnt)
 	cur_dw.src = blacked_out;
 }
 
-generate_font('assets/determination_mono.png')
+//generate_font('assets/fonts/cfc determination_mono.png')
+
+cur_font = loadImage('assets/fonts/determination_mono.png')
 
 function letter_to_index(letta, index)
 {
@@ -268,6 +270,11 @@ let iters = 0
 
 function draw_canvas()
 {
+	if(iters == 0)
+	{
+		generate_font(cur_font)
+		iters = 0.1
+	}
 	var draw_it = true
 	if(textbox_bg.value == "custom")
 	{image_i_use = thatExistsAlso}
@@ -415,7 +422,7 @@ function draw_canvas()
 		const dataURL = canvas.toDataURL('image/png');
 		awesome_canvas.src = dataURL;
 		//canvas.style.display = 'none'
-		if(iters<2)
+		if(iters<3)
 		{
 			setTimeout(draw_canvas, 250)
 			iters+=1
