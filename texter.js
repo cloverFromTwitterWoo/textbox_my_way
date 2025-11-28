@@ -314,17 +314,17 @@ function draw_canvas()
 
 function box_stack_update()
 {
-	//alert(box_size)
-	var stack_width = stack_width_inp
+	
+	var stack_width = Number(stack_width_inp.value)
 	canvas_stack.height = (box_size[3] + 12)*bonus_boxes.length
 	canvas_stack.width = (box_size[2] + 12)*stack_width_inp
 	ctx_stack.fillRect(0,0,canvas_stack.width,canvas_stack.height)
 	for (let i = 0; i < bonus_boxes.length; i++) 
 	{
 		if(marge.checked)
-  		{ctx_stack.drawImage(bonus_boxes[i], box_size[3]*(i%stack_width_inp), (box_size[3] + 12))}
+  		{ctx_stack.drawImage(bonus_boxes[i], box_size[3]*(i%stack_width_inp), (box_size[3] + 12)*Math.floor(i/box_size[3]*(i%stack_width_inp)))}
 		else
-  		{ctx_stack.drawImage(bonus_boxes[i], 6+(6+box_size[3])*(i%stack_width_inp), 6+(box_size[3] + 12))}
+  		{ctx_stack.drawImage(bonus_boxes[i], 6+(6+box_size[3])*(i%stack_width_inp), 6+(box_size[3] + 12)*Math.floor(i/box_size[3]*(i%stack_width_inp))}
 	}
 
 	const dataURL = canvas_stack.toDataURL('image/png');
