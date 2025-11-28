@@ -17,6 +17,16 @@ const marge = document.getElementById("margesimpson");
 const homer = document.getElementById("dark");
 const bart = document.getElementById("outtheline");
 
+function hexToRgb(hex) {
+  var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+  return result ? {
+    r: parseInt(result[1], 16),
+    g: parseInt(result[2], 16),
+    b: parseInt(result[3], 16)
+  } : null;
+}
+//stolen code lol https://stackoverflow.com/questions/5623838/rgb-to-hex-and-hex-to-rgb
+
 function loadImage(filePath)
 {
 	my_tempo = new Image()
@@ -36,6 +46,7 @@ let textbox_text = document.getElementById("text_input")
 let textbox_chr = document.getElementById("text_chr")
 let textbox_exp = document.getElementById("text_exp")
 let textbox_exp_alt = document.getElementById("text_exp_alt")
+let textbox_exp_c = document.getElementById("text_exp_color")
 
 
 let textbox_exp_txt_1 = document.getElementById(id="exp_txt")
@@ -225,7 +236,31 @@ function draw_canvas()
 				ctx.drawImage(img_a, 6+offset[0]+box_size[0]+1, 6+offset[1]+box_size[1]-1, 134,140)
 				ctx.drawImage(img_a, 6+offset[0]+box_size[0]+1, 6+offset[1]+box_size[1]+1, 134,140)
 			}
-			ctx.drawImage(portrait_i_use, 6+offset[0]+box_size[0], 6+offset[1]+box_size[1], 134,140)
+			if(textbox_exp_c.value == "#ffffff")
+			{ctx.drawImage(portrait_i_use, 6+offset[0]+box_size[0], 6+offset[1]+box_size[1], 134,140)}
+			else
+			{
+				new_color = hexToRgb(textbox_exp_c.value)
+				portrait_blacka.imageSmoothingEnabled = false
+				canvas.imageSmoothingEnabled = false
+				portrait_blacka.clearRect(0,0,134,140)
+				portrait_blacka.drawImage(portrait_i_use,0,0,134,140)
+				var cool_pixels = portrait_blacka.getImageData(0,0, 134,140)
+				for(var i = 3; i < cool_pixels.data.length; i += 4)
+				{
+					if(cool_pixels.data[i] == 255 && cool_pixels.data[i-3] == 255 && cool_pixels.data[i-2] == 255 && cool_pixels.data[i-1] == 255)
+					{
+						cool_pixels.data[i-3] = new_color.r
+						cool_pixels.data[i-2] = new_color.g
+						cool_pixels.data[i-1] = new_color.b
+					}
+				}
+				portrait_blacka.putImageData(cool_pixels, 0, 0)
+				var blacked_out = portrait_blacked.toDataURL('image/png');
+				const img_a = document.createElement('img');
+				img_a.src = blacked_out;
+				ctx.drawImage(img_a, 6+offset[0]+box_size[0], 6+offset[1]+box_size[1], 134,140)
+			}
 		}
 		if(textbox_chr.value == "none")
 		{offset[0] -= 144-28}
@@ -367,12 +402,14 @@ textbox_exp.innerHTML=exp_options[textbox_chr.value]
 textbox_chr.addEventListener("change", (event) => {
 	if(textbox_chr.value == "none")
 	{
+		textbox_exp_c.style.display = "none"
 		textbox_exp_txt_1.style.display = "none"
 		textbox_exp.style.display = "none"
 		textbox_exp_alt.style.display = "none"
 	}
 	else
 	{
+		textbox_exp_c.style.display = "inline"
 		textbox_exp_txt_1.style.display = "inline"
 		textbox_exp.style.display = "inline"
 		if(textbox_chr.value == "custom")

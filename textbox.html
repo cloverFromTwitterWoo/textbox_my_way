@@ -17,6 +17,12 @@
 	</select>
 	<input type="file" id="text_bg_alt" accept="image/png" style="display:none"/>
 	<br>
+	<span>Box Options: X:</span><input type="number" id="origin_x" value="0" style="width: 40px;"/>
+	<span>Y:</span><input type="number" id="origin_y" value="0" style="width: 40px;"/>
+	<span>W:</span><input type="number" id="origin_w" value="578" style="width: 40px;"/>
+	<span>H:</span><input type="number" id="origin_h" value="152" style="width: 40px;"/>
+	<span>C:</span><input type="color" id="origin_c" value="#ffffff"/>
+	<br>
 	<span>Character:</span>
 	<select id="text_chr">
 	<option value="none">None</option>
@@ -30,6 +36,7 @@
 	<option value="default">Default</option>
 	</select>
 	<input type="file" id="text_exp_alt" accept="image/png" style="display:none"/>
+	<input type="color" id="text_exp_color" style="display:none" value="#ffffff"/>
 	<br>
 	<span>Margin:</span>
 	<input type="checkbox" id="margesimpson">
@@ -41,7 +48,7 @@
 	<span>Text:</span>
 	<input type="text" id="text_input" value="* Type in your text here!"></input>
 	<br>
-	<canvas id="textbox_work" style="display:none" width="578" height="152"></canvas>
+	<canvas id="textbox_work" style="display:inline" width="578" height="152"></canvas>
 	<img id="canvasTrue" src="assets/textboxes/undertale.png"></img>
 	<canvas id="portrait_outline" style="display:none" width="134" height="140"></canvas>
 	<br>
