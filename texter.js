@@ -136,10 +136,12 @@ function letter_to_index(letta, index)
 	{return 67}
 }
 
+let doColorMath = true
 function draw_text(x,y,str)
 {
 	var draw_pos_x = [x, x]
 	var draw_pos_y = [y, y]
+	var color = hexToRgb("#ffffff")
 	var i = 0
 	while(i < str.length) {
 		if (str.charAt(i) == "\\")
@@ -148,6 +150,16 @@ function draw_text(x,y,str)
 			{
 				draw_pos_x[0] = draw_pos_x[1]
 				draw_pos_y[0] += 36
+			}
+			else if(str.charAt(i+1) == "#")
+			{
+				color = "#"
+				for(var j = 2; j < 8; j++)
+				{
+					color += str.charAt(i+j)
+				}
+				i += 6
+				color = hexToRgb(color)
 			}
 			i += 2
 		}
@@ -163,7 +175,36 @@ function draw_text(x,y,str)
 		{
 			ctx.drawImage(font_dt_mono_dw,(cur_letter%10)*18,Math.floor(cur_letter/10)*26,18,26, draw_pos_x[0]+1, draw_pos_y[0]+1, 18, 26)
 		}
-   		ctx.drawImage(font_dt_mono,(cur_letter%10)*18,Math.floor(cur_letter/10)*26,18,26, draw_pos_x[0], draw_pos_y[0], 18, 26)
+		if(doColorMath)
+		{
+			portrait_blacked.width = 18
+			portrait_blacked.height = 26
+			portrait_blacka.clearRect(0,0,18,26)
+			portrait_blacka.imageSmoothingEnabled = false
+			canvas.imageSmoothingEnabled = false
+			portrait_blacka.drawImage(font_dt_mono,(cur_letter%10)*18,Math.floor(cur_letter/10)*26,18,26, 0,0, 18, 26)
+			var cool_pixels = portrait_blacka.getImageData(0,0,box_size[2],box_size[3])
+			for(var i = 3; i < cool_pixels.data.length; i += 4)
+			{
+				if(cool_pixels.data[i] == 255)
+				{
+					if(cool_pixels.data[i-3] == color.r && cool_pixels.data[i-2] == color.g && cool_pixels.data[i-1] == color.b)
+					{
+						break
+					}
+					cool_pixels.data[i-3] = color.r
+					cool_pixels.data[i-2] = color.g
+					cool_pixels.data[i-1] = color.b
+				}
+			}
+			portrait_blacka.putImageData(cool_pixels, 0, 0)
+			var blacked_out = portrait_blacked.toDataURL('image/png');
+			const img_a = document.createElement('img');
+			img_a.src = blacked_out;
+			ctx.drawImage(img_a, draw_pos_x[0], draw_pos_y[0],18,26)
+		}
+		else
+		{ctx.drawImage(font_dt_mono,(cur_letter%10)*18,Math.floor(cur_letter/10)*26,18,26, draw_pos_x[0], draw_pos_y[0], 18, 26)}
 		i++
 		draw_pos_x[0] += 16
  	}
