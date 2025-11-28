@@ -59,9 +59,9 @@ let textbox_bg_c = document.getElementById("origin_c")
 
 let textbox_exp_txt_1 = document.getElementById(id="exp_txt")
 
-let font_dt_mono = loadImage("assets/determination_mono.png")
+/*let font_dt_mono = loadImage("assets/determination_mono.png")
 let font_dt_mono_ol = loadImage("assets/determination_mono_outline.png")
-let font_dt_mono_dw = loadImage("assets/determination_mono_dw.png")
+let font_dt_mono_dw = loadImage("assets/determination_mono_dw.png")*/
 
 let boxes_in = []
 
@@ -77,6 +77,39 @@ let overlays_in = []
 let offset = [0,0]
 
 let box_size = [0,0,578,152]
+
+let cur_font = new Image()
+let cur_outline = new Image()
+let cur_dw = new Image()
+
+function generate_font(new_fnt)
+{
+	cur_font = loadImage(new_fnt)
+	portrait_blacked.width = cur_font.width
+	portrait_blacked.height = cur_font.height
+	portrait_blacka.clearRect(0,0,cur_font.width,cur_font.height)
+	portrait_blacka.imageSmoothingEnabled = false
+	canvas.imageSmoothingEnabled = false
+	portrait_blacka.drawImage(image_i_use,0,0)
+	var cool_pixels = portrait_blacka.getImageData(0,0,cur_font.width,cur_font.height)
+	for(var i = 3; i < cool_pixels.data.length; i += 4)
+	{
+		if(cool_pixels.data[i] == 255 && cool_pixels.data[i-3] == 255 && cool_pixels.data[i-2] == 255 && cool_pixels.data[i-1] == 255)
+		{
+			cool_pixels.data[i-3] = new_color.r
+			cool_pixels.data[i-2] = new_color.g
+			cool_pixels.data[i-1] = new_color.b
+		}
+	}
+	portrait_blacka.putImageData(cool_pixels, 0, 0)
+	var blacked_out = portrait_blacked.toDataURL('image/png');
+	const img_a = document.createElement('img');
+	img_a.src = blacked_out;
+	cur_outline = img_a
+	cur_dw = loadImage(new_fnt)
+}
+
+generate_font('assets/determination_mono.png')
 
 function letter_to_index(letta, index)
 {
@@ -171,14 +204,14 @@ function draw_text(x,y,str)
 		var cur_letter = letter_to_index(str, i)
 		if(!homer.checked)
 		{
-   			ctx.drawImage(font_dt_mono_ol,(cur_letter%10)*18,Math.floor(cur_letter/10)*26,18,26, draw_pos_x[0]-1, draw_pos_y[0]-1, 18, 26)
-   			ctx.drawImage(font_dt_mono_ol,(cur_letter%10)*18,Math.floor(cur_letter/10)*26,18,26, draw_pos_x[0]-1, draw_pos_y[0]+1, 18, 26)
-   			ctx.drawImage(font_dt_mono_ol,(cur_letter%10)*18,Math.floor(cur_letter/10)*26,18,26, draw_pos_x[0]+1, draw_pos_y[0]-1, 18, 26)
-   			ctx.drawImage(font_dt_mono_ol,(cur_letter%10)*18,Math.floor(cur_letter/10)*26,18,26, draw_pos_x[0]+1, draw_pos_y[0]+1, 18, 26)
+   			ctx.drawImage(cur_outline,(cur_letter%10)*18,Math.floor(cur_letter/10)*26,18,26, draw_pos_x[0]-1, draw_pos_y[0]-1, 18, 26)
+   			ctx.drawImage(cur_outline,(cur_letter%10)*18,Math.floor(cur_letter/10)*26,18,26, draw_pos_x[0]-1, draw_pos_y[0]+1, 18, 26)
+   			ctx.drawImage(cur_outline,(cur_letter%10)*18,Math.floor(cur_letter/10)*26,18,26, draw_pos_x[0]+1, draw_pos_y[0]-1, 18, 26)
+   			ctx.drawImage(cur_outline,(cur_letter%10)*18,Math.floor(cur_letter/10)*26,18,26, draw_pos_x[0]+1, draw_pos_y[0]+1, 18, 26)
 		}
 		else
 		{
-			ctx.drawImage(font_dt_mono_dw,(cur_letter%10)*18,Math.floor(cur_letter/10)*26,18,26, draw_pos_x[0]+1, draw_pos_y[0]+1, 18, 26)
+			ctx.drawImage(cur_dw,(cur_letter%10)*18,Math.floor(cur_letter/10)*26,18,26, draw_pos_x[0]+1, draw_pos_y[0]+1, 18, 26)
 		}
 		if(doColorMath && !(color.r == 255 && color.g == 255 && color.b == 255) )
 		{
@@ -209,7 +242,7 @@ function draw_text(x,y,str)
 			ctx.drawImage(img_a, draw_pos_x[0], draw_pos_y[0],18,26)
 		}
 		else
-		{ctx.drawImage(font_dt_mono,(cur_letter%10)*18,Math.floor(cur_letter/10)*26,18,26, draw_pos_x[0], draw_pos_y[0], 18, 26)}
+		{ctx.drawImage(cur_font,(cur_letter%10)*18,Math.floor(cur_letter/10)*26,18,26, draw_pos_x[0], draw_pos_y[0], 18, 26)}
 		i++
 		draw_pos_x[0] += 16
  	}
