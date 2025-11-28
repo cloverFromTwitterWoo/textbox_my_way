@@ -94,7 +94,7 @@ function generate_font(new_fnt)
 	var cool_pixels = portrait_blacka.getImageData(0,0,cur_font.width,cur_font.height)
 	for(var i = 3; i < cool_pixels.data.length; i += 4)
 	{
-		if(cool_pixels.data[i] == 255)
+		if(cool_pixels.data[i] > 0)
 		{
 			cool_pixels.data[i-3] = 0
 			cool_pixels.data[i-2] = 0
@@ -112,7 +112,7 @@ function generate_font(new_fnt)
 	var cool_pixels = portrait_blacka.getImageData(0,0,cur_font.width,cur_font.height)
 	for(var i = 3; i < cool_pixels.data.length; i += 4)
 	{
-		if(cool_pixels.data[i] == 255)
+		if(cool_pixels.data[i] > 0)
 		{
 			cool_pixels.data[i-3] = 15
 			cool_pixels.data[i-2] = 15
