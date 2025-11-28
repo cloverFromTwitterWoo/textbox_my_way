@@ -180,7 +180,7 @@ function draw_text(x,y,str)
 		{
 			ctx.drawImage(font_dt_mono_dw,(cur_letter%10)*18,Math.floor(cur_letter/10)*26,18,26, draw_pos_x[0]+1, draw_pos_y[0]+1, 18, 26)
 		}
-		if(doColorMath)
+		if(doColorMath && !(color.r == 255 && color.g == 255 && color.b == 255) )
 		{
 			portrait_blacked.width = 18
 			portrait_blacked.height = 26
