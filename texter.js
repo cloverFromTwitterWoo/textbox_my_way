@@ -662,4 +662,25 @@ textbox_font.addEventListener("change", (event) => {
 	}
 })
 
+textbox_font_alt.addEventListener('change', function(ev) {
+   if(ev.target.files) {
+      let file = ev.target.files[0];
+      var reader  = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onloadend = function (e) {
+	if(ohAndThis == false)
+	{
+          var image = new Image();
+          image.src = e.target.result;
+	  cur_font = image
+	}
+	else
+	{
+	ohAndThis.src=e.target.result;
+	}
+      }
+   }
+});
+
 draw_canvas()
+setTimeout(draw_canvas, 1080)
