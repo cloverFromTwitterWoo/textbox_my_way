@@ -184,17 +184,17 @@ function draw_text(x,y,str)
 			canvas.imageSmoothingEnabled = false
 			portrait_blacka.drawImage(font_dt_mono,(cur_letter%10)*18,Math.floor(cur_letter/10)*26,18,26, 0,0, 18, 26)
 			var cool_pixels = portrait_blacka.getImageData(0,0,box_size[2],box_size[3])
-			for(var i = 3; i < cool_pixels.data.length; i += 4)
+			for(var j = 3; j < cool_pixels.data.length; j += 4)
 			{
-				if(cool_pixels.data[i] == 255)
+				if(cool_pixels.data[j] == 255)
 				{
-					if(cool_pixels.data[i-3] == color.r && cool_pixels.data[i-2] == color.g && cool_pixels.data[i-1] == color.b)
+					if(cool_pixels.data[j-3] == color.r && cool_pixels.data[j-2] == color.g && cool_pixels.data[j-1] == color.b)
 					{
 						break
 					}
-					cool_pixels.data[i-3] = color.r
-					cool_pixels.data[i-2] = color.g
-					cool_pixels.data[i-1] = color.b
+					cool_pixels.data[j-3] = color.r
+					cool_pixels.data[j-2] = color.g
+					cool_pixels.data[j-1] = color.b
 				}
 			}
 			portrait_blacka.putImageData(cool_pixels, 0, 0)
