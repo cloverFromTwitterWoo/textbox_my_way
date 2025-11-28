@@ -89,7 +89,6 @@ function generate_font(new_fnt)
 	portrait_blacked.height = cur_font.height
 	portrait_blacka.clearRect(0,0,cur_font.width,cur_font.height)
 	portrait_blacka.imageSmoothingEnabled = false
-	canvas.imageSmoothingEnabled = false
 	portrait_blacka.drawImage(image_i_use,0,0)
 	var cool_pixels = portrait_blacka.getImageData(0,0,cur_font.width,cur_font.height)
 	for(var i = 3; i < cool_pixels.data.length; i += 4)
@@ -101,11 +100,13 @@ function generate_font(new_fnt)
 			cool_pixels.data[i-1] = new_color.b
 		}
 	}
+	alert("wwww")
 	portrait_blacka.putImageData(cool_pixels, 0, 0)
 	var blacked_out = portrait_blacked.toDataURL('image/png');
 	const img_a = document.createElement('img');
 	img_a.src = blacked_out;
-	cur_outline = img_a
+	alert("aaaa")
+	cur_outline.src = blacked_out;
 	cur_dw = loadImage(new_fnt)
 }
 
