@@ -82,9 +82,8 @@ let cur_font = new Image()
 let cur_outline = new Image()
 let cur_dw = new Image()
 
-function generate_font(new_fnt)
+function generate_font()
 {
-	cur_font = new_fnt
 	//cur_outline = loadImage(new_fnt)
 	//cur_dw = loadImage(new_fnt)
 	portrait_blacked.width = cur_font.width
@@ -125,9 +124,9 @@ function generate_font(new_fnt)
 	cur_dw.src = blacked_out;
 }
 
+cur_font = loadImage("assets/fonts/determination_mono.png")
 
-font_dt_mono = loadImage("assets/determination_mono.png")
-generate_font(fnt_dt_mono)
+generate_font()
 
 function letter_to_index(letta, index)
 {
