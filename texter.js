@@ -85,18 +85,14 @@ let cur_dw = new Image()
 function generate_font(new_fnt)
 {
 	cur_font = loadImage(new_fnt)
-	cur_outline = loadImage(new_fnt)
-	cur_dw = loadImage(new_fnt)
-	alert("huh")
+	//cur_outline = loadImage(new_fnt)
+	//cur_dw = loadImage(new_fnt)
 	portrait_blacked.width = cur_font.width
 	portrait_blacked.height = cur_font.height
 	portrait_blacka.clearRect(0,0,cur_font.width,cur_font.height)
-	alert("okay")
 	portrait_blacka.imageSmoothingEnabled = false
 	portrait_blacka.drawImage(cur_font,0,0)
-	alert("inteesting")
 	var cool_pixels = portrait_blacka.getImageData(0,0,cur_font.width,cur_font.height)
-	alert("Mhm")
 	for(var i = 3; i < cool_pixels.data.length; i += 4)
 	{
 		if(cool_pixels.data[i] == 255)
@@ -106,14 +102,27 @@ function generate_font(new_fnt)
 			cool_pixels.data[i-1] = 0
 		}
 	}
-	alert("wwww")
 	portrait_blacka.putImageData(cool_pixels, 0, 0)
 	var blacked_out = portrait_blacked.toDataURL('image/png');
-	const img_a = document.createElement('img');
-	img_a.src = blacked_out;
-	alert("aaaa")
 	cur_outline.src = blacked_out;
-	cur_dw = loadImage(new_fnt)
+	portrait_blacked.width = cur_font.width
+	portrait_blacked.height = cur_font.height
+	portrait_blacka.clearRect(0,0,cur_font.width,cur_font.height)
+	portrait_blacka.imageSmoothingEnabled = false
+	portrait_blacka.drawImage(cur_font,0,0)
+	var cool_pixels = portrait_blacka.getImageData(0,0,cur_font.width,cur_font.height)
+	for(var i = 3; i < cool_pixels.data.length; i += 4)
+	{
+		if(cool_pixels.data[i] == 255)
+		{
+			cool_pixels.data[i-3] = 15
+			cool_pixels.data[i-2] = 15
+			cool_pixels.data[i-1] = 112
+		}
+	}
+	portrait_blacka.putImageData(cool_pixels, 0, 0)
+	var blacked_out = portrait_blacked.toDataURL('image/png');
+	cur_dw.src = blacked_out;
 }
 
 generate_font('assets/determination_mono.png')
