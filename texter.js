@@ -141,7 +141,7 @@ function letter_to_index(letta, index)
 	{return 67}
 }
 
-let doColorMath = false
+let doColorMath = true
 function draw_text(x,y,str)
 {
 	var draw_pos_x = [x, x]
