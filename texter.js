@@ -322,9 +322,9 @@ function box_stack_update()
 	for (let i = 0; i < bonus_boxes.length; i++) 
 	{
 		if(marge.checked)
-  		{ctx_stack.drawImage(bonus_boxes[i], box_size[3]*(i%stack_width_inp), (box_size[3] + 12)*Math.floor(i/box_size[3]*(i%stack_width_inp)))}
+  		{ctx_stack.drawImage(bonus_boxes[i], box_size[3]*(i%stack_width), (box_size[3] + 12)*Math.floor(i/box_size[3]*(i%stack_width)))}
 		else
-  		{ctx_stack.drawImage(bonus_boxes[i], 6+(6+box_size[3])*(i%stack_width_inp), 6+(box_size[3] + 12)*Math.floor(i/box_size[3]*(i%stack_width_inp))}
+  		{ctx_stack.drawImage(bonus_boxes[i], 6+(6+box_size[3])*(i%stack_width), 6+(box_size[3] + 12)*Math.floor(i/box_size[3]*(i%stack_width))}
 	}
 
 	const dataURL = canvas_stack.toDataURL('image/png');
