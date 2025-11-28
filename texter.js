@@ -89,7 +89,7 @@ function generate_font(new_fnt)
 	portrait_blacked.height = cur_font.height
 	portrait_blacka.clearRect(0,0,cur_font.width,cur_font.height)
 	portrait_blacka.imageSmoothingEnabled = false
-	portrait_blacka.drawImage(image_i_use,0,0)
+	portrait_blacka.drawImage(cur_font,0,0)
 	var cool_pixels = portrait_blacka.getImageData(0,0,cur_font.width,cur_font.height)
 	for(var i = 3; i < cool_pixels.data.length; i += 4)
 	{
