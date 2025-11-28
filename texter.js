@@ -463,8 +463,10 @@ textbox_chr.addEventListener("change", (event) => {
 const box_sizes = {
 "undertale": [0,0,578,152],
 "outertale": [0,0,578,152],
+"jumbo": [0,0,578,188],
 "transparent": [0,0,578,152],
-"deltarune": [8,10,594,168]}
+"deltarune": [8,10,594,168]
+}
 
 textbox_bg.addEventListener("change", (event) => {
 	if(textbox_bg.value == "custom")
