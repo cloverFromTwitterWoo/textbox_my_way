@@ -18,11 +18,11 @@
 	</select>
 	<input type="file" id="text_bg_alt" accept="image/png" style="display:none"/>
 	<br>
-	<span>Box Options: X:</span><input type="number" id="origin_x" value="0" style="width: 40px;"/>
-	<span>Y:</span><input type="number" id="origin_y" value="0" style="width: 40px;"/>
-	<span>W:</span><input type="number" id="origin_w" value="578" style="width: 40px;" min="0"/>
-	<span>H:</span><input type="number" id="origin_h" value="152" style="width: 40px;" min="0"/>
-	<span>C:</span><input type="color" id="origin_c" value="#ffffff"/>
+	<span>Box Options: Text X:</span><input type="number" id="origin_x" value="0" style="width: 40px;"/>
+	<span>Text Y:</span><input type="number" id="origin_y" value="0" style="width: 40px;"/>
+	<span>Box W:</span><input type="number" id="origin_w" value="578" style="width: 40px;" min="0"/>
+	<span>Box H:</span><input type="number" id="origin_h" value="152" style="width: 40px;" min="0"/>
+	<span>Box C:</span><input type="color" id="origin_c" value="#ffffff"/>
 	<br>
 	<span>Character:</span>
 	<select id="text_chr">
@@ -38,6 +38,14 @@
 	</select>
 	<input type="file" id="text_exp_alt" accept="image/png" style="display:none"/>
 	<input type="color" id="text_exp_color" style="display:none" value="#ffffff"/>
+	<br>
+	<span>Overlay:</span>
+	<select id="text_over">
+	<option value="transparent">None</option>
+	<option value="custom">Custom</option>
+	<option value="fog">Fog</option>
+	</select>
+	<input type="file" id="text_over_alt" accept="image/png" style="display:none"/>
 	<br>
 	<span>Margin:</span>
 	<input type="checkbox" id="margesimpson">

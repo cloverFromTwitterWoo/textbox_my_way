@@ -48,6 +48,9 @@ let textbox_exp = document.getElementById("text_exp")
 let textbox_exp_alt = document.getElementById("text_exp_alt")
 let textbox_exp_c = document.getElementById("text_exp_color")
 
+let textbox_over = document.getElementById("text_over")
+let textbox_over_alt = document.getElementById("text_over_alt")
+
 let textbox_bg_x = document.getElementById("origin_x")
 let textbox_bg_y = document.getElementById("origin_y")
 let textbox_bg_w = document.getElementById("origin_w")
@@ -68,6 +71,8 @@ ctx.imageSmoothingEnabled = false
 canvas.imageSmoothingEnabled = false
 
 let portraits_in = []
+
+let overlays_in = []
 
 let offset = [0,0]
 
@@ -136,7 +141,7 @@ function letter_to_index(letta, index)
 	{return 67}
 }
 
-let doColorMath = true
+let doColorMath = false
 function draw_text(x,y,str)
 {
 	var draw_pos_x = [x, x]
@@ -224,6 +229,11 @@ function draw_canvas()
 	else
 	{var portrait_i_use = loadImage("assets/characters/"+textbox_chr.value+"/"+textbox_exp.value+".png")}
 	//alert(portrait_i_use)
+	if(textbox_over.value == "custom")
+	{overlay_i_use = ohAndThis}
+	else
+	{var overlay_i_use = loadImage("assets/overlays/"+textbox_over.value+".png")}
+
 	if(!boxes_in.includes(textbox_bg.value))
 	{
 		draw_it = false
@@ -236,6 +246,11 @@ function draw_canvas()
 			draw_it = false
 			portraits_in.push(textbox_chr.value + "-" + textbox_exp.value)
 		}
+	}
+	if(!overlays_in.includes(textbox_over.value))
+	{
+		draw_it = false
+		overlays_in.push(textbox_over.value)
 	}
 	if(draw_it)
 	{
@@ -345,10 +360,13 @@ function draw_canvas()
 		{offset[0] -= 144-28}
 		draw_text(144+box_size[0]+offset[0],26+box_size[1]+offset[1],textbox_text.value)
 		//canvas.style.display = 'none'
+		if(textbox_chr.value == "none")
+		{offset[0] += 144-28}
+		ctx.drawImage(overlay_i_use,0,0,box_size[2],box_size[3],offset[0],offset[1],box_size[2],box_size[3])
 		const dataURL = canvas.toDataURL('image/png');
 		awesome_canvas.src = dataURL;
 		//canvas.style.display = 'none'
-		if(iters==0)
+		if(iters<2)
 		{
 			setTimeout(draw_canvas, 250)
 			iters+=1
@@ -484,6 +502,30 @@ textbox_bg_alt.addEventListener('change', function(ev) {
    }
 });
 
+let ohAndThis = false
+
+textbox_over_alt.addEventListener('change', function(ev) {
+   if(ev.target.files) {
+      let file = ev.target.files[0];
+      var reader  = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onloadend = function (e) {
+	if(ohAndThis == false)
+	{
+          var image = new Image();
+          image.src = e.target.result;
+          document.body.appendChild(image);
+	  ohAndThis = image
+	  ohAndThis.style.display='none'
+	}
+	else
+	{
+	ohAndThis.src=e.target.result;
+	}
+      }
+   }
+});
+
 const exp_options = {
 "clover": '<option value="default">Default</option><option value="neutral">Neutral</option><option value="bummed">Bummed</option>',
 "toriel": '<option value="default">Default</option><option value="looking-away">Looking Away</option><option value="sad">Sad</option>'}
@@ -539,6 +581,17 @@ textbox_bg.addEventListener("change", (event) => {
 			textbox_bg_h.value = box_size[3]
 		}
 		textbox_bg_alt.style.display = "none"
+	}
+})
+
+textbox_over.addEventListener("change", (event) => {
+	if(textbox_over.value == "custom")
+	{
+		textbox_over_alt.style.display = "inline"
+	}
+	else
+	{
+		textbox_over_alt.style.display = "none"
 	}
 })
 
