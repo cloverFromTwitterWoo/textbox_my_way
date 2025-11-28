@@ -47,6 +47,14 @@
 	</select>
 	<input type="file" id="text_over_alt" accept="image/png" style="display:none"/>
 	<br>
+	<span>Font:</span>
+	<select id="text_font">
+	<option value="determination_mono">Default</option>
+	<option value="custom">Custom</option>
+	<option value="determination_fuck">Fucked up lol</option>
+	</select>
+	<input type="file" id="text_font_alt" accept="image/png" style="display:none"/>
+	<br>
 	<span>Margin:</span>
 	<input type="checkbox" id="margesimpson">
 	<span>Portrait Outline:</span><input type="checkbox" id="outtheline">
@@ -55,10 +63,10 @@
 	<input type="checkbox" id="dark">
 	<br>
 	<span>Text:</span>
-	<input type="text" id="text_input" value="* Type in your text here!"></input>
+	<input type="text" id="text_input" value="* Type in your text here!" style="width: 500px;"></input>
 	<br>
 	<br>
-	<canvas id="textbox_work" style="display:block" width="578" height="152"></canvas>
+	<canvas id="textbox_work" style="display:none" width="578" height="152"></canvas>
 	<img id="canvasTrue" src="assets/textboxes/undertale.png"></img>
 	<canvas id="portrait_outline" style="display:none" width="134" height="140"></canvas>
 	<br>

@@ -50,6 +50,8 @@ let textbox_exp_c = document.getElementById("text_exp_color")
 
 let textbox_over = document.getElementById("text_over")
 let textbox_over_alt = document.getElementById("text_over_alt")
+let textbox_font = document.getElementById("text_font")
+let textbox_font_alt = document.getElementById("text_font_alt")
 
 let textbox_bg_x = document.getElementById("origin_x")
 let textbox_bg_y = document.getElementById("origin_y")
@@ -645,6 +647,18 @@ textbox_over.addEventListener("change", (event) => {
 	else
 	{
 		textbox_over_alt.style.display = "none"
+	}
+})
+
+textbox_font.addEventListener("change", (event) => {
+	if(textbox_font.value == "custom")
+	{
+		textbox_font_alt.style.display = "inline"
+	}
+	else
+	{
+		textbox_font_alt.style.display = "none"
+		cur_font = loadImage('assets/fonts/'+textbox_font.value+'.png')
 	}
 })
 
