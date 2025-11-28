@@ -84,7 +84,7 @@ let cur_dw = new Image()
 
 function generate_font(new_fnt)
 {
-	cur_font = loadImage(new_fnt)
+	cur_font = new_fnt
 	//cur_outline = loadImage(new_fnt)
 	//cur_dw = loadImage(new_fnt)
 	portrait_blacked.width = cur_font.width
@@ -125,7 +125,9 @@ function generate_font(new_fnt)
 	cur_dw.src = blacked_out;
 }
 
-generate_font('assets/determination_mono.png')
+
+font_dt_mono = loadImage("assets/determination_mono.png")
+generate_font(fnt_dt_mono)
 
 function letter_to_index(letta, index)
 {
@@ -515,13 +517,12 @@ textbox_exp_alt.addEventListener('change', function(ev) {
 	{
           var image = new Image();
           image.src = e.target.result;
-          document.body.appendChild(image);
-		thatExists = image
-		thatExists.style.display='none'
+	  thatExists = image
+	  thatExists.style.display='none'
 	}
 	else
 	{
-	thatExists.src=e.target.result;
+	  thatExists.src=e.target.result;
 	}
       }
    }
@@ -539,13 +540,12 @@ textbox_bg_alt.addEventListener('change', function(ev) {
 	{
           var image = new Image();
           image.src = e.target.result;
-          document.body.appendChild(image);
-		thatExistsAlso = image
-		thatExistsAlso.style.display='none'
+	  thatExistsAlso = image
+	  thatExistsAlso.style.display='none'
 	}
 	else
 	{
-	thatExistsAlso.src=e.target.result;
+	  thatExistsAlso.src=e.target.result;
 	}
       }
    }
@@ -563,13 +563,12 @@ textbox_over_alt.addEventListener('change', function(ev) {
 	{
           var image = new Image();
           image.src = e.target.result;
-          document.body.appendChild(image);
 	  ohAndThis = image
 	  ohAndThis.style.display='none'
 	}
 	else
 	{
-	ohAndThis.src=e.target.result;
+	  ohAndThis.src=e.target.result;
 	}
       }
    }
