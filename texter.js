@@ -62,7 +62,7 @@ let font_dt_mono_dw = loadImage("assets/determination_mono_dw.png")
 
 let boxes_in = []
 
-//let stack_width_inp = document.getElementById(id="stack_width")
+let stack_width_inp = document.getElementById(id="stack_width")
 
 ctx.imageSmoothingEnabled = false
 canvas.imageSmoothingEnabled = false
@@ -314,10 +314,11 @@ function draw_canvas()
 
 function box_stack_update()
 {
-	
 	//alert(box_size)
+	var stack_width = Number(stack_width_inp.value)
+	alert(stack_width)
 	canvas_stack.height = (box_size[3] + 12)*bonus_boxes.length
-	canvas_stack.width = (box_size[2] + 12)
+	canvas_stack.width = (box_size[2] + 12)*stack_width
 	ctx_stack.fillRect(0,0,canvas_stack.width,canvas_stack.height)
 	for (let i = 0; i < bonus_boxes.length; i++) 
 	{
