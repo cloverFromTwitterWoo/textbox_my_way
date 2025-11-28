@@ -210,6 +210,8 @@ function draw_text(x,y,str)
  	}
 }
 
+let iters = 0
+
 function draw_canvas()
 {
 	var draw_it = true
@@ -346,10 +348,19 @@ function draw_canvas()
 		const dataURL = canvas.toDataURL('image/png');
 		awesome_canvas.src = dataURL;
 		//canvas.style.display = 'none'
+		if(iters==0)
+		{
+			setTimeout(draw_canvas, 250)
+			iters+=1
+		}
+		else
+		{
+			iters=0
+		}
 	}
 	else
 	{
-		setTimeout(draw_canvas, 160)
+		setTimeout(draw_canvas, 250)
 	}
 }
 
