@@ -84,9 +84,6 @@ let cur_dw = new Image()
 
 function generate_font(new_fnt)
 {
-	//cur_font = loadImage(new_fnt)
-	//cur_outline = loadImage(new_fnt)
-	//cur_dw = loadImage(new_fnt)
 	portrait_blacked.width = cur_font.width
 	portrait_blacked.height = cur_font.height
 	portrait_blacka.clearRect(0,0,cur_font.width,cur_font.height)
@@ -238,7 +235,7 @@ function draw_text(x,y,str)
 			portrait_blacka.clearRect(0,0,18,26)
 			portrait_blacka.imageSmoothingEnabled = false
 			canvas.imageSmoothingEnabled = false
-			portrait_blacka.drawImage(font_dt_mono,(cur_letter%10)*18,Math.floor(cur_letter/10)*26,18,26, 0,0, 18, 26)
+			portrait_blacka.drawImage(cur_font,(cur_letter%10)*18,Math.floor(cur_letter/10)*26,18,26, 0,0, 18, 26)
 			var cool_pixels = portrait_blacka.getImageData(0,0,box_size[2],box_size[3])
 			for(var j = 3; j < cool_pixels.data.length; j += 4)
 			{
