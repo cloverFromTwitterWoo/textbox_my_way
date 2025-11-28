@@ -241,7 +241,7 @@ function draw_text(x,y,str)
 			var cool_pixels = portrait_blacka.getImageData(0,0,box_size[2],box_size[3])
 			for(var j = 3; j < cool_pixels.data.length; j += 4)
 			{
-				if(cool_pixels.data[j] == 255)
+				if(cool_pixels.data[j] > 0)
 				{
 					if(cool_pixels.data[j-3] == color.r && cool_pixels.data[j-2] == color.g && cool_pixels.data[j-1] == color.b)
 					{
