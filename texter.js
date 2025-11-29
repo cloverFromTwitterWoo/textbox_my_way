@@ -49,6 +49,8 @@ let textbox_exp = document.getElementById("text_exp")
 let textbox_exp_alt = document.getElementById("text_exp_alt")
 let textbox_exp_c = document.getElementById("text_exp_color")
 
+let textbox_exp_sc = document.getElementById("text_exp_sc")
+
 let textbox_over = document.getElementById("text_over")
 let textbox_over_alt = document.getElementById("text_over_alt")
 let textbox_font = document.getElementById("text_font")
@@ -369,15 +371,54 @@ function draw_canvas()
 		}
 		if(textbox_chr.value != "none")
 		{
-			portrait_blacked.width = 134
-			portrait_blacked.height = 140
+			portrait_blacked.width = portrait_i_use.width
+			portrait_blacked.height = portrait_i_use.height
+			var port_pos = [6+offset[0]+box_size[0], 6+offset[1]+box_size[1],134,140]
+			if(textbox_exp_sc.value == "Center_It")
+			{
+				port_pos[2] = portrait_i_use.width
+				port_pos[3] = portrait_i_use.height
+				port_pos[0] += Math.floor((134 - port_pos[2])/2)
+				port_pos[1] += Math.floor((140 - port_pos[3])/2)
+			}
+			else if(textbox_exp_sc.value == "2x_Scaling")
+			{
+				port_pos[2] = portrait_i_use.width*2
+				port_pos[3] = portrait_i_use.height*2
+				port_pos[0] += Math.floor((134 - port_pos[2])/2)
+				port_pos[1] += Math.floor((140 - port_pos[3])/2)
+			}
+			else if(textbox_exp_sc.value == "0.5x_Scaling")
+			{
+				port_pos[2] = portrait_i_use.width*0.5
+				port_pos[3] = portrait_i_use.height*0.5
+				port_pos[0] += Math.floor((134 - port_pos[2])/2)
+				port_pos[1] += Math.floor((140 - port_pos[3])/2)
+			}
+			else if(textbox_exp_sc.value == "Fit_Square")
+			{
+				var width_power = 134/portrait_i_use.width
+				var height_power = 140/portrait_i_use.height
+				if(width_power < height_power)
+				{
+					port_pos[2] = portrait_i_use.width*width_power
+					port_pos[3] = portrait_i_use.height*width_power
+				}
+				else
+				{
+					port_pos[2] = portrait_i_use.width*height_power
+					port_pos[3] = portrait_i_use.height*height_power
+				}
+				port_pos[0] += Math.floor((134 - port_pos[2])/2)
+				port_pos[1] += Math.floor((140 - port_pos[3])/2)
+			}
 			if(bart.checked)
 			{
 				portrait_blacka.imageSmoothingEnabled = false
 				canvas.imageSmoothingEnabled = false
-				portrait_blacka.clearRect(0,0,134,140)
-				portrait_blacka.drawImage(portrait_i_use,0,0,134,140)
-				var cool_pixels = portrait_blacka.getImageData(0,0, 134,140)
+				portrait_blacka.clearRect(0,0,portrait_i_use.width,portrait_i_use.height)
+				portrait_blacka.drawImage(portrait_i_use,0,0)
+				var cool_pixels = portrait_blacka.getImageData(0,0,portrait_i_use.width,portrait_i_use.height)
 				for(var i = 3; i < cool_pixels.data.length; i += 4)
 				{
 					if(cool_pixels.data[i] == 255)
@@ -391,25 +432,25 @@ function draw_canvas()
 				var blacked_out = portrait_blacked.toDataURL('image/png');
 				const img_a = document.createElement('img');
 				img_a.src = blacked_out;
-				ctx.drawImage(img_a, 6+offset[0]+box_size[0]-1, 6+offset[1]+box_size[1]-1, 134,140)
-				ctx.drawImage(img_a, 6+offset[0]+box_size[0]-1, 6+offset[1]+box_size[1]+1, 134,140)
-				ctx.drawImage(img_a, 6+offset[0]+box_size[0]+1, 6+offset[1]+box_size[1]-1, 134,140)
-				ctx.drawImage(img_a, 6+offset[0]+box_size[0]+1, 6+offset[1]+box_size[1]+1, 134,140)
-				ctx.drawImage(img_a, 6+offset[0]+box_size[0]-1, 6+offset[1]+box_size[1], 134,140)
-				ctx.drawImage(img_a, 6+offset[0]+box_size[0]+1, 6+offset[1]+box_size[1], 134,140)
-				ctx.drawImage(img_a, 6+offset[0]+box_size[0], 6+offset[1]+box_size[1]-1, 134,140)
-				ctx.drawImage(img_a, 6+offset[0]+box_size[0], 6+offset[1]+box_size[1]+1, 134,140)
+				for(var _x = -1; _x < 2; _x++)
+				{
+					for(var _y = -1; _y < 2; _y++)
+					{
+						if(_x == 0 && _y == 0)
+						{continue}
+						else
+						{ctx.drawImage(img_a, port_pos[0]+_x, port_pos[1]+_y, port_pos[2], port_pos[3])}
+					}
+				}
 			}
-			if(textbox_exp_c.value == "#ffffff")
-			{ctx.drawImage(portrait_i_use, 6+offset[0]+box_size[0], 6+offset[1]+box_size[1], 134,140)}
-			else
+			if(textbox_exp_c.value != "#ffffff")
 			{
 				new_color = hexToRgb(textbox_exp_c.value)
 				portrait_blacka.imageSmoothingEnabled = false
 				canvas.imageSmoothingEnabled = false
-				portrait_blacka.clearRect(0,0,134,140)
-				portrait_blacka.drawImage(portrait_i_use,0,0,134,140)
-				var cool_pixels = portrait_blacka.getImageData(0,0, 134,140)
+				portrait_blacka.clearRect(0,0,portrait_i_use.width,portrait_i_use.height)
+				portrait_blacka.drawImage(portrait_i_use,0,0)
+				var cool_pixels = portrait_blacka.getImageData(0,0,portrait_i_use.width,portrait_i_use.height)
 				for(var i = 3; i < cool_pixels.data.length; i += 4)
 				{
 					if(cool_pixels.data[i] == 255 && cool_pixels.data[i-3] == 255 && cool_pixels.data[i-2] == 255 && cool_pixels.data[i-1] == 255)
@@ -421,10 +462,9 @@ function draw_canvas()
 				}
 				portrait_blacka.putImageData(cool_pixels, 0, 0)
 				var blacked_out = portrait_blacked.toDataURL('image/png');
-				const img_a = document.createElement('img');
-				img_a.src = blacked_out;
-				ctx.drawImage(img_a, 6+offset[0]+box_size[0], 6+offset[1]+box_size[1], 134,140)
+				portrait_i_use = blacked_out
 			}
+			ctx.drawImage(portrait_i_use, port_pos[0], port_pos[1], port_pos[2], port_pos[3])
 		}
 		if(textbox_chr.value == "none")
 		{offset[0] -= 144-28}

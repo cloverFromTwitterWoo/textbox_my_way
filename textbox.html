@@ -33,12 +33,22 @@
 	<option value="toriel">Toriel</option>
 	</select>
 	<br>
-	<span id="exp_txt" style="display:none">Expression:</span>
+	<span id="exp_txt" style="display:none"><span>Expression:</span>
 	<select id="text_exp" style="display:none">
 	<option value="default">Default</option>
 	</select>
 	<input type="file" id="text_exp_alt" accept="image/png" style="display:none"/>
 	<input type="color" id="text_exp_color" style="display:none" value="#ffffff"/>
+	<br>
+	<span>Portrait Scaling:</span>
+	<select id="text_exp_sc">
+	<option value="2x_Scaling">2X Upscale And Center</option>
+	<option value="Fit_Basic">Squish/Stretch to Fit</option>
+	<option value="Center_It">Center</option>
+	<option value="0.5x_Scaling">0.5X Downscale And Center</option>
+	<option value="Fit_Square">Scale Evenly to Fit</option>
+	</select>
+	</span>
 	<br>
 	<span>Overlay:</span>
 	<select id="text_over">
@@ -69,6 +79,7 @@
 	<br>
 	<span>DW:</span><input type="checkbox" id="dark">
 	<span>Text Outline:</span><input type="checkbox" id="outthelineTxt" checked="true">
+	<br>
 	<br>
 	<span>Text:</span>
 	<input type="text" id="text_input" value="* Type in your text here!\n* For colored text, do \#ff0000T\#ffa500H\#ffff00I\#00ff00S\#0000ff!\#a901c0!\n  \#ffffffIt uses the hex code." style="width: 500px;"></input>
