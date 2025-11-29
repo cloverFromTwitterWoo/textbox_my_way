@@ -207,7 +207,7 @@ function draw_text(x,y,str)
 			if(str.charAt(i+1) == "n")
 			{
 				draw_pos_x[0] = draw_pos_x[1]
-				draw_pos_y[0] += 36
+				draw_pos_y[0] += math.floor(chr_height*18/13)
 			}
 			else if(str.charAt(i+1) == "#")
 			{
@@ -272,7 +272,7 @@ function draw_text(x,y,str)
 		else
 		{ctx.drawImage(cur_font,letter_info[0],letter_info[1],letter_info[2],letter_info[3], draw_pos_x[0], draw_pos_y[0], letter_info[2],letter_info[3])}
 		i++
-		draw_pos_x[0] += letter_info[2]-2 //idk?
+		draw_pos_x[0] += math.floor(letter_info[2]*8/9) //idk?
  	}
 }
 
