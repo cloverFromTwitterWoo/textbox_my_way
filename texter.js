@@ -234,7 +234,7 @@ function draw_text(x,y,str)
 					x_off += str.charAt(i+j)
 					j++
 				}
-				i += j-2
+				i += j-3
 				draw_pos_x[0] += Number(x_off)
 				draw_pos_x[1] += Number(x_off)
 			}
@@ -247,7 +247,7 @@ function draw_text(x,y,str)
 					x_off += str.charAt(i+j)
 					j++
 				}
-				i += j-2
+				i += j-3
 				draw_pos_y[0] += Number(x_off)
 				draw_pos_y[1] += Number(x_off)
 			}
