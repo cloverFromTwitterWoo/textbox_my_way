@@ -62,6 +62,10 @@ let textbox_bg_w = document.getElementById("origin_w")
 let textbox_bg_h = document.getElementById("origin_h")
 let textbox_bg_c = document.getElementById("origin_c")
 
+
+let portrait_x = document.getElementById("port_x")
+let portrait_y = document.getElementById("port_y")
+
 let textbox_exp_txt_1 = document.getElementById(id="exp_txt")
 
 /*let font_dt_mono = loadImage("assets/determination_mono.png")
@@ -322,7 +326,7 @@ function draw_canvas()
 	}
 	if(draw_it)
 	{
-		box_size = [Number(textbox_bg_x.value), Number(textbox_bg_y.value), Number(textbox_bg_w.value), Number(textbox_bg_h.value)]
+		box_size = [Number(textbox_bg_x.value), Number(textbox_bg_y.value), Number(textbox_bg_w.value), Number(textbox_bg_h.value), Number(portrait_x.value), Number(portrait_y.value)]
 		if(marge.checked)
 		{
 			canvas.height = box_size[3] + 12
@@ -373,7 +377,7 @@ function draw_canvas()
 		{
 			portrait_blacked.width = portrait_i_use.width
 			portrait_blacked.height = portrait_i_use.height
-			var port_pos = [6+offset[0]+box_size[0], 6+offset[1]+box_size[1],134,140]
+			var port_pos = [6+offset[0]+box_size[0]+box_size[4], 6+offset[1]+box_size[1]+box_size[5],134,140]
 			if(textbox_exp_sc.value == "Center_It")
 			{
 				port_pos[2] = portrait_i_use.width
@@ -665,11 +669,10 @@ textbox_chr.addEventListener("change", (event) => {
 })
 
 const box_sizes = {
-"undertale": [0,0,578,152],
-"outertale": [0,0,578,152],
-"jumbo": [0,0,578,188],
-"transparent": [0,0,578,152],
-"deltarune": [8,10,594,168]
+"undertale": [0,0,578,152,0,0],
+"outertale": [0,0,578,152,0,0],
+"jumbo": [0,0,578,188,0,0],
+"deltarune": [8,10,594,168,0,0]
 }
 
 textbox_bg.addEventListener("change", (event) => {
@@ -686,6 +689,8 @@ textbox_bg.addEventListener("change", (event) => {
 			textbox_bg_y.value = box_size[1]
 			textbox_bg_w.value = box_size[2]
 			textbox_bg_h.value = box_size[3]
+			portrait_x.value = box_size[4]
+			portrait_y.value = box_size[5]
 		}
 		textbox_bg_alt.style.display = "none"
 	}
