@@ -251,7 +251,8 @@ function draw_text(x,y,str)
 				draw_pos_y[0] += Number(x_off)
 				draw_pos_y[1] += Number(x_off)
 			}
-			i += 2
+			i += 1
+			continue
 		}
 		var cur_letter = letter_to_index(str, i)
 		var letter_info = [(cur_letter%10)*chr_length,Math.floor(cur_letter/10)*chr_height,chr_length,chr_height]
