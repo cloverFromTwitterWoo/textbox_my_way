@@ -200,6 +200,7 @@ function draw_text(x,y,str)
 	var color = hexToRgb("#ffffff")
 	var i = 0
 	alert("uh crud")
+	alert(cur_font.naturalWidth)
 	while(i < str.length) {
 		if (str.charAt(i) == "\\")
 		{
