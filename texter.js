@@ -229,12 +229,12 @@ function draw_text(x,y,str)
 			{
 				x_off = ""
 				var j = 2
-				while(str.charAt(i+j) != "\\")
+				while(str.charAt(i+j) != "]")
 				{
 					x_off += str.charAt(i+j)
 					j++
 				}
-				i += j-3
+				i += j-1
 				draw_pos_x[0] += Number(x_off)
 				draw_pos_x[1] += Number(x_off)
 			}
@@ -242,12 +242,12 @@ function draw_text(x,y,str)
 			{
 				x_off = ""
 				var j = 2
-				while(str.charAt(i+j) != "\\")
+				while(str.charAt(i+j) != "]")
 				{
 					x_off += str.charAt(i+j)
 					j++
 				}
-				i += j-3
+				i += j-1
 				draw_pos_y[0] += Number(x_off)
 				draw_pos_y[1] += Number(x_off)
 			}
