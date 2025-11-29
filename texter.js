@@ -251,7 +251,7 @@ function draw_text(x,y,str)
 				draw_pos_y[0] += Number(x_off)
 				draw_pos_y[1] += Number(x_off)
 			}
-			i += 1
+			i += 2
 			continue
 		}
 		var cur_letter = letter_to_index(str, i)
