@@ -199,8 +199,7 @@ function draw_text(x,y,str)
 	var draw_pos_y = [y, y]
 	var color = hexToRgb("#ffffff")
 	var i = 0
-	var char_length = curfont.length/10
-	alert(char_length)
+	alert("uh crud")
 	while(i < str.length) {
 		if (str.charAt(i) == "\\")
 		{
