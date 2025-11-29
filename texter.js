@@ -200,7 +200,7 @@ function draw_text(x,y,str)
 	var color = hexToRgb("#ffffff")
 	var i = 0
 	var chr_length = cur_font.naturalWidth/10
-	var chr_height = 26
+	var chr_height = cur_font.naturalHeight/9 //!REMEMBER TO CHANGE LATER!
 	while(i < str.length) {
 		if (str.charAt(i) == "\\")
 		{
