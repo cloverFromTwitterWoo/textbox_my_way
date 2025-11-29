@@ -227,30 +227,29 @@ function draw_text(x,y,str)
 			}
 			else if(str.charAt(i+1) == "x")
 			{
-				color = ""
+				x_off = ""
 				var j = 2
 				while(str.charAt(i+j) != "\\")
 				{
-					color += str.charAt(i+j)
+					x_off += str.charAt(i+j)
 					j++
 				}
-				//i += j-2
-				draw_pos_x[0] += Number(color)
-				alert(draw_pos_x[0]+32)
-				//draw_pos_x[1] += Number(color)
+				i += j-2
+				draw_pos_x[0] += Number(x_off)
+				draw_pos_x[1] += Number(x_off)
 			}
 			else if(str.charAt(i+1) == "y")
 			{
-				color = ""
+				x_off = ""
 				var j = 2
 				while(str.charAt(i+j) != "\\")
 				{
-					color += str.charAt(i+j)
+					x_off += str.charAt(i+j)
 					j++
 				}
-				//i += j-2
-				draw_pos_y[0] += Number(color)
-				//draw_pos_y[1] += Number(color)
+				i += j-2
+				draw_pos_y[0] += Number(x_off)
+				draw_pos_y[1] += Number(x_off)
 			}
 			i += 2
 		}
