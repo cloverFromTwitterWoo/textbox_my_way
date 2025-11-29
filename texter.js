@@ -199,8 +199,8 @@ function draw_text(x,y,str)
 	var draw_pos_y = [y, y]
 	var color = hexToRgb("#ffffff")
 	var i = 0
-	alert("uh crud")
-	alert(cur_font.naturalWidth)
+	var chr_length = cur_font.naturalWidth/10
+	var chr_height = 26
 	while(i < str.length) {
 		if (str.charAt(i) == "\\")
 		{
@@ -222,23 +222,24 @@ function draw_text(x,y,str)
 			i += 2
 		}
 		var cur_letter = letter_to_index(str, i)
+		var letter_info = [(cur_letter%10)*chr_length,Math.floor(cur_letter/10)*chr_height,chr_length,chr_height]
 		if(!homer.checked)
 		{
 			if(lisa.checked)
 			{
-   				ctx.drawImage(cur_outline,(cur_letter%10)*18,Math.floor(cur_letter/10)*26,18,26, draw_pos_x[0]-1, draw_pos_y[0]-1, 18, 26)
-   				ctx.drawImage(cur_outline,(cur_letter%10)*18,Math.floor(cur_letter/10)*26,18,26, draw_pos_x[0]-1, draw_pos_y[0]+1, 18, 26)
-   				ctx.drawImage(cur_outline,(cur_letter%10)*18,Math.floor(cur_letter/10)*26,18,26, draw_pos_x[0]+1, draw_pos_y[0]-1, 18, 26)
-   				ctx.drawImage(cur_outline,(cur_letter%10)*18,Math.floor(cur_letter/10)*26,18,26, draw_pos_x[0]+1, draw_pos_y[0]+1, 18, 26)
-				ctx.drawImage(cur_outline,(cur_letter%10)*18,Math.floor(cur_letter/10)*26,18,26, draw_pos_x[0]-1, draw_pos_y[0], 18, 26)
-   				ctx.drawImage(cur_outline,(cur_letter%10)*18,Math.floor(cur_letter/10)*26,18,26, draw_pos_x[0]+1, draw_pos_y[0], 18, 26)
-   				ctx.drawImage(cur_outline,(cur_letter%10)*18,Math.floor(cur_letter/10)*26,18,26, draw_pos_x[0], draw_pos_y[0]-1, 18, 26)
-   				ctx.drawImage(cur_outline,(cur_letter%10)*18,Math.floor(cur_letter/10)*26,18,26, draw_pos_x[0], draw_pos_y[0]+1, 18, 26)
+   				ctx.drawImage(cur_outline,letter_info[0],letter_info[1],letter_info[2],letter_info[3], draw_pos_x[0]-1, draw_pos_y[0]-1, letter_info[2],letter_info[3])
+   				ctx.drawImage(cur_outline,letter_info[0],letter_info[1],letter_info[2],letter_info[3], draw_pos_x[0]-1, draw_pos_y[0]+1, letter_info[2],letter_info[3])
+				ctx.drawImage(cur_outline,letter_info[0],letter_info[1],letter_info[2],letter_info[3], draw_pos_x[0]+1, draw_pos_y[0]-1, letter_info[2],letter_info[3])
+				ctx.drawImage(cur_outline,letter_info[0],letter_info[1],letter_info[2],letter_info[3], draw_pos_x[0]+1, draw_pos_y[0]+1, letter_info[2],letter_info[3])
+				ctx.drawImage(cur_outline,letter_info[0],letter_info[1],letter_info[2],letter_info[3], draw_pos_x[0]-1, draw_pos_y[0], letter_info[2],letter_info[3])
+				ctx.drawImage(cur_outline,letter_info[0],letter_info[1],letter_info[2],letter_info[3], draw_pos_x[0]+1, draw_pos_y[0], letter_info[2],letter_info[3])
+				ctx.drawImage(cur_outline,letter_info[0],letter_info[1],letter_info[2],letter_info[3], draw_pos_x[0], draw_pos_y[0]-1, letter_info[2],letter_info[3])
+				ctx.drawImage(cur_outline,letter_info[0],letter_info[1],letter_info[2],letter_info[3], draw_pos_x[0], draw_pos_y[0]+1, letter_info[2],letter_info[3])
 			}
 		}
 		else
 		{
-			ctx.drawImage(cur_dw,(cur_letter%10)*18,Math.floor(cur_letter/10)*26,18,26, draw_pos_x[0]+1, draw_pos_y[0]+1, 18, 26)
+			ctx.drawImage(cur_outline,letter_info[0],letter_info[1],letter_info[2],letter_info[3], draw_pos_x[0]+1, draw_pos_y[0]+1, letter_info[2],letter_info[3])
 		}
 		if(doColorMath && !(color.r == 255 && color.g == 255 && color.b == 255) )
 		{
@@ -247,8 +248,8 @@ function draw_text(x,y,str)
 			portrait_blacka.clearRect(0,0,18,26)
 			portrait_blacka.imageSmoothingEnabled = false
 			canvas.imageSmoothingEnabled = false
-			portrait_blacka.drawImage(cur_font,(cur_letter%10)*18,Math.floor(cur_letter/10)*26,18,26, 0,0, 18, 26)
-			var cool_pixels = portrait_blacka.getImageData(0,0,box_size[2],box_size[3])
+			portrait_blacka.drawImage(cur_font,letter_info[0],letter_info[1],letter_info[2],letter_info[3],0,0,letter_info[2],letter_info[3])
+			var cool_pixels = portrait_blacka.getImageData(0,0,letter_info[2],letter_info[3])
 			for(var j = 3; j < cool_pixels.data.length; j += 4)
 			{
 				if(cool_pixels.data[j] > 0)
@@ -266,12 +267,12 @@ function draw_text(x,y,str)
 			var blacked_out = portrait_blacked.toDataURL('image/png');
 			const img_a = document.createElement('img');
 			img_a.src = blacked_out;
-			ctx.drawImage(img_a, draw_pos_x[0], draw_pos_y[0],18,26)
+			ctx.drawImage(img_a, draw_pos_x[0], draw_pos_y[0],letter_info[2],letter_info[3])
 		}
 		else
-		{ctx.drawImage(cur_font,(cur_letter%10)*18,Math.floor(cur_letter/10)*26,18,26, draw_pos_x[0], draw_pos_y[0], 18, 26)}
+		{ctx.drawImage(cur_font,letter_info[0],letter_info[1],letter_info[2],letter_info[3], draw_pos_x[0], draw_pos_y[0], letter_info[2],letter_info[3])}
 		i++
-		draw_pos_x[0] += 16
+		draw_pos_x[0] += letter_info[2]-2 //idk?
  	}
 }
 
