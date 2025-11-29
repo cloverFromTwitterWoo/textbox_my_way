@@ -16,6 +16,7 @@ let portrait_blacked = document.getElementById("portrait_outline");
 const marge = document.getElementById("margesimpson");
 const homer = document.getElementById("dark");
 const bart = document.getElementById("outtheline");
+const lisa = document.getElementById("outthelineTxt");
 
 function hexToRgb(hex) {
   var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
@@ -221,14 +222,17 @@ function draw_text(x,y,str)
 		var cur_letter = letter_to_index(str, i)
 		if(!homer.checked)
 		{
-   			ctx.drawImage(cur_outline,(cur_letter%10)*18,Math.floor(cur_letter/10)*26,18,26, draw_pos_x[0]-1, draw_pos_y[0]-1, 18, 26)
-   			ctx.drawImage(cur_outline,(cur_letter%10)*18,Math.floor(cur_letter/10)*26,18,26, draw_pos_x[0]-1, draw_pos_y[0]+1, 18, 26)
-   			ctx.drawImage(cur_outline,(cur_letter%10)*18,Math.floor(cur_letter/10)*26,18,26, draw_pos_x[0]+1, draw_pos_y[0]-1, 18, 26)
-   			ctx.drawImage(cur_outline,(cur_letter%10)*18,Math.floor(cur_letter/10)*26,18,26, draw_pos_x[0]+1, draw_pos_y[0]+1, 18, 26)
-			ctx.drawImage(cur_outline,(cur_letter%10)*18,Math.floor(cur_letter/10)*26,18,26, draw_pos_x[0]-1, draw_pos_y[0], 18, 26)
-   			ctx.drawImage(cur_outline,(cur_letter%10)*18,Math.floor(cur_letter/10)*26,18,26, draw_pos_x[0]+1, draw_pos_y[0], 18, 26)
-   			ctx.drawImage(cur_outline,(cur_letter%10)*18,Math.floor(cur_letter/10)*26,18,26, draw_pos_x[0], draw_pos_y[0]-1, 18, 26)
-   			ctx.drawImage(cur_outline,(cur_letter%10)*18,Math.floor(cur_letter/10)*26,18,26, draw_pos_x[0], draw_pos_y[0]+1, 18, 26)
+			if(lisa.checked)
+			{
+   				ctx.drawImage(cur_outline,(cur_letter%10)*18,Math.floor(cur_letter/10)*26,18,26, draw_pos_x[0]-1, draw_pos_y[0]-1, 18, 26)
+   				ctx.drawImage(cur_outline,(cur_letter%10)*18,Math.floor(cur_letter/10)*26,18,26, draw_pos_x[0]-1, draw_pos_y[0]+1, 18, 26)
+   				ctx.drawImage(cur_outline,(cur_letter%10)*18,Math.floor(cur_letter/10)*26,18,26, draw_pos_x[0]+1, draw_pos_y[0]-1, 18, 26)
+   				ctx.drawImage(cur_outline,(cur_letter%10)*18,Math.floor(cur_letter/10)*26,18,26, draw_pos_x[0]+1, draw_pos_y[0]+1, 18, 26)
+				ctx.drawImage(cur_outline,(cur_letter%10)*18,Math.floor(cur_letter/10)*26,18,26, draw_pos_x[0]-1, draw_pos_y[0], 18, 26)
+   				ctx.drawImage(cur_outline,(cur_letter%10)*18,Math.floor(cur_letter/10)*26,18,26, draw_pos_x[0]+1, draw_pos_y[0], 18, 26)
+   				ctx.drawImage(cur_outline,(cur_letter%10)*18,Math.floor(cur_letter/10)*26,18,26, draw_pos_x[0], draw_pos_y[0]-1, 18, 26)
+   				ctx.drawImage(cur_outline,(cur_letter%10)*18,Math.floor(cur_letter/10)*26,18,26, draw_pos_x[0], draw_pos_y[0]+1, 18, 26)
+			}
 		}
 		else
 		{
@@ -527,15 +531,14 @@ textbox_exp_alt.addEventListener('change', function(ev) {
       reader.onloadend = function (e) {
 	if(thatExists == false)
 	{
-          var image = new Image();
-          image.src = e.target.result;
-          document.body.appendChild(image);
+       		var image = new Image();
+        	image.src = e.target.result;
 		thatExists = image
 		thatExists.style.display='none'
 	}
 	else
 	{
-	thatExists.src=e.target.result;
+		thatExists.src=e.target.result;
 	}
       }
    }
@@ -551,15 +554,14 @@ textbox_bg_alt.addEventListener('change', function(ev) {
       reader.onloadend = function (e) {
 	if(thatExistsAlso == false)
 	{
-          var image = new Image();
-          image.src = e.target.result;
-          document.body.appendChild(image);
+        	var image = new Image();
+        	image.src = e.target.result;
 		thatExistsAlso = image
 		thatExistsAlso.style.display='none'
 	}
 	else
 	{
-	thatExistsAlso.src=e.target.result;
+		thatExistsAlso.src=e.target.result;
 	}
       }
    }
@@ -575,15 +577,14 @@ textbox_over_alt.addEventListener('change', function(ev) {
       reader.onloadend = function (e) {
 	if(ohAndThis == false)
 	{
-          var image = new Image();
-          image.src = e.target.result;
-          document.body.appendChild(image);
-	  ohAndThis = image
-	  ohAndThis.style.display='none'
+		var image = new Image();
+		image.src = e.target.result;
+		ohAndThis = image
+		ohAndThis.style.display='none'
 	}
 	else
 	{
-	ohAndThis.src=e.target.result;
+		ohAndThis.src=e.target.result;
 	}
       }
    }
@@ -678,13 +679,13 @@ textbox_font_alt.addEventListener('change', function(ev) {
       reader.onloadend = function (e) {
 	if(ohAndThis == false)
 	{
-          var image = new Image();
-          image.src = e.target.result;
-	  cur_font = image
+        	var image = new Image();
+    		image.src = e.target.result;
+		cur_font = image
 	}
 	else
 	{
-	ohAndThis.src=e.target.result;
+		ohAndThis.src=e.target.result;
 	}
       }
    }
