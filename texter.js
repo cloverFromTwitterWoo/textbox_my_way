@@ -249,7 +249,7 @@ function draw_text(x,y,str)
 			portrait_blacka.imageSmoothingEnabled = false
 			canvas.imageSmoothingEnabled = false
 			portrait_blacka.drawImage(cur_font,letter_info[0],letter_info[1],letter_info[2],letter_info[3],0,0,letter_info[2],letter_info[3])
-			var cool_pixels = portrait_blacka.getImageData(0,0,letter_info[2],letter_info[3])
+			var cool_pixels = portrait_blacka.getImageData(0,0,18,26)
 			for(var j = 3; j < cool_pixels.data.length; j += 4)
 			{
 				if(cool_pixels.data[j] > 0)
@@ -267,7 +267,7 @@ function draw_text(x,y,str)
 			var blacked_out = portrait_blacked.toDataURL('image/png');
 			const img_a = document.createElement('img');
 			img_a.src = blacked_out;
-			ctx.drawImage(img_a, draw_pos_x[0], draw_pos_y[0],letter_info[2],letter_info[3])
+			ctx.drawImage(img_a, draw_pos_x[0], draw_pos_y[0])
 		}
 		else
 		{ctx.drawImage(cur_font,letter_info[0],letter_info[1],letter_info[2],letter_info[3], draw_pos_x[0], draw_pos_y[0], letter_info[2],letter_info[3])}
