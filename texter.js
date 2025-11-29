@@ -225,6 +225,33 @@ function draw_text(x,y,str)
 				i += 6
 				color = hexToRgb(color)
 			}
+			else if(str.charAt(i+1) == "x")
+			{
+				color = ""
+				var j = 2
+				while(str.charAt(i+j) != "\\")
+				{
+					color += str.charAt(i+j)
+					j++
+				}
+				//i += j-2
+				draw_pos_x[0] += Number(color)
+				alert(draw_pos_x[0]+32)
+				//draw_pos_x[1] += Number(color)
+			}
+			else if(str.charAt(i+1) == "y")
+			{
+				color = ""
+				var j = 2
+				while(str.charAt(i+j) != "\\")
+				{
+					color += str.charAt(i+j)
+					j++
+				}
+				//i += j-2
+				draw_pos_y[0] += Number(color)
+				//draw_pos_y[1] += Number(color)
+			}
 			i += 2
 		}
 		var cur_letter = letter_to_index(str, i)
@@ -288,7 +315,7 @@ function draw_canvas()
 {
 	if(iters == 0)
 	{
-		generate_font(cur_font)
+		generate_font(cur_font) //uncoment!
 		iters = 0.1
 	}
 	var draw_it = true
@@ -415,6 +442,11 @@ function draw_canvas()
 				}
 				port_pos[0] += Math.floor((134 - port_pos[2])/2)
 				port_pos[1] += Math.floor((140 - port_pos[3])/2)
+			}
+			else if(textbox_exp_sc.value == "Unchanged_Anything")
+			{
+				port_pos[2] = portrait_i_use.width
+				port_pos[3] = portrait_i_use.height
 			}
 			if(bart.checked)
 			{
