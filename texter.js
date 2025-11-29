@@ -239,7 +239,7 @@ function draw_text(x,y,str)
 		}
 		else
 		{
-			ctx.drawImage(cur_outline,letter_info[0],letter_info[1],letter_info[2],letter_info[3], draw_pos_x[0]+1, draw_pos_y[0]+1, letter_info[2],letter_info[3])
+			ctx.drawImage(cur_outline,letter_info[0],letter_info[1],letter_info[2]*2,letter_info[3], draw_pos_x[0]+1, draw_pos_y[0]+1, letter_info[2],letter_info[3])
 		}
 		if(doColorMath && !(color.r == 255 && color.g == 255 && color.b == 255) )
 		{
