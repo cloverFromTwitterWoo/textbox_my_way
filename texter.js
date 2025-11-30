@@ -275,7 +275,7 @@ function draw_text(x,y,str)
 		}
 		else
 		{
-			letter_posed = [Number(per_char_spacing[cur_letter][1]), Number(per_char_spacing[cur_letter][2]), Number(per_char_spacing[cur_letter][3])+Math.floor(chr_length*8/9)]
+			letter_posed = [Number(per_char_spacing[cur_letter][1]), Number(per_char_spacing[cur_letter][2]), Number(per_char_spacing[cur_letter][3])]
 		}
 		var letter_info = [(cur_letter%10)*chr_length,Math.floor(cur_letter/10)*chr_height,chr_length,chr_height]
 		if(!homer.checked)
@@ -346,7 +346,7 @@ function draw_text(x,y,str)
 					if(per_char_spacing.length == 0)
 					{draw_pos_x[0] += Math.floor(chr_length*8/9)*2}
 					else
-					{draw_pos_x[0] += (Number(per_char_spacing[67][3])+Math.floor(chr_length*8/9))*2}
+					{draw_pos_x[0] += Number(per_char_spacing[67][3])*2}
 				}
 				draw_pos_y[0] += Math.floor(chr_height*18/13)
 				//str = [str.slice(0, i), "  ", str.slice(i)].join('')
