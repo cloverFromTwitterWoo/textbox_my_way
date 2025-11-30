@@ -215,8 +215,7 @@ function draw_text(x,y,str)
 	var chr_height = cur_font.naturalHeight/9 //!REMEMBER TO CHANGE LATER!
 	per_char_spacing = [] //this is empty so it's monospaced
 	if(!mono_spaced_real.checked)
-	{per_char_spacing = JSON.parse(JSON.stringify(readThisBozo))
-	alert(per_char_spacing)} //Just In Case Man
+	{per_char_spacing = JSON.parse(JSON.stringify(readThisBozo))} //Just In Case Man
 	while(i < str.length) {
 		if (str.charAt(i) == "\\")
 		{
@@ -271,7 +270,7 @@ function draw_text(x,y,str)
 		}
 		else
 		{
-			alert(per_char_spacing[cur_letter])
+			letter_posed = [Number(per_char_spacing[cur_letter][1]), Number(per_char_spacing[cur_letter][2]), Number(per_char_spacing[cur_letter][3])+Math.floor(chr_length*8/9)]
 		}
 		var letter_info = [(cur_letter%10)*chr_length,Math.floor(cur_letter/10)*chr_height,chr_length,chr_height]
 		if(!homer.checked)
@@ -354,7 +353,7 @@ function draw_canvas()
 {
 	if(iters == 0)
 	{
-		generate_font(cur_font) //uncoment!
+		generate_font(cur_font) //uncomment!
 		iters = 0.1
 	}
 	var draw_it = true
@@ -820,10 +819,10 @@ this_is_gonna_suck_i_guess.addEventListener('change', function(ev) {
       reader.onloadend = function (e) {
 	//read_this_bozo = alert(e.target.result)
 	read_this_bozo_temp = e.target.result.split('\n')
-	read_this_bozo = []
+	readThisBozo = []
 	for(var i = 0; i < read_this_bozo_temp.length; i++)
 	{
-		read_this_bozo[i] = read_this_bozo_temp[i].split(',')
+		readThisBozo[i] = read_this_bozo_temp[i].split(',')
 	}
       }
    }
