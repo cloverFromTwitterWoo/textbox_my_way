@@ -63,6 +63,9 @@ let textbox_bg_w = document.getElementById("origin_w")
 let textbox_bg_h = document.getElementById("origin_h")
 let textbox_bg_c = document.getElementById("origin_c")
 
+let font_box_hidden = document.getElementById("custom_show")
+let mono_spaced_real = document.getElementById("noJoke")
+let this_is_gonna_suck_i_guess = document.getElementById("text_font_spacin")
 
 let portrait_x = document.getElementById("port_x")
 let portrait_y = document.getElementById("port_y")
@@ -199,6 +202,8 @@ function letter_to_index(letta, index)
 	{return 67}
 }
 
+let readThisBozo = []
+
 let doColorMath = true
 function draw_text(x,y,str)
 {
@@ -208,6 +213,10 @@ function draw_text(x,y,str)
 	var i = 0
 	var chr_length = cur_font.naturalWidth/10
 	var chr_height = cur_font.naturalHeight/9 //!REMEMBER TO CHANGE LATER!
+	per_char_spacing = [] //this is empty so it's monospaced
+	if(!mono_spaced_real.checked)
+	{per_char_spacing = JSON.parse(JSON.stringify(readThisBozo))
+	alert(per_char_spacing)} //Just In Case Man
 	while(i < str.length) {
 		if (str.charAt(i) == "\\")
 		{
@@ -256,24 +265,32 @@ function draw_text(x,y,str)
 			continue
 		}
 		var cur_letter = letter_to_index(str, i)
+		if(per_char_spacing.length == 0)
+		{
+			letter_posed = [0, 0, Math.floor(chr_length*8/9)]
+		}
+		else
+		{
+			alert(per_char_spacing[cur_letter])
+		}
 		var letter_info = [(cur_letter%10)*chr_length,Math.floor(cur_letter/10)*chr_height,chr_length,chr_height]
 		if(!homer.checked)
 		{
 			if(lisa.checked)
 			{
-   				ctx.drawImage(cur_outline,letter_info[0],letter_info[1],letter_info[2],letter_info[3], draw_pos_x[0]-1, draw_pos_y[0]-1, letter_info[2],letter_info[3])
-   				ctx.drawImage(cur_outline,letter_info[0],letter_info[1],letter_info[2],letter_info[3], draw_pos_x[0]-1, draw_pos_y[0]+1, letter_info[2],letter_info[3])
-				ctx.drawImage(cur_outline,letter_info[0],letter_info[1],letter_info[2],letter_info[3], draw_pos_x[0]+1, draw_pos_y[0]-1, letter_info[2],letter_info[3])
-				ctx.drawImage(cur_outline,letter_info[0],letter_info[1],letter_info[2],letter_info[3], draw_pos_x[0]+1, draw_pos_y[0]+1, letter_info[2],letter_info[3])
-				ctx.drawImage(cur_outline,letter_info[0],letter_info[1],letter_info[2],letter_info[3], draw_pos_x[0]-1, draw_pos_y[0], letter_info[2],letter_info[3])
-				ctx.drawImage(cur_outline,letter_info[0],letter_info[1],letter_info[2],letter_info[3], draw_pos_x[0]+1, draw_pos_y[0], letter_info[2],letter_info[3])
-				ctx.drawImage(cur_outline,letter_info[0],letter_info[1],letter_info[2],letter_info[3], draw_pos_x[0], draw_pos_y[0]-1, letter_info[2],letter_info[3])
-				ctx.drawImage(cur_outline,letter_info[0],letter_info[1],letter_info[2],letter_info[3], draw_pos_x[0], draw_pos_y[0]+1, letter_info[2],letter_info[3])
+   				ctx.drawImage(cur_outline,letter_info[0],letter_info[1],letter_info[2],letter_info[3], draw_pos_x[0]-1+letter_posed[0], draw_pos_y[0]-1+letter_posed[1], letter_info[2],letter_info[3])
+   				ctx.drawImage(cur_outline,letter_info[0],letter_info[1],letter_info[2],letter_info[3], draw_pos_x[0]-1+letter_posed[0], draw_pos_y[0]+1+letter_posed[1], letter_info[2],letter_info[3])
+				ctx.drawImage(cur_outline,letter_info[0],letter_info[1],letter_info[2],letter_info[3], draw_pos_x[0]+1+letter_posed[0], draw_pos_y[0]-1+letter_posed[1], letter_info[2],letter_info[3])
+				ctx.drawImage(cur_outline,letter_info[0],letter_info[1],letter_info[2],letter_info[3], draw_pos_x[0]+1+letter_posed[0], draw_pos_y[0]+1+letter_posed[1], letter_info[2],letter_info[3])
+				ctx.drawImage(cur_outline,letter_info[0],letter_info[1],letter_info[2],letter_info[3], draw_pos_x[0]-1+letter_posed[0], draw_pos_y[0]+letter_posed[1], letter_info[2],letter_info[3])
+				ctx.drawImage(cur_outline,letter_info[0],letter_info[1],letter_info[2],letter_info[3], draw_pos_x[0]+1+letter_posed[0], draw_pos_y[0]+letter_posed[1], letter_info[2],letter_info[3])
+				ctx.drawImage(cur_outline,letter_info[0],letter_info[1],letter_info[2],letter_info[3], draw_pos_x[0]+letter_posed[0], draw_pos_y[0]-1+letter_posed[1], letter_info[2],letter_info[3])
+				ctx.drawImage(cur_outline,letter_info[0],letter_info[1],letter_info[2],letter_info[3], draw_pos_x[0]+letter_posed[0], draw_pos_y[0]+1+letter_posed[1], letter_info[2],letter_info[3])
 			}
 		}
 		else
 		{
-			ctx.drawImage(cur_outline,letter_info[0],letter_info[1],letter_info[2],letter_info[3], draw_pos_x[0]+1, draw_pos_y[0]+1, letter_info[2],letter_info[3])
+			ctx.drawImage(cur_outline,letter_info[0],letter_info[1],letter_info[2],letter_info[3], draw_pos_x[0]+1+letter_posed[0], draw_pos_y[0]+1+letter_posed[1], letter_info[2],letter_info[3])
 		}
 		if(doColorMath && !(color.r == 255 && color.g == 255 && color.b == 255) )
 		{
@@ -301,12 +318,12 @@ function draw_text(x,y,str)
 			var blacked_out = portrait_blacked.toDataURL('image/png');
 			const img_a = document.createElement('img');
 			img_a.src = blacked_out;
-			ctx.drawImage(img_a, draw_pos_x[0], draw_pos_y[0])
+			ctx.drawImage(img_a, draw_pos_x[0]+letter_posed[0], draw_pos_y[0]+letter_posed[1])
 		}
 		else
-		{ctx.drawImage(cur_font,letter_info[0],letter_info[1],letter_info[2],letter_info[3], draw_pos_x[0], draw_pos_y[0], letter_info[2],letter_info[3])}
+		{ctx.drawImage(cur_font,letter_info[0],letter_info[1],letter_info[2],letter_info[3], draw_pos_x[0]+letter_posed[0], draw_pos_y[0]+letter_posed[1], letter_info[2],letter_info[3])}
 		i++
-		draw_pos_x[0] += Math.floor(chr_length*8/9) //idk?
+		draw_pos_x[0] += letter_posed[2] //idk?
 		if(str.charAt(i-1) == " " && maggie.checked)
 		{
 			var total_pos = draw_pos_x[0]
@@ -321,8 +338,10 @@ function draw_text(x,y,str)
 				var look_str = str.slice(0, i)
 				draw_pos_x[0] = draw_pos_x[1]
 				if (look_str.indexOf('* ') > -1)
-				{draw_pos_x[0] += Math.floor(chr_length*8/9)*2}
-				draw_pos_y[0] += Math.floor(chr_height*18/13)
+				{
+					draw_pos_x[0] += Math.floor(chr_length*8/9)*2}
+					draw_pos_y[0] += Math.floor(chr_height*18/13
+				)
 				//str = [str.slice(0, i), "  ", str.slice(i)].join('')
 			}
 		}
@@ -763,9 +782,11 @@ textbox_font.addEventListener("change", (event) => {
 	if(textbox_font.value == "custom")
 	{
 		textbox_font_alt.style.display = "inline"
+		font_box_hidden.style.display = "inline"
 	}
 	else
 	{
+		font_box_hidden.style.display = "none"
 		textbox_font_alt.style.display = "none"
 		cur_font = loadImage('assets/fonts/'+textbox_font.value+'.png')
 	}
@@ -786,6 +807,23 @@ textbox_font_alt.addEventListener('change', function(ev) {
 	else
 	{
 		ohAndThis.src=e.target.result;
+	}
+      }
+   }
+});
+
+this_is_gonna_suck_i_guess.addEventListener('change', function(ev) {
+   if(ev.target.files) {
+      let file = ev.target.files[0];
+      var reader  = new FileReader();
+      reader.readAsText(file);
+      reader.onloadend = function (e) {
+	//read_this_bozo = alert(e.target.result)
+	read_this_bozo_temp = e.target.result.split('\n')
+	read_this_bozo = []
+	for(var i = 0; i < read_this_bozo_temp.length; i++)
+	{
+		read_this_bozo[i] = read_this_bozo_temp[i].split(',')
 	}
       }
    }
