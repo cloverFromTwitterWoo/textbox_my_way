@@ -17,6 +17,7 @@ const marge = document.getElementById("margesimpson");
 const homer = document.getElementById("dark");
 const bart = document.getElementById("outtheline");
 const lisa = document.getElementById("outthelineTxt");
+const maggie = document.getElementById("smart");
 
 function hexToRgb(hex) {
   var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
@@ -306,6 +307,25 @@ function draw_text(x,y,str)
 		{ctx.drawImage(cur_font,letter_info[0],letter_info[1],letter_info[2],letter_info[3], draw_pos_x[0], draw_pos_y[0], letter_info[2],letter_info[3])}
 		i++
 		draw_pos_x[0] += Math.floor(chr_length*8/9) //idk?
+		if(str.charAt(i-1) == " " && maggie.checked)
+		{
+			var total_pos = draw_pos_x[0]
+			var j = 1
+			while(str.charAt(i+j) != " ")
+			{
+				total_pos += Math.floor(chr_length*8/9)
+				j++
+			}
+			if(total_pos >= box_size[2] - 6)
+			{
+				var look_str = str.slice(0, i)
+				draw_pos_x[0] = draw_pos_x[1]
+				if (look_str.indexOf('* ') > -1)
+				{draw_pos_x[0] += Math.floor(chr_length*8/9)*2}
+				draw_pos_y[0] += Math.floor(chr_height*18/13)
+				//str = [str.slice(0, i), "  ", str.slice(i)].join('')
+			}
+		}
  	}
 }
 
