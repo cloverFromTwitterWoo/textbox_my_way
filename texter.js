@@ -793,7 +793,10 @@ textbox_over.addEventListener("change", (event) => {
 	}
 })
 
+let custom_spaced_fonts = {"arial": "QSwwLDAsMTgKQiwtMSwwLDE2CkMsLTEsMCwxNwpELC0xLDAsMTcKRSwtMSwwLDE2CkYsLTIsMCwxNApHLC0xLDAsMTgKSCwtMiwwLDE2CkksLTIsMCw0CkosMCwwLDEyCkssLTEsMCwxNQpMLC0xLDAsMTQKTSwtMSwwLDE4Ck4sLTEsMCwxNgpPLC0xLDAsMTcKUCwtMSwwLDE2ClEsLTEsMCwxOQpSLC0xLDAsMTcKUywtMSwwLDE2ClQsMCwwLDE3ClUsLTEsMCwxNwpWLDAsMCwxNwpXLDAsMCwyNQpYLDAsMCwxOApZLDAsMCwxOApaLDAsMCwxNgphLDAsMCwxNApiLC0xLDAsMTQKYywtMSwwLDEzCmQsMCwwLDE0CmUsMCwwLDE1CmYsMCwwLDEwCmcsMCwwLDE0CmgsLTEsMCwxMwppLC0xLDAsNQpqLDAsMCw3CmssLTEsMCwxMwpsLC0xLDAsNQptLC0xLDAsMjAKbiwtMSwwLDEzCm8sMCwwLDE1CnAsLTEsMCwxNApxLDAsMCwxNApyLC0xLDAsOApzLDAsMCwxMwp0LDAsMCw5CnUsLTEsMCwxMwp2LDAsMCwxNAp3LDAsMCwyMAp4LDAsMCwxNAp5LDAsMCwxNAp6LDAsMCwxNAo/LC0xLDAsMTQKISwtMiwwLDUKKiwwLDAsMTEKKCwtMSwwLDkKKSwtMSwwLDkKMCwtMSwwLDE0CjEsLTIsMCw5CjIsMCwwLDE0CjMsLTEsMCwxNAo0LDAsMCwxNQo1LC0xLDAsMTQKNiwwLDAsMTUKNywtMSwwLDE0CjgsLTEsMCwxNAo5LC0xLDAsMTQKICwwLDAsMTQKLiwtMiwwLDcKW2NvbW1hXSwtMiwwLDcKJywtMSwwLDUKIiwtMSwwLDcKPCwtMSwwLDE0Cj4sLTEsMCwxNAorLC0xLDAsMTQKLSwwLDAsOQovLDAsMCw3CiUsLTEsMCwyMQokLDAsMCwxNAokLDAsMCwxNQo6LC0yLDAsOAo7LC0yLDAsOApeLDAsLTEsMTEKJiwtMSwwLDE2CkAsLTEsMCwyNQpfLDAsLTMsMTYKWywtMSwwLDgKXSwtMSwwLDgKfiwtMSwwLDE0Cj0sLTEsMCwxNAoyMA=="}
+
 textbox_font.addEventListener("change", (event) => {
+	mono_spaced_real.checked = true
 	if(textbox_font.value == "custom")
 	{
 		textbox_font_alt.style.display = "inline"
@@ -801,6 +804,16 @@ textbox_font.addEventListener("change", (event) => {
 	}
 	else
 	{
+		if(textbox_font.value in custom_spaced_fonts)
+		{
+			mono_spaced_real.checked = false
+			read_this_bozo_temp = atob(custom_spaced_fonts[textbox_font.value])
+			readThisBozo = []
+			for(var i = 0; i < read_this_bozo_temp.length; i++)
+			{
+				readThisBozo[i] = read_this_bozo_temp[i].split(',')
+			}
+		}
 		font_box_hidden.style.display = "none"
 		textbox_font_alt.style.display = "none"
 		cur_font = loadImage('assets/fonts/'+textbox_font.value+'.png')
