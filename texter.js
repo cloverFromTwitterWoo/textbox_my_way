@@ -311,7 +311,7 @@ function draw_text(x,y,str)
 		{
 			var total_pos = draw_pos_x[0]
 			var j = 1
-			while(str.charAt(i+j) != " ")
+			while(str.charAt(i+j) != " " && i+j < str.length)
 			{
 				total_pos += Math.floor(chr_length*8/9)
 				j++
