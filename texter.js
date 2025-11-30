@@ -690,7 +690,7 @@ textbox_over_alt.addEventListener('change', function(ev) {
 });
 
 const exp_options = {
-"clover": '<option value="default">Default</option><option value="neutral">Neutral</option><option value="bummed">Bummed</option>',
+"flowey": '<option value="spr_floweynice_0">Nice</option><option value="spr_floweywink_0">Wink</option><option value="spr_floweysassy_0">Sassy</option><option value="spr_floweyplain_0">D:</option><option value="spr_floweyniceside_0">Side (Smile)</option><option value="spr_floweynicesideum_0">Side (Uh)</option><option value="spr_floweygrin_0">Grin</option><option value="spr_floweyevil_0">Evil</option><option value="spr_floweylaugh_0">Laugh</option><option value="spr_floweyside_0">Side</option><option value="spr_floweysideshock_0">Side (Ah)</option><option value="spr_floweytoriel_0">Toriel</option><option value="spr_floweytoriel2_0">Toriel (Distorted)</option><option value="spr_floweyhurt_0">Hurt</option>',
 "toriel": '<option value="default">Default</option><option value="looking-away">Looking Away</option><option value="sad">Sad</option>'}
 textbox_exp.innerHTML=exp_options[textbox_chr.value]
 textbox_chr.addEventListener("change", (event) => {
