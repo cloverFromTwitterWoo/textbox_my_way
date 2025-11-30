@@ -213,9 +213,14 @@ function draw_text(x,y,str)
 	var i = 0
 	var chr_length = cur_font.naturalWidth/10
 	var chr_height = cur_font.naturalHeight/9 //!REMEMBER TO CHANGE LATER!
-	per_char_spacing = [] //this is empty so it's monospaced
+	var per_char_spacing = [] //this is empty so it's monospaced
+	var line_break_height = Math.floor(chr_height*18/13)
 	if(!mono_spaced_real.checked)
-	{per_char_spacing = JSON.parse(JSON.stringify(readThisBozo))} //Just In Case Man
+	{
+		per_char_spacing = JSON.parse(JSON.stringify(readThisBozo))
+		if(per_char_spacing.length > 90)
+		{line_break_height = Number(per_char_spacing[90][0])}
+	} //Just In Case Man
 	while(i < str.length) {
 		if (str.charAt(i) == "\\")
 		{
@@ -338,9 +343,12 @@ function draw_text(x,y,str)
 				draw_pos_x[0] = draw_pos_x[1]
 				if (look_str.indexOf('* ') > -1)
 				{
-					draw_pos_x[0] += Math.floor(chr_length*8/9)*2}
-					draw_pos_y[0] += Math.floor(chr_height*18/13
-				)
+					if(per_char_spacing.length == 0)
+					{draw_pos_x[0] += Math.floor(chr_length*8/9)*2}
+					else
+					{draw_pos_x[0] += (Number(per_char_spacing[67][3])+Math.floor(chr_length*8/9))*2}
+				}
+				draw_pos_y[0] += Math.floor(chr_height*18/13)
 				//str = [str.slice(0, i), "  ", str.slice(i)].join('')
 			}
 		}
