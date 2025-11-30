@@ -807,7 +807,7 @@ textbox_font.addEventListener("change", (event) => {
 		if(textbox_font.value in custom_spaced_fonts)
 		{
 			mono_spaced_real.checked = false
-			read_this_bozo_temp = atob(custom_spaced_fonts[textbox_font.value])
+			read_this_bozo_temp = atob(custom_spaced_fonts[textbox_font.value]).split('\n')
 			readThisBozo = []
 			for(var i = 0; i < read_this_bozo_temp.length; i++)
 			{
