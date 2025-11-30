@@ -275,7 +275,15 @@ function draw_text(x,y,str)
 		}
 		else
 		{
-			letter_posed = [Number(per_char_spacing[cur_letter][1]), Number(per_char_spacing[cur_letter][2]), Number(per_char_spacing[cur_letter][3])]
+			letter_posed = [Number(per_char_spacing[cur_letter][1]), Number(per_char_spacing[cur_letter][2])]
+			if(per_char_spacing[cur_letter][3] == "default")
+			{
+				letter_posed.push(Math.floor(chr_length*8/9))
+			}
+			else
+			{
+				letter_posed.push(Number(per_char_spacing[cur_letter][3]))
+			}
 		}
 		var letter_info = [(cur_letter%10)*chr_length,Math.floor(cur_letter/10)*chr_height,chr_length,chr_height]
 		if(!homer.checked)
