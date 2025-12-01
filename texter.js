@@ -552,7 +552,7 @@ function draw_canvas()
 				}
 				portrait_blacka.putImageData(cool_pixels, 0, 0)
 				var blacked_out = portrait_blacked.toDataURL('image/png');
-				portrait_i_use = blacked_out
+				portrait_i_use.src = blacked_out
 			}
 			ctx.drawImage(portrait_i_use, port_pos[0], port_pos[1], port_pos[2], port_pos[3])
 		}
