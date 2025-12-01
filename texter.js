@@ -826,7 +826,7 @@ textbox_font_alt.addEventListener('change', function(ev) {
       var reader  = new FileReader();
       reader.readAsDataURL(file);
       reader.onloadend = function (e) {
-	if(ohAndThis == false)
+	if(true)
 	{
         	var image = new Image();
     		image.src = e.target.result;
