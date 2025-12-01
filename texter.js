@@ -591,6 +591,7 @@ function box_stack_update()
 	ctx_stack.fillRect(0,0,canvas_stack.width,canvas_stack.height)
 	for (let i = 0; i < bonus_boxes.length; i++) 
 	{
+		//to future me: check if the first 6 pixels diagonally are black
 		if(marge.checked)
   		{ctx_stack.drawImage(bonus_boxes[i], box_size[2]*(i%stack_width), (box_size[3] + 12)*Math.floor(i/stack_width))}
 		else
