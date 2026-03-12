@@ -7,6 +7,8 @@ const ctx_stack = canvas_stack.getContext("2d");
 ctx.fillStyle = "black"
 ctx.fillRect(0,0,canvas.width,canvas.height)
 
+const box_container = document.getElementById("box_box");
+
 let awesome_canvas = document.getElementById("canvasTrue");
 let awesome_canvas_Stacked = document.getElementById("canvasStack");
 
@@ -57,11 +59,11 @@ let textbox_over_alt = document.getElementById("text_over_alt")
 let textbox_font = document.getElementById("text_font")
 let textbox_font_alt = document.getElementById("text_font_alt")
 
-let textbox_bg_x = document.getElementById("origin_x")
-let textbox_bg_y = document.getElementById("origin_y")
-let textbox_bg_w = document.getElementById("origin_w")
-let textbox_bg_h = document.getElementById("origin_h")
-let textbox_bg_c = document.getElementById("origin_c")
+//let textbox_bg_x = document.getElementById("origin_x")
+//let textbox_bg_y = document.getElementById("origin_y")
+//let textbox_bg_w = document.getElementById("origin_w")
+//let textbox_bg_h = document.getElementById("origin_h")
+//let textbox_bg_c = document.getElementById("origin_c")
 
 let font_box_hidden = document.getElementById("custom_show")
 let mono_spaced_real = document.getElementById("noJoke")
@@ -94,6 +96,103 @@ let box_size = [0,0,578,152]
 let cur_font = new Image()
 let cur_outline = new Image()
 let cur_dw = new Image()
+
+let list_of_boxes = [];
+
+function new_box(def_name="", def_image=-1, def_x=0, def_y=0, def_w=578, def_h=152, def_c="#ffffff", def_v="true")
+{
+	var newBox = {};
+	newBox.border = document.createElement("div");
+	newBox.border.classList.add("box")
+
+	var name_txt = document.createElement("span");
+	name_txt.innerHTML = "Name: "
+	newBox.border.appendChild(name_txt)
+	name_field = document.createElement("input");
+	name_field.value = def_name;
+	newBox.border.appendChild(name_field)
+
+	newBox.border.appendChild(document.createElement("br"))
+	var image_txt = document.createElement("span");
+	image_txt.innerHTML = "Image: "
+	newBox.border.appendChild(image_txt)
+	newBox.image = document.createElement("input");
+	newBox.image.type = "file"
+	newBox.image.accept = "image/png"
+	newBox.border.appendChild(newBox.image)
+
+	newBox.border.appendChild(document.createElement("br"))
+	newBox.border.appendChild(document.createElement("br"))
+
+	var set_txt = document.createElement("span");
+	set_txt.innerHTML = "Box Settings: "
+	newBox.border.appendChild(set_txt)
+	newBox.border.appendChild(document.createElement("br"))
+
+	var x_txt = document.createElement("span");
+	x_txt.innerHTML = "Box X: "
+	newBox.border.appendChild(x_txt)
+	newBox.x_pos = document.createElement("input");
+	newBox.x_pos.type = "number"
+	newBox.x_pos.value = def_x
+	newBox.x_pos.style = "width: 40px;"
+	newBox.border.appendChild(newBox.x_pos);
+
+	var y_txt = document.createElement("span");
+	y_txt.innerHTML = " Box Y: "
+	newBox.border.appendChild(y_txt)
+	newBox.y_pos = document.createElement("input");
+	newBox.y_pos.type = "number"
+	newBox.y_pos.value = def_y
+	newBox.y_pos.style = "width: 40px;"
+	newBox.border.appendChild(newBox.y_pos);
+
+	newBox.border.appendChild(document.createElement("br"))
+
+	var w_txt = document.createElement("span");
+	w_txt.innerHTML = "Box Width: "
+	newBox.border.appendChild(w_txt)
+	newBox.w_pos = document.createElement("input");
+	newBox.w_pos.type = "number"
+	newBox.w_pos.value = def_w
+	newBox.w_pos.style = "width: 40px;"
+	newBox.border.appendChild(newBox.w_pos);
+
+	var h_txt = document.createElement("span");
+	h_txt.innerHTML = " Box Height: "
+	newBox.border.appendChild(h_txt)
+	newBox.h_pos = document.createElement("input");
+	newBox.h_pos.type = "number"
+	newBox.h_pos.value = def_h
+	newBox.h_pos.style = "width: 40px;"
+	newBox.border.appendChild(newBox.h_pos);
+
+	newBox.border.appendChild(document.createElement("br"))
+
+	var c_txt = document.createElement("span");
+	c_txt.innerHTML = "Box Color (subtractive): "
+	newBox.border.appendChild(c_txt)
+	newBox.c_pos = document.createElement("input");
+	newBox.c_pos.type = "color"
+	newBox.c_pos.value = def_c
+	newBox.border.appendChild(newBox.c_pos);
+
+	newBox.border.appendChild(document.createElement("br"))
+
+	var vis_txt = document.createElement("span");
+	vis_txt.innerHTML = "Visible: "
+	newBox.border.appendChild(vis_txt)
+	newBox.v_pos = document.createElement("input");
+	newBox.v_pos.type = "checkbox"
+	newBox.v_pos.checked = def_v
+	newBox.border.appendChild(newBox.v_pos)
+
+	box_container.appendChild(newBox.border)
+
+	newBox.linebreak = document.createElement("br");
+	box_container.appendChild(newBox.linebreak)
+	list_of_boxes.push(newBox)
+}
 
 function generate_font(new_fnt)
 {
@@ -369,7 +468,7 @@ function draw_canvas()
 {
 	if(iters == 0)
 	{
-		generate_font(cur_font) //uncomment!
+		//generate_font(cur_font) //uncomment!
 		iters = 0.1
 	}
 	var draw_it = true
@@ -769,7 +868,7 @@ textbox_bg.addEventListener("change", (event) => {
 	}
 	else
 	{
-		if(textbox_bg.value != "transparent")
+		/*if(textbox_bg.value != "transparent")
 		{
 			box_size = box_sizes[textbox_bg.value]
 			textbox_bg_x.value = box_size[0]
@@ -778,7 +877,23 @@ textbox_bg.addEventListener("change", (event) => {
 			textbox_bg_h.value = box_size[3]
 			portrait_x.value = box_size[4]
 			portrait_y.value = box_size[5]
+		}*/
+		for(let i = 0; i < list_of_boxes.length; i++)
+		{
+			list_of_boxes[i].border.remove()
+			list_of_boxes[i].linebreak.remove()
 		}
+		list_of_boxes.length = 0
+		alert(textbox_bg.value)
+		var xhttp = new XMLHttpRequest();
+    		xhttp.onreadystatechange = function() {
+        		if (this.readyState == 4 && this.status == 200) {
+            			alert(this.responseText)
+       			}
+    		};
+    		xhttp.open("GET", "assets/textboxes/" + textbox_bg.value + ".txt", false);
+    		xhttp.send();
+		alert(textbox_bg.value)
 		textbox_bg_alt.style.display = "none"
 	}
 })

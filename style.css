@@ -16,3 +16,8 @@ canvas {
   src:
     local("Determination Mono"),
 }
+
+.box {
+  border: 3px inset black;
+  padding: 4px;
+}
