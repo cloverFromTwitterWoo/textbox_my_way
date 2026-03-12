@@ -20,26 +20,18 @@
 	<option value="custom">Custom</option>
 	</select>
 	<input type="file" id="text_bg_alt" accept="image/png" style="display:none"/>
-	<br>
-	<br>
+	<br><br>
 	<span>Image Settings:</span> <br>
 	<span>Image Width: </span><input type="number" id="origin_w" value="578" style="width: 40px;" min="0"/>
 	<span>Image Height: </span><input type="number" id="origin_h" value="152" style="width: 40px;" min="0"/>
 	<span>Margin:</span><input type="checkbox" id="margesimpson">
-
 	<br><br>
 	<button onclick="new_box()">Add New Box</button>
 	<br><br>
-	
-<!--
-	<br>
-	<span>Box X:</span><input type="number" id="origi_x" value="578" style="width: 40px;"/>
-	<span>Box Y:</span><input type="number" id="origi_y" value="152" style="width: 40px;"/>
-	<br>
-	<span>Box C:</span><input type="color" id="origin_c" value="#ffffff"/>!-->
-	
 	</div>
 	<br>
+	<!--div class="box" id="char_box">
+	<legend>Character Settings</legend-->
 	<span>Character:</span>
 	<select id="text_chr">
 	<option value="none">None</option>
@@ -67,18 +59,13 @@
 	<span>Portrait X_Off:</span><input type="number" id="port_x" value="0" style="width: 40px;"/>
 	<span>Portrait Y_Off:</span><input type="number" id="port_y" value="0" style="width: 40px;"/>
 	</span>
+	
+	<span>Portrait Outline: </span><input type="checkbox" id="outtheline" checked="true">
+	<!--/div-->
 	<br>
-	<span>Overlay:</span>
-	<select id="text_over">
-	<option value="transparent">None</option>
-	<option value="custom">Custom</option>
-	<option value="fog">Fog</option>
-	<option value=”evil_glow">Red Glow</option>
-	<option value="snowdin">Snow</option>
-	<option value="scanlines">Scanlines</option>
-	</select>
-	<input type="file" id="text_over_alt" accept="image/png" style="display:none"/>
 	<br>
+	<div class="box" id="text_box" style="width:700px">
+	<legend>Text:</legend>
 	<span>Font:</span>
 	<select id="text_font">
 	<option value="determination_mono">Default</option>
@@ -97,21 +84,24 @@
 	<span>Mono:</span><input type="checkbox" id="noJoke" checked="true"><span>or </span><input type="file" id="text_font_spacin" accept=".txt"/>
 	</span>
 	<br>
-	<span>Portrait Outline:</span><input type="checkbox" id="outtheline" checked="true">
-	<br>
-	<span>DW:</span><input type="checkbox" id="dark">
-	<span>Text Outline:</span><input type="checkbox" id="outthelineTxt" checked="true">
-	<br>
-	<span>Auto-Linebreak:</span><input type="checkbox" id="smart">
-	<br>
-	<span>Text:</span>
-	<input type="text" id="text_input" value="* Type in your text here!\n* For colored text, do \#ff0000T\#ffa500H\#ffff00I\#00ff00S\#0000ff!\#a901c0!\n  \#ffffffIt uses the hex code. \y-2]S\y4]H\y-4]A\y4]K\y-4]Y\y2]!" style="width: 500px;"></input>
-	<span>Text X:</span><input type="number" id="origin_x" value="0" style="width: 40px;"/>
-	<span>Text Y:</span><input type="number" id="origin_y" value="0" style="width: 40px;"/>
-	
+	<button onclick="new_text()">More Text</button>
 	<br>
 	<br>
-	<canvas id="textbox_work" style="display:block" width="578" height="152"></canvas>
+	</div>
+	<br>
+	<span>Overlay:</span>
+	<select id="text_over">
+	<option value="transparent">None</option>
+	<option value="custom">Custom</option>
+	<option value="fog">Fog</option>
+	<option value=”evil_glow">Red Glow</option>
+	<option value="snowdin">Snow</option>
+	<option value="scanlines">Scanlines</option>
+	</select>
+	<input type="file" id="text_over_alt" accept="image/png" style="display:none"/>
+	<br>
+	<br>
+	<canvas id="textbox_work" style="display:none" width="578" height="152"></canvas>
 	<img id="canvasTrue" src="assets/textboxes/undertale.png"></img>
 	<canvas id="portrait_outline" style="display:none" width="134" height="140"></canvas>
 	<br>

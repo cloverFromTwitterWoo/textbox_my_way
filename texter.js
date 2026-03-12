@@ -8,6 +8,7 @@ ctx.fillStyle = "black"
 ctx.fillRect(0,0,canvas.width,canvas.height)
 
 const box_container = document.getElementById("box_box");
+const text_container = document.getElementById("text_box");
 
 let awesome_canvas = document.getElementById("canvasTrue");
 let awesome_canvas_Stacked = document.getElementById("canvasStack");
@@ -38,7 +39,10 @@ function loadImage(filePath)
 	return my_tempo
 }
 
-let prebaked
+function copy(it) 
+{
+	return JSON.parse(JSON.stringify(it))
+}
 
 //canvas.style.display = 'none'
 
@@ -100,10 +104,11 @@ let cur_outline = new Image()
 let cur_dw = new Image()
 
 let list_of_boxes = [];
+let list_of_text = [];
 
 let prebaked_boxes = {
-	undertale: [578, 152, ["Default", "assets/textboxes/undertale.png", 0, 0, "#ffffff", "true"], "ports"],
-	outertale: [578, 152, ["Default", "assets/textboxes/outertale.png", 0, 0, "#ffffff", "true"], "ports"],
+	undertale: [578, 152, ["", "assets/textboxes/undertale.png", 0, 0, "#ffffff", "true"], "ports", ["", 28, 26, 116, 0, true, false, false]],
+	outertale: [578, 152, ["", "assets/textboxes/outertale.png", 0, 0, "#ffffff", "true"], "ports", ["", 28, 26, 116, 0, true, false, false]],
 }
 
 function refresh_box_list()
@@ -117,7 +122,15 @@ function refresh_box_list()
 	}
 }
 
-function new_box(def_name="", def_image=-1, def_x=0, def_y=0, def_w=578, def_h=152, def_c="#ffffff", def_v="true")
+function refresh_text_list()
+{
+	for(var i = 0; i < list_of_text.length; i++)
+	{
+		list_of_text[i].removeButt.className = "text_" + String(i)
+	}
+}
+
+function new_box(def_name="", def_image=-1, def_x=0, def_y=0, def_w=578, def_h=152, def_c="#ffffff", def_v=true)
 {
 	var newBox = {};
 	newBox.border = document.createElement("div");
@@ -262,6 +275,139 @@ function new_box(def_name="", def_image=-1, def_x=0, def_y=0, def_w=578, def_h=1
 	list_of_boxes.push(newBox)
 }
 
+function new_text(def_name="", def_x=0, def_y=0, def_x_off=0, def_y_off=0, def_o=true, def_d=false, def_a=false)
+{
+	var newText = {};
+	newText.border = document.createElement("div");
+	newText.border.classList.add("box")
+	newText.border.style.width = "600px"
+
+	var name_txt = document.createElement("span");
+	name_txt.innerHTML = "Name: "
+	newText.border.appendChild(name_txt)
+	name_field = document.createElement("input");
+	name_field.value = def_name;
+	newText.border.appendChild(name_field)
+
+	newText.border.appendChild(document.createElement("br"))
+
+	/*var font_txt = document.createElement("span");
+	font_txt.innerHTML = "Font: "
+	newText.border.appendChild(font_txt)
+	
+	var placeholder = document.createElement("span");
+	placeholder.innerHTML = "[WIP]"
+	newText.border.appendChild(placeholder)
+	
+	newText.border.appendChild(document.createElement("br"))*/
+	newText.border.appendChild(document.createElement("br"))
+
+	var set_txt = document.createElement("span");
+	set_txt.innerHTML = "Text Settings: "
+	newText.border.appendChild(set_txt)
+
+	newText.border.appendChild(document.createElement("br"))
+
+	var x_txt = document.createElement("span");
+	x_txt.innerHTML = "Text X: "
+	newText.border.appendChild(x_txt)
+	newText.x_pos = document.createElement("input");
+	newText.x_pos.type = "number"
+	newText.x_pos.value = def_x
+	newText.x_pos.style = "width: 40px;"
+	newText.border.appendChild(newText.x_pos);
+
+	var y_txt = document.createElement("span");
+	y_txt.innerHTML = " Text Y: "
+	newText.border.appendChild(y_txt)
+	newText.y_pos = document.createElement("input");
+	newText.y_pos.type = "number"
+	newText.y_pos.value = def_y
+	newText.y_pos.style = "width: 40px;"
+	newText.border.appendChild(newText.y_pos);
+
+	newText.border.appendChild(document.createElement("br"))
+
+	var x_txt = document.createElement("span");
+	x_txt.innerHTML = "Portrait X-Offset: "
+	newText.border.appendChild(x_txt)
+	newText.x_pos_alt = document.createElement("input");
+	newText.x_pos_alt.type = "number"
+	newText.x_pos_alt.value = def_x_off
+	newText.x_pos_alt.style = "width: 40px;"
+	newText.border.appendChild(newText.x_pos_alt);
+
+	var y_txt = document.createElement("span");
+	y_txt.innerHTML = " Portrait Y-Offset: "
+	newText.border.appendChild(y_txt)
+	newText.y_pos_alt = document.createElement("input");
+	newText.y_pos_alt.type = "number"
+	newText.y_pos_alt.value = def_y_off
+	newText.y_pos_alt.style = "width: 40px;"
+	newText.border.appendChild(newText.y_pos_alt);
+
+	newText.border.appendChild(document.createElement("br"))
+
+	var out_txt = document.createElement("span");
+	out_txt.innerHTML = "Outline: "
+	newText.border.appendChild(out_txt)
+	newText.o_pos = document.createElement("input");
+	newText.o_pos.type = "checkbox"
+	newText.o_pos.checked = def_o
+	newText.border.appendChild(newText.o_pos)
+
+	var dark_txt = document.createElement("span");
+	dark_txt.innerHTML = " Dark World: "
+	newText.border.appendChild(dark_txt)
+	newText.d_pos = document.createElement("input");
+	newText.d_pos.type = "checkbox"
+	newText.d_pos.checked = def_d
+	newText.border.appendChild(newText.d_pos)
+
+	newText.border.appendChild(document.createElement("br"))
+
+	var auto_txt = document.createElement("span");
+	auto_txt.innerHTML = "Auto-Linebreak: "
+	newText.border.appendChild(auto_txt)
+	newText.a_pos = document.createElement("input");
+	newText.a_pos.type = "checkbox"
+	newText.a_pos.checked = def_a
+	newText.border.appendChild(newText.a_pos)
+
+	newText.border.appendChild(document.createElement("br"))
+	newText.border.appendChild(document.createElement("br"))
+	
+	var txt_txt = document.createElement("span");
+	txt_txt.innerHTML = "Text: "
+	newText.border.appendChild(txt_txt)
+	newText.border.appendChild(document.createElement("br"))
+	newText.text = document.createElement("input");
+	newText.text.type = "text"
+	newText.text.style = "width: 500px;"
+	newText.border.appendChild(newText.text)
+
+	newText.border.appendChild(document.createElement("br"))
+	newText.border.appendChild(document.createElement("br"))
+
+	newText.removeButt = document.createElement("button");
+	newText.removeButt.innerHTML = "X"
+	newText.removeButt.classList.add("text_" + String(list_of_text.length))
+	newText.removeButt.onclick = function() 
+	{
+		var which_text = Number(this.className.substring(5))
+		list_of_text[which_text].border.remove()
+		list_of_text[which_text].linebreak.remove()
+		list_of_text.splice(which_text, 1)
+		refresh_text_list()
+	}
+	newText.border.appendChild(newText.removeButt)
+
+	text_container.appendChild(newText.border)
+	newText.linebreak = document.createElement("br");
+	text_container.appendChild(newText.linebreak)
+	list_of_text.push(newText)
+}
+
 var awesome_template = prebaked_boxes["undertale"]
 origin_w.value = awesome_template[0]
 origin_h.value = awesome_template[1]
@@ -269,6 +415,12 @@ var i = 2
 while(i < awesome_template.length && typeof(awesome_template[i]) != "string")
 {
 	new_box(awesome_template[i][0], awesome_template[i][1], awesome_template[i][2], awesome_template[i][3], awesome_template[i][4], awesome_template[i][5], awesome_template[i][6], awesome_template[i][7])
+	i++
+}
+i++
+while(i < awesome_template.length && typeof(awesome_template[i]) != "string")
+{
+	new_text(awesome_template[i][0], awesome_template[i][1], awesome_template[i][2], awesome_template[i][3], awesome_template[i][4], awesome_template[i][5], awesome_template[i][6], awesome_template[i][7])
 	i++
 }
 
@@ -382,8 +534,16 @@ function letter_to_index(letta, index)
 let readThisBozo = []
 
 let doColorMath = true
-function draw_text(x,y,str)
+function draw_text(pass_in)//(x,y,str)
 {
+	var x = Number(copy(pass_in.x_pos.value)) + offset[0]
+	var y = Number(copy(pass_in.y_pos.value)) + offset[1]
+	if(textbox_chr.value != "none")
+	{
+		x += Number(copy(pass_in.x_pos_alt.value))
+		y += Number(copy(pass_in.y_pos_alt.value))
+	}
+	var str = copy(pass_in.text.value)
 	var draw_pos_x = [x, x]
 	var draw_pos_y = [y, y]
 	var color = hexToRgb("#ffffff")
@@ -463,9 +623,9 @@ function draw_text(x,y,str)
 			}
 		}
 		var letter_info = [(cur_letter%10)*chr_length,Math.floor(cur_letter/10)*chr_height,chr_length,chr_height]
-		if(!homer.checked)
+		if(!pass_in.d_pos.checked)
 		{
-			if(lisa.checked)
+			if(pass_in.o_pos.checked)
 			{
    				ctx.drawImage(cur_outline,letter_info[0],letter_info[1],letter_info[2],letter_info[3], draw_pos_x[0]-1+letter_posed[0], draw_pos_y[0]-1+letter_posed[1], letter_info[2],letter_info[3])
    				ctx.drawImage(cur_outline,letter_info[0],letter_info[1],letter_info[2],letter_info[3], draw_pos_x[0]-1+letter_posed[0], draw_pos_y[0]+1+letter_posed[1], letter_info[2],letter_info[3])
@@ -513,7 +673,7 @@ function draw_text(x,y,str)
 		{ctx.drawImage(cur_font,letter_info[0],letter_info[1],letter_info[2],letter_info[3], draw_pos_x[0]+letter_posed[0], draw_pos_y[0]+letter_posed[1], letter_info[2],letter_info[3])}
 		i++
 		draw_pos_x[0] += letter_posed[2] //idk?
-		if(str.charAt(i-1) == " " && maggie.checked)
+		if(str.charAt(i-1) == " " && pass_in.a_pos.checked)
 		{
 			var total_pos = draw_pos_x[0]
 			var j = 1
@@ -546,7 +706,7 @@ function draw_canvas()
 {
 	if(iters == 0)
 	{
-		//generate_font(cur_font) //uncomment!
+		generate_font(cur_font) //uncomment!
 		iters = 0.1
 	}
 	var draw_it = true
@@ -564,7 +724,7 @@ function draw_canvas()
 	{
 		draw_it = false
 		boxes_in.push(textbox_bg.value)
-	}
+	}*/
 	if(textbox_chr.value != "none")
 	{
 		if(!portraits_in.includes(textbox_chr.value + "-" + textbox_exp.value))
@@ -577,7 +737,7 @@ function draw_canvas()
 	{
 		draw_it = false
 		overlays_in.push(textbox_over.value)
-	}*/
+	}
 	if(draw_it)
 	{
 		//box_size = [Number(textbox_bg_x.value), Number(textbox_bg_y.value), Number(textbox_bg_w.value), Number(textbox_bg_h.value), Number(portrait_x.value), Number(portrait_y.value)]
@@ -736,12 +896,17 @@ function draw_canvas()
 			}
 			ctx.drawImage(portrait_i_use, port_pos[0], port_pos[1], port_pos[2], port_pos[3])
 		}
-		if(textbox_chr.value == "none")
-		{offset[0] -= 144-28}
-		draw_text(144+box_size[0]+offset[0],26+box_size[1]+offset[1],textbox_text.value)
+		//if(textbox_chr.value == "none")
+		//{offset[0] -= 144-28}
+		//draw_text(144+box_size[0]+offset[0],26+box_size[1]+offset[1],textbox_text.value)
+		for(let z = 0; z < list_of_text.length; z++)
+		{
+			draw_text(list_of_text[z])
+			//alert(list_of_text[z].text)
+		}
 		//canvas.style.display = 'none'
-		if(textbox_chr.value == "none")
-		{offset[0] += 144-28}
+		//if(textbox_chr.value == "none")
+		//{offset[0] += 144-28}
 		ctx.drawImage(overlay_i_use,0,0,box_size[2],box_size[3],offset[0],offset[1],box_size[2],box_size[3])
 		const dataURL = canvas.toDataURL('image/png');
 		awesome_canvas.src = dataURL;
@@ -949,22 +1114,20 @@ textbox_bg.addEventListener("change", (event) => {
 	}
 	else
 	{
-		/*if(textbox_bg.value != "transparent")
-		{
-			box_size = box_sizes[textbox_bg.value]
-			textbox_bg_x.value = box_size[0]
-			textbox_bg_y.value = box_size[1]
-			textbox_bg_w.value = box_size[2]
-			textbox_bg_h.value = box_size[3]
-			portrait_x.value = box_size[4]
-			portrait_y.value = box_size[5]
-		}*/
 		for(let i = 0; i < list_of_boxes.length; i++)
 		{
 			list_of_boxes[i].border.remove()
 			list_of_boxes[i].linebreak.remove()
 		}
 		list_of_boxes.length = 0
+		var save_this_tho = []
+		for(let i = 0; i < list_of_text.length; i++)
+		{
+			save_this_tho.push(copy(list_of_text[i].text.value))
+			list_of_text[i].border.remove()
+			list_of_text[i].linebreak.remove()
+		}
+		list_of_text.length = 0
 		var awesome_template = prebaked_boxes[textbox_bg.value]
 		origin_w.value = awesome_template[0]
 		origin_h.value = awesome_template[1]
@@ -972,6 +1135,13 @@ textbox_bg.addEventListener("change", (event) => {
 		while(i < awesome_template.length && typeof(awesome_template[i]) != "string")
 		{
 			new_box(awesome_template[i][0], awesome_template[i][1], awesome_template[i][2], awesome_template[i][3], awesome_template[i][4], awesome_template[i][5], awesome_template[i][6], awesome_template[i][7])
+			i++
+		}
+		i++
+		while(i < awesome_template.length && typeof(awesome_template[i]) != "string")
+		{
+			new_text(awesome_template[i][0], awesome_template[i][1], awesome_template[i][2], awesome_template[i][3], awesome_template[i][4], awesome_template[i][5], awesome_template[i][6], awesome_template[i][7])
+			list_of_text[list_of_text.length-1].text.value = save_this_tho[list_of_text.length-1]
 			i++
 		}
 		
