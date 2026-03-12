@@ -1,5 +1,3 @@
-const fs = require('node:fs');
-
 const canvas = document.getElementById("textbox_work");
 const ctx = canvas.getContext("2d");
 
@@ -103,6 +101,11 @@ let cur_dw = new Image()
 
 let list_of_boxes = [];
 
+let prebaked_boxes = {
+	undertale: [578, 152, ["Default", "assets/textboxes/undertale.png", 0, 0, 578, 152, "#ffffff", "true"]],
+	outertale: [578, 152, ["Default", "assets/textboxes/outertale.png", 0, 0, 578, 152, "#ffffff", "true"]],
+}
+
 function new_box(def_name="", def_image=-1, def_x=0, def_y=0, def_w=578, def_h=152, def_c="#ffffff", def_v="true")
 {
 	var newBox = {};
@@ -120,10 +123,44 @@ function new_box(def_name="", def_image=-1, def_x=0, def_y=0, def_w=578, def_h=1
 	var image_txt = document.createElement("span");
 	image_txt.innerHTML = "Image: "
 	newBox.border.appendChild(image_txt)
-	newBox.image = document.createElement("input");
-	newBox.image.type = "file"
-	newBox.image.accept = "image/png"
-	newBox.border.appendChild(newBox.image)
+
+	newBox.image = false
+
+	newBox.image_sel = document.createElement("input");
+	newBox.image_sel.type = "file"
+	newBox.image_sel.accept = "image/png"
+	newBox.image_sel.classList.add("box_" + String(list_of_boxes.length))
+	newBox.image_sel.addEventListener('change', function(ev)
+	{
+		if(ev.target.files) {
+			let file = ev.target.files[0];
+			var reader = new FileReader();
+			
+     		 	reader.readAsDataURL(file);
+      			reader.onloadend = (e) => 
+			{
+				var which_box = Number(this.className.substring(4))
+				alert(which_box)
+				if(list_of_boxes[which_box].image == false)
+				{
+       					var image = new Image();
+        				image.src = e.target.result;
+					list_of_boxes[which_box].image = image
+					list_of_boxes[which_box].image.style.display='none'
+				}
+				else
+				{
+					list_of_boxes[which_box].image.src=e.target.result;
+				}
+      			}
+   		}
+	});
+	if(def_image != -1)
+	{
+		newBox.image = loadImage(def_image)
+		newBox.image.style.display = 'none'
+	}
+	newBox.border.appendChild(newBox.image_sel)
 
 	newBox.border.appendChild(document.createElement("br"))
 	newBox.border.appendChild(document.createElement("br"))
@@ -196,6 +233,14 @@ function new_box(def_name="", def_image=-1, def_x=0, def_y=0, def_w=578, def_h=1
 	newBox.linebreak = document.createElement("br");
 	box_container.appendChild(newBox.linebreak)
 	list_of_boxes.push(newBox)
+}
+
+var awesome_template = prebaked_boxes["undertale"]
+origin_w.value = awesome_template[0]
+origin_h.value = awesome_template[1]
+for(let i = 2; i < awesome_template.length; i++)
+{
+	new_box(awesome_template[i][0], awesome_template[i][1], awesome_template[i][2], awesome_template[i][3], awesome_template[i][4], awesome_template[i][5], awesome_template[i][6], awesome_template[i][7])
 }
 
 function generate_font(new_fnt)
@@ -476,10 +521,10 @@ function draw_canvas()
 		iters = 0.1
 	}
 	var draw_it = true
-	if(textbox_bg.value == "custom")
+	/*if(textbox_bg.value == "custom")
 	{image_i_use = thatExistsAlso}
 	else
-	{var image_i_use = loadImage("assets/textboxes/"+textbox_bg.value+".png")}
+	{var image_i_use = loadImage("assets/textboxes/"+textbox_bg.value+".png")}*/
 	if(textbox_chr.value == "custom")
 	{portrait_i_use = thatExists}
 	else
@@ -510,7 +555,8 @@ function draw_canvas()
 	}
 	if(draw_it)
 	{
-		box_size = [Number(textbox_bg_x.value), Number(textbox_bg_y.value), Number(textbox_bg_w.value), Number(textbox_bg_h.value), Number(portrait_x.value), Number(portrait_y.value)]
+		//box_size = [Number(textbox_bg_x.value), Number(textbox_bg_y.value), Number(textbox_bg_w.value), Number(textbox_bg_h.value), Number(portrait_x.value), Number(portrait_y.value)]
+		box_size = [0,0,578,152, Number(portrait_x.value), Number(portrait_y.value)]
 		if(marge.checked)
 		{
 			canvas.height = box_size[3] + 12
@@ -530,32 +576,38 @@ function draw_canvas()
 		}
 		ctx.imageSmoothingEnabled = false
 		canvas.imageSmoothingEnabled = false
-		if(textbox_bg_c.value == "#ffffff")
-		{ctx.drawImage(image_i_use,offset[0],offset[1])}
-		else
-		{
-			portrait_blacked.width = box_size[2]
-			portrait_blacked.height = box_size[3]
-			portrait_blacka.clearRect(0,0,box_size[2],box_size[3])
-			new_color = hexToRgb(textbox_bg_c.value)
-			portrait_blacka.imageSmoothingEnabled = false
-			canvas.imageSmoothingEnabled = false
-			portrait_blacka.drawImage(image_i_use,0,0)
-			var cool_pixels = portrait_blacka.getImageData(0,0,box_size[2],box_size[3])
-			for(var i = 3; i < cool_pixels.data.length; i += 4)
+		//if(textbox_bg_c.value == "#ffffff")
+		for(var i = 0; i < list_of_boxes.length; i++)
+		{	
+			if(!list_of_boxes[i].v_pos.checked)
+				{continue}
+			if(list_of_boxes[i].c_pos.value == "#ffffff")
+				{ctx.drawImage(list_of_boxes[i].image,offset[0] + Number(list_of_boxes[i].x_pos.value),offset[1] + Number(list_of_boxes[i].y_pos.value))}
+			else
 			{
-				if(cool_pixels.data[i] == 255 && cool_pixels.data[i-3] == 255 && cool_pixels.data[i-2] == 255 && cool_pixels.data[i-1] == 255)
+				portrait_blacked.width = box_size[2]
+				portrait_blacked.height = box_size[3]
+				portrait_blacka.clearRect(0,0,box_size[2],box_size[3])
+				new_color = hexToRgb(textbox_bg_c.value)
+				portrait_blacka.imageSmoothingEnabled = false
+				canvas.imageSmoothingEnabled = false
+				portrait_blacka.drawImage(list_of_boxes[i].image,0,0)
+				var cool_pixels = portrait_blacka.getImageData(0,0,box_size[2],box_size[3])
+				for(var i = 3; i < cool_pixels.data.length; i += 4)
 				{
-					cool_pixels.data[i-3] = new_color.r
-					cool_pixels.data[i-2] = new_color.g
-					cool_pixels.data[i-1] = new_color.b
+					if(cool_pixels.data[i] == 255 && cool_pixels.data[i-3] == 255 && cool_pixels.data[i-2] == 255 && cool_pixels.data[i-1] == 255)
+					{
+						cool_pixels.data[i-3] = new_color.r
+						cool_pixels.data[i-2] = new_color.g
+						cool_pixels.data[i-1] = new_color.b
+					}
 				}
+				portrait_blacka.putImageData(cool_pixels, 0, 0)
+				var blacked_out = portrait_blacked.toDataURL('image/png');
+				const img_a = document.createElement('img');
+				img_a.src = blacked_out;
+				ctx.drawImage(img_a, offset[0] + Number(list_of_boxes[i].x_pos.value),offset[1] + Number(list_of_boxes[i].y_pos.value))
 			}
-			portrait_blacka.putImageData(cool_pixels, 0, 0)
-			var blacked_out = portrait_blacked.toDataURL('image/png');
-			const img_a = document.createElement('img');
-			img_a.src = blacked_out;
-			ctx.drawImage(img_a, offset[0], offset[1])
 		}
 		if(textbox_chr.value != "none")
 		{
@@ -888,18 +940,13 @@ textbox_bg.addEventListener("change", (event) => {
 			list_of_boxes[i].linebreak.remove()
 		}
 		list_of_boxes.length = 0
-		alert(textbox_bg.value)
-		/*var xhttp = new XMLHttpRequest();
-    		xhttp.onreadystatechange = function() {
-        		if (this.readyState == 4 && this.status == 200) {
-            			alert(this.responseText)
-       			}
-    		};
-    		xhttp.open("GET", "assets/textboxes/" + textbox_bg.value + ".txt", false);
-    		xhttp.send();*/
-		const data = fs.readFileSync("assets/textboxes/" + textbox_bg.value + ".txt", 'utf8');
-  		alert(data);
-		alert(textbox_bg.value)
+		var awesome_template = prebaked_boxes[textbox_bg.value]
+		origin_w.value = awesome_template[0]
+		origin_h.value = awesome_template[1]
+		for(let i = 2; i < awesome_template.length; i++)
+		{
+			new_box(awesome_template[i][0], awesome_template[i][1], awesome_template[i][2], awesome_template[i][3], awesome_template[i][4], awesome_template[i][5], awesome_template[i][6], awesome_template[i][7])
+		}
 		textbox_bg_alt.style.display = "none"
 	}
 })
