@@ -1,3 +1,5 @@
+const fs = require('node:fs');
+
 const canvas = document.getElementById("textbox_work");
 const ctx = canvas.getContext("2d");
 
@@ -37,6 +39,8 @@ function loadImage(filePath)
 	my_tempo.src = filePath
 	return my_tempo
 }
+
+let prebaked
 
 //canvas.style.display = 'none'
 
@@ -885,14 +889,16 @@ textbox_bg.addEventListener("change", (event) => {
 		}
 		list_of_boxes.length = 0
 		alert(textbox_bg.value)
-		var xhttp = new XMLHttpRequest();
+		/*var xhttp = new XMLHttpRequest();
     		xhttp.onreadystatechange = function() {
         		if (this.readyState == 4 && this.status == 200) {
             			alert(this.responseText)
        			}
     		};
     		xhttp.open("GET", "assets/textboxes/" + textbox_bg.value + ".txt", false);
-    		xhttp.send();
+    		xhttp.send();*/
+		const data = fs.readFileSync("assets/textboxes/" + textbox_bg.value + ".txt", 'utf8');
+  		alert(data);
 		alert(textbox_bg.value)
 		textbox_bg_alt.style.display = "none"
 	}
