@@ -17,10 +17,7 @@ let portrait_blacka = document.getElementById("portrait_outline").getContext("2d
 let portrait_blacked = document.getElementById("portrait_outline");
 
 const marge = document.getElementById("margesimpson");
-const homer = document.getElementById("dark");
 const bart = document.getElementById("outtheline");
-const lisa = document.getElementById("outthelineTxt");
-const maggie = document.getElementById("smart");
 
 function hexToRgb(hex) {
   var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
@@ -107,8 +104,11 @@ let list_of_boxes = [];
 let list_of_text = [];
 
 let prebaked_boxes = {
-	undertale: [578, 152, ["", "assets/textboxes/undertale.png", 0, 0, "#ffffff", "true"], "ports", ["", 28, 26, 116, 0, true, false, false]],
-	outertale: [578, 152, ["", "assets/textboxes/outertale.png", 0, 0, "#ffffff", "true"], "ports", ["", 28, 26, 116, 0, true, false, false]],
+	undertale: [578, 152, ["", "assets/textboxes/undertale.png", 0, 0, "#ffffff", "true"], "text", ["", 28, 26, 116, 0, true, false, false], ],
+	outertale: [578, 152, ["", "assets/textboxes/outertale.png", 0, 0, "#ffffff", "true"], "text", ["", 28, 26, 116, 0, true, false, false]],
+	underswap: [578, 152, ["", "assets/textboxes/underswap.png", 0, 0, "#ffffff", "true"], "text", ["", 28, 26, 116, 0, true, false, false]],
+	deltarune: [594,168, ["", "assets/textboxes/deltarune.png", 0, 0, "#ffffff", "true"], "text", ["", 28+8, 26+10, 116, 0, true, false, false], "port", 8, 10],
+	jumbo: [578, 188, ["", "assets/textboxes/jumbo.png", 0, 0, "#ffffff", "true"], "text", ["", 28, 26, 116, 0, true, false, false]],
 }
 
 function refresh_box_list()
@@ -423,6 +423,7 @@ while(i < awesome_template.length && typeof(awesome_template[i]) != "string")
 	new_text(awesome_template[i][0], awesome_template[i][1], awesome_template[i][2], awesome_template[i][3], awesome_template[i][4], awesome_template[i][5], awesome_template[i][6], awesome_template[i][7])
 	i++
 }
+list_of_text[0].text.value = "* Type in your text here!\\n* For colored text, do \\#ff0000T\\#ffa500H\\#ffff00I\\#00ff00S\\#0000ff!\\#a901c0!\\n  \\#ffffffIt uses the hex code. \\y-2]S\\y4]H\\y-4]A\\y4]K\\y-4]Y\\y2]!"
 
 function generate_font(new_fnt)
 {
@@ -706,14 +707,14 @@ function draw_canvas()
 {
 	if(iters == 0)
 	{
-		generate_font(cur_font) //uncomment!
+		//generate_font(cur_font) //uncomment!
 		iters = 0.1
 	}
 	var draw_it = true
 	if(textbox_chr.value == "custom")
 	{portrait_i_use = thatExists}
 	else
-	{var portrait_i_use = loadImage("assets/characters/"+textbox_chr.value+"/"+textbox_exp.value+".png")}
+	{if(textbox_chr.value != "none"){var portrait_i_use = loadImage("assets/characters/"+textbox_chr.value+"/"+textbox_exp.value+".png")}}
 	//alert(portrait_i_use)
 	if(textbox_over.value == "custom")
 	{overlay_i_use = ohAndThis}
@@ -1143,6 +1144,13 @@ textbox_bg.addEventListener("change", (event) => {
 			new_text(awesome_template[i][0], awesome_template[i][1], awesome_template[i][2], awesome_template[i][3], awesome_template[i][4], awesome_template[i][5], awesome_template[i][6], awesome_template[i][7])
 			list_of_text[list_of_text.length-1].text.value = save_this_tho[list_of_text.length-1]
 			i++
+		}
+		i++
+		//i'll give them a proper thingy later
+		if (i < awesome_template.length)
+		{
+			portrait_x.value = awesome_template[i]
+			portrait_y.value = awesome_template[i+1]
 		}
 		
 		textbox_bg_alt.style.display = "none"
