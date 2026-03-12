@@ -63,8 +63,8 @@ let textbox_font_alt = document.getElementById("text_font_alt")
 
 //let textbox_bg_x = document.getElementById("origin_x")
 //let textbox_bg_y = document.getElementById("origin_y")
-//let textbox_bg_w = document.getElementById("origin_w")
-//let textbox_bg_h = document.getElementById("origin_h")
+let textbox_bg_w = document.getElementById("origin_w")
+let textbox_bg_h = document.getElementById("origin_h")
 //let textbox_bg_c = document.getElementById("origin_c")
 
 let font_box_hidden = document.getElementById("custom_show")
@@ -102,8 +102,19 @@ let cur_dw = new Image()
 let list_of_boxes = [];
 
 let prebaked_boxes = {
-	undertale: [578, 152, ["Default", "assets/textboxes/undertale.png", 0, 0, 578, 152, "#ffffff", "true"]],
-	outertale: [578, 152, ["Default", "assets/textboxes/outertale.png", 0, 0, 578, 152, "#ffffff", "true"]],
+	undertale: [578, 152, ["Default", "assets/textboxes/undertale.png", 0, 0, "#ffffff", "true"], "ports"],
+	outertale: [578, 152, ["Default", "assets/textboxes/outertale.png", 0, 0, "#ffffff", "true"], "ports"],
+}
+
+function refresh_box_list()
+{
+	for(var i = 0; i < list_of_boxes.length; i++)
+	{
+		list_of_boxes[i].image_sel.className = "box_" + String(i)
+		//list_of_boxes[i].upButt.className = "box_" + String(i)
+		list_of_boxes[i].removeButt.className = "box_" + String(i)
+		//list_of_boxes[i].downButt.className = "box_" + String(i)
+	}
 }
 
 function new_box(def_name="", def_image=-1, def_x=0, def_y=0, def_w=578, def_h=152, def_c="#ffffff", def_v="true")
@@ -111,6 +122,7 @@ function new_box(def_name="", def_image=-1, def_x=0, def_y=0, def_w=578, def_h=1
 	var newBox = {};
 	newBox.border = document.createElement("div");
 	newBox.border.classList.add("box")
+	newBox.border.style.width = "330px"
 
 	var name_txt = document.createElement("span");
 	name_txt.innerHTML = "Name: "
@@ -140,7 +152,7 @@ function new_box(def_name="", def_image=-1, def_x=0, def_y=0, def_w=578, def_h=1
       			reader.onloadend = (e) => 
 			{
 				var which_box = Number(this.className.substring(4))
-				alert(which_box)
+				//alert(which_box)
 				if(list_of_boxes[which_box].image == false)
 				{
        					var image = new Image();
@@ -190,26 +202,6 @@ function new_box(def_name="", def_image=-1, def_x=0, def_y=0, def_w=578, def_h=1
 
 	newBox.border.appendChild(document.createElement("br"))
 
-	var w_txt = document.createElement("span");
-	w_txt.innerHTML = "Box Width: "
-	newBox.border.appendChild(w_txt)
-	newBox.w_pos = document.createElement("input");
-	newBox.w_pos.type = "number"
-	newBox.w_pos.value = def_w
-	newBox.w_pos.style = "width: 40px;"
-	newBox.border.appendChild(newBox.w_pos);
-
-	var h_txt = document.createElement("span");
-	h_txt.innerHTML = " Box Height: "
-	newBox.border.appendChild(h_txt)
-	newBox.h_pos = document.createElement("input");
-	newBox.h_pos.type = "number"
-	newBox.h_pos.value = def_h
-	newBox.h_pos.style = "width: 40px;"
-	newBox.border.appendChild(newBox.h_pos);
-
-	newBox.border.appendChild(document.createElement("br"))
-
 	var c_txt = document.createElement("span");
 	c_txt.innerHTML = "Box Color (subtractive): "
 	newBox.border.appendChild(c_txt)
@@ -227,6 +219,41 @@ function new_box(def_name="", def_image=-1, def_x=0, def_y=0, def_w=578, def_h=1
 	newBox.v_pos.type = "checkbox"
 	newBox.v_pos.checked = def_v
 	newBox.border.appendChild(newBox.v_pos)
+	
+	newBox.border.appendChild(document.createElement("br"))
+	newBox.border.appendChild(document.createElement("br"))
+
+	/*newBox.upButt = document.createElement("button");
+	newBox.upButt.innerHTML = "^"
+	newBox.upButt.classList.add("box_" + String(list_of_boxes.length))
+	newBox.upButt.onclick = function() 
+	{
+		var which_box = Number(this.className.substring(4))
+		if(which_box > 0)
+		{
+			alert("?")
+			list_of_boxes.length = 0
+			refresh_box_list()
+		}
+	}
+	newBox.border.appendChild(newBox.upButt)*/
+
+	newBox.removeButt = document.createElement("button");
+	newBox.removeButt.innerHTML = "X"
+	newBox.removeButt.classList.add("box_" + String(list_of_boxes.length))
+	newBox.removeButt.onclick = function() 
+	{
+		var which_box = Number(this.className.substring(4))
+		list_of_boxes[which_box].border.remove()
+		list_of_boxes[which_box].linebreak.remove()
+		list_of_boxes.splice(which_box, 1)
+		refresh_box_list()
+	}
+	newBox.border.appendChild(newBox.removeButt)
+
+	/*newBox.downButt = document.createElement("button");
+	newBox.downButt.innerHTML = "v"
+	newBox.border.appendChild(newBox.downButt)*/
 
 	box_container.appendChild(newBox.border)
 
@@ -238,9 +265,11 @@ function new_box(def_name="", def_image=-1, def_x=0, def_y=0, def_w=578, def_h=1
 var awesome_template = prebaked_boxes["undertale"]
 origin_w.value = awesome_template[0]
 origin_h.value = awesome_template[1]
-for(let i = 2; i < awesome_template.length; i++)
+var i = 2
+while(i < awesome_template.length && typeof(awesome_template[i]) != "string")
 {
 	new_box(awesome_template[i][0], awesome_template[i][1], awesome_template[i][2], awesome_template[i][3], awesome_template[i][4], awesome_template[i][5], awesome_template[i][6], awesome_template[i][7])
+	i++
 }
 
 function generate_font(new_fnt)
@@ -521,10 +550,6 @@ function draw_canvas()
 		iters = 0.1
 	}
 	var draw_it = true
-	/*if(textbox_bg.value == "custom")
-	{image_i_use = thatExistsAlso}
-	else
-	{var image_i_use = loadImage("assets/textboxes/"+textbox_bg.value+".png")}*/
 	if(textbox_chr.value == "custom")
 	{portrait_i_use = thatExists}
 	else
@@ -535,7 +560,7 @@ function draw_canvas()
 	else
 	{var overlay_i_use = loadImage("assets/overlays/"+textbox_over.value+".png")}
 
-	if(!boxes_in.includes(textbox_bg.value))
+	/*if(!boxes_in.includes(textbox_bg.value))
 	{
 		draw_it = false
 		boxes_in.push(textbox_bg.value)
@@ -552,11 +577,11 @@ function draw_canvas()
 	{
 		draw_it = false
 		overlays_in.push(textbox_over.value)
-	}
+	}*/
 	if(draw_it)
 	{
 		//box_size = [Number(textbox_bg_x.value), Number(textbox_bg_y.value), Number(textbox_bg_w.value), Number(textbox_bg_h.value), Number(portrait_x.value), Number(portrait_y.value)]
-		box_size = [0,0,578,152, Number(portrait_x.value), Number(portrait_y.value)]
+		box_size = [0,0, Number(textbox_bg_w.value), Number(textbox_bg_h.value), Number(portrait_x.value), Number(portrait_y.value)]
 		if(marge.checked)
 		{
 			canvas.height = box_size[3] + 12
@@ -943,10 +968,13 @@ textbox_bg.addEventListener("change", (event) => {
 		var awesome_template = prebaked_boxes[textbox_bg.value]
 		origin_w.value = awesome_template[0]
 		origin_h.value = awesome_template[1]
-		for(let i = 2; i < awesome_template.length; i++)
+		let i = 2
+		while(i < awesome_template.length && typeof(awesome_template[i]) != "string")
 		{
 			new_box(awesome_template[i][0], awesome_template[i][1], awesome_template[i][2], awesome_template[i][3], awesome_template[i][4], awesome_template[i][5], awesome_template[i][6], awesome_template[i][7])
+			i++
 		}
+		
 		textbox_bg_alt.style.display = "none"
 	}
 })

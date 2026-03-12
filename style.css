@@ -20,4 +20,5 @@ canvas {
 .box {
   border: 3px inset black;
   padding: 4px;
+  width: 400px;
 }
