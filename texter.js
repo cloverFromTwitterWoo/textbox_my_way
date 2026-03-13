@@ -708,7 +708,7 @@ function draw_canvas()
 {
 	if(iters == 0)
 	{
-		//generate_font(cur_font) //uncomment!
+		generate_font(cur_font) //uncomment!
 		iters = 0.1
 	}
 	var draw_it = true
