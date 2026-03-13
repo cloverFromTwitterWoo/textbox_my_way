@@ -213,33 +213,14 @@ function new_box(def_name="", def_image=-1, def_x=0, def_y=0, def_w=578, def_h=1
 		}
 		else
 		{
-			def_image = def_image.substring(23)
+			def_image = def_image.substring(22)
 			console.log(def_image)
 			alert(def_image)
-			/*var reader = new FileReader();
 			
-     		 	reader.readAsDataURL(def_image);
-      			reader.onloadend = (e) => 
-			{
-				alert("AAAA")
-				var which_box = Number(this.className.substring(4))
-				//alert(which_box)
-				if(list_of_boxes[which_box].image == false)
-				{
-       					var image = new Image();
-        				image.src = e.target.result;
-					list_of_boxes[which_box].image = image
-					list_of_boxes[which_box].image.style.display='none'
-				}
-				else
-				{
-					list_of_boxes[which_box].image.src=e.target.result;
-				}
-      			}*/
 			var image = new Image();
         		image.src = def_image;
-			list_of_boxes[which_box].image = image
-			list_of_boxes[which_box].image.style.display='none'
+			newBox.image = image
+			newBox.image.style.display='none'
 		}
 	}
 	newBox.border.appendChild(newBox.image_sel)
