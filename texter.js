@@ -1003,15 +1003,17 @@ function draw_canvas()
 
 function box_stack_update()
 {
-	//alert(box_size)
+	console.log(bonus_boxes)
 	for(let i = 0; i < bonus_boxes.length; i++)
 	{
-		document.body.removeChild(bonus_boxes[i])
+		document.body.removeChild(bonus_boxes[i][0])
 	}
 	for(let i = 0; i < bonus_boxes.length; i++)
 	{
-		document.body.appendChild(bonus_boxes[i])
-		bonus_boxes[i][1].value = i
+		document.body.appendChild(bonus_boxes[i][0])
+		bonus_boxes[i][2].value = i
+		bonus_boxes[i][3].value = i
+		bonus_boxes[i][4].value = i
 	}
 	var stack_width = Number(stack_width_inp.value)
 	canvas_stack.height = (box_size[3] + 12)*Math.ceil(bonus_boxes.length/stack_width)
@@ -1021,9 +1023,9 @@ function box_stack_update()
 	{
 		//to future me: check if the first 6 pixels diagonally are black
 		if(marge.checked)
-  		{ctx_stack.drawImage(bonus_boxes[i][0], box_size[2]*(i%stack_width), (box_size[3] + 12)*Math.floor(i/stack_width))}
+  		{ctx_stack.drawImage(bonus_boxes[i][1], box_size[2]*(i%stack_width), (box_size[3] + 12)*Math.floor(i/stack_width))}
 		else
-  		{ctx_stack.drawImage(bonus_boxes[i][0], 6+(12+box_size[2])*(i%stack_width), 6+(box_size[3] + 12)*Math.floor(i/stack_width))}
+  		{ctx_stack.drawImage(bonus_boxes[i][1], 6+(12+box_size[2])*(i%stack_width), 6+(box_size[3] + 12)*Math.floor(i/stack_width))}
 	}
 
 	const dataURL = canvas_stack.toDataURL('image/png');
@@ -1033,22 +1035,27 @@ function box_stack_update()
 
 function box_stack_remove(which)
 {
-	//document.body.removeChild(bonus_boxes[which])
-	//document.body.removeChild(bonus_buttons[which])
-	//document.body.removeChild(bonus_breaks[which])
-	bonus_boxes[which].remove()
+	bonus_boxes[which][0].remove()
 	bonus_boxes.splice(which, 1)
-	//bonus_buttons.splice(which, 1)
-	//bonus_breaks.splice(which, 1)
-	//for (let i = which; i < bonus_boxes.length; i++)
-	//{
-	//	document.body.removeChild(bonus_boxes[
-		//bonus_buttons[i].value -= 1
-	
 	if(bonus_boxes.length > 0)
 	{box_stack_update()}
 	else
 	{stack_reset()}
+}
+
+function box_stack_swap(which, dir)
+{
+	if(dir == -1 && which > 0)
+	{
+		bonus_boxes[which] = bonus_boxes.splice(which, 1, bonus_boxes[which-1])[0];
+		//[bonus_boxes[which], bonus_boxes[which-1]] = [bonus_boxes[which-1], bonus_boxes[which]];
+	}
+	else if (dir == 1 && which < bonus_boxes.length)
+	{
+		bonus_boxes[which+1] = bonus_boxes.splice(which+1, 1, bonus_boxes[which])[0];
+		//[bonus_boxes[which], bonus_boxes[which+1]] = [bonus_boxes[which+1], bonus_boxes[which]];
+	}
+	box_stack_update()
 }
 
 function box_stack_add()
@@ -1059,15 +1066,27 @@ function box_stack_add()
 	new_stack.appendChild(img);
 	//img.style.display = 'none'
 	//bonus_boxes.push(img)
+	const button_up = document.createElement('button')
+	button_up.innerHTML = "^"
+	button_up.value = bonus_boxes.length
+	button_up.onclick = function() {box_stack_swap(this.value, -1)}
+	new_stack.appendChild(button_up);
 	const button = document.createElement('button')
 	button.innerHTML = "X"
-	button.value = bonus_boxes.length-1
+	button.value = bonus_boxes.length
 	button.onclick = function() {box_stack_remove(this.value)}
 	new_stack.appendChild(button);
+	
+	const button_down = document.createElement('button')
+	button_down.innerHTML = "v"
+	button_down.value = bonus_boxes.length
+	button_down.onclick = function() {box_stack_swap(this.value, 1)}
+	new_stack.appendChild(button_down);
 	//bonus_buttons.push(button)
 	//const br = document.createElement('br')
 	document.body.appendChild(new_stack);
-	bonus_boxes.push(new_stack)
+	var the_thing = [new_stack, img, button, button_up, button_down]
+	bonus_boxes.push(the_thing)
 	box_stack_update()
 }
 
@@ -1075,13 +1094,8 @@ function stack_reset()
 {
 	while(bonus_boxes.length > 0)
 	{
-		bonus_boxes[0].remove
-		///document.body.removeChild(bonus_boxes[0])
-		//document.body.removeChild(bonus_breaks[0])
-		//document.body.removeChild(bonus_buttons[0])
+		bonus_boxes[0][0].remove()
 		bonus_boxes.shift()
-		//bonus_buttons.shift()
-		//bonus_breaks.shift()
 	}
 	canvas_stack.height = 0
 	awesome_canvas_Stacked.style.display = 'none'
