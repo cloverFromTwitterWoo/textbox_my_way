@@ -213,9 +213,10 @@ function new_box(def_name="", def_image=-1, def_x=0, def_y=0, def_w=578, def_h=1
 		}
 		else
 		{
+			def_image = def_image.substring(23)
 			console.log(def_image)
 			alert(def_image)
-			var reader = new FileReader();
+			/*var reader = new FileReader();
 			
      		 	reader.readAsDataURL(def_image);
       			reader.onloadend = (e) => 
@@ -234,7 +235,11 @@ function new_box(def_name="", def_image=-1, def_x=0, def_y=0, def_w=578, def_h=1
 				{
 					list_of_boxes[which_box].image.src=e.target.result;
 				}
-      			}
+      			}*/
+			var image = new Image();
+        		image.src = def_image;
+			list_of_boxes[which_box].image = image
+			list_of_boxes[which_box].image.style.display='none'
 		}
 	}
 	newBox.border.appendChild(newBox.image_sel)
@@ -1214,8 +1219,8 @@ function save_box()
 		else
 		{
 			var save_cav = document.createElement('canvas');
-        		save_cav.width = list_of_boxes[i].image.naturalWidth;
-        		save_cav.height = list_of_boxes[i].image.naturalHeight;
+        		save_cav.width = list_of_boxes[i].image.width;
+        		save_cav.height = list_of_boxes[i].image.height;
 			//save_cav.style = "display: block"
         		var btx = save_cav.getContext('2d');
        			btx.drawImage(list_of_boxes[i].image, 0, 0);	
