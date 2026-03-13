@@ -206,8 +206,18 @@ function new_box(def_name="", def_image=-1, def_x=0, def_y=0, def_w=578, def_h=1
 	});
 	if(def_image != -1)
 	{
-		newBox.image = loadImage(def_image)
-		newBox.image.style.display = 'none'
+		if(def_image.substring(0,7) == "assets/")
+		{
+			newBox.image = loadImage(def_image)
+			newBox.image.style.display = 'none'
+		}
+		else
+		{
+			var image = new Image();
+        		image.src = def_image;
+			newBox.image = image
+			newBox.image.style.display='none'
+		}
 	}
 	newBox.border.appendChild(newBox.image_sel)
 
@@ -1181,11 +1191,21 @@ function save_box()
 	{
 		//console.log(list_of_boxes[i])
 		save_array[save_array.length-1].push(list_of_boxes[i].name_field.value)
-		save_array[save_array.length-1].push(-1)
+		if(list_of_boxes[i].image == false)
+		{save_array[save_array.length-1].push(-1)}
+		else
+		{
+			var save_cav = document.createElement('canvas');
+        		save_cav.width = list_of_boxes[i].image.naturalWidth;
+        		save_cav.height = list_of_boxes[i].image.naturalHeight;
+        		var btx = canvas.getContext('2d');
+       			btx.drawImage(list_of_boxes[i].image, 0, 0);
+			save_array[save_array.length-1].push(save_cav.toDataURL())
+		}
 		save_array[save_array.length-1].push(list_of_boxes[i].x_pos.value)
 		save_array[save_array.length-1].push(list_of_boxes[i].y_pos.value)
 		save_array[save_array.length-1].push(list_of_boxes[i].c_pos.value)
-		save_array[save_array.length-1].push(list_of_boxes[i].v_pos.value)
+		save_array[save_array.length-1].push(list_of_boxes[i].v_pos.checked)
 		if(i + 1 < list_of_boxes.length)
 		{
 			save_array.push([])
@@ -1206,9 +1226,9 @@ function save_box()
 		save_array[save_array.length-1].push(list_of_text[i].y_pos.value)
 		save_array[save_array.length-1].push(list_of_text[i].x_pos_alt.value)
 		save_array[save_array.length-1].push(list_of_text[i].y_pos_alt.value)
-		save_array[save_array.length-1].push(list_of_text[i].o_pos.value)
-		save_array[save_array.length-1].push(list_of_text[i].d_pos.value)
-		save_array[save_array.length-1].push(list_of_text[i].a_pos.value)
+		save_array[save_array.length-1].push(list_of_text[i].o_pos.checked)
+		save_array[save_array.length-1].push(list_of_text[i].d_pos.checked)
+		save_array[save_array.length-1].push(list_of_text[i].a_pos.checked)
 		if(i + 1 < list_of_text.length)
 		{
 			save_array.push([])
