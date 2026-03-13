@@ -109,6 +109,7 @@ let prebaked_boxes = {
 	underswap: [578, 152, ["", "assets/textboxes/underswap.png", 0, 0, "#ffffff", "true"], "text", ["", 28, 26, 116, 0, true, false, false]],
 	deltarune: [594,168, ["", "assets/textboxes/deltarune.png", 0, 0, "#ffffff", "true"], "text", ["", 28+8, 26+10, 116, 0, true, false, false], "port", 8, 10],
 	jumbo: [578, 188, ["", "assets/textboxes/jumbo.png", 0, 0, "#ffffff", "true"], "text", ["", 28, 26, 116, 0, true, false, false]],
+	cavestory: [488, 128, ["", "assets/textboxes/cave_story.png", 0, 0, "#ffffff", "true"], "text", ["", 27, 23, 110, 0, false, false, false]],
 }
 
 function refresh_box_list()
