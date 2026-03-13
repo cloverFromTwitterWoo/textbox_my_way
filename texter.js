@@ -775,7 +775,7 @@ function draw_canvas()
 				portrait_blacked.width = box_size[2]
 				portrait_blacked.height = box_size[3]
 				portrait_blacka.clearRect(0,0,box_size[2],box_size[3])
-				new_color = hexToRgb(textbox_bg_c.value)
+				new_color = hexToRgb(list_of_boxes[i].c_pos.value)
 				portrait_blacka.imageSmoothingEnabled = false
 				canvas.imageSmoothingEnabled = false
 				portrait_blacka.drawImage(list_of_boxes[i].image,0,0)
