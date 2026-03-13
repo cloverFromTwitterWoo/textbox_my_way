@@ -214,8 +214,8 @@ function new_box(def_name="", def_image=-1, def_x=0, def_y=0, def_w=578, def_h=1
 		else
 		{
 			def_image = def_image.substring(22)
-			console.log(def_image)
-			alert(def_image)
+			//console.log(def_image)
+			//alert(def_image)
 			
 			var image = new Image();
         		image.src = def_image;
