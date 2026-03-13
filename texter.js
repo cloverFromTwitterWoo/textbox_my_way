@@ -213,6 +213,8 @@ function new_box(def_name="", def_image=-1, def_x=0, def_y=0, def_w=578, def_h=1
 		}
 		else
 		{
+			console.log(def_image)
+			alert(def_image)
 			var reader = new FileReader();
 			
      		 	reader.readAsDataURL(def_image);
@@ -1214,8 +1216,10 @@ function save_box()
 			var save_cav = document.createElement('canvas');
         		save_cav.width = list_of_boxes[i].image.naturalWidth;
         		save_cav.height = list_of_boxes[i].image.naturalHeight;
-        		var btx = canvas.getContext('2d');
-       			btx.drawImage(list_of_boxes[i].image, 0, 0);
+			//save_cav.style = "display: block"
+        		var btx = save_cav.getContext('2d');
+       			btx.drawImage(list_of_boxes[i].image, 0, 0);	
+			//document.body.appendChild(save_cav);
 			save_array[save_array.length-1].push(save_cav.toDataURL())
 		}
 		save_array[save_array.length-1].push(list_of_boxes[i].x_pos.value)
