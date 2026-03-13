@@ -42,6 +42,19 @@ function copy(it)
 	return JSON.parse(JSON.stringify(it))
 }
 
+function download(filename, text) {
+  var element = document.createElement('a');
+  element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+  element.setAttribute('download', filename);
+
+  element.style.display = 'none';
+  document.body.appendChild(element);
+
+  element.click();
+
+  document.body.removeChild(element);
+}
+
 //canvas.style.display = 'none'
 
 let bonus_boxes = []
@@ -150,10 +163,10 @@ function new_box(def_name="", def_image=-1, def_x=0, def_y=0, def_w=578, def_h=1
 	name_txt.innerHTML = "Name: "
 	name_txt.classList.add("complex")
 	newBox.border.appendChild(name_txt)
-	name_field = document.createElement("input");
-	name_field.value = def_name;
-	name_field.classList.add("complex")
-	newBox.border.appendChild(name_field)
+	newBox.name_field = document.createElement("input");
+	newBox.name_field.value = def_name;
+	newBox.name_field.classList.add("complex")
+	newBox.border.appendChild(newBox.name_field)
 
 	newBox.border.appendChild(complex_br())
 	var image_txt = document.createElement("span");
@@ -236,6 +249,7 @@ function new_box(def_name="", def_image=-1, def_x=0, def_y=0, def_w=578, def_h=1
 	newBox.border.appendChild(c_txt)
 	newBox.c_type = document.createElement("select");
 	newBox.c_type.innerHTML = '<option value="white">(Replacing White)</option><option value="multi">(Multiplicative)</option></option>'
+	newBox.c_type.classList.add("complex")
 	newBox.border.appendChild(newBox.c_type)
 	c_txt = document.createElement("span");
 	c_txt.innerHTML = ": "
@@ -311,10 +325,10 @@ function new_text(def_name="", def_x=0, def_y=0, def_x_off=0, def_y_off=0, def_o
 	name_txt.innerHTML = "Name: "
 	name_txt.classList.add("complex")
 	newText.border.appendChild(name_txt)
-	name_field = document.createElement("input");
-	name_field.value = def_name;
-	name_field.classList.add("complex")
-	newText.border.appendChild(name_field)
+	newText.name_field = document.createElement("input");
+	newText.name_field.value = def_name;
+	newText.name_field.classList.add("complex")
+	newText.border.appendChild(newText.name_field)
 
 	newText.border.appendChild(complex_br())
 
@@ -451,21 +465,50 @@ function new_text(def_name="", def_x=0, def_y=0, def_x_off=0, def_y_off=0, def_o
 	list_of_text.push(newText)
 }
 
-var awesome_template = prebaked_boxes["undertale"]
-origin_w.value = awesome_template[0]
-origin_h.value = awesome_template[1]
-var i = 2
-while(i < awesome_template.length && typeof(awesome_template[i]) != "string")
+function loader_up(awesome_template)
 {
-	new_box(awesome_template[i][0], awesome_template[i][1], awesome_template[i][2], awesome_template[i][3], awesome_template[i][4], awesome_template[i][5], awesome_template[i][6], awesome_template[i][7])
+	for(let i = 0; i < list_of_boxes.length; i++)
+	{
+		list_of_boxes[i].border.remove()
+		list_of_boxes[i].linebreak.remove()
+	}
+	list_of_boxes.length = 0
+	var save_this_tho = []
+	for(let i = 0; i < list_of_text.length; i++)
+	{
+		save_this_tho.push(copy(list_of_text[i].text.value))
+		list_of_text[i].border.remove()
+		list_of_text[i].linebreak.remove()
+	}
+	list_of_text.length = 0
+	origin_w.value = awesome_template[0]
+	origin_h.value = awesome_template[1]
+	let i = 2
+	while(i < awesome_template.length && typeof(awesome_template[i]) != "string")
+	{
+		new_box(awesome_template[i][0], awesome_template[i][1], awesome_template[i][2], awesome_template[i][3], awesome_template[i][4], awesome_template[i][5], awesome_template[i][6], awesome_template[i][7])
+		i++
+	}
 	i++
-}
-i++
-while(i < awesome_template.length && typeof(awesome_template[i]) != "string")
-{
-	new_text(awesome_template[i][0], awesome_template[i][1], awesome_template[i][2], awesome_template[i][3], awesome_template[i][4], awesome_template[i][5], awesome_template[i][6], awesome_template[i][7])
+	while(i < awesome_template.length && typeof(awesome_template[i]) != "string")
+	{
+		new_text(awesome_template[i][0], awesome_template[i][1], awesome_template[i][2], awesome_template[i][3], awesome_template[i][4], awesome_template[i][5], awesome_template[i][6], awesome_template[i][7])
+		list_of_text[list_of_text.length-1].text.value = save_this_tho[list_of_text.length-1]
+		i++
+	}
 	i++
+	//i'll give them a proper thingy later
+	if (i < awesome_template.length)
+	{
+		portrait_x.value = awesome_template[i]
+		portrait_y.value = awesome_template[i+1]
+		bart.checked = awesome_template[i+1]
+	}
+	
+	toggle_complex(homer.checked)
 }
+
+loader_up(prebaked_boxes["undertale"])
 list_of_text[0].text.value = "* Type in your text here!\\n* For colored text, do \\#ff0000T\\#ffa500H\\#ffff00I\\#00ff00S\\#0000ff!\\#a901c0!\\n  \\#ffffffIt uses the hex code. \\y-2]S\\y4]H\\y-4]A\\y4]K\\y-4]Y\\y2]!"
 
 function generate_font(new_fnt)
@@ -793,7 +836,7 @@ function draw_canvas()
 {
 	if(iters == 0)
 	{
-		//generate_font(cur_font) //uncomment!
+		generate_font(cur_font) //uncomment!
 		iters = 0.1
 	}
 	var draw_it = true
@@ -1126,6 +1169,61 @@ function stack_reset()
 	awesome_canvas_Stacked.style.display = 'none'
 }
 
+function save_box()
+{
+	var save_array = []
+	save_array.push(textbox_bg_w.value)
+	save_array.push(textbox_bg_h.value)
+
+	if(list_of_boxes.length > 0) {save_array.push([])}
+
+	for(var i = 0; i < list_of_boxes.length; i++)
+	{
+		//console.log(list_of_boxes[i])
+		save_array[save_array.length-1].push(list_of_boxes[i].name_field.value)
+		save_array[save_array.length-1].push(-1)
+		save_array[save_array.length-1].push(list_of_boxes[i].x_pos.value)
+		save_array[save_array.length-1].push(list_of_boxes[i].y_pos.value)
+		save_array[save_array.length-1].push(list_of_boxes[i].c_pos.value)
+		save_array[save_array.length-1].push(list_of_boxes[i].v_pos.value)
+		if(i + 1 < list_of_boxes.length)
+		{
+			save_array.push([])
+		}
+	}
+
+	if(list_of_text.length > 0) 
+	{
+		save_array.push("text")
+		save_array.push([])
+	}
+
+	for(var i = 0; i < list_of_text.length; i++)
+	{
+		//console.log(list_of_text[i])
+		save_array[save_array.length-1].push(list_of_text[i].name_field.value)
+		save_array[save_array.length-1].push(list_of_text[i].x_pos.value)
+		save_array[save_array.length-1].push(list_of_text[i].y_pos.value)
+		save_array[save_array.length-1].push(list_of_text[i].x_pos_alt.value)
+		save_array[save_array.length-1].push(list_of_text[i].y_pos_alt.value)
+		save_array[save_array.length-1].push(list_of_text[i].o_pos.value)
+		save_array[save_array.length-1].push(list_of_text[i].d_pos.value)
+		save_array[save_array.length-1].push(list_of_text[i].a_pos.value)
+		if(i + 1 < list_of_text.length)
+		{
+			save_array.push([])
+		}
+	}
+
+	//if(list_of_text.length > 0) {save_str += "port,["}
+	//wip!
+	save_array.push("port")
+	save_array.push(portrait_x.value)
+	save_array.push(portrait_y.value)
+
+	download("new_box", JSON.stringify(save_array))
+}
+
 let thatExists = false
 
 textbox_exp_alt.addEventListener('change', function(ev) {
@@ -1155,19 +1253,11 @@ textbox_bg_alt.addEventListener('change', function(ev) {
    if(ev.target.files) {
       let file = ev.target.files[0];
       var reader  = new FileReader();
-      reader.readAsDataURL(file);
+      reader.readAsText(file);
       reader.onloadend = function (e) {
-	if(thatExistsAlso == false)
-	{
-        	var image = new Image();
-        	image.src = e.target.result;
-		thatExistsAlso = image
-		thatExistsAlso.style.display='none'
-	}
-	else
-	{
-		thatExistsAlso.src=e.target.result;
-	}
+	var awesome_template = JSON.parse(e.target.result)
+	loader_up(awesome_template)
+	
       }
    }
 });
@@ -1240,44 +1330,8 @@ textbox_bg.addEventListener("change", (event) => {
 	}
 	else
 	{
-		for(let i = 0; i < list_of_boxes.length; i++)
-		{
-			list_of_boxes[i].border.remove()
-			list_of_boxes[i].linebreak.remove()
-		}
-		list_of_boxes.length = 0
-		var save_this_tho = []
-		for(let i = 0; i < list_of_text.length; i++)
-		{
-			save_this_tho.push(copy(list_of_text[i].text.value))
-			list_of_text[i].border.remove()
-			list_of_text[i].linebreak.remove()
-		}
-		list_of_text.length = 0
 		var awesome_template = prebaked_boxes[textbox_bg.value]
-		origin_w.value = awesome_template[0]
-		origin_h.value = awesome_template[1]
-		let i = 2
-		while(i < awesome_template.length && typeof(awesome_template[i]) != "string")
-		{
-			new_box(awesome_template[i][0], awesome_template[i][1], awesome_template[i][2], awesome_template[i][3], awesome_template[i][4], awesome_template[i][5], awesome_template[i][6], awesome_template[i][7])
-			i++
-		}
-		i++
-		while(i < awesome_template.length && typeof(awesome_template[i]) != "string")
-		{
-			new_text(awesome_template[i][0], awesome_template[i][1], awesome_template[i][2], awesome_template[i][3], awesome_template[i][4], awesome_template[i][5], awesome_template[i][6], awesome_template[i][7])
-			list_of_text[list_of_text.length-1].text.value = save_this_tho[list_of_text.length-1]
-			i++
-		}
-		i++
-		//i'll give them a proper thingy later
-		if (i < awesome_template.length)
-		{
-			portrait_x.value = awesome_template[i]
-			portrait_y.value = awesome_template[i+1]
-			bart.checked = awesome_template[i+1]
-		}
+		loader_up(awesome_template)
 		
 		textbox_bg_alt.style.display = "none"
 	}

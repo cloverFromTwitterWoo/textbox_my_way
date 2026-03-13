@@ -3,11 +3,10 @@
   <head>
     <link rel="stylesheet" type="text/css" href="style.css">
     <meta charset="utf-8" />
-
   </head>
   <body>
     <main>
-	<span>Complex: </span><input type="checkbox" id="complexmode">
+	<a href="base.html">Back</a><span> Complex: </span><input type="checkbox" id="complexmode">
 	<br>
 	<br>
 	<div class="box" id="box_box" style="display:inline-block">
@@ -20,9 +19,9 @@
 	<option value="underswap">TS!Underswap</option>
 	<option value="jumbo">Jumbo</option>
 	<option value="cavestory">Cave Story</option>
-	<!--option value="custom">Custom</option-->
+	<option value="custom">Custom</option>
 	</select>
-	<input type="file" id="text_bg_alt" accept="image/png" style="display:none"/>
+	<input type="file" id="text_bg_alt" accept=".txt" style="display:none"/>
 	<br><br>
 	<span>Image Settings:</span> <br>
 	<span>Image Width: </span><input type="number" id="origin_w" value="578" style="width: 40px;" min="0"/>
@@ -114,6 +113,7 @@
 	<canvas id="portrait_outline" style="display:none" width="134" height="140"></canvas>
 	<br>
 	<button onclick="draw_canvas()">Generate Box</button>
+	<button class="complex" onclick="save_box()">Save Custom Box</button>
 	<br>
 	<hr>
 	<button onclick="box_stack_add()">Add to Stack</button>
