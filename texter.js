@@ -477,28 +477,36 @@ function toggle_complex(complex)
 	if(!complex)
 	{
 		var box_borders = document.getElementsByClassName('box');
-  		for(i = 0; i < cols.length; i++) {
+  		for(i = 0; i < box_borders.length; i++) {
   			box_borders[i].style.border = 'none'
 			box_borders[i].style.padding = '0px'
+		}
+		box_borders = document.getElementsByClassName('complex');
+  		for(i = 0; i < box_borders.length; i++) {
+  			box_borders[i].style.display = 'none'
 		}
 	}
 	else
 	{
 		var box_borders = document.getElementsByClassName('box');
-  		for(i = 0; i < cols.length; i++) {
+  		for(i = 0; i < box_borders.length; i++) {
   			box_borders[i].style.border = '3px double black'
 			box_borders[i].style.padding = '4px'
+		}
+		box_borders = document.getElementsByClassName('complex');
+  		for(i = 0; i < box_borders.length; i++) {
+  			box_borders[i].style.display = 'inline'
 		}
 	}
 }
 
 
 homer.addEventListener('change', (event) => {
-  if (event.currentTarget.checked) {
-    toggle_complex(true)
-  } else {
-    toggle_conplex(false)
-  }
+
+	alert("clicked!")
+  toggle_complex(event.currentTarget.checked)
+
+
 })
 
 function letter_to_index(letta, index)
