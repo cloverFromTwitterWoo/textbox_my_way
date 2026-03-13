@@ -217,7 +217,7 @@ function new_box(def_name="", def_image=-1, def_x=0, def_y=0, def_w=578, def_h=1
 	newBox.border.appendChild(document.createElement("br"))
 
 	var c_txt = document.createElement("span");
-	c_txt.innerHTML = "Box Color (subtractive): "
+	c_txt.innerHTML = "Box Color (multiplicative): "
 	newBox.border.appendChild(c_txt)
 	newBox.c_pos = document.createElement("input");
 	newBox.c_pos.type = "color"
@@ -656,13 +656,13 @@ function draw_text(pass_in)//(x,y,str)
 			{
 				if(cool_pixels.data[j] > 0)
 				{
-					if(cool_pixels.data[j-3] == color.r && cool_pixels.data[j-2] == color.g && cool_pixels.data[j-1] == color.b)
-					{
-						break
-					}
-					cool_pixels.data[j-3] = color.r
-					cool_pixels.data[j-2] = color.g
-					cool_pixels.data[j-1] = color.b
+					//if(cool_pixels.data[j-3] == color.r && cool_pixels.data[j-2] == color.g && cool_pixels.data[j-1] == color.b)
+					//{
+					//	break
+					//}
+					cool_pixels.data[j-3] *= color.r / 255
+					cool_pixels.data[j-2] *= color.g / 255
+					cool_pixels.data[j-1] *= color.b / 255
 				}
 			}
 			portrait_blacka.putImageData(cool_pixels, 0, 0)
@@ -782,12 +782,12 @@ function draw_canvas()
 				var cool_pixels = portrait_blacka.getImageData(0,0,box_size[2],box_size[3])
 				for(var i = 3; i < cool_pixels.data.length; i += 4)
 				{
-					if(cool_pixels.data[i] == 255 && cool_pixels.data[i-3] == 255 && cool_pixels.data[i-2] == 255 && cool_pixels.data[i-1] == 255)
-					{
-						cool_pixels.data[i-3] = new_color.r
-						cool_pixels.data[i-2] = new_color.g
-						cool_pixels.data[i-1] = new_color.b
-					}
+					//if(cool_pixels.data[i] == 255 && cool_pixels.data[i-3] == 255 && cool_pixels.data[i-2] == 255 && cool_pixels.data[i-1] == 255)
+					//{
+						cool_pixels.data[j-3] *= new_color.r / 255
+						cool_pixels.data[j-2] *= new_color.g / 255
+						cool_pixels.data[j-1] *= new_color.b / 255
+					//}
 				}
 				portrait_blacka.putImageData(cool_pixels, 0, 0)
 				var blacked_out = portrait_blacked.toDataURL('image/png');
@@ -885,12 +885,12 @@ function draw_canvas()
 				var cool_pixels = portrait_blacka.getImageData(0,0,portrait_i_use.width,portrait_i_use.height)
 				for(var i = 3; i < cool_pixels.data.length; i += 4)
 				{
-					if(cool_pixels.data[i] == 255 && cool_pixels.data[i-3] == 255 && cool_pixels.data[i-2] == 255 && cool_pixels.data[i-1] == 255)
-					{
-						cool_pixels.data[i-3] = new_color.r
-						cool_pixels.data[i-2] = new_color.g
-						cool_pixels.data[i-1] = new_color.b
-					}
+					//if(cool_pixels.data[i] == 255 && cool_pixels.data[i-3] == 255 && cool_pixels.data[i-2] == 255 && cool_pixels.data[i-1] == 255)
+					//{
+						cool_pixels.data[j-3] *= new_color.r / 255
+						cool_pixels.data[j-2] *= new_color.g / 255
+						cool_pixels.data[j-1] *= new_color.b / 255
+					//}
 				}
 				portrait_blacka.putImageData(cool_pixels, 0, 0)
 				var blacked_out = portrait_blacked.toDataURL('image/png');
