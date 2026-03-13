@@ -107,9 +107,9 @@ let prebaked_boxes = {
 	undertale: [578, 152, ["", "assets/textboxes/undertale.png", 0, 0, "#ffffff", "true"], "text", ["", 28, 26, 116, 0, true, false, false], ],
 	outertale: [578, 152, ["", "assets/textboxes/outertale.png", 0, 0, "#ffffff", "true"], "text", ["", 28, 26, 116, 0, true, false, false]],
 	underswap: [578, 152, ["", "assets/textboxes/underswap.png", 0, 0, "#ffffff", "true"], "text", ["", 28, 26, 116, 0, true, false, false]],
-	deltarune: [594,168, ["", "assets/textboxes/deltarune.png", 0, 0, "#ffffff", "true"], "text", ["", 28+8, 26+10, 116, 0, true, false, false], "port", 8, 10],
+	deltarune: [594,168, ["", "assets/textboxes/deltarune.png", 0, 0, "#ffffff", "true"], "text", ["", 28+8, 26+10, 116, 0, true, false, false], "port", 8, 10, true],
 	jumbo: [578, 188, ["", "assets/textboxes/jumbo.png", 0, 0, "#ffffff", "true"], "text", ["", 28, 26, 116, 0, true, false, false]],
-	cavestory: [488, 128, ["", "assets/textboxes/cave_story.png", 0, 0, "#ffffff", "true"], "text", ["", 27, 23, 110, 0, false, false, false]],
+	cavestory: [488, 128, ["", "assets/textboxes/cave_story.png", 0, 0, "#ffffff", "true"], "text", ["", 27, 23, 110, 0, false, false, false], "port", 3, -8, false],
 }
 
 function refresh_box_list()
@@ -1152,6 +1152,7 @@ textbox_bg.addEventListener("change", (event) => {
 		{
 			portrait_x.value = awesome_template[i]
 			portrait_y.value = awesome_template[i+1]
+			bart.checked = awesome_template[i+1]
 		}
 		
 		textbox_bg_alt.style.display = "none"
