@@ -139,6 +139,8 @@ function new_box(def_name="", def_image=-1, def_x=0, def_y=0, def_w=578, def_h=1
 	newBox.border.classList.add("box")
 	newBox.border.style.width = "330px"
 
+	alert("1")
+
 	var name_txt = document.createElement("span");
 	name_txt.innerHTML = "Name: "
 	name_txt.classList.add("complex")
@@ -147,6 +149,8 @@ function new_box(def_name="", def_image=-1, def_x=0, def_y=0, def_w=578, def_h=1
 	name_field.value = def_name;
 	name_field.classList.add("complex")
 	newBox.border.appendChild(name_field)
+
+	alert("2")
 
 	newBox.border.appendChild(document.createElement("br"))
 	var image_txt = document.createElement("span");
@@ -200,6 +204,8 @@ function new_box(def_name="", def_image=-1, def_x=0, def_y=0, def_w=578, def_h=1
 	newBox.border.appendChild(set_txt)
 	newBox.border.appendChild(document.createElement("br"))
 
+	alert("3")
+
 	var x_txt = document.createElement("span");
 	x_txt.innerHTML = "Box X: "
 	x_txt.classList.add("complex")
@@ -222,10 +228,16 @@ function new_box(def_name="", def_image=-1, def_x=0, def_y=0, def_w=578, def_h=1
 	newBox.y_pos.classList.add("complex")
 	newBox.border.appendChild(newBox.y_pos);
 
+	alert("4")
+
 	newBox.border.appendChild(document.createElement("br"))
 
 	var c_txt = document.createElement("span");
-	c_txt.innerHTML = "Box Color (multiplicative): "
+	c_txt.innerHTML = "Box Color "
+	newBox.border.appendChild(c_txt)
+	//replace with select v
+	c_txt = document.createElement("span");
+	c_txt.innerHTML = "(multiplicative): "
 	newBox.border.appendChild(c_txt)
 	newBox.c_pos = document.createElement("input");
 	newBox.c_pos.type = "color"
@@ -243,6 +255,8 @@ function new_box(def_name="", def_image=-1, def_x=0, def_y=0, def_w=578, def_h=1
 	newBox.v_pos.checked = def_v
 	newBox.v_pos.classList.add("complex")
 	newBox.border.appendChild(newBox.v_pos)
+
+	alert("5")
 	
 	newBox.border.appendChild(document.createElement("br"))
 	newBox.border.appendChild(document.createElement("br"))
@@ -275,6 +289,8 @@ function new_box(def_name="", def_image=-1, def_x=0, def_y=0, def_w=578, def_h=1
 		refresh_box_list()
 	}
 	newBox.border.appendChild(newBox.removeButt)
+
+	alert("6")
 
 	/*newBox.downButt = document.createElement("button");
 	newBox.downButt.innerHTML = "v"
