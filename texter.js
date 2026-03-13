@@ -474,6 +474,22 @@ cur_font = loadImage('assets/fonts/determination_mono.png')
 function toggle_complex(complex)
 {
 	alert(complex)
+	if(!complex)
+	{
+		var box_borders = document.getElementsByClassName('box');
+  		for(i = 0; i < cols.length; i++) {
+  			box_borders[i].style.border = 'none'
+			box_borders[i].style.padding = '0px'
+		}
+	}
+	else
+	{
+		var box_borders = document.getElementsByClassName('box');
+  		for(i = 0; i < cols.length; i++) {
+  			box_borders[i].style.border = '3px double black'
+			box_borders[i].style.padding = '4px'
+		}
+	}
 }
 
 
