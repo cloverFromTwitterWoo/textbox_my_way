@@ -1004,6 +1004,15 @@ function draw_canvas()
 function box_stack_update()
 {
 	//alert(box_size)
+	for(let i = 0; i < bonus_boxes.length; i++)
+	{
+		document.body.removeChild(bonus_boxes[i])
+	}
+	for(let i = 0; i < bonus_boxes.length; i++)
+	{
+		document.body.appendChild(bonus_boxes[i])
+		bonus_boxes[i][1].value = i
+	}
 	var stack_width = Number(stack_width_inp.value)
 	canvas_stack.height = (box_size[3] + 12)*Math.ceil(bonus_boxes.length/stack_width)
 	canvas_stack.width = (box_size[2] + 12)*stack_width
@@ -1012,9 +1021,9 @@ function box_stack_update()
 	{
 		//to future me: check if the first 6 pixels diagonally are black
 		if(marge.checked)
-  		{ctx_stack.drawImage(bonus_boxes[i], box_size[2]*(i%stack_width), (box_size[3] + 12)*Math.floor(i/stack_width))}
+  		{ctx_stack.drawImage(bonus_boxes[i][0], box_size[2]*(i%stack_width), (box_size[3] + 12)*Math.floor(i/stack_width))}
 		else
-  		{ctx_stack.drawImage(bonus_boxes[i], 6+(12+box_size[2])*(i%stack_width), 6+(box_size[3] + 12)*Math.floor(i/stack_width))}
+  		{ctx_stack.drawImage(bonus_boxes[i][0], 6+(12+box_size[2])*(i%stack_width), 6+(box_size[3] + 12)*Math.floor(i/stack_width))}
 	}
 
 	const dataURL = canvas_stack.toDataURL('image/png');
@@ -1024,16 +1033,18 @@ function box_stack_update()
 
 function box_stack_remove(which)
 {
-	document.body.removeChild(bonus_boxes[which])
-	document.body.removeChild(bonus_buttons[which])
-	document.body.removeChild(bonus_breaks[which])
+	//document.body.removeChild(bonus_boxes[which])
+	//document.body.removeChild(bonus_buttons[which])
+	//document.body.removeChild(bonus_breaks[which])
+	bonus_boxes[which].remove()
 	bonus_boxes.splice(which, 1)
-	bonus_buttons.splice(which, 1)
-	bonus_breaks.splice(which, 1)
-	for (let i = which; i < bonus_buttons.length; i++)
-	{
-		bonus_buttons[i].value -= 1
-	}
+	//bonus_buttons.splice(which, 1)
+	//bonus_breaks.splice(which, 1)
+	//for (let i = which; i < bonus_boxes.length; i++)
+	//{
+	//	document.body.removeChild(bonus_boxes[
+		//bonus_buttons[i].value -= 1
+	
 	if(bonus_boxes.length > 0)
 	{box_stack_update()}
 	else
@@ -1042,20 +1053,21 @@ function box_stack_remove(which)
 
 function box_stack_add()
 {
+	var new_stack = document.createElement('div')
 	const img = document.createElement('img');
 	img.src = awesome_canvas.src;
-	document.body.appendChild(img);
+	new_stack.appendChild(img);
 	//img.style.display = 'none'
-	bonus_boxes.push(img)
+	//bonus_boxes.push(img)
 	const button = document.createElement('button')
-	button.innerHTML = "Remove"
+	button.innerHTML = "X"
 	button.value = bonus_boxes.length-1
 	button.onclick = function() {box_stack_remove(this.value)}
-	document.body.appendChild(button);
-	bonus_buttons.push(button)
-	const br = document.createElement('br')
-	document.body.appendChild(br);
-	bonus_breaks.push(br)
+	new_stack.appendChild(button);
+	//bonus_buttons.push(button)
+	//const br = document.createElement('br')
+	document.body.appendChild(new_stack);
+	bonus_boxes.push(new_stack)
 	box_stack_update()
 }
 
@@ -1063,12 +1075,13 @@ function stack_reset()
 {
 	while(bonus_boxes.length > 0)
 	{
-		document.body.removeChild(bonus_boxes[0])
-		document.body.removeChild(bonus_breaks[0])
-		document.body.removeChild(bonus_buttons[0])
+		bonus_boxes[0].remove
+		///document.body.removeChild(bonus_boxes[0])
+		//document.body.removeChild(bonus_breaks[0])
+		//document.body.removeChild(bonus_buttons[0])
 		bonus_boxes.shift()
-		bonus_buttons.shift()
-		bonus_breaks.shift()
+		//bonus_buttons.shift()
+		//bonus_breaks.shift()
 	}
 	canvas_stack.height = 0
 	awesome_canvas_Stacked.style.display = 'none'
