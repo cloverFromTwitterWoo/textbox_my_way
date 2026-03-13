@@ -132,14 +132,19 @@ function refresh_text_list()
 	}
 }
 
+function complex_br()
+{
+	const complx_br = document.createElement("br")
+	complx_br.classList.add("complex")
+	return complx_br
+}
+
 function new_box(def_name="", def_image=-1, def_x=0, def_y=0, def_w=578, def_h=152, def_c="#ffffff", def_v=true)
 {
 	var newBox = {};
 	newBox.border = document.createElement("div");
 	newBox.border.classList.add("box")
 	newBox.border.style.width = "330px"
-
-	//alert("1")
 
 	var name_txt = document.createElement("span");
 	name_txt.innerHTML = "Name: "
@@ -150,9 +155,7 @@ function new_box(def_name="", def_image=-1, def_x=0, def_y=0, def_w=578, def_h=1
 	name_field.classList.add("complex")
 	newBox.border.appendChild(name_field)
 
-	//alert("2")
-
-	newBox.border.appendChild(document.createElement("br"))
+	newBox.border.appendChild(complex_br())
 	var image_txt = document.createElement("span");
 	image_txt.innerHTML = "Image: "
 	newBox.border.appendChild(image_txt)
@@ -196,15 +199,13 @@ function new_box(def_name="", def_image=-1, def_x=0, def_y=0, def_w=578, def_h=1
 	newBox.border.appendChild(newBox.image_sel)
 
 	newBox.border.appendChild(document.createElement("br"))
-	newBox.border.appendChild(document.createElement("br"))
+	newBox.border.appendChild(complex_br())
 
 	var set_txt = document.createElement("span");
 	set_txt.innerHTML = "Box Settings: "
 	set_txt.classList.add("complex")
 	newBox.border.appendChild(set_txt)
-	newBox.border.appendChild(document.createElement("br"))
-
-	//alert("3")
+	newBox.border.appendChild(complex_br())
 
 	var x_txt = document.createElement("span");
 	x_txt.innerHTML = "Box X: "
@@ -228,23 +229,23 @@ function new_box(def_name="", def_image=-1, def_x=0, def_y=0, def_w=578, def_h=1
 	newBox.y_pos.classList.add("complex")
 	newBox.border.appendChild(newBox.y_pos);
 
-	//alert("4")
-
-	newBox.border.appendChild(document.createElement("br"))
+	newBox.border.appendChild(complex_br())
 
 	var c_txt = document.createElement("span");
 	c_txt.innerHTML = "Box Color "
 	newBox.border.appendChild(c_txt)
-	//replace with select v
+	newBox.c_type = document.createElement("select");
+	newBox.c_type.innerHTML = '<option value="white">(Replacing White)</option><option value="multi">(Multiplicative)</option></option>'
+	newBox.border.appendChild(newBox.c_type)
 	c_txt = document.createElement("span");
-	c_txt.innerHTML = "(multiplicative): "
+	c_txt.innerHTML = ": "
 	newBox.border.appendChild(c_txt)
 	newBox.c_pos = document.createElement("input");
 	newBox.c_pos.type = "color"
 	newBox.c_pos.value = def_c
 	newBox.border.appendChild(newBox.c_pos);
 
-	newBox.border.appendChild(document.createElement("br"))
+	newBox.border.appendChild(complex_br())
 
 	var vis_txt = document.createElement("span");
 	vis_txt.innerHTML = "Visible: "
@@ -255,8 +256,6 @@ function new_box(def_name="", def_image=-1, def_x=0, def_y=0, def_w=578, def_h=1
 	newBox.v_pos.checked = def_v
 	newBox.v_pos.classList.add("complex")
 	newBox.border.appendChild(newBox.v_pos)
-
-	//alert("5")
 	
 	newBox.border.appendChild(document.createElement("br"))
 	newBox.border.appendChild(document.createElement("br"))
@@ -277,7 +276,7 @@ function new_box(def_name="", def_image=-1, def_x=0, def_y=0, def_w=578, def_h=1
 	newBox.border.appendChild(newBox.upButt)*/
 
 	newBox.removeButt = document.createElement("button");
-	newBox.removeButt.innerHTML = "X"
+	newBox.removeButt.innerHTML = "Remove"
 	newBox.removeButt.id = "box_" + String(list_of_boxes.length)
 	newBox.removeButt.classList.add("complex")
 	newBox.removeButt.onclick = function() 
@@ -290,15 +289,13 @@ function new_box(def_name="", def_image=-1, def_x=0, def_y=0, def_w=578, def_h=1
 	}
 	newBox.border.appendChild(newBox.removeButt)
 
-	//alert("6")
-
 	/*newBox.downButt = document.createElement("button");
 	newBox.downButt.innerHTML = "v"
 	newBox.border.appendChild(newBox.downButt)*/
 
 	box_container.appendChild(newBox.border)
 
-	newBox.linebreak = document.createElement("br");
+	newBox.linebreak = complex_br()
 	box_container.appendChild(newBox.linebreak)
 	list_of_boxes.push(newBox)
 }
@@ -319,7 +316,7 @@ function new_text(def_name="", def_x=0, def_y=0, def_x_off=0, def_y_off=0, def_o
 	name_field.classList.add("complex")
 	newText.border.appendChild(name_field)
 
-	newText.border.appendChild(document.createElement("br"))
+	newText.border.appendChild(complex_br())
 
 	/*var font_txt = document.createElement("span");
 	font_txt.innerHTML = "Font: "
@@ -356,7 +353,7 @@ function new_text(def_name="", def_x=0, def_y=0, def_x_off=0, def_y_off=0, def_o
 	newText.y_pos.style = "width: 40px;"
 	newText.border.appendChild(newText.y_pos);
 
-	newText.border.appendChild(document.createElement("br"))
+	newText.border.appendChild(complex_br())
 
 	var x_txt = document.createElement("span");
 	x_txt.innerHTML = "Portrait X-Offset: "
@@ -408,6 +405,17 @@ function new_text(def_name="", def_x=0, def_y=0, def_x_off=0, def_y_off=0, def_o
 	newText.a_pos.checked = def_a
 	newText.border.appendChild(newText.a_pos)
 
+	newText.border.appendChild(complex_br())
+
+	auto_txt = document.createElement("span");
+	auto_txt.innerHTML = "Color-Blend: "
+	auto_txt.classList.add("complex")
+	newText.border.appendChild(auto_txt)
+	newText.c_type = document.createElement("select");
+	newText.c_type.innerHTML = '<option value="white">(Replacing White)</option><option value="multi">(Multiplicative)</option>'
+	newText.c_type.classList.add("complex")
+	newText.border.appendChild(newText.c_type)
+
 	newText.border.appendChild(document.createElement("br"))
 	newText.border.appendChild(document.createElement("br"))
 	
@@ -420,11 +428,11 @@ function new_text(def_name="", def_x=0, def_y=0, def_x_off=0, def_y_off=0, def_o
 	newText.text.style = "width: 500px;"
 	newText.border.appendChild(newText.text)
 
-	newText.border.appendChild(document.createElement("br"))
-	newText.border.appendChild(document.createElement("br"))
+	newText.border.appendChild(complex_br())
+	newText.border.appendChild(complex_br())
 
 	newText.removeButt = document.createElement("button");
-	newText.removeButt.innerHTML = "X"
+	newText.removeButt.innerHTML = "Remove"
 	newText.removeButt.id ="text_" + String(list_of_text.length)
 	newText.removeButt.classList.add("complex")
 	newText.removeButt.onclick = function() 
@@ -438,7 +446,7 @@ function new_text(def_name="", def_x=0, def_y=0, def_x_off=0, def_y_off=0, def_o
 	newText.border.appendChild(newText.removeButt)
 
 	text_container.appendChild(newText.border)
-	newText.linebreak = document.createElement("br");
+	newText.linebreak = complex_br()
 	text_container.appendChild(newText.linebreak)
 	list_of_text.push(newText)
 }
@@ -506,7 +514,7 @@ cur_font = loadImage('assets/fonts/determination_mono.png')
 
 function toggle_complex(complex)
 {
-	alert(complex)
+	//alert(complex)
 	if(!complex)
 	{
 		var box_borders = document.getElementsByClassName('box');
@@ -517,6 +525,10 @@ function toggle_complex(complex)
 		box_borders = document.getElementsByClassName('complex');
   		for(i = 0; i < box_borders.length; i++) {
   			box_borders[i].style.display = 'none'
+		}
+		box_borders = document.getElementsByClassName('simple');
+  		for(i = 0; i < box_borders.length; i++) {
+  			box_borders[i].style.display = 'inline'
 		}
 	}
 	else
@@ -530,16 +542,17 @@ function toggle_complex(complex)
   		for(i = 0; i < box_borders.length; i++) {
   			box_borders[i].style.display = 'inline'
 		}
+		box_borders = document.getElementsByClassName('simple');
+  		for(i = 0; i < box_borders.length; i++) {
+  			box_borders[i].style.display = 'none'
+		}
 	}
 }
 
+toggle_complex(false)
 
 homer.addEventListener('change', (event) => {
-
-	alert("clicked!")
   toggle_complex(event.currentTarget.checked)
-
-
 })
 
 function letter_to_index(letta, index)
@@ -780,7 +793,7 @@ function draw_canvas()
 {
 	if(iters == 0)
 	{
-		generate_font(cur_font) //uncomment!
+		//generate_font(cur_font) //uncomment!
 		iters = 0.1
 	}
 	var draw_it = true
@@ -851,15 +864,27 @@ function draw_canvas()
 				portrait_blacka.imageSmoothingEnabled = false
 				canvas.imageSmoothingEnabled = false
 				portrait_blacka.drawImage(list_of_boxes[i].image,0,0)
+				var what_to = list_of_boxes[i].c_type.value
 				var cool_pixels = portrait_blacka.getImageData(0,0,box_size[2],box_size[3])
-				for(var i = 3; i < cool_pixels.data.length; i += 4)
+				for(var j = 3; j < cool_pixels.data.length; j += 4)
 				{
 					//if(cool_pixels.data[i] == 255 && cool_pixels.data[i-3] == 255 && cool_pixels.data[i-2] == 255 && cool_pixels.data[i-1] == 255)
 					//{
+					if(what_to == "multi")
+					{
 						cool_pixels.data[j-3] *= new_color.r / 255
 						cool_pixels.data[j-2] *= new_color.g / 255
 						cool_pixels.data[j-1] *= new_color.b / 255
-					//}
+					}
+					else if(what_to == "white")
+					{
+						if(cool_pixels.data[j-3] == 255 && cool_pixels.data[j-2] == 255 && cool_pixels.data[j-1] == 255)
+						{
+							cool_pixels.data[j-3] = new_color.r
+							cool_pixels.data[j-2] = new_color.g
+							cool_pixels.data[j-1] = new_color.b
+						}
+					}
 				}
 				portrait_blacka.putImageData(cool_pixels, 0, 0)
 				var blacked_out = portrait_blacked.toDataURL('image/png');

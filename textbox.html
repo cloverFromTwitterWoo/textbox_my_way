@@ -7,9 +7,11 @@
   </head>
   <body>
     <main>
-	<span>Complex: </span><input type="checkbox" id="complexmode" checked="true">
-	<div class="box" id="box_box">
-	<legend class="complex">Box Settings</legend>
+	<span>Complex: </span><input type="checkbox" id="complexmode">
+	<br>
+	<br>
+	<div class="box" id="box_box" style="display:inline-block">
+	<legend class="complex">Boxes</legend>
 	<span>Style:</span>
 	<select id="text_bg">
 	<option value="undertale">Undertale</option>
@@ -25,14 +27,15 @@
 	<span>Image Settings:</span> <br>
 	<span>Image Width: </span><input type="number" id="origin_w" value="578" style="width: 40px;" min="0"/>
 	<span>Image Height: </span><input type="number" id="origin_h" value="152" style="width: 40px;" min="0"/>
-	<span>Margin:</span><input type="checkbox" id="margesimpson">
-	<br><br>
-	<button class="complex" onclick="new_box()">Add New Box</button>
-	<br><br>
-	</div>
 	<br>
-	<!--div class="box" id="char_box">
-	<legend>Character Settings</legend-->
+	<span>Margin:</span><input type="checkbox" id="margesimpson">
+	<br class="complex"><br class="complex">
+	<button class="complex" onclick="new_box()">Add New Box</button>
+	<br class="complex"><br>
+	</div>
+	<div id="chr_over_box" style="display:inline-block">
+	<div class="box" id="char_box">
+	<legend class="complex">Portraits</legend>
 	<span>Character:</span>
 	<select id="text_chr">
 	<option value="none">None</option>
@@ -60,11 +63,27 @@
 	<br>
 	<span>Portrait X_Off: </span><input type="number" id="port_x" value="0" style="width: 40px;"/>
 	<span> Portrait Y_Off: </span><input type="number" id="port_y" value="0" style="width: 40px;"/>
+	<br>
 	<span> Portrait Outline: </span><input type="checkbox" id="outtheline" checked="true">
 	</span>
-	<!--/div-->
+	</div>
 	<br>
+	<div class="box" id="over_box">
+	<legend class="complex">Overlays:</legend>
+	<span>Overlay:</span>
+	<select id="text_over">
+	<option value="transparent">None</option>
+	<option value="custom">Custom</option>
+	<option value="fog">Fog</option>
+	<option value=”evil_glow">Red Glow</option>
+	<option value="snowdin">Snow</option>
+	<option value="scanlines">Scanlines</option>
+	</select>
+	<input type="file" id="text_over_alt" accept="image/png" style="display:none"/>
+	</div>
+	</div>
 	<br>
+	<br class="complex">
 	<div class="box" id="text_box" style="width:700px">
 	<legend class="complex">Text:</legend>
 	<span>Font:</span>
@@ -85,28 +104,14 @@
 	<span id="custom_show" style="display:none">
 	<span>Mono:</span><input type="checkbox" id="noJoke" checked="true"><span>or </span><input type="file" id="text_font_spacin" accept=".txt"/>
 	</span>
-	<br>
 	<button class="complex" onclick="new_text()">More Text</button>
-	<br>
-	<br>
+	<br class="complex">
+	<br class="complex">
 	</div>
-	<br>
-	<span>Overlay:</span>
-	<select id="text_over">
-	<option value="transparent">None</option>
-	<option value="custom">Custom</option>
-	<option value="fog">Fog</option>
-	<option value=”evil_glow">Red Glow</option>
-	<option value="snowdin">Snow</option>
-	<option value="scanlines">Scanlines</option>
-	</select>
-	<input type="file" id="text_over_alt" accept="image/png" style="display:none"/>
-	<br>
 	<br>
 	<canvas id="textbox_work" style="display:none" width="578" height="152"></canvas>
 	<img id="canvasTrue" src="assets/textboxes/undertale.png"></img>
 	<canvas id="portrait_outline" style="display:none" width="134" height="140"></canvas>
-	<br>
 	<br>
 	<button onclick="draw_canvas()">Generate Box</button>
 	<br>
