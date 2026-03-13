@@ -119,7 +119,7 @@ function refresh_box_list()
 	{
 		list_of_boxes[i].image_sel.className = "box_" + String(i)
 		//list_of_boxes[i].upButt.className = "box_" + String(i)
-		list_of_boxes[i].removeButt.className = "box_" + String(i)
+		list_of_boxes[i].removeButt.id = "box_" + String(i)
 		//list_of_boxes[i].downButt.className = "box_" + String(i)
 	}
 }
@@ -128,7 +128,7 @@ function refresh_text_list()
 {
 	for(var i = 0; i < list_of_text.length; i++)
 	{
-		list_of_text[i].removeButt.className = "text_" + String(i)
+		list_of_text[i].removeButt.id = "text_" + String(i)
 	}
 }
 
@@ -141,9 +141,11 @@ function new_box(def_name="", def_image=-1, def_x=0, def_y=0, def_w=578, def_h=1
 
 	var name_txt = document.createElement("span");
 	name_txt.innerHTML = "Name: "
+	name_txt.classList.add("complex")
 	newBox.border.appendChild(name_txt)
 	name_field = document.createElement("input");
 	name_field.value = def_name;
+	name_field.classList.add("complex")
 	newBox.border.appendChild(name_field)
 
 	newBox.border.appendChild(document.createElement("br"))
@@ -194,25 +196,30 @@ function new_box(def_name="", def_image=-1, def_x=0, def_y=0, def_w=578, def_h=1
 
 	var set_txt = document.createElement("span");
 	set_txt.innerHTML = "Box Settings: "
+	set_txt.classList.add("complex")
 	newBox.border.appendChild(set_txt)
 	newBox.border.appendChild(document.createElement("br"))
 
 	var x_txt = document.createElement("span");
 	x_txt.innerHTML = "Box X: "
+	x_txt.classList.add("complex")
 	newBox.border.appendChild(x_txt)
 	newBox.x_pos = document.createElement("input");
 	newBox.x_pos.type = "number"
 	newBox.x_pos.value = def_x
 	newBox.x_pos.style = "width: 40px;"
+	newBox.x_pos.classList.add("complex")
 	newBox.border.appendChild(newBox.x_pos);
 
 	var y_txt = document.createElement("span");
 	y_txt.innerHTML = " Box Y: "
+	y_txt.classList.add("complex")
 	newBox.border.appendChild(y_txt)
 	newBox.y_pos = document.createElement("input");
 	newBox.y_pos.type = "number"
 	newBox.y_pos.value = def_y
 	newBox.y_pos.style = "width: 40px;"
+	newBox.y_pos.classList.add("complex")
 	newBox.border.appendChild(newBox.y_pos);
 
 	newBox.border.appendChild(document.createElement("br"))
@@ -229,10 +236,12 @@ function new_box(def_name="", def_image=-1, def_x=0, def_y=0, def_w=578, def_h=1
 
 	var vis_txt = document.createElement("span");
 	vis_txt.innerHTML = "Visible: "
+	vid_txt.classList.add("complex")
 	newBox.border.appendChild(vis_txt)
 	newBox.v_pos = document.createElement("input");
 	newBox.v_pos.type = "checkbox"
 	newBox.v_pos.checked = def_v
+	newBox.v_pos.classList.add("complex")
 	newBox.border.appendChild(newBox.v_pos)
 	
 	newBox.border.appendChild(document.createElement("br"))
@@ -255,10 +264,11 @@ function new_box(def_name="", def_image=-1, def_x=0, def_y=0, def_w=578, def_h=1
 
 	newBox.removeButt = document.createElement("button");
 	newBox.removeButt.innerHTML = "X"
-	newBox.removeButt.classList.add("box_" + String(list_of_boxes.length))
+	newBox.removeButt.id = "box_" + String(list_of_boxes.length)
+	newBox.removeButt.classList.add("complex")
 	newBox.removeButt.onclick = function() 
 	{
-		var which_box = Number(this.className.substring(4))
+		var which_box = Number(this.id.substring(4))
 		list_of_boxes[which_box].border.remove()
 		list_of_boxes[which_box].linebreak.remove()
 		list_of_boxes.splice(which_box, 1)
@@ -286,9 +296,11 @@ function new_text(def_name="", def_x=0, def_y=0, def_x_off=0, def_y_off=0, def_o
 
 	var name_txt = document.createElement("span");
 	name_txt.innerHTML = "Name: "
+	name_txt.classList.add("complex")
 	newText.border.appendChild(name_txt)
 	name_field = document.createElement("input");
 	name_field.value = def_name;
+	name_field.classList.add("complex")
 	newText.border.appendChild(name_field)
 
 	newText.border.appendChild(document.createElement("br"))
@@ -332,20 +344,24 @@ function new_text(def_name="", def_x=0, def_y=0, def_x_off=0, def_y_off=0, def_o
 
 	var x_txt = document.createElement("span");
 	x_txt.innerHTML = "Portrait X-Offset: "
+	x_txt.classList.add("complex")
 	newText.border.appendChild(x_txt)
 	newText.x_pos_alt = document.createElement("input");
 	newText.x_pos_alt.type = "number"
 	newText.x_pos_alt.value = def_x_off
 	newText.x_pos_alt.style = "width: 40px;"
+	newText.x_pos_alt.classList.add("complex")
 	newText.border.appendChild(newText.x_pos_alt);
 
 	var y_txt = document.createElement("span");
 	y_txt.innerHTML = " Portrait Y-Offset: "
+	y_txt.classList.add("complex")
 	newText.border.appendChild(y_txt)
 	newText.y_pos_alt = document.createElement("input");
 	newText.y_pos_alt.type = "number"
 	newText.y_pos_alt.value = def_y_off
 	newText.y_pos_alt.style = "width: 40px;"
+	newText.y_pos_alt.classList.add("complex")
 	newText.border.appendChild(newText.y_pos_alt);
 
 	newText.border.appendChild(document.createElement("br"))
@@ -393,10 +409,11 @@ function new_text(def_name="", def_x=0, def_y=0, def_x_off=0, def_y_off=0, def_o
 
 	newText.removeButt = document.createElement("button");
 	newText.removeButt.innerHTML = "X"
-	newText.removeButt.classList.add("text_" + String(list_of_text.length))
+	newText.removeButt.id ="text_" + String(list_of_text.length)
+	newText.removeButt.classList.add("complex")
 	newText.removeButt.onclick = function() 
 	{
-		var which_text = Number(this.className.substring(5))
+		var which_text = Number(this.id.substring(5))
 		list_of_text[which_text].border.remove()
 		list_of_text[which_text].linebreak.remove()
 		list_of_text.splice(which_text, 1)
