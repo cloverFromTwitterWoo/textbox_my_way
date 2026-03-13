@@ -8,7 +8,7 @@
   <body>
     <main>
 	<div class="box" id="box_box">
-	<legend>Box Settings</legend>
+	<legend class="complex">Box Settings</legend>
 	<span>Style:</span>
 	<select id="text_bg">
 	<option value="undertale">Undertale</option>
@@ -26,7 +26,7 @@
 	<span>Image Height: </span><input type="number" id="origin_h" value="152" style="width: 40px;" min="0"/>
 	<span>Margin:</span><input type="checkbox" id="margesimpson">
 	<br><br>
-	<button onclick="new_box()">Add New Box</button>
+	<button class="complex" onclick="new_box()">Add New Box</button>
 	<br><br>
 	</div>
 	<br>
@@ -65,7 +65,7 @@
 	<br>
 	<br>
 	<div class="box" id="text_box" style="width:700px">
-	<legend>Text:</legend>
+	<legend class="complex">Text:</legend>
 	<span>Font:</span>
 	<select id="text_font">
 	<option value="determination_mono">Default</option>
@@ -85,7 +85,7 @@
 	<span>Mono:</span><input type="checkbox" id="noJoke" checked="true"><span>or </span><input type="file" id="text_font_spacin" accept=".txt"/>
 	</span>
 	<br>
-	<button onclick="new_text()">More Text</button>
+	<button class="complex" onclick="new_text()">More Text</button>
 	<br>
 	<br>
 	</div>
