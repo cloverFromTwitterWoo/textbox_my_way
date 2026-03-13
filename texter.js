@@ -1003,7 +1003,7 @@ function draw_canvas()
 
 function box_stack_update()
 {
-	console.log(bonus_boxes)
+	//console.log(bonus_boxes)
 	for(let i = 0; i < bonus_boxes.length; i++)
 	{
 		document.body.removeChild(bonus_boxes[i][0])
@@ -1047,13 +1047,13 @@ function box_stack_swap(which, dir)
 {
 	if(dir == -1 && which > 0)
 	{
-		bonus_boxes[which] = bonus_boxes.splice(which, 1, bonus_boxes[which-1])[0];
-		//[bonus_boxes[which], bonus_boxes[which-1]] = [bonus_boxes[which-1], bonus_boxes[which]];
+		var the_guy = bonus_boxes.splice(which, 1);
+		bonus_boxes.splice(which-1,0,the_guy[0])
 	}
 	else if (dir == 1 && which < bonus_boxes.length)
 	{
-		bonus_boxes[which+1] = bonus_boxes.splice(which+1, 1, bonus_boxes[which])[0];
-		//[bonus_boxes[which], bonus_boxes[which+1]] = [bonus_boxes[which+1], bonus_boxes[which]];
+		var the_guy = bonus_boxes.splice(which, 1);
+		bonus_boxes.splice(which+1,0,the_guy[0])
 	}
 	box_stack_update()
 }
@@ -1085,7 +1085,7 @@ function box_stack_add()
 	//bonus_buttons.push(button)
 	//const br = document.createElement('br')
 	document.body.appendChild(new_stack);
-	var the_thing = [new_stack, img, button, button_up, button_down]
+	var the_thing = [new_stack, img, button, button_up, button_down, bonus_boxes.length]
 	bonus_boxes.push(the_thing)
 	box_stack_update()
 }
