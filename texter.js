@@ -18,6 +18,7 @@ let portrait_blacked = document.getElementById("portrait_outline");
 
 const marge = document.getElementById("margesimpson");
 const bart = document.getElementById("outtheline");
+const homer = document.getElementById("complexmode");
 
 function hexToRgb(hex) {
   var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
@@ -469,6 +470,20 @@ function generate_font(new_fnt)
 //generate_font('assets/fonts/cfc determination_mono.png')
 
 cur_font = loadImage('assets/fonts/determination_mono.png')
+
+function toggle_complex(complex)
+{
+	alert(complex)
+}
+
+
+homer.addEventListener('change', (event) => {
+  if (event.currentTarget.checked) {
+    toggle_complex(true)
+  } else {
+    toggle_conplex(false)
+  }
+})
 
 function letter_to_index(letta, index)
 {
