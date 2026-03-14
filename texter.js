@@ -1205,11 +1205,11 @@ function draw_canvas()
 		}
 		for(var i = 0; i < list_of_portraits.length; i++)
 		{
-			console.log(list_of_portraits[i])
+			//console.log(list_of_portraits[i])
 			if(!list_of_portraits[i].image)
 			{continue}
 			any_portraits = true
-			var portrait_i_use = list_of_portraits[i].image
+			var portrait_i_use = copy(list_of_portraits[i].image)
 			portrait_blacked.width = portrait_i_use.width
 			portrait_blacked.height = portrait_i_use.height
 			var port_pos = [6+offset[0]+Number(list_of_portraits[i].x_pos.value), 6+offset[1]+Number(list_of_portraits[i].y_pos.value),134,140]
