@@ -1618,7 +1618,7 @@ textbox_bg.addEventListener("change", (event) => {
 	}
 })
 
-/*let ohAndThis = false
+let ohAndThis = false
 
 textbox_over_alt.addEventListener('change', function(ev) {
    if(ev.target.files) {
@@ -1640,34 +1640,6 @@ textbox_over_alt.addEventListener('change', function(ev) {
       }
    }
 });
-
-textbox_exp.innerHTML=exp_options[textbox_chr.value]
-textbox_chr.addEventListener("change", (event) => {
-	if(textbox_chr.value == "none")
-	{
-		textbox_exp_c.style.display = "none"
-		textbox_exp_txt_1.style.display = "none"
-		textbox_exp.style.display = "none"
-		textbox_exp_alt.style.display = "none"
-	}
-	else
-	{
-		textbox_exp_c.style.display = "inline"
-		textbox_exp_txt_1.style.display = "inline"
-		textbox_exp.style.display = "inline"
-		if(textbox_chr.value == "custom")
-		{
-			textbox_exp.style.display = "none";
-			textbox_exp_alt.style.display = "inline";
-		}
-		else
-		{
-			textbox_exp.style.display = "inline";
-			textbox_exp_alt.style.display = "none";
-			textbox_exp.innerHTML=exp_options[textbox_chr.value]
-		}
-	}
-})
 
 const box_sizes = {
 "undertale": [0,0,578,152,0,0],
@@ -1749,7 +1721,7 @@ this_is_gonna_suck_i_guess.addEventListener('change', function(ev) {
 	}
       }
    }
-});*/
+});
 
 draw_canvas()
 setTimeout(draw_canvas, 1080)
