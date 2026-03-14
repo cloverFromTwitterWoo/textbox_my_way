@@ -283,7 +283,7 @@ function new_box(def_name="", def_image=-1, def_x=0, def_y=0, def_w=578, def_h=1
 	c_txt.innerHTML = "Box Color "
 	newBox.border.appendChild(c_txt)
 	newBox.c_type = document.createElement("select");
-	newBox.c_type.innerHTML = '<option value="white">(Replacing White)</option><option value="multi">(Multiplicative)</option></option>'
+	newBox.c_type.innerHTML = '<option value="white">(Replacing White)</option><option value="multi">(Multiplicative)</option><option value="whole">(All Of It)</option>'
 	newBox.c_type.classList.add("complex")
 	newBox.border.appendChild(newBox.c_type)
 	c_txt = document.createElement("span");
@@ -461,7 +461,7 @@ function new_text(def_name="", def_x=0, def_y=0, def_x_off=0, def_y_off=0, def_o
 	auto_txt.classList.add("complex")
 	newText.border.appendChild(auto_txt)
 	newText.c_type = document.createElement("select");
-	newText.c_type.innerHTML = '<option value="white">(Replacing White)</option><option value="multi">(Multiplicative)</option>'
+	newText.c_type.innerHTML = '<option value="white">(Replacing White)</option><option value="multi">(Multiplicative)</option><option value="whole">(All Of It)</option>'
 	newText.c_type.classList.add("complex")
 	newText.border.appendChild(newText.c_type)
 
@@ -1035,7 +1035,7 @@ function draw_text(pass_in)//(x,y,str)
 		{
 			ctx.drawImage(cur_outline,letter_info[0],letter_info[1],letter_info[2],letter_info[3], draw_pos_x[0]+1+letter_posed[0], draw_pos_y[0]+1+letter_posed[1], letter_info[2],letter_info[3])
 		}
-		if(doColorMath && !(color.r == 255 && color.g == 255 && color.b == 255) )
+		if(doColorMath && (!(color.r == 255 && color.g == 255 && color.b == 255) || pass_in.c_type.value == "whole") )
 		{
 			portrait_blacked.width = letter_info[2]
 			portrait_blacked.height = letter_info[3]
@@ -1043,18 +1043,30 @@ function draw_text(pass_in)//(x,y,str)
 			portrait_blacka.imageSmoothingEnabled = false
 			canvas.imageSmoothingEnabled = false
 			portrait_blacka.drawImage(cur_font,letter_info[0],letter_info[1],letter_info[2],letter_info[3],0,0,letter_info[2],letter_info[3])
+			var what_to = list_of_boxes[i].c_type.value
 			var cool_pixels = portrait_blacka.getImageData(0,0,letter_info[2],letter_info[3])
 			for(var j = 3; j < cool_pixels.data.length; j += 4)
 			{
-				if(cool_pixels.data[j] > 0)
+				if(what_to == "multi")
 				{
-					//if(cool_pixels.data[j-3] == color.r && cool_pixels.data[j-2] == color.g && cool_pixels.data[j-1] == color.b)
-					//{
-					//	break
-					//}
-					cool_pixels.data[j-3] *= color.r / 255
-					cool_pixels.data[j-2] *= color.g / 255
-					cool_pixels.data[j-1] *= color.b / 255
+					cool_pixels.data[j-3] *= new_color.r / 255
+					cool_pixels.data[j-2] *= new_color.g / 255
+					cool_pixels.data[j-1] *= new_color.b / 255
+				}
+				else if(what_to == "white")
+				{
+					if(cool_pixels.data[j-3] == 255 && cool_pixels.data[j-2] == 255 && cool_pixels.data[j-1] == 255)
+					{
+						cool_pixels.data[j-3] = new_color.r
+						cool_pixels.data[j-2] = new_color.g
+						cool_pixels.data[j-1] = new_color.b
+					}
+				}
+				else if(what_to == "whole")
+				{
+					cool_pixels.data[j-3] = new_color.r
+					cool_pixels.data[j-2] = new_color.g
+					cool_pixels.data[j-1] = new_color.b
 				}
 			}
 			portrait_blacka.putImageData(cool_pixels, 0, 0)
@@ -1163,7 +1175,7 @@ function draw_canvas()
 		{	
 			if(!list_of_boxes[i].v_pos.checked)
 				{continue}
-			if(list_of_boxes[i].c_pos.value == "#ffffff")
+			if(list_of_boxes[i].c_pos.value == "#ffffff" || list_of_boxes[i].c_type.value == "whole"))
 				{ctx.drawImage(list_of_boxes[i].image,offset[0] + Number(list_of_boxes[i].x_pos.value),offset[1] + Number(list_of_boxes[i].y_pos.value))}
 			else
 			{
@@ -1178,8 +1190,6 @@ function draw_canvas()
 				var cool_pixels = portrait_blacka.getImageData(0,0,box_size[2],box_size[3])
 				for(var j = 3; j < cool_pixels.data.length; j += 4)
 				{
-					//if(cool_pixels.data[i] == 255 && cool_pixels.data[i-3] == 255 && cool_pixels.data[i-2] == 255 && cool_pixels.data[i-1] == 255)
-					//{
 					if(what_to == "multi")
 					{
 						cool_pixels.data[j-3] *= new_color.r / 255
@@ -1194,6 +1204,12 @@ function draw_canvas()
 							cool_pixels.data[j-2] = new_color.g
 							cool_pixels.data[j-1] = new_color.b
 						}
+					}
+					else if(what_to == "whole")
+					{
+						cool_pixels.data[j-3] = new_color.r
+						cool_pixels.data[j-2] = new_color.g
+						cool_pixels.data[j-1] = new_color.b
 					}
 				}
 				portrait_blacka.putImageData(cool_pixels, 0, 0)
@@ -1287,7 +1303,7 @@ function draw_canvas()
 					}
 				}
 			}
-			if(list_of_portraits[i].c_pos.value != "#ffffff")
+			if(list_of_portraits[i].c_pos.value != "#ffffff" || list_of_portraits[i].c_type.value == "whole")
 			{
 				new_color = hexToRgb(list_of_portraits[i].c_pos.value)
 				portrait_blacka.imageSmoothingEnabled = false
