@@ -122,19 +122,24 @@ let list_of_portraits = [];
 let list_of_over = [];
 
 let prebaked_boxes = {
-	undertale: [578, 152, ["", "assets/textboxes/undertale.png", 0, 0, "#ffffff", "true"], "text", ["", 28, 26, 116, 0, true, false, false], "port", ["", 0, 0, "2x_Scaling", true], "over"],
-	outertale: [578, 152, ["", "assets/textboxes/outertale.png", 0, 0, "#ffffff", "true"], "text", ["", 28, 26, 116, 0, true, false, false], "port", ["", 0, 0, "2x_Scaling", true], "over"],
-	underswap: [578, 152, ["", "assets/textboxes/underswap.png", 0, 0, "#ffffff", "true"], "text", ["", 28, 26, 116, 0, true, false, false], "port", ["", 0, 0, "2x_Scaling", true], "over"],
-	deltarune: [594,168, ["", "assets/textboxes/deltarune.png", 0, 0, "#ffffff", "true"], "text", ["", 28+8, 26+10, 116, 0, true, false, false], "port", ["", 8, 10, "2x_Scaling", true], "over"],
-	jumbo: [578, 188, ["", "assets/textboxes/jumbo.png", 0, 0, "#ffffff", "true"], "text", ["", 28, 26, 116, 0, true, false, false], "port", ["", 0, 0, "2x_Scaling", true], "over"],
-	cavestory: [488, 128, ["", "assets/textboxes/cave_story.png", 0, 0, "#ffffff", "true"], "text", ["", 27, 23, 110, 0, false, false, false], "port", ["", 3, -11, "2x_Scaling", false], "over"],
+	undertale: [578, 152, ["", "assets/textboxes/undertale.png", 0, 0, "#ffffff", "true"], "text", ["", 28, 26, 116, 0, true, false, false], "port", ["", 67, 70, "2x_Scaling", true], "over"],
+	outertale: [578, 152, ["", "assets/textboxes/outertale.png", 0, 0, "#ffffff", "true"], "text", ["", 28, 26, 116, 0, true, false, false], "port", ["", 67, 70, "2x_Scaling", true], "over"],
+	underswap: [578, 152, ["", "assets/textboxes/underswap.png", 0, 0, "#ffffff", "true"], "text", ["", 28, 26, 116, 0, true, false, false], "port", ["", 67, 70, "2x_Scaling", true], "over"],
+	deltarune: [594,168, ["", "assets/textboxes/deltarune.png", 0, 0, "#ffffff", "true"], "text", ["", 36, 36, 116, 0, true, false, false], "port", ["", 84, 80, "2x_Scaling", true], "over"],
+	jumbo: [578, 188, ["", "assets/textboxes/jumbo.png", 0, 0, "#ffffff", "true"], "text", ["", 28, 26, 116, 0, true, false, false], "port", ["", 67, 70, "2x_Scaling", true], "over"],
+	cavestory: [488, 128, ["", "assets/textboxes/cave_story.png", 0, 0, "#ffffff", "true"], "text", ["", 27, 23, 110, 0, false, false, false], "port", ["", 28, 20, "2x_Scaler", false], "over"],
 }
 
 let char_options = '<option value="none">None</option><option value="custom">Custom</option><option value="flowey">Flowey</option><option value="toriel">Toriel</option>'
 
 let exp_options = 
 {
-	"flowey": '<option value="assets/characters/flowey/spr_floweynice_0.png">Nice</option><option value="assets/characters/flowey/spr_floweywink_0.png">Wink</option><option value="assets/characters/flowey/spr_floweysassy_0.png">Sassy</option><option value="assets/characters/flowey/spr_floweyplain_0.png">D:</option><option value="assets/characters/flowey/spr_floweyniceside_0.png">Side (Smile)</option><option value="assets/characters/flowey/spr_floweynicesideum_0.png">Side (Uh)</option><option value="assets/characters/flowey/spr_floweygrin_0.png">Grin</option><option value="assets/characters/flowey/spr_floweyevil_0.png">Evil</option><option value="assets/characters/flowey/spr_floweylaugh_0.png">Laugh</option><option value="assets/characters/flowey/spr_floweyside_0.png">Side</option><option value="assets/characters/flowey/spr_floweysideshock_0.png">Side (Ah)</option><option value="assets/characters/flowey/spr_floweytoriel_0.png">Toriel</option><option value="assets/characters/flowey/spr_floweytoriel2_0.png">Toriel (Distorted)</option><option value="assets/characters/flowey/spr_floweyhurt_0.png">Hurt</option>',
+	"flowey": '\
+<option value="assets/characters/flowey/spr_floweynice_0.png">Nice</option><option value="assets/characters/flowey/spr_floweywink_0.png">Wink</option>\
+<option value="assets/characters/flowey/spr_floweysassy_0.png">Sassy</option><option value="assets/characters/flowey/spr_floweyplain_0.png">D:</option><option value="assets/characters/flowey/spr_floweyniceside_0.png">Side (Smile)</option>\
+<option value="assets/characters/flowey/spr_floweynicesideum_0.png">Side (Uh)</option><option value="assets/characters/flowey/spr_floweygrin_0.png">Grin</option><option value="assets/characters/flowey/spr_floweyevil_0.png">Evil</option>\
+<option value="assets/characters/flowey/spr_floweylaugh_0.png">Laugh</option><option value="assets/characters/flowey/spr_floweyside_0.png">Side</option><option value="assets/characters/flowey/spr_floweysideshock_0.png">Side (Ah)</option>\
+<option value="assets/characters/flowey/spr_floweytoriel_0.png">Toriel</option><option value="assets/characters/flowey/spr_floweytoriel2_0.png">Toriel (Distorted)</option><option value="assets/characters/flowey/spr_floweyhurt_0.png">Hurt</option>',
 	"toriel": '<option value="assets/characters/toriel/default.png">Default</option><option value="assets/characters/toriel/looking-away.png">Looking Away</option><option value="sad">Sad</option>'
 }
 
@@ -167,6 +172,7 @@ function refresh_char_list()
 		list_of_portraits[i].chara_pos.className = "port_" + String(i)
 		list_of_portraits[i].exp_select.className = "port_" + String(i)
 		list_of_portraits[i].image_sel.className = "port_" + String(i)
+		list_of_portraits[i].s_pos.id = "portD_" + String(i)
 	}
 }
 
@@ -514,7 +520,7 @@ function new_text(def_name="", def_x=0, def_y=0, def_x_off=0, def_y_off=0, def_o
 	list_of_text.push(newText)
 }
 
-function new_port(def_name="", def_x=0, def_y=0, def_s="2x_Scaling", def_o=true)
+function new_port(def_name="", def_x=0, def_y=0, def_s="2x_Scaling", def_o=true, def_w=-1, def_h=-1)
 {
 	var newPort = {};
 	newPort.border = document.createElement("div");
@@ -659,7 +665,7 @@ function new_port(def_name="", def_x=0, def_y=0, def_s="2x_Scaling", def_o=true)
 	newPort.border.appendChild(document.createElement("br"))
 
 	var x_txt = document.createElement("span");
-	x_txt.innerHTML = "Portrait X Offset: "
+	x_txt.innerHTML = "Portrait X: "
 	newPort.border.appendChild(x_txt)
 	newPort.x_pos = document.createElement("input");
 	newPort.x_pos.type = "number"
@@ -668,7 +674,7 @@ function new_port(def_name="", def_x=0, def_y=0, def_s="2x_Scaling", def_o=true)
 	newPort.border.appendChild(newPort.x_pos);
 
 	var y_txt = document.createElement("span");
-	y_txt.innerHTML = " Portrait Y Offset: "
+	y_txt.innerHTML = " Portrait Y: "
 	newPort.border.appendChild(y_txt)
 	newPort.y_pos = document.createElement("input");
 	newPort.y_pos.type = "number"
@@ -683,10 +689,73 @@ function new_port(def_name="", def_x=0, def_y=0, def_s="2x_Scaling", def_o=true)
 	s_txt.classList.add("complex")
 	newPort.border.appendChild(s_txt)
 	newPort.s_pos = document.createElement("select");
-	newPort.s_pos.innerHTML = '<option value="2x_Scaling">2X Upscale And Center</option><option value="Fit_Basic">Squish/Stretch to Fit</option><option value="Center_It">Center</option><option value="0.5x_Scaling">0.5X Downscale And Center</option><option value="Fit_Square">Scale Evenly to Fit</option><option value="Unchanged_Anything">Unchanged</option>'
+	newPort.s_pos.innerHTML = '\
+<option value="2x_Scaling">2X Size (Centered)</option><option value="2x_Scaler">2X Size</option>\
+<option value="Center_It">Centered</option><option value="Unchanged_Anything">Unchanged</option>\
+<option value="0.5x_Scaling">0.5X Size (Centered)</option><option value="0.5x_Scaler">0.5X Size</option>\
+<option value="Whatever_Scaling">Arbitary Scale (Centered)</option><option value="Whatever_Scaler">Arbitary Scale</option>\
+<option value="ohgoodness">Arbitary Size (Centered)</option><option value="ohgoodness2">Arbitary Size</option>\
+<option value="Fit_Square">Scale Evenly to Fit</option>'
 	newPort.s_pos.classList.add("complex")
 	newPort.s_pos.value = def_s
+	newPort.s_pos.id = "portS_" + String(list_of_portraits.length)
+	newPort.s_pos.addEventListener('change', function(ev)
+	{
+		var which_char = Number(this.id.substring(6))
+		if (["Whatever_Scaling", "Whatever_Scaler", "Fit_Basic", "Fit_Square", "ohgoodness", "ohgoodness2"].includes(this.value))
+		{
+			list_of_portraits[which_char].size_controls.style = "display:inline"
+			if (["Whatever_Scaling", "Whatever_Scaler"].includes(this.value))
+			{
+				list_of_portraits[which_char].size_w.innerHTML = "(In Multipler): "
+				list_of_portraits[which_char].size_h.innerHTML = "(In Multipler): "
+			}
+			else
+			{
+				list_of_portraits[which_char].size_w.innerHTML = "(In Pixels): "
+				list_of_portraits[which_char].size_h.innerHTML = "(In Pixels): "
+			}
+		}
+		else
+		{
+			list_of_portraits[which_char].size_controls.style = "display:none"
+		}
+	});
 	newPort.border.appendChild(newPort.s_pos)
+
+	newPort.size_controls = document.createElement("span");
+	newPort.size_controls.appendChild(document.createElement("br"))
+	s_txt = document.createElement("span");
+	s_txt.innerHTML = "Portrait Width "
+	newPort.size_controls.appendChild(s_txt)
+	newPort.size_w = document.createElement("span");
+	newPort.size_w.innerHTML = "(In Pixels): "
+	newPort.size_controls.appendChild(newPort.size_w)
+	newPort.w_pos = document.createElement("input");
+	newPort.w_pos.type = "number"
+	newPort.w_pos.value = def_w
+	newPort.w_pos.min = "0"
+	newPort.w_pos.style = "width: 40px;"
+	newPort.size_controls.appendChild(newPort.w_pos);
+
+	newPort.size_controls.appendChild(document.createElement("br"))
+
+	s_txt = document.createElement("span");
+	s_txt.innerHTML = " Portrait Height "
+	newPort.size_controls.appendChild(s_txt)
+	newPort.size_h = document.createElement("span");
+	newPort.size_h.innerHTML = "(In Pixels): "
+	newPort.size_controls.appendChild(newPort.size_h)
+	newPort.h_pos = document.createElement("input");
+	newPort.h_pos.type = "number"
+	newPort.h_pos.value = def_h
+	newPort.h_pos.min = "0"
+	newPort.h_pos.style = "width: 40px;"
+	newPort.size_controls.appendChild(newPort.h_pos);
+
+	newPort.size_controls.style.display = "none"
+	newPort.size_controls.classList.add("complex")
+	newPort.border.appendChild(newPort.size_controls)
 
 	newPort.border.appendChild(document.createElement("br"))
 
@@ -737,6 +806,9 @@ function new_port(def_name="", def_x=0, def_y=0, def_s="2x_Scaling", def_o=true)
 	newPort.linebreak_two = document.createElement("br")
 	char_container.appendChild(newPort.linebreak)
 	list_of_portraits.push(newPort)
+
+	var event = new Event('change');
+	newPort.s_pos.dispatchEvent(event);
 }
 
 function new_over(def_name="", def_image=-1, def_x=0, def_y=0, def_w=-1, def_h=-1, def_v=true)
@@ -959,8 +1031,13 @@ function loader_up(awesome_template)
 		list_of_text[i].linebreak.remove()
 	}
 	list_of_text.length = 0
+	var save_this_too = []
+	//i really should try saving the portraits
+	//but that seems like
+	//really annoying lol
 	for(let i = 0; i < list_of_portraits.length; i++)
 	{
+		//save_this_too.push(copy(list_of_portraits(
 		list_of_portraits[i].border.remove()
 		list_of_portraits[i].linebreak.remove()
 	}
@@ -1077,6 +1154,13 @@ function toggle_complex(complex)
 		box_borders = document.getElementsByClassName('simple');
   		for(i = 0; i < box_borders.length; i++) {
   			box_borders[i].style.display = 'none'
+		}
+		for(var i = 0; i < list_of_portraits.length; i++)
+		{
+			if (!["Whatever_Scaling", "Whatever_Scaler", "Fit_Basic", "Fit_Square", "ohgoodness", "ohgoodness2"].includes(list_of_portraits[i].s_pos.value))
+			{
+				list_of_portraits[i].size_controls.style = "display: none"
+			}
 		}
 	}
 }
@@ -1453,49 +1537,46 @@ function draw_canvas()
 			var portrait_i_use = list_of_portraits[i].image
 			portrait_blacked.width = portrait_i_use.width
 			portrait_blacked.height = portrait_i_use.height
-			var port_pos = [6+offset[0]+Number(list_of_portraits[i].x_pos.value), 6+offset[1]+Number(list_of_portraits[i].y_pos.value),134,140]
-			if(list_of_portraits[i].s_pos.value == "Center_It")
+			var port_pos = [offset[0] + Number(list_of_portraits[i].x_pos.value),offset[1] + Number(list_of_portraits[i].y_pos.value),portrait_i_use.width,portrait_i_use.height]
+			if(list_of_portraits[i].s_pos.value == "2x_Scaling" || list_of_portraits[i].s_pos.value == "2x_Scaler")
 			{
-				port_pos[2] = portrait_i_use.width
-				port_pos[3] = portrait_i_use.height
-				port_pos[0] += Math.floor((134 - port_pos[2])/2)
-				port_pos[1] += Math.floor((140 - port_pos[3])/2)
+				port_pos[2] *= 2
+				port_pos[3] *= 2
 			}
-			else if(list_of_portraits[i].s_pos.value == "2x_Scaling")
+			else if(list_of_portraits[i].s_pos.value == "0.5x_Scaling" || list_of_portraits[i].s_pos.value == "0.5x_Scaler")
 			{
-				port_pos[2] = portrait_i_use.width*2
-				port_pos[3] = portrait_i_use.height*2
-				port_pos[0] += Math.floor((134 - port_pos[2])/2)
-				port_pos[1] += Math.floor((140 - port_pos[3])/2)
+				port_pos[2] = Math.floor(port_pos[2]/2)
+				port_pos[3] = Math.floor(port_pos[3]/2)
 			}
-			else if(list_of_portraits[i].s_pos.value == "0.5x_Scaling")
+			else if(list_of_portraits[i].s_pos.value == "Whatever_Scaling" || list_of_portraits[i].s_pos.value == "Whatever_Scaler")
 			{
-				port_pos[2] = portrait_i_use.width*0.5
-				port_pos[3] = portrait_i_use.height*0.5
-				port_pos[0] += Math.floor((134 - port_pos[2])/2)
-				port_pos[1] += Math.floor((140 - port_pos[3])/2)
+				port_pos[2] = Math.floor(port_pos[2] * Number(list_of_portraits[i].w_pos.value))
+				port_pos[3] = Math.floor(port_pos[3] * Number(list_of_portraits[i].h_pos.value))
+			}
+			else if(list_of_portraits[i].s_pos.value == "ohgoodness" || list_of_portraits[i].s_pos.value == "ohgoodness2")
+			{
+				if(Number(list_of_portraits[i].w_pos.value) > 0) {port_pos[2] = Number(list_of_portraits[i].w_pos.value)}
+				if(Number(list_of_portraits[i].h_pos.value) > 0) {port_pos[3] = Number(list_of_portraits[i].h_pos.value)}
 			}
 			else if(list_of_portraits[i].s_pos.value == "Fit_Square")
 			{
-				var width_power = 134/portrait_i_use.width
-				var height_power = 140/portrait_i_use.height
+				var width_power = Number(list_of_portraits[i].w_pos.value)/portrait_i_use.width
+				var height_power = Number(list_of_portraits[i].h_pos.value)/portrait_i_use.height
 				if(width_power < height_power)
 				{
-					port_pos[2] = portrait_i_use.width*width_power
-					port_pos[3] = portrait_i_use.height*width_power
+					port_pos[2] = Math.floor(port_pos[2] * width_power)
+					port_pos[3] = Math.floor(port_pos[3] * width_power)
 				}
 				else
 				{
-					port_pos[2] = portrait_i_use.width*height_power
-					port_pos[3] = portrait_i_use.height*height_power
+					port_pos[2] = Math.floor(port_pos[2] * height_power)
+					port_pos[3] = Math.floor(port_pos[3] * height_power)
 				}
-				port_pos[0] += Math.floor((134 - port_pos[2])/2)
-				port_pos[1] += Math.floor((140 - port_pos[3])/2)
 			}
-			else if(list_of_portraits[i].s_pos.value == "Unchanged_Anything")
+			if(["Center_It", "2x_Scaling", "0.5x_Scaling", "Whatever_Scaling", "Fit_Square", "Fit_Basic", "ohgoodness"].includes(list_of_portraits[i].s_pos.value))
 			{
-				port_pos[2] = portrait_i_use.width
-				port_pos[3] = portrait_i_use.height
+				port_pos[0] -= Math.floor(port_pos[2]/2)
+				port_pos[1] -= Math.floor(port_pos[3]/2)
 			}
 			if(list_of_portraits[i].o_pos.checked)
 			{
@@ -1935,7 +2016,14 @@ textbox_over.addEventListener("change", (event) => {
 	}
 })*/
 
-let custom_spaced_fonts = {"arial": "QSwwLDAsMTgKQiwtMSwwLDE2CkMsLTEsMCwxNwpELC0xLDAsMTcKRSwtMSwwLDE2CkYsLTIsMCwxNApHLC0xLDAsMTgKSCwtMiwwLDE2CkksLTIsMCw0CkosMCwwLDEyCkssLTEsMCwxNQpMLC0xLDAsMTQKTSwtMSwwLDE4Ck4sLTEsMCwxNgpPLC0xLDAsMTcKUCwtMSwwLDE2ClEsLTEsMCwxOQpSLC0xLDAsMTcKUywtMSwwLDE2ClQsMCwwLDE3ClUsLTEsMCwxNwpWLDAsMCwxNwpXLDAsMCwyNQpYLDAsMCwxOApZLDAsMCwxOApaLDAsMCwxNgphLDAsMCwxNApiLC0xLDAsMTQKYywtMSwwLDEzCmQsMCwwLDE0CmUsMCwwLDE1CmYsMCwwLDEwCmcsMCwwLDE0CmgsLTEsMCwxMwppLC0xLDAsNQpqLDAsMCw3CmssLTEsMCwxMwpsLC0xLDAsNQptLC0xLDAsMjAKbiwtMSwwLDEzCm8sMCwwLDE1CnAsLTEsMCwxNApxLDAsMCwxNApyLC0xLDAsOApzLDAsMCwxMwp0LDAsMCw5CnUsLTEsMCwxMwp2LDAsMCwxNAp3LDAsMCwyMAp4LDAsMCwxNAp5LDAsMCwxNAp6LDAsMCwxNAo/LC0xLDAsMTQKISwtMiwwLDUKKiwwLDAsMTEKKCwtMSwwLDkKKSwtMSwwLDkKMCwtMSwwLDE0CjEsLTIsMCw5CjIsMCwwLDE0CjMsLTEsMCwxNAo0LDAsMCwxNQo1LC0xLDAsMTQKNiwwLDAsMTUKNywtMSwwLDE0CjgsLTEsMCwxNAo5LC0xLDAsMTQKICwwLDAsMTQKLiwtMiwwLDcKW2NvbW1hXSwtMiwwLDcKJywtMSwwLDUKIiwtMSwwLDcKPCwtMSwwLDE0Cj4sLTEsMCwxNAorLC0xLDAsMTQKLSwwLDAsOQovLDAsMCw3CiUsLTEsMCwyMQokLDAsMCwxNAokLDAsMCwxNQo6LC0yLDAsOAo7LC0yLDAsOApeLDAsLTEsMTEKJiwtMSwwLDE2CkAsLTEsMCwyNQpfLDAsLTMsMTYKWywtMSwwLDgKXSwtMSwwLDgKfiwtMSwwLDE0Cj0sLTEsMCwxNAoyMA=="}
+let custom_spaced_fonts = {"arial": "\
+QSwwLDAsMTgKQiwtMSwwLDE2CkMsLTEsMCwxNwpELC0xLDAsMTcKRSwtMSwwLDE2CkYsLTIsMCwxNApHLC0xLDAsMTgKSCwtMiwwLDE2CkksLTIsMCw0CkosMCwwL\
+DEyCkssLTEsMCwxNQpMLC0xLDAsMTQKTSwtMSwwLDE4Ck4sLTEsMCwxNgpPLC0xLDAsMTcKUCwtMSwwLDE2ClEsLTEsMCwxOQpSLC0xLDAsMTcKUywtMSwwLDE2ClQsMCwwLDE3ClUsLTEsMCwxNwpWLDAsMCwxNwpXLDAs\
+MCwyNQpYLDAsMCwxOApZLDAsMCwxOApaLDAsMCwxNgphLDAsMCwxNApiLC0xLDAsMTQKYywtMSwwLDEzCmQsMCwwLDE0CmUsMCwwLDE1CmYsMCwwLDEwCmcsMCwwLDE0CmgsLTEsMCwxMwppLC0xLDAsNQpqLDAsMCw3CmssLT\
+EsMCwxMwpsLC0xLDAsNQptLC0xLDAsMjAKbiwtMSwwLDEzCm8sMCwwLDE1CnAsLTEsMCwxNApxLDAsMCwxNApyLC0xLDAsOApzLDAsMCwxMwp0LDAsMCw5CnUsLTEsMCwxMwp2LDAsMCwxNAp3LDAsMCwyMAp4LDAsMCwxNAp5LDAsM\
+CwxNAp6LDAsMCwxNAo/LC0xLDAsMTQKISwtMiwwLDUKKiwwLDAsMTEKKCwtMSwwLDkKKSwtMSwwLDkKMCwtMSwwLDE0CjEsLTIsMCw5CjIsMCwwLDE0CjMsLTEsMCwxNAo0LDAsMCwxNQo1LC0xLDAsMTQKNiwwLDAsMTUKNywtMSwwLDE0\
+CjgsLTEsMCwxNAo5LC0xLDAsMTQKICwwLDAsMTQKLiwtMiwwLDcKW2NvbW1hXSwtMiwwLDcKJywtMSwwLDUKIiwtMSwwLDcKPCwtMSwwLDE0Cj4sLTEsMCwxNAorLC0xLDAsMTQKLSwwLDAsOQovLDAsMCw3CiUsLTEsMCwyMQokLDAsMCwx\
+NAokLDAsMCwxNQo6LC0yLDAsOAo7LC0yLDAsOApeLDAsLTEsMTEKJiwtMSwwLDE2CkAsLTEsMCwyNQpfLDAsLTMsMTYKWywtMSwwLDgKXSwtMSwwLDgKfiwtMSwwLDE0Cj0sLTEsMCwxNAoyMA=="}
 
 textbox_font.addEventListener("change", (event) => {
 	mono_spaced_real.checked = true
