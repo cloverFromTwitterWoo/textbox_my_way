@@ -1289,7 +1289,7 @@ function draw_canvas()
 			}
 			if(list_of_portraits[i].c_pos.value != "#ffffff")
 			{
-				new_color = hexToRgb(textbox_exp_c.value)
+				new_color = hexToRgb(list_of_portraits[i].c_pos.value)
 				portrait_blacka.imageSmoothingEnabled = false
 				canvas.imageSmoothingEnabled = false
 				portrait_blacka.clearRect(0,0,portrait_i_use.width,portrait_i_use.height)
