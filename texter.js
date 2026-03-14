@@ -1037,7 +1037,7 @@ function loader_up(awesome_template)
 	//really annoying lol
 	for(let i = 0; i < list_of_portraits.length; i++)
 	{
-		if(list_of_portraits[i].image == false)
+		if(list_of_portraits[i].image == false || list_of_portraits == list_of_portraits[list_of_portraits.length-1].chara_pos.value == "none")
 			{save_this_too.push(-1)}
 		else
 			{save_this_too.push(list_of_portraits[i].image.src)}
