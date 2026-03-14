@@ -596,6 +596,7 @@ function new_port(def_name="", def_x=0, def_y=0, def_s="2x_Scaling", def_o=true)
         		image.src = this.value;
 			list_of_portraits[which_char].image = image
 		}
+		list_of_portraits[which_char].image.classList.add("image_border")
 		list_of_portraits[which_char].border.appendChild(list_of_portraits[which_char].linebreak_two)
 		list_of_portraits[which_char].border.appendChild(list_of_portraits[which_char].image)
 	})
@@ -622,6 +623,7 @@ function new_port(def_name="", def_x=0, def_y=0, def_s="2x_Scaling", def_o=true)
        					var image = new Image();
         				image.src = e.target.result;
 					list_of_portraits[which_char].image = image
+					list_of_portraits[which_char].image.classList.add("image_border")
 					list_of_portraits[which_char].border.appendChild(list_of_portraits[which_char].linebreak_two)
 					list_of_portraits[which_char].border.appendChild(list_of_portraits[which_char].image)
 				}

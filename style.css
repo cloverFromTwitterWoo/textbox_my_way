@@ -23,3 +23,8 @@ canvas {
   width: 400px;
   vertical-align: top;
 }
+
+.image_border {
+  border: 2px dashed lightGray;
+  padding: 2px;
+}
