@@ -990,6 +990,7 @@ function loader_up(awesome_template)
 		new_port(awesome_template[i][0], awesome_template[i][1], awesome_template[i][2], awesome_template[i][3], awesome_template[i][4])
 		i++
 	}
+	i++
 	while(i < awesome_template.length && typeof(awesome_template[i]) != "string")
 	{
 		new_over(awesome_template[i][0], awesome_template[i][1], awesome_template[i][2], awesome_template[i][3], awesome_template[i][4], awesome_template[i][5], awesome_template[i][6])
@@ -1822,12 +1823,17 @@ function save_box()
 		//console.log(list_of_over[i])
 		save_array[save_array.length-1].push(list_of_over[i].name_field.value)
 
-		var save_cav = document.createElement('canvas');
-        	save_cav.width = list_of_over[i].image.width;
-        	save_cav.height = list_of_over[i].image.height;
-        	var btx = save_cav.getContext('2d');
-       		btx.drawImage(list_of_over[i].image, 0, 0);
-		save_array[save_array.length-1].push(save_cav.toDataURL())
+		if (list_of_over[i].chara_pos.value == "none")
+		{save_array[save_array.length-1].push(-1)}
+		else
+		{
+			var save_cav = document.createElement('canvas');
+        		save_cav.width = list_of_over[i].image.width;
+        		save_cav.height = list_of_over[i].image.height;
+        		var btx = save_cav.getContext('2d');
+       			btx.drawImage(list_of_over[i].image, 0, 0);
+			save_array[save_array.length-1].push(save_cav.toDataURL())
+		}
 
 		save_array[save_array.length-1].push(list_of_over[i].x_pos.value)
 		save_array[save_array.length-1].push(list_of_over[i].y_pos.value)
