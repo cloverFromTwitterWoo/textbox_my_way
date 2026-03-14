@@ -1037,11 +1037,17 @@ function loader_up(awesome_template)
 	//really annoying lol
 	for(let i = 0; i < list_of_portraits.length; i++)
 	{
-		//save_this_too.push(copy(list_of_portraits(
+		save_this_too.push(copy(list_of_portraits[i].image))
 		list_of_portraits[i].border.remove()
 		list_of_portraits[i].linebreak.remove()
 	}
 	list_of_portraits.length = 0
+	for(let i = 0; i < list_of_over.length; i++)
+	{
+		list_of_over[i].border.remove()
+		list_of_over[i].linebreak.remove()
+	}
+	list_of_over.length = 0
 	origin_w.value = awesome_template[0]
 	origin_h.value = awesome_template[1]
 	let i = 2
@@ -1061,6 +1067,7 @@ function loader_up(awesome_template)
 	while(i < awesome_template.length && typeof(awesome_template[i]) != "string")
 	{
 		new_port(awesome_template[i][0], awesome_template[i][1], awesome_template[i][2], awesome_template[i][3], awesome_template[i][4])
+		list_of_portraits[list_of_portraits.length-1].image = save_this_too[list_of_portraits.length-1]
 		i++
 	}
 	i++
