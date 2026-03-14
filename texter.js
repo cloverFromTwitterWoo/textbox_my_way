@@ -763,26 +763,6 @@ function new_over(def_name="", def_image=-1, def_x=0, def_y=0, def_w=-1, def_h=-
 
 	newOver.image = false
 
-	if(def_image != -1)
-	{
-		if(def_image.substring(0,7) == "assets/")
-		{
-			newOver.image = loadImage(def_image)
-			newOver.image.style.display = 'none'
-		}
-		else
-		{
-			//def_image = def_image.substring(22)
-			//console.log(def_image)
-			//alert(def_image)
-			
-			var image = new Image();
-        		image.src = def_image;
-			newOver.image = image
-			newOver.image.style.display='none'
-		}
-	}
-
 	newOver.chara_pos = document.createElement("select");
 	newOver.chara_pos.innerHTML = over_options
 	newOver.chara_pos.classList.add("over_" + String(list_of_over.length))
@@ -793,13 +773,6 @@ function new_over(def_name="", def_image=-1, def_x=0, def_y=0, def_w=-1, def_h=-
 		if(this.value == "custom")
 		{
 			list_of_over[which_char].image_sel.style = "display: inline"
-			/*var prehold = copy(list_of_portraits[which_char].image)
-			if(prehold != false)
-			{
-				list_of_portraits[which_char].border.removeChild(list_of_portraits[which_char].image)
-				list_of_portraits[which_char].border.removeChild(list_of_portraits[which_char].linebreak_two)
-			}
-			list_of_portraits[which_char].image = false*/
 		}
 		else
 		{
@@ -819,6 +792,29 @@ function new_over(def_name="", def_image=-1, def_x=0, def_y=0, def_w=-1, def_h=-
 		}
 	})
 	newOver.border.appendChild(newOver.chara_pos)
+
+	if(def_image != -1)
+	{
+		if(def_image.substring(0,7) == "assets/")
+		{
+			newOver.image = loadImage(def_image)
+			newOver.image.style.display = 'none'
+		}
+		else
+		{
+			//def_image = def_image.substring(22)
+			//console.log(def_image)
+			//alert(def_image)
+			
+			var image = new Image();
+        		image.src = def_image;
+			newOver.image = image
+			newOver.image.style.display='none'
+		}
+		newOver.chara_pos.value = "custom"
+		var event = new Event('change');
+		newOver.chara_pos.dispatchEvent(event);
+	}
 	
 	newOver.image_sel = document.createElement("input");
 	newOver.image_sel.type = "file"
