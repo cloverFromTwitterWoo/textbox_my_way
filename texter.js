@@ -1043,7 +1043,7 @@ function draw_text(pass_in)//(x,y,str)
 			portrait_blacka.imageSmoothingEnabled = false
 			canvas.imageSmoothingEnabled = false
 			portrait_blacka.drawImage(cur_font,letter_info[0],letter_info[1],letter_info[2],letter_info[3],0,0,letter_info[2],letter_info[3])
-			var what_to = list_of_boxes[i].c_type.value
+			var what_to = pass_in.c_type.value
 			var cool_pixels = portrait_blacka.getImageData(0,0,letter_info[2],letter_info[3])
 			for(var j = 3; j < cool_pixels.data.length; j += 4)
 			{
