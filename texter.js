@@ -739,7 +739,7 @@ function new_port(def_name="", def_x=0, def_y=0, def_s="2x_Scaling", def_o=true)
 	list_of_portraits.push(newPort)
 }
 
-function new_over(def_name="", def_img=-1, def_x=0, def_y=0, def_w=-1, def_h=-1, def_v=true)
+function new_over(def_name="", def_image=-1, def_x=0, def_y=0, def_w=-1, def_h=-1, def_v=true)
 {
 	var newOver = {};
 	newOver.border = document.createElement("div");
