@@ -1076,7 +1076,7 @@ function loader_up(awesome_template)
 		//console.log(list_of_portraits[list_of_portraits.length-1])
 		if(list_of_portraits.length-1 < save_this_too.length)
 		{
-			if(list_of_portraits[list_of_portraits.length-1] != -1)
+			if(save_this_too[list_of_portraits.length-1] != -1 && save_this_too[list_of_portraits.length-1] != undefined)
 			{
 				var image = new Image();
         			image.src = save_this_too[list_of_portraits.length-1]
