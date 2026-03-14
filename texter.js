@@ -10,6 +10,7 @@ ctx.fillRect(0,0,canvas.width,canvas.height)
 const box_container = document.getElementById("box_box");
 const text_container = document.getElementById("text_box");
 const char_container = document.getElementById("char_box");
+const over_container = document.getElementById("over_box");
 
 let awesome_canvas = document.getElementById("canvasTrue");
 let awesome_canvas_Stacked = document.getElementById("canvasStack");
@@ -118,6 +119,7 @@ let cur_dw = new Image()
 let list_of_boxes = [];
 let list_of_text = [];
 let list_of_portraits = [];
+let list_of_over = [];
 
 let prebaked_boxes = {
 	undertale: [578, 152, ["", "assets/textboxes/undertale.png", 0, 0, "#ffffff", "true"], "text", ["", 28, 26, 116, 0, true, false, false], "port", ["", 0, 0, "2x_Scaling", true], "over"],
@@ -135,6 +137,8 @@ let exp_options =
 	"flowey": '<option value="assets/characters/flowey/spr_floweynice_0.png">Nice</option><option value="assets/characters/flowey/spr_floweywink_0.png">Wink</option><option value="assets/characters/flowey/spr_floweysassy_0.png">Sassy</option><option value="assets/characters/flowey/spr_floweyplain_0.png">D:</option><option value="assets/characters/flowey/spr_floweyniceside_0.png">Side (Smile)</option><option value="assets/characters/flowey/spr_floweynicesideum_0.png">Side (Uh)</option><option value="assets/characters/flowey/spr_floweygrin_0.png">Grin</option><option value="assets/characters/flowey/spr_floweyevil_0.png">Evil</option><option value="assets/characters/flowey/spr_floweylaugh_0.png">Laugh</option><option value="assets/characters/flowey/spr_floweyside_0.png">Side</option><option value="assets/characters/flowey/spr_floweysideshock_0.png">Side (Ah)</option><option value="assets/characters/flowey/spr_floweytoriel_0.png">Toriel</option><option value="assets/characters/flowey/spr_floweytoriel2_0.png">Toriel (Distorted)</option><option value="assets/characters/flowey/spr_floweyhurt_0.png">Hurt</option>',
 	"toriel": '<option value="assets/characters/toriel/default.png">Default</option><option value="assets/characters/toriel/looking-away.png">Looking Away</option><option value="sad">Sad</option>'
 }
+
+let over_options = '<option value="none">None</option><option value="custom">Custom</option><option value="assets/overlays/fog.png">Fog</option><option value="assets/overlays/evil_glow.png">Red Glow</option><option value="assets/overlays/snowdin.png">Snow</option><option value="ssets/overlays/scanlines.png">Scanlines</option>'
 
 function refresh_box_list()
 {
@@ -163,6 +167,16 @@ function refresh_char_list()
 		list_of_portraits[i].chara_pos.className = "port_" + String(i)
 		list_of_portraits[i].exp_select.className = "port_" + String(i)
 		list_of_portraits[i].image_sel.className = "port_" + String(i)
+	}
+}
+
+function refresh_over_list()
+{
+	for(var i = 0; i < list_of_over.length; i++)
+	{
+		list_of_over[i].removeButt.id = "port_" + String(i)
+		list_of_over[i].chara_pos.className = "port_" + String(i)
+		list_of_over[i].image_sel.className = "port_" + String(i)
 	}
 }
 
@@ -617,7 +631,6 @@ function new_port(def_name="", def_x=0, def_y=0, def_s="2x_Scaling", def_o=true)
       			reader.onloadend = (e) => 
 			{
 				var which_char = Number(this.className.substring(5))
-				alert(which_char)
 				if(list_of_portraits[which_char].image == false)
 				{
        					var image = new Image();
@@ -724,6 +737,214 @@ function new_port(def_name="", def_x=0, def_y=0, def_s="2x_Scaling", def_o=true)
 	newPort.linebreak_two = document.createElement("br")
 	char_container.appendChild(newPort.linebreak)
 	list_of_portraits.push(newPort)
+}
+
+function new_over(def_name="", def_img=-1, def_x=0, def_y=0, def_w=-1, def_h=-1, def_v=true)
+{
+	var newOver = {};
+	newOver.border = document.createElement("div");
+	newOver.border.classList.add("box")
+	newOver.border.style.width = "370px"
+
+	var name_txt = document.createElement("span");
+	name_txt.innerHTML = "Name: "
+	name_txt.classList.add("complex")
+	newOver.border.appendChild(name_txt)
+	newOver.name_field = document.createElement("input");
+	newOver.name_field.value = def_name;
+	newOver.name_field.classList.add("complex")
+	newOver.border.appendChild(newOver.name_field)
+
+	newOver.border.appendChild(complex_br())
+
+	var label_txt = document.createElement("span");
+	label_txt.innerHTML = "Overlay: "
+	newOver.border.appendChild(label_txt)
+
+	newOver.image = false
+
+	if(def_image != -1)
+	{
+		if(def_image.substring(0,7) == "assets/")
+		{
+			newOver.image = loadImage(def_image)
+			newOver.image.style.display = 'none'
+		}
+		else
+		{
+			//def_image = def_image.substring(22)
+			//console.log(def_image)
+			//alert(def_image)
+			
+			var image = new Image();
+        		image.src = def_image;
+			newOver.image = image
+			newOver.image.style.display='none'
+		}
+	}
+
+	newOver.chara_pos = document.createElement("select");
+	newOver.chara_pos.innerHTML = over_options
+	newOver.chara_pos.classList.add("over_" + String(list_of_over.length))
+
+	newOver.chara_pos.addEventListener("change", function(event) 
+	{
+		var which_char = Number(this.className.substring(5))
+		if(this.value == "custom")
+		{
+			list_of_over[which_char].image_sel.style = "display: inline"
+			/*var prehold = copy(list_of_portraits[which_char].image)
+			if(prehold != false)
+			{
+				list_of_portraits[which_char].border.removeChild(list_of_portraits[which_char].image)
+				list_of_portraits[which_char].border.removeChild(list_of_portraits[which_char].linebreak_two)
+			}
+			list_of_portraits[which_char].image = false*/
+		}
+		else
+		{
+			list_of_over[which_char].image_sel.style = "display: none"
+			if(this.value != "none")
+			{
+				if(list_of_over[which_char].image == false)
+				{
+					list_of_over[which_char].image = loadImage(this.value)
+					list_of_over[which_char].image.style = "display: none"
+				}
+				else
+				{
+					list_of_over[which_char].image = loadImage(this.value);
+				}
+			}
+		}
+	})
+	newOver.border.appendChild(newOver.chara_pos)
+	
+	newOver.image_sel = document.createElement("input");
+	newOver.image_sel.type = "file"
+	newOver.image_sel.accept = "image/png"
+	newOver.image_sel.classList.add("over_" + String(list_of_over.length))
+	newOver.image_sel.style = "display: none"
+	newOver.image_sel.addEventListener('change', function(ev)
+	{
+		if(ev.target.files) {
+			let file = ev.target.files[0];
+			var reader = new FileReader();
+			
+     		 	reader.readAsDataURL(file);
+      			reader.onloadend = (e) => 
+			{
+				var which_char = Number(this.className.substring(5))
+				//alert(which_char)
+				if(list_of_over[which_char].image == false)
+				{
+       					var image = new Image();
+        				image.src = e.target.result;
+					list_of_over[which_char].image = image
+					list_of_over[which_char].image.style = "display: none"
+				}
+				else
+				{
+					list_of_over[which_char].image.src=e.target.result;
+				}
+      			}
+   		}
+	});
+
+	
+	newOver.border.appendChild(newOver.image_sel)
+
+	newOver.border.appendChild(complex_br())
+	newOver.border.appendChild(complex_br())
+
+	var set_txt = document.createElement("span");
+	set_txt.innerHTML = "Overlay Settings: "
+	set_txt.classList.add("complex")
+	newOver.border.appendChild(set_txt)
+
+	newOver.border.appendChild(complex_br())
+
+	var x_txt = document.createElement("span");
+	x_txt.innerHTML = "Overlay X: "
+	x_txt.classList.add("complex")
+	newOver.border.appendChild(x_txt)
+	newOver.x_pos = document.createElement("input");
+	newOver.x_pos.type = "number"
+	newOver.x_pos.value = def_x
+	newOver.x_pos.classList.add("complex")
+	newOver.x_pos.style = "width: 40px;"
+	newOver.border.appendChild(newOver.x_pos);
+
+	var y_txt = document.createElement("span");
+	y_txt.innerHTML = " Overlay Y: "
+	y_txt.classList.add("complex")
+	newOver.border.appendChild(y_txt)
+	newOver.y_pos = document.createElement("input");
+	newOver.y_pos.type = "number"
+	newOver.y_pos.value = def_y
+	newOver.y_pos.classList.add("complex")
+	newOver.y_pos.style = "width: 40px;"
+	newOver.border.appendChild(newOver.y_pos);
+
+	newOver.border.appendChild(complex_br())
+
+	var w_txt = document.createElement("span");
+	w_txt.innerHTML = "Overlay Width: "
+	w_txt.classList.add("complex")
+	newOver.border.appendChild(w_txt)
+	newOver.w_pos = document.createElement("input");
+	newOver.w_pos.type = "number"
+	newOver.w_pos.value = def_w
+	newOver.w_pos.classList.add("complex")
+	newOver.w_pos.style = "width: 40px;"
+	newOver.w_pos.min = "-1"
+	newOver.border.appendChild(newOver.w_pos);
+
+	var h_txt = document.createElement("span");
+	h_txt.innerHTML = " Overlay Height: "
+	h_txt.classList.add("complex")
+	newOver.border.appendChild(h_txt)
+	newOver.h_pos = document.createElement("input");
+	newOver.h_pos.type = "number"
+	newOver.h_pos.value = def_h
+	newOver.h_pos.classList.add("complex")
+	newOver.h_pos.style = "width: 40px;"
+	newOver.h_pos.min = "-1"
+	newOver.border.appendChild(newOver.h_pos);
+
+	newOver.border.appendChild(complex_br())
+
+	var vis_txt = document.createElement("span");
+	vis_txt.innerHTML = "Visible: "
+	vis_txt.classList.add("complex")
+	newOver.border.appendChild(vis_txt)
+	newOver.v_pos = document.createElement("input");
+	newOver.v_pos.type = "checkbox"
+	newOver.v_pos.checked = def_v
+	newOver.v_pos.classList.add("complex")
+	newOver.border.appendChild(newOver.v_pos)
+
+	newOver.border.appendChild(complex_br())
+	newOver.border.appendChild(complex_br())
+
+	newOver.removeButt = document.createElement("button");
+	newOver.removeButt.innerHTML = "Remove"
+	newOver.removeButt.id = "over_" + String(list_of_over.length)
+	newOver.removeButt.classList.add("complex")
+	newOver.removeButt.onclick = function() 
+	{
+		var which_char = Number(this.id.substring(5))
+		list_of_over[which_char].border.remove()
+		list_of_over[which_char].linebreak.remove()
+		list_of_over.splice(which_char, 1)
+		refresh_over_list()
+	}
+	newOver.border.appendChild(newOver.removeButt)
+
+	over_container.appendChild(newOver.border)
+	newOver.linebreak = complex_br()
+	over_container.appendChild(newOver.linebreak)
+	list_of_over.push(newOver)
 }
 
 function loader_up(awesome_template)
@@ -1362,6 +1583,25 @@ function draw_canvas()
 		//if(textbox_chr.value == "none")
 		//{offset[0] += 144-28}
 		//ctx.drawImage(overlay_i_use,0,0,box_size[2],box_size[3],offset[0],offset[1],box_size[2],box_size[3])
+		for(let i = 0; i < list_of_over.length; i++)
+		{
+			if (list_of_over[i].v_pos.checked && list_of_over[i].chara_pos.value != "none")
+			{
+				var my_x_pos = Number(list_of_over[i].x_pos.value)
+				var my_y_pos = Number(list_of_over[i].y_pos.value)
+				var my_w_pos = Number(list_of_over[i].w_pos.value)
+				var my_h_pos = Number(list_of_over[i].h_pos.value)
+				if(my_w_pos == -1)
+				{
+					my_w_pos = box_size[2]
+				}
+				if(my_h_pos == -1)
+				{
+					my_h_pos = box_size[3]
+				}
+				ctx.drawImage(list_of_over[i].image,0,0,my_w_pos-my_x_pos,my_h_pos-my_y_pos,offset[0]+my_x_pos,offset[1]+my_y_pos,my_w_pos-my_x_pos,my_h_pos-my_y_pos)
+			}
+		}
 		const dataURL = canvas.toDataURL('image/png');
 		awesome_canvas.src = dataURL;
 		//canvas.style.display = 'none'
@@ -1566,7 +1806,34 @@ function save_box()
 	}
 
 	save_array.push("over")
-	//wip!
+	
+	if(list_of_over.length > 0) 
+	{
+		save_array.push([])
+	}
+	
+	for(var i = 0; i < list_of_over.length; i++)
+	{
+		//console.log(list_of_over[i])
+		save_array[save_array.length-1].push(list_of_over[i].name_field.value)
+
+		var save_cav = document.createElement('canvas');
+        	save_cav.width = list_of_over[i].image.width;
+        	save_cav.height = list_of_over[i].image.height;
+        	var btx = save_cav.getContext('2d');
+       		btx.drawImage(list_of_over[i].image, 0, 0);
+		save_array[save_array.length-1].push(save_cav.toDataURL())
+
+		save_array[save_array.length-1].push(list_of_over[i].x_pos.value)
+		save_array[save_array.length-1].push(list_of_over[i].y_pos.value)
+		save_array[save_array.length-1].push(list_of_over[i].w_pos.value)
+		save_array[save_array.length-1].push(list_of_over[i].h_pos.value)
+		save_array[save_array.length-1].push(list_of_over[i].v_pos.checked)
+		if(i + 1 < list_of_over.length)
+		{
+			save_array.push([])
+		}
+	}
 
 	download("new_box", JSON.stringify(save_array))
 }
@@ -1622,7 +1889,7 @@ textbox_bg.addEventListener("change", (event) => {
 
 let ohAndThis = false
 
-textbox_over_alt.addEventListener('change', function(ev) {
+/*textbox_over_alt.addEventListener('change', function(ev) {
    if(ev.target.files) {
       let file = ev.target.files[0];
       var reader  = new FileReader();
@@ -1659,7 +1926,7 @@ textbox_over.addEventListener("change", (event) => {
 	{
 		textbox_over_alt.style.display = "none"
 	}
-})
+})*/
 
 let custom_spaced_fonts = {"arial": "QSwwLDAsMTgKQiwtMSwwLDE2CkMsLTEsMCwxNwpELC0xLDAsMTcKRSwtMSwwLDE2CkYsLTIsMCwxNApHLC0xLDAsMTgKSCwtMiwwLDE2CkksLTIsMCw0CkosMCwwLDEyCkssLTEsMCwxNQpMLC0xLDAsMTQKTSwtMSwwLDE4Ck4sLTEsMCwxNgpPLC0xLDAsMTcKUCwtMSwwLDE2ClEsLTEsMCwxOQpSLC0xLDAsMTcKUywtMSwwLDE2ClQsMCwwLDE3ClUsLTEsMCwxNwpWLDAsMCwxNwpXLDAsMCwyNQpYLDAsMCwxOApZLDAsMCwxOApaLDAsMCwxNgphLDAsMCwxNApiLC0xLDAsMTQKYywtMSwwLDEzCmQsMCwwLDE0CmUsMCwwLDE1CmYsMCwwLDEwCmcsMCwwLDE0CmgsLTEsMCwxMwppLC0xLDAsNQpqLDAsMCw3CmssLTEsMCwxMwpsLC0xLDAsNQptLC0xLDAsMjAKbiwtMSwwLDEzCm8sMCwwLDE1CnAsLTEsMCwxNApxLDAsMCwxNApyLC0xLDAsOApzLDAsMCwxMwp0LDAsMCw5CnUsLTEsMCwxMwp2LDAsMCwxNAp3LDAsMCwyMAp4LDAsMCwxNAp5LDAsMCwxNAp6LDAsMCwxNAo/LC0xLDAsMTQKISwtMiwwLDUKKiwwLDAsMTEKKCwtMSwwLDkKKSwtMSwwLDkKMCwtMSwwLDE0CjEsLTIsMCw5CjIsMCwwLDE0CjMsLTEsMCwxNAo0LDAsMCwxNQo1LC0xLDAsMTQKNiwwLDAsMTUKNywtMSwwLDE0CjgsLTEsMCwxNAo5LC0xLDAsMTQKICwwLDAsMTQKLiwtMiwwLDcKW2NvbW1hXSwtMiwwLDcKJywtMSwwLDUKIiwtMSwwLDcKPCwtMSwwLDE0Cj4sLTEsMCwxNAorLC0xLDAsMTQKLSwwLDAsOQovLDAsMCw3CiUsLTEsMCwyMQokLDAsMCwxNAokLDAsMCwxNQo6LC0yLDAsOAo7LC0yLDAsOApeLDAsLTEsMTEKJiwtMSwwLDE2CkAsLTEsMCwyNQpfLDAsLTMsMTYKWywtMSwwLDgKXSwtMSwwLDgKfiwtMSwwLDE0Cj0sLTEsMCwxNAoyMA=="}
 

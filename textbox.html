@@ -3,14 +3,18 @@
   <head>
     <link rel="stylesheet" type="text/css" href="style.css">
     <meta charset="utf-8" />
+    <title>Text Box Creator</title>
   </head>
   <body>
     <main>
-	<a href="base.html">Back</a><span> Complex: </span><input type="checkbox" id="complexmode" checked="true">
+	<a href="base.html">Back</a><span> </span>
+	<a href="text_help.html" onclick="window.open(this.href,'targetWindow', 'width=500, height=500'); return false;">Help</a>
+	<span> </span><span>Complex: </span><input type="checkbox" id="complexmode" checked="true">
 	<br>
 	<br>
 	<div class="box" id="box_box" style="display:inline-block">
 	<legend class="complex">Boxes</legend>
+	<span>Image Settings:</span> <br>
 	<span>Style:</span>
 	<select id="text_bg">
 	<option value="undertale">Undertale</option>
@@ -22,8 +26,7 @@
 	<option value="custom">Custom</option>
 	</select>
 	<input type="file" id="text_bg_alt" accept=".txt" style="display:none"/>
-	<br><br>
-	<span>Image Settings:</span> <br>
+	<br>
 	<span>Image Width: </span><input type="number" id="origin_w" value="578" style="width: 40px;" min="0"/>
 	<span>Image Height: </span><input type="number" id="origin_h" value="152" style="width: 40px;" min="0"/>
 	<br>
@@ -38,56 +41,27 @@
 	<!--span>Import Character:</span> <input type="file" id="text_exp_alt" accept=".txt"/>
 	<br-->
 	<button class="complex" onclick="new_port()">Add New Portrait</button>
-	<!--<select id="text_chr">
-	<option value="none">None</option>
-	<option value="custom">Custom</option>
-	<option value="flowey">Flowey</option>
-	<option value="toriel">Toriel</option>
-	</select>
-	<br>
-	<span id="exp_txt" style="display:none"><span>Expression:</span>
-	<select id="text_exp" style="display:none">
-	<option value="default">Default</option>
-	</select>
-	<input type="file" id="text_exp_alt" accept="image/png" style="display:none"/>
-	<input type="color" id="text_exp_color" style="display:none" value="#ffffff"/>
-	<br>
-	<span>Portrait Scaling:</span>
-	<select id="text_exp_sc">
-	<option value="2x_Scaling">2X Upscale And Center</option>
-	<option value="Fit_Basic">Squish/Stretch to Fit</option>
-	<option value="Center_It">Center</option>
-	<option value="0.5x_Scaling">0.5X Downscale And Center</option>
-	<option value="Fit_Square">Scale Evenly to Fit</option>
-	<option value="Unchanged_Anything">Unchanged</option>
-	</select>
-	<br>
-	<span>Portrait X_Off: </span><input type="number" id="port_x" value="0" style="width: 40px;"/>
-	<span> Portrait Y_Off: </span><input type="number" id="port_y" value="0" style="width: 40px;"/>
-	<br>
-	<span> Portrait Outline: </span><input type="checkbox" id="outtheline" checked="true">
-	</span>
-	!-->
 	</div>
 	<br>
-	<div class="box" id="over_box">
+	<div class="box" id="over_box" style="display:inline-block">
 	<legend class="complex">Overlays</legend>
-	<span>[CURRENTLY NONFUNCTIONAL]</span>
+	<button class="complex" onclick="new_over()">Add New Overlay</button>
+	<!--
 	<span>Overlay: </span>
 	<select id="text_over">
 	<option value="transparent">None</option>
 	<option value="custom">Custom</option>
 	<option value="fog">Fog</option>
-	<option value=”evil_glow">Red Glow</option>
+	<option value="evil_glow">Red Glow</option>
 	<option value="snowdin">Snow</option>
 	<option value="scanlines">Scanlines</option>
 	</select>
-	<input type="file" id="text_over_alt" accept="image/png" style="display:none"/>
+	<input type="file" id="text_over_alt" accept="image/png" style="display:none"/>-->
 	</div>
 	</div>
 	<br>
 	<br class="complex">
-	<div class="box" id="text_box" style="width:700px">
+	<div class="box" id="text_box" style="width:700px" style="display:inline-block">
 	<legend class="complex">Text</legend>
 	<span>Font:</span>
 	<select id="text_font">
