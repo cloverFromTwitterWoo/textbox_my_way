@@ -1175,7 +1175,7 @@ function draw_canvas()
 		{	
 			if(!list_of_boxes[i].v_pos.checked)
 				{continue}
-			if(list_of_boxes[i].c_pos.value == "#ffffff" || list_of_boxes[i].c_type.value == "whole"))
+			if(list_of_boxes[i].c_pos.value == "#ffffff" || list_of_boxes[i].c_type.value == "whole")
 				{ctx.drawImage(list_of_boxes[i].image,offset[0] + Number(list_of_boxes[i].x_pos.value),offset[1] + Number(list_of_boxes[i].y_pos.value))}
 			else
 			{
