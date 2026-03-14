@@ -120,20 +120,21 @@ let list_of_text = [];
 let list_of_portraits = [];
 
 let prebaked_boxes = {
-	undertale: [578, 152, ["", "assets/textboxes/undertale.png", 0, 0, "#ffffff", "true"], "text", ["", 28, 26, 116, 0, true, false, false], ],
-	outertale: [578, 152, ["", "assets/textboxes/outertale.png", 0, 0, "#ffffff", "true"], "text", ["", 28, 26, 116, 0, true, false, false]],
-	underswap: [578, 152, ["", "assets/textboxes/underswap.png", 0, 0, "#ffffff", "true"], "text", ["", 28, 26, 116, 0, true, false, false]],
-	deltarune: [594,168, ["", "assets/textboxes/deltarune.png", 0, 0, "#ffffff", "true"], "text", ["", 28+8, 26+10, 116, 0, true, false, false], "port", 8, 10, true],
-	jumbo: [578, 188, ["", "assets/textboxes/jumbo.png", 0, 0, "#ffffff", "true"], "text", ["", 28, 26, 116, 0, true, false, false]],
-	cavestory: [488, 128, ["", "assets/textboxes/cave_story.png", 0, 0, "#ffffff", "true"], "text", ["", 27, 23, 110, 0, false, false, false], "port", 3, -11, false],
+	undertale: [578, 152, ["", "assets/textboxes/undertale.png", 0, 0, "#ffffff", "true"], "text", ["", 28, 26, 116, 0, true, false, false], "port", ["", 0, 0, "2X Scaling", true], "over"],
+	outertale: [578, 152, ["", "assets/textboxes/outertale.png", 0, 0, "#ffffff", "true"], "text", ["", 28, 26, 116, 0, true, false, false], "port", ["", 0, 0, "2X Scaling", true], "over"],
+	underswap: [578, 152, ["", "assets/textboxes/underswap.png", 0, 0, "#ffffff", "true"], "text", ["", 28, 26, 116, 0, true, false, false], "port", ["", 0, 0, "2X Scaling", true], "over"],
+	deltarune: [594,168, ["", "assets/textboxes/deltarune.png", 0, 0, "#ffffff", "true"], "text", ["", 28+8, 26+10, 116, 0, true, false, false], "port", ["", 8, 10, "2X Scaling", true], "over"],
+	jumbo: [578, 188, ["", "assets/textboxes/jumbo.png", 0, 0, "#ffffff", "true"], "text", ["", 28, 26, 116, 0, true, false, false], "port", ["", 0, 0, "2X Scaling", true], "over"],
+	cavestory: [488, 128, ["", "assets/textboxes/cave_story.png", 0, 0, "#ffffff", "true"], "text", ["", 27, 23, 110, 0, false, false, false], "port", ["", 3, -11, "2X Scaling", false], "over"],
 }
+
+let char_options = '<option value="none">None</option><option value="custom">Custom</option><option value="flowey">Flowey</option><option value="toriel">Toriel</option>'
 
 let exp_options = 
 {
-	"flowey": '<option value="spr_floweynice_0">Nice</option><option value="spr_floweywink_0">Wink</option><option value="spr_floweysassy_0">Sassy</option><option value="spr_floweyplain_0">D:</option><option value="spr_floweyniceside_0">Side (Smile)</option><option value="spr_floweynicesideum_0">Side (Uh)</option><option value="spr_floweygrin_0">Grin</option><option value="spr_floweyevil_0">Evil</option><option value="spr_floweylaugh_0">Laugh</option><option value="spr_floweyside_0">Side</option><option value="spr_floweysideshock_0">Side (Ah)</option><option value="spr_floweytoriel_0">Toriel</option><option value="spr_floweytoriel2_0">Toriel (Distorted)</option><option value="spr_floweyhurt_0">Hurt</option>',
-	"toriel": '<option value="default">Default</option><option value="looking-away">Looking Away</option><option value="sad">Sad</option>'
+	"flowey": '<option value="assets/characters/flowey/spr_floweynice_0.png">Nice</option><option value="assets/characters/flowey/spr_floweywink_0.png">Wink</option><option value="assets/characters/flowey/spr_floweysassy_0.png">Sassy</option><option value="assets/characters/flowey/spr_floweyplain_0.png">D:</option><option value="assets/characters/flowey/spr_floweyniceside_0.png">Side (Smile)</option><option value="assets/characters/flowey/spr_floweynicesideum_0.png">Side (Uh)</option><option value="assets/characters/flowey/spr_floweygrin_0.png">Grin</option><option value="assets/characters/flowey/spr_floweyevil_0.png">Evil</option><option value="assets/characters/flowey/spr_floweylaugh_0.png">Laugh</option><option value="assets/characters/flowey/spr_floweyside_0.png">Side</option><option value="assets/characters/flowey/spr_floweysideshock_0.png">Side (Ah)</option><option value="assets/characters/flowey/spr_floweytoriel_0.png">Toriel</option><option value="assets/characters/flowey/spr_floweytoriel2_0.png">Toriel (Distorted)</option><option value="assets/characters/flowey/spr_floweyhurt_0.png">Hurt</option>',
+	"toriel": '<option value="assets/characters/toriel/default.png">Default</option><option value="assets/characters/toriel/looking-away.png">Looking Away</option><option value="sad">Sad</option>'
 }
-
 
 function refresh_box_list()
 {
@@ -151,6 +152,17 @@ function refresh_text_list()
 	for(var i = 0; i < list_of_text.length; i++)
 	{
 		list_of_text[i].removeButt.id = "text_" + String(i)
+	}
+}
+
+function refresh_char_list()
+{
+	for(var i = 0; i < list_of_portraits.length; i++)
+	{
+		list_of_portraits[i].removeButt.id = "port_" + String(i)
+		list_of_portraits[i].chara_pos.className = "port_" + String(i)
+		list_of_portraits[i].exp_select.className = "port_" + String(i)
+		list_of_portraits[i].image_sel.className = "port_" + String(i)
 	}
 }
 
@@ -488,155 +500,228 @@ function new_text(def_name="", def_x=0, def_y=0, def_x_off=0, def_y_off=0, def_o
 	list_of_text.push(newText)
 }
 
-function new_port(def_name="", def_x=0, def_y=0, def_x_off=0, def_y_off=0, def_o=true, def_d=false, def_a=false)
+function new_port(def_name="", def_x=0, def_y=0, def_s="2x_Scaling", def_o=true)
 {
-	var newText = {};
-	newText.border = document.createElement("div");
-	newText.border.classList.add("box")
-	newText.border.style.width = "370px"
+	var newPort = {};
+	newPort.border = document.createElement("div");
+	newPort.border.classList.add("box")
+	newPort.border.style.width = "370px"
 
 	var name_txt = document.createElement("span");
 	name_txt.innerHTML = "Name: "
 	name_txt.classList.add("complex")
-	newText.border.appendChild(name_txt)
-	newText.name_field = document.createElement("input");
-	newText.name_field.value = def_name;
-	newText.name_field.classList.add("complex")
-	newText.border.appendChild(newText.name_field)
+	newPort.border.appendChild(name_txt)
+	newPort.name_field = document.createElement("input");
+	newPort.name_field.value = def_name;
+	newPort.name_field.classList.add("complex")
+	newPort.border.appendChild(newPort.name_field)
 
-	newText.border.appendChild(complex_br())
+	newPort.border.appendChild(complex_br())
 
-	/*var font_txt = document.createElement("span");
-	font_txt.innerHTML = "Font: "
-	newText.border.appendChild(font_txt)
+	var label_txt = document.createElement("span");
+	label_txt.innerHTML = "Character: "
+	newPort.border.appendChild(label_txt)
+
+	newPort.image = false
+
+	newPort.chara_pos = document.createElement("select");
+	newPort.chara_pos.innerHTML = char_options
+	newPort.chara_pos.classList.add("port_" + String(list_of_portraits.length))
+
 	
-	var placeholder = document.createElement("span");
-	placeholder.innerHTML = "[WIP]"
-	newText.border.appendChild(placeholder)
-	
-	newText.border.appendChild(document.createElement("br"))*/
-	newText.border.appendChild(document.createElement("br"))
+	newPort.chara_pos.addEventListener("change", function(event) 
+	{
+		var which_char = Number(this.className.substring(5))
+		if(this.value == "none")
+		{
+			list_of_portraits[which_char].exp_txt.style = "display: none"
+			list_of_portraits[which_char].exp_select.style = "display: none"
+			list_of_portraits[which_char].image_sel.style = "display: none"
+			var prehold = copy(list_of_portraits[which_char].image)
+			if(prehold != false)
+			{
+				list_of_portraits[which_char].border.removeChild(list_of_portraits[which_char].image)
+				list_of_portraits[which_char].border.removeChild(list_of_portraits[which_char].linebreak_two)
+			}
+			list_of_portraits[which_char].image = false
+		}
+		else
+		{
+			list_of_portraits[which_char].exp_txt.style = "display: inline"
+			if(this.value == "custom")
+			{
+				list_of_portraits[which_char].image_sel.style = "display: inline"
+				list_of_portraits[which_char].exp_select.style = "display: none"
+			}
+			else
+			{
+				list_of_portraits[which_char].image_sel.style = "display: none"
+				list_of_portraits[which_char].exp_select.style = "display: inline"
+				list_of_portraits[which_char].exp_select.innerHTML = exp_options[this.value]
+				var event = new Event('change');
+				list_of_portraits[which_char].exp_select.dispatchEvent(event);
+			}
+		}
+	})
+	newPort.border.appendChild(newPort.chara_pos)
 
+	newPort.border.appendChild(document.createElement("br"))
+	
+	newPort.exp_txt = document.createElement("span");
+	newPort.exp_txt.innerHTML = "Expression: "
+	newPort.exp_txt.style = "display: none"
+	newPort.border.appendChild(newPort.exp_txt)
+	
+	newPort.exp_select = document.createElement("select");
+	newPort.exp_select.innerHTML = char_options
+	newPort.exp_select.classList.add("port_" + String(list_of_portraits.length))
+	newPort.exp_select.style = "display: none"
+
+	newPort.exp_select.addEventListener("change", function(event) 
+	{
+		var which_char = Number(this.className.substring(5))
+		var prehold = copy(list_of_portraits[which_char].image)
+		if(prehold != false)
+		{
+			list_of_portraits[which_char].border.removeChild(list_of_portraits[which_char].image)
+			list_of_portraits[which_char].border.removeChild(list_of_portraits[which_char].linebreak_two)
+		}
+		if(this.value.substring(0,7) == "assets/")
+		{
+			list_of_portraits[which_char].image = loadImage(this.value)
+		}
+		else
+		{
+			var image = new Image();
+        		image.src = this.value;
+			list_of_portraits[which_char].image = image
+		}
+		list_of_portraits[which_char].border.appendChild(list_of_portraits[which_char].linebreak_two)
+		list_of_portraits[which_char].border.appendChild(list_of_portraits[which_char].image)
+	})
+	newPort.border.appendChild(newPort.exp_select)
+
+	newPort.image_sel = document.createElement("input");
+	newPort.image_sel.type = "file"
+	newPort.image_sel.accept = "image/png"
+	newPort.image_sel.classList.add("port_" + String(list_of_portraits.length))
+	newPort.image_sel.style = "display: none"
+	newPort.image_sel.addEventListener('change', function(ev)
+	{
+		if(ev.target.files) {
+			let file = ev.target.files[0];
+			var reader = new FileReader();
+			
+     		 	reader.readAsDataURL(file);
+      			reader.onloadend = (e) => 
+			{
+				var which_char = Number(this.className.substring(5))
+				alert(which_char)
+				if(list_of_portraits[which_char].image == false)
+				{
+       					var image = new Image();
+        				image.src = e.target.result;
+					list_of_portraits[which_char].image = image
+					list_of_portraits[which_char].border.appendChild(list_of_portraits[which_char].linebreak_two)
+					list_of_portraits[which_char].border.appendChild(list_of_portraits[which_char].image)
+				}
+				else
+				{
+					list_of_portraits[which_char].image.src=e.target.result;
+				}
+      			}
+   		}
+	});
+
+	
+	newPort.border.appendChild(newPort.image_sel)
+	//newPort.image_sel.addEventListener('change', function(ev)
+
+	newPort.border.appendChild(document.createElement("br"))
 	var set_txt = document.createElement("span");
-	set_txt.innerHTML = "Text Settings: "
-	newText.border.appendChild(set_txt)
-
-	newText.border.appendChild(document.createElement("br"))
-
-	var x_txt = document.createElement("span");
-	x_txt.innerHTML = "Text X: "
-	newText.border.appendChild(x_txt)
-	newText.x_pos = document.createElement("input");
-	newText.x_pos.type = "number"
-	newText.x_pos.value = def_x
-	newText.x_pos.style = "width: 40px;"
-	newText.border.appendChild(newText.x_pos);
-
-	var y_txt = document.createElement("span");
-	y_txt.innerHTML = " Text Y: "
-	newText.border.appendChild(y_txt)
-	newText.y_pos = document.createElement("input");
-	newText.y_pos.type = "number"
-	newText.y_pos.value = def_y
-	newText.y_pos.style = "width: 40px;"
-	newText.border.appendChild(newText.y_pos);
-
-	newText.border.appendChild(complex_br())
+	set_txt.innerHTML = "Portrait Settings: "
+	newPort.border.appendChild(set_txt)
+	newPort.border.appendChild(document.createElement("br"))
 
 	var x_txt = document.createElement("span");
-	x_txt.innerHTML = "Portrait X-Offset: "
-	x_txt.classList.add("complex")
-	newText.border.appendChild(x_txt)
-	newText.x_pos_alt = document.createElement("input");
-	newText.x_pos_alt.type = "number"
-	newText.x_pos_alt.value = def_x_off
-	newText.x_pos_alt.style = "width: 40px;"
-	newText.x_pos_alt.classList.add("complex")
-	newText.border.appendChild(newText.x_pos_alt);
+	x_txt.innerHTML = "Portrait X Offset: "
+	newPort.border.appendChild(x_txt)
+	newPort.x_pos = document.createElement("input");
+	newPort.x_pos.type = "number"
+	newPort.x_pos.value = def_x
+	newPort.x_pos.style = "width: 40px;"
+	newPort.border.appendChild(newPort.x_pos);
 
 	var y_txt = document.createElement("span");
-	y_txt.innerHTML = " Portrait Y-Offset: "
-	y_txt.classList.add("complex")
-	newText.border.appendChild(y_txt)
-	newText.y_pos_alt = document.createElement("input");
-	newText.y_pos_alt.type = "number"
-	newText.y_pos_alt.value = def_y_off
-	newText.y_pos_alt.style = "width: 40px;"
-	newText.y_pos_alt.classList.add("complex")
-	newText.border.appendChild(newText.y_pos_alt);
+	y_txt.innerHTML = " Portrait Y Offset: "
+	newPort.border.appendChild(y_txt)
+	newPort.y_pos = document.createElement("input");
+	newPort.y_pos.type = "number"
+	newPort.y_pos.value = def_y
+	newPort.y_pos.style = "width: 40px;"
+	newPort.border.appendChild(newPort.y_pos);
 
-	newText.border.appendChild(document.createElement("br"))
+	newPort.border.appendChild(complex_br())
+
+	var s_txt = document.createElement("span");
+	s_txt.innerHTML = "Portrait Scaling: "
+	s_txt.classList.add("complex")
+	newPort.border.appendChild(s_txt)
+	newPort.s_pos = document.createElement("select");
+	newPort.s_pos.innerHTML = '<option value="2x_Scaling">2X Upscale And Center</option><option value="Fit_Basic">Squish/Stretch to Fit</option><option value="Center_It">Center</option><option value="0.5x_Scaling">0.5X Downscale And Center</option><option value="Fit_Square">Scale Evenly to Fit</option><option value="Unchanged_Anything">Unchanged</option>'
+	newPort.s_pos.classList.add("complex")
+	newPort.s_pos.value = def_s
+	newPort.border.appendChild(newPort.s_pos)
+
+	newPort.border.appendChild(document.createElement("br"))
 
 	var out_txt = document.createElement("span");
 	out_txt.innerHTML = "Outline: "
-	newText.border.appendChild(out_txt)
-	newText.o_pos = document.createElement("input");
-	newText.o_pos.type = "checkbox"
-	newText.o_pos.checked = def_o
-	newText.border.appendChild(newText.o_pos)
-
-	var dark_txt = document.createElement("span");
-	dark_txt.innerHTML = " Dark World: "
-	newText.border.appendChild(dark_txt)
-	newText.d_pos = document.createElement("input");
-	newText.d_pos.type = "checkbox"
-	newText.d_pos.checked = def_d
-	newText.border.appendChild(newText.d_pos)
-
-	newText.border.appendChild(document.createElement("br"))
-
-	var auto_txt = document.createElement("span");
-	auto_txt.innerHTML = "Auto-Linebreak: "
-	newText.border.appendChild(auto_txt)
-	newText.a_pos = document.createElement("input");
-	newText.a_pos.type = "checkbox"
-	newText.a_pos.checked = def_a
-	newText.border.appendChild(newText.a_pos)
-
-	newText.border.appendChild(complex_br())
-
-	auto_txt = document.createElement("span");
-	auto_txt.innerHTML = "Color-Blend: "
-	auto_txt.classList.add("complex")
-	newText.border.appendChild(auto_txt)
-	newText.c_type = document.createElement("select");
-	newText.c_type.innerHTML = '<option value="white">(Replacing White)</option><option value="multi">(Multiplicative)</option>'
-	newText.c_type.classList.add("complex")
-	newText.border.appendChild(newText.c_type)
-
-	newText.border.appendChild(document.createElement("br"))
-	newText.border.appendChild(document.createElement("br"))
+	newPort.border.appendChild(out_txt)
+	newPort.o_pos = document.createElement("input");
+	newPort.o_pos.type = "checkbox"
+	newPort.o_pos.checked = def_o
+	newPort.border.appendChild(newPort.o_pos)
 	
-	var txt_txt = document.createElement("span");
-	txt_txt.innerHTML = "Text: "
-	newText.border.appendChild(txt_txt)
-	newText.border.appendChild(document.createElement("br"))
-	newText.text = document.createElement("input");
-	newText.text.type = "text"
-	newText.text.style = "width: 500px;"
-	newText.border.appendChild(newText.text)
+	newPort.border.appendChild(document.createElement("br"))
+	
+	var c_txt = document.createElement("span");
+	c_txt.innerHTML = "Portrait Color "
+	newPort.border.appendChild(c_txt)
+	newPort.c_type = document.createElement("select");
+	newPort.c_type.innerHTML = '<option value="white">(Replacing White)</option><option value="multi">(Multiplicative)</option><option value="whole">(All Of It)</option>'
+	newPort.c_type.classList.add("complex")
+	newPort.border.appendChild(newPort.c_type)
+	c_txt = document.createElement("span");
+	c_txt.innerHTML = ": "
+	newPort.border.appendChild(c_txt)
+	newPort.c_pos = document.createElement("input");
+	newPort.c_pos.type = "color"
+	newPort.c_pos.value = "#ffffff"
+	newPort.border.appendChild(newPort.c_pos);
 
-	newText.border.appendChild(complex_br())
-	newText.border.appendChild(complex_br())
+	newPort.border.appendChild(complex_br())
+	newPort.border.appendChild(complex_br())
 
-	newText.removeButt = document.createElement("button");
-	newText.removeButt.innerHTML = "Remove"
-	newText.removeButt.id ="text_" + String(list_of_text.length)
-	newText.removeButt.classList.add("complex")
-	newText.removeButt.onclick = function() 
+	newPort.removeButt = document.createElement("button");
+	newPort.removeButt.innerHTML = "Remove"
+	newPort.removeButt.id = "port_" + String(list_of_portraits.length)
+	newPort.removeButt.classList.add("complex")
+	newPort.removeButt.onclick = function() 
 	{
-		var which_text = Number(this.id.substring(5))
-		list_of_text[which_text].border.remove()
-		list_of_text[which_text].linebreak.remove()
-		list_of_text.splice(which_text, 1)
-		refresh_text_list()
+		var which_char = Number(this.id.substring(5))
+		list_of_portraits[which_char].border.remove()
+		list_of_portraits[which_char].linebreak.remove()
+		list_of_portraits.splice(which_char, 1)
+		refresh_char_list()
 	}
-	newText.border.appendChild(newText.removeButt)
+	newPort.border.appendChild(newPort.removeButt)
 
-	char_container.appendChild(newText.border)
-	newText.linebreak = complex_br()
-	char_container.appendChild(newText.linebreak)
-	list_of_portraits.push(newText)
+	char_container.appendChild(newPort.border)
+	newPort.linebreak = complex_br()
+	newPort.linebreak_two = document.createElement("br")
+	char_container.appendChild(newPort.linebreak)
+	list_of_portraits.push(newPort)
 }
 
 function loader_up(awesome_template)
@@ -655,6 +740,12 @@ function loader_up(awesome_template)
 		list_of_text[i].linebreak.remove()
 	}
 	list_of_text.length = 0
+	for(let i = 0; i < list_of_portraits.length; i++)
+	{
+		list_of_portraits[i].border.remove()
+		list_of_portraits[i].linebreak.remove()
+	}
+	list_of_portraits.length = 0
 	origin_w.value = awesome_template[0]
 	origin_h.value = awesome_template[1]
 	let i = 2
@@ -671,12 +762,10 @@ function loader_up(awesome_template)
 		i++
 	}
 	i++
-	//i'll give them a proper thingy later
-	if (i < awesome_template.length)
+	while(i < awesome_template.length && typeof(awesome_template[i]) != "string")
 	{
-		portrait_x.value = awesome_template[i]
-		portrait_y.value = awesome_template[i+1]
-		bart.checked = awesome_template[i+1]
+		new_port(awesome_template[i][0], awesome_template[i][1], awesome_template[i][2], awesome_template[i][3], awesome_template[i][4])
+		i++
 	}
 	
 	toggle_complex(homer.checked)
@@ -843,7 +932,7 @@ function draw_text(pass_in)//(x,y,str)
 {
 	var x = Number(copy(pass_in.x_pos.value)) + offset[0]
 	var y = Number(copy(pass_in.y_pos.value)) + offset[1]
-	if(textbox_chr.value != "none")
+	if(any_portraits)
 	{
 		x += Number(copy(pass_in.x_pos_alt.value))
 		y += Number(copy(pass_in.y_pos_alt.value))
@@ -1007,6 +1096,8 @@ function draw_text(pass_in)//(x,y,str)
 
 let iters = 0
 
+let any_portraits = false
+
 function draw_canvas()
 {
 	if(iters == 0)
@@ -1014,8 +1105,9 @@ function draw_canvas()
 		generate_font(cur_font) //uncomment!
 		iters = 0.1
 	}
+	any_portraits = false
 	var draw_it = true
-	if(textbox_chr.value == "custom")
+	/*if(textbox_chr.value == "custom")
 	{portrait_i_use = thatExists}
 	else
 	{if(textbox_chr.value != "none"){var portrait_i_use = loadImage("assets/characters/"+textbox_chr.value+"/"+textbox_exp.value+".png")}}
@@ -1025,11 +1117,11 @@ function draw_canvas()
 	else
 	{var overlay_i_use = loadImage("assets/overlays/"+textbox_over.value+".png")}
 
-	/*if(!boxes_in.includes(textbox_bg.value))
+	if(!boxes_in.includes(textbox_bg.value))
 	{
 		draw_it = false
 		boxes_in.push(textbox_bg.value)
-	}*/
+	}
 	if(textbox_chr.value != "none")
 	{
 		if(!portraits_in.includes(textbox_chr.value + "-" + textbox_exp.value))
@@ -1042,11 +1134,11 @@ function draw_canvas()
 	{
 		draw_it = false
 		overlays_in.push(textbox_over.value)
-	}
+	}*/
 	if(draw_it)
 	{
 		//box_size = [Number(textbox_bg_x.value), Number(textbox_bg_y.value), Number(textbox_bg_w.value), Number(textbox_bg_h.value), Number(portrait_x.value), Number(portrait_y.value)]
-		box_size = [0,0, Number(textbox_bg_w.value), Number(textbox_bg_h.value), Number(portrait_x.value), Number(portrait_y.value)]
+		box_size = [0,0, Number(textbox_bg_w.value), Number(textbox_bg_h.value)]//, Number(portrait_x.value), Number(portrait_y.value)]
 		if(marge.checked)
 		{
 			canvas.height = box_size[3] + 12
@@ -1111,33 +1203,38 @@ function draw_canvas()
 				ctx.drawImage(img_a, offset[0] + Number(list_of_boxes[i].x_pos.value),offset[1] + Number(list_of_boxes[i].y_pos.value))
 			}
 		}
-		if(textbox_chr.value != "none")
+		for(var i = 0; i < list_of_portraits.length; i++)
 		{
+			console.log(list_of_portraits[i])
+			if(!list_of_portraits[i].image)
+			{continue}
+			any_portraits = true
+			var portrait_i_use = list_of_portraits[i].image
 			portrait_blacked.width = portrait_i_use.width
 			portrait_blacked.height = portrait_i_use.height
-			var port_pos = [6+offset[0]+box_size[0]+box_size[4], 6+offset[1]+box_size[1]+box_size[5],134,140]
-			if(textbox_exp_sc.value == "Center_It")
+			var port_pos = [6+offset[0]+Number(list_of_portraits[i].x_pos.value), 6+offset[1]+Number(list_of_portraits[i].y_pos.value),134,140]
+			if(list_of_portraits[i].s_pos.value == "Center_It")
 			{
 				port_pos[2] = portrait_i_use.width
 				port_pos[3] = portrait_i_use.height
 				port_pos[0] += Math.floor((134 - port_pos[2])/2)
 				port_pos[1] += Math.floor((140 - port_pos[3])/2)
 			}
-			else if(textbox_exp_sc.value == "2x_Scaling")
+			else if(list_of_portraits[i].s_pos.value == "2x_Scaling")
 			{
 				port_pos[2] = portrait_i_use.width*2
 				port_pos[3] = portrait_i_use.height*2
 				port_pos[0] += Math.floor((134 - port_pos[2])/2)
 				port_pos[1] += Math.floor((140 - port_pos[3])/2)
 			}
-			else if(textbox_exp_sc.value == "0.5x_Scaling")
+			else if(list_of_portraits[i].s_pos.value == "0.5x_Scaling")
 			{
 				port_pos[2] = portrait_i_use.width*0.5
 				port_pos[3] = portrait_i_use.height*0.5
 				port_pos[0] += Math.floor((134 - port_pos[2])/2)
 				port_pos[1] += Math.floor((140 - port_pos[3])/2)
 			}
-			else if(textbox_exp_sc.value == "Fit_Square")
+			else if(list_of_portraits[i].s_pos.value == "Fit_Square")
 			{
 				var width_power = 134/portrait_i_use.width
 				var height_power = 140/portrait_i_use.height
@@ -1154,25 +1251,25 @@ function draw_canvas()
 				port_pos[0] += Math.floor((134 - port_pos[2])/2)
 				port_pos[1] += Math.floor((140 - port_pos[3])/2)
 			}
-			else if(textbox_exp_sc.value == "Unchanged_Anything")
+			else if(list_of_portraits[i].s_pos.value == "Unchanged_Anything")
 			{
 				port_pos[2] = portrait_i_use.width
 				port_pos[3] = portrait_i_use.height
 			}
-			if(bart.checked)
+			if(list_of_portraits[i].o_pos.checked)
 			{
 				portrait_blacka.imageSmoothingEnabled = false
 				canvas.imageSmoothingEnabled = false
 				portrait_blacka.clearRect(0,0,portrait_i_use.width,portrait_i_use.height)
 				portrait_blacka.drawImage(portrait_i_use,0,0)
 				var cool_pixels = portrait_blacka.getImageData(0,0,portrait_i_use.width,portrait_i_use.height)
-				for(var i = 3; i < cool_pixels.data.length; i += 4)
+				for(var j = 3; j < cool_pixels.data.length; j += 4)
 				{
-					if(cool_pixels.data[i] == 255)
+					if(cool_pixels.data[j] == 255)
 					{
-						cool_pixels.data[i-3] = 0
-						cool_pixels.data[i-2] = +0
-						cool_pixels.data[i-1] = 0
+						cool_pixels.data[j-3] = 0
+						cool_pixels.data[j-2] = 0
+						cool_pixels.data[j-1] = 0
 					}
 				}
 				portrait_blacka.putImageData(cool_pixels, 0, 0)
@@ -1190,22 +1287,38 @@ function draw_canvas()
 					}
 				}
 			}
-			if(textbox_exp_c.value != "#ffffff")
+			if(list_of_portraits[i].c_pos.value != "#ffffff")
 			{
 				new_color = hexToRgb(textbox_exp_c.value)
 				portrait_blacka.imageSmoothingEnabled = false
 				canvas.imageSmoothingEnabled = false
 				portrait_blacka.clearRect(0,0,portrait_i_use.width,portrait_i_use.height)
 				portrait_blacka.drawImage(portrait_i_use,0,0)
+				var what_to = list_of_portraits[i].c_type.value
 				var cool_pixels = portrait_blacka.getImageData(0,0,portrait_i_use.width,portrait_i_use.height)
-				for(var i = 3; i < cool_pixels.data.length; i += 4)
+				for(var j = 3; j < cool_pixels.data.length; j += 4)
 				{
-					//if(cool_pixels.data[i] == 255 && cool_pixels.data[i-3] == 255 && cool_pixels.data[i-2] == 255 && cool_pixels.data[i-1] == 255)
-					//{
+					if(what_to == "multi")
+					{
 						cool_pixels.data[j-3] *= new_color.r / 255
 						cool_pixels.data[j-2] *= new_color.g / 255
 						cool_pixels.data[j-1] *= new_color.b / 255
-					//}
+					}
+					else if(what_to == "white")
+					{
+						if(cool_pixels.data[j-3] == 255 && cool_pixels.data[j-2] == 255 && cool_pixels.data[j-1] == 255)
+						{
+							cool_pixels.data[j-3] = new_color.r
+							cool_pixels.data[j-2] = new_color.g
+							cool_pixels.data[j-1] = new_color.b
+						}
+					}
+					else if(what_to == "whole")
+					{
+						cool_pixels.data[j-3] = new_color.r
+						cool_pixels.data[j-2] = new_color.g
+						cool_pixels.data[j-1] = new_color.b
+					}
 				}
 				portrait_blacka.putImageData(cool_pixels, 0, 0)
 				var blacked_out = portrait_blacked.toDataURL('image/png');
@@ -1224,7 +1337,7 @@ function draw_canvas()
 		//canvas.style.display = 'none'
 		//if(textbox_chr.value == "none")
 		//{offset[0] += 144-28}
-		ctx.drawImage(overlay_i_use,0,0,box_size[2],box_size[3],offset[0],offset[1],box_size[2],box_size[3])
+		//ctx.drawImage(overlay_i_use,0,0,box_size[2],box_size[3],offset[0],offset[1],box_size[2],box_size[3])
 		const dataURL = canvas.toDataURL('image/png');
 		awesome_canvas.src = dataURL;
 		//canvas.style.display = 'none'
@@ -1446,6 +1559,20 @@ textbox_bg_alt.addEventListener('change', function(ev) {
    }
 });
 
+textbox_bg.addEventListener("change", (event) => {
+	if(textbox_bg.value == "custom")
+	{
+		textbox_bg_alt.style.display = "inline"
+	}
+	else
+	{
+		var awesome_template = prebaked_boxes[textbox_bg.value]
+		loader_up(awesome_template)
+		
+		textbox_bg_alt.style.display = "none"
+	}
+})
+
 /*let ohAndThis = false
 
 textbox_over_alt.addEventListener('change', function(ev) {
@@ -1503,20 +1630,6 @@ const box_sizes = {
 "jumbo": [0,0,578,188,0,0],
 "deltarune": [8,10,594,168,0,0]
 }
-
-textbox_bg.addEventListener("change", (event) => {
-	if(textbox_bg.value == "custom")
-	{
-		textbox_bg_alt.style.display = "inline"
-	}
-	else
-	{
-		var awesome_template = prebaked_boxes[textbox_bg.value]
-		loader_up(awesome_template)
-		
-		textbox_bg_alt.style.display = "none"
-	}
-})
 
 textbox_over.addEventListener("change", (event) => {
 	if(textbox_over.value == "custom")
