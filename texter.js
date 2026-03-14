@@ -1037,7 +1037,10 @@ function loader_up(awesome_template)
 	//really annoying lol
 	for(let i = 0; i < list_of_portraits.length; i++)
 	{
-		save_this_too.push(list_of_portraits[i].image.src)
+		if(list_of_portraits[i].image == false)
+			{save_this_too.push(-1)}
+		else
+			{save_this_too.push(list_of_portraits[i].image.src)}
 		list_of_portraits[i].border.remove()
 		list_of_portraits[i].linebreak.remove()
 	}
@@ -1073,16 +1076,19 @@ function loader_up(awesome_template)
 		//console.log(list_of_portraits[list_of_portraits.length-1])
 		if(list_of_portraits.length-1 < save_this_too.length)
 		{
-			var image = new Image();
-        		image.src = save_this_too[list_of_portraits.length-1]
-			list_of_portraits[list_of_portraits.length-1].image = image
-			list_of_portraits[list_of_portraits.length-1].image.classList.add("image_border")
-			list_of_portraits[list_of_portraits.length-1].border.appendChild(list_of_portraits[list_of_portraits.length-1].linebreak_two)
-			list_of_portraits[list_of_portraits.length-1].border.appendChild(list_of_portraits[list_of_portraits.length-1].image)
-			list_of_portraits[list_of_portraits.length-1].chara_pos.value = "custom"
-			var event = new Event('change');
-			list_of_portraits[list_of_portraits.length-1].chara_pos.dispatchEvent(event);
-		}
+			if(list_of_portraits[list_of_portraits.length-1] != -1)
+			{
+				var image = new Image();
+        			image.src = save_this_too[list_of_portraits.length-1]
+				list_of_portraits[list_of_portraits.length-1].image = image
+				list_of_portraits[list_of_portraits.length-1].image.classList.add("image_border")
+				list_of_portraits[list_of_portraits.length-1].border.appendChild(list_of_portraits[list_of_portraits.length-1].linebreak_two)
+				list_of_portraits[list_of_portraits.length-1].border.appendChild(list_of_portraits[list_of_portraits.length-1].image)
+				list_of_portraits[list_of_portraits.length-1].chara_pos.value = "custom"
+				var event = new Event('change');
+				list_of_portraits[list_of_portraits.length-1].chara_pos.dispatchEvent(event);
+			}
+		}	
 		i++
 	}
 	i++
@@ -1445,7 +1451,7 @@ function draw_canvas()
 {
 	if(iters == 0)
 	{
-		generate_font(cur_font) //uncomment!
+		//generate_font(cur_font) //uncomment!
 		iters = 0.1
 	}
 	any_portraits = false
