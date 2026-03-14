@@ -1463,7 +1463,10 @@ function save_box()
 	save_array.push(textbox_bg_w.value)
 	save_array.push(textbox_bg_h.value)
 
-	if(list_of_boxes.length > 0) {save_array.push([])}
+	if(list_of_boxes.length > 0) 
+	{
+		save_array.push([])
+	}
 
 	for(var i = 0; i < list_of_boxes.length; i++)
 	{
@@ -1492,9 +1495,10 @@ function save_box()
 		}
 	}
 
+	save_array.push("text")
+
 	if(list_of_text.length > 0) 
 	{
-		save_array.push("text")
 		save_array.push([])
 	}
 
@@ -1515,11 +1519,30 @@ function save_box()
 		}
 	}
 
-	//if(list_of_text.length > 0) {save_str += "port,["}
-	//wip!
+	
 	save_array.push("port")
-	save_array.push(portrait_x.value)
-	save_array.push(portrait_y.value)
+
+	if(list_of_portraits.length > 0) 
+	{
+		save_array.push([])
+	}
+	
+	for(var i = 0; i < list_of_portraits.length; i++)
+	{
+		//console.log(list_of_portraits[i])
+		save_array[save_array.length-1].push(list_of_portraits[i].name_field.value)
+		save_array[save_array.length-1].push(list_of_portraits[i].x_pos.value)
+		save_array[save_array.length-1].push(list_of_portraits[i].y_pos.value)
+		save_array[save_array.length-1].push(list_of_portraits[i].s_pos.value)
+		save_array[save_array.length-1].push(list_of_portraits[i].o_pos.checked)
+		if(i + 1 < list_of_portraits.length)
+		{
+			save_array.push([])
+		}
+	}
+
+	save_array.push("over")
+	//wip!
 
 	download("new_box", JSON.stringify(save_array))
 }
