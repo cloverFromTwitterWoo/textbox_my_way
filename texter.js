@@ -990,6 +990,11 @@ function loader_up(awesome_template)
 		new_port(awesome_template[i][0], awesome_template[i][1], awesome_template[i][2], awesome_template[i][3], awesome_template[i][4])
 		i++
 	}
+	while(i < awesome_template.length && typeof(awesome_template[i]) != "string")
+	{
+		new_over(awesome_template[i][0], awesome_template[i][1], awesome_template[i][2], awesome_template[i][3], awesome_template[i][4], awesome_template[i][5], awesome_template[i][6])
+		i++
+	}
 	
 	toggle_complex(homer.checked)
 	//toggle_complex(true)
