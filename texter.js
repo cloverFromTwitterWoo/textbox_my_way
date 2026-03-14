@@ -1037,7 +1037,7 @@ function loader_up(awesome_template)
 	//really annoying lol
 	for(let i = 0; i < list_of_portraits.length; i++)
 	{
-		save_this_too.push(copy(list_of_portraits[i].image))
+		save_this_too.push(list_of_portraits[i].image.src)
 		list_of_portraits[i].border.remove()
 		list_of_portraits[i].linebreak.remove()
 	}
@@ -1060,14 +1060,29 @@ function loader_up(awesome_template)
 	while(i < awesome_template.length && typeof(awesome_template[i]) != "string")
 	{
 		new_text(awesome_template[i][0], awesome_template[i][1], awesome_template[i][2], awesome_template[i][3], awesome_template[i][4], awesome_template[i][5], awesome_template[i][6], awesome_template[i][7])
-		list_of_text[list_of_text.length-1].text.value = save_this_tho[list_of_text.length-1]
+		if(list_of_text.length-1 < save_this_tho.length)
+		{
+			list_of_text[list_of_text.length-1].text.value = save_this_tho[list_of_text.length-1]
+		}
 		i++
 	}
 	i++
 	while(i < awesome_template.length && typeof(awesome_template[i]) != "string")
 	{
 		new_port(awesome_template[i][0], awesome_template[i][1], awesome_template[i][2], awesome_template[i][3], awesome_template[i][4])
-		list_of_portraits[list_of_portraits.length-1].image = save_this_too[list_of_portraits.length-1]
+		//console.log(list_of_portraits[list_of_portraits.length-1])
+		if(list_of_portraits.length-1 < save_this_too.length)
+		{
+			var image = new Image();
+        		image.src = save_this_too[list_of_portraits.length-1]
+			list_of_portraits[list_of_portraits.length-1].image = image
+			list_of_portraits[list_of_portraits.length-1].image.classList.add("image_border")
+			list_of_portraits[list_of_portraits.length-1].border.appendChild(list_of_portraits[list_of_portraits.length-1].linebreak_two)
+			list_of_portraits[list_of_portraits.length-1].border.appendChild(list_of_portraits[list_of_portraits.length-1].image)
+			list_of_portraits[list_of_portraits.length-1].chara_pos.value = "custom"
+			var event = new Event('change');
+			list_of_portraits[list_of_portraits.length-1].chara_pos.dispatchEvent(event);
+		}
 		i++
 	}
 	i++
