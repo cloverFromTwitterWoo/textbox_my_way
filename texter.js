@@ -1057,19 +1057,6 @@ function loader_up(awesome_template)
 		i++
 	}
 	i++
-	/*if(awesome_template[i].substring(0,7) == "assets/")
-	{
-		cur_font = loadImage(awesome_template[i])
-		cur_font.style.display = 'none'
-	}
-	else
-	{
-		var image = new Image();
-        	image.src = awesome_template[i];
-		cur_font = image
-		cur_font.style.display='none'
-	}
-	i++*/
 	while(i < awesome_template.length && typeof(awesome_template[i]) != "string")
 	{
 		new_text(awesome_template[i][0], awesome_template[i][1], awesome_template[i][2], awesome_template[i][3], awesome_template[i][4], awesome_template[i][5], awesome_template[i][6], awesome_template[i][7])
@@ -1878,13 +1865,6 @@ function save_box()
 	}
 
 	save_array.push("text")
-
-	/*var save_cav = document.createElement('canvas');
-        save_cav.width = cur_font.width;
-        save_cav.height = cur_font.height;
-        var btx = save_cav.getContext('2d');
-       	btx.drawImage(cur_font, 0, 0);	
-	save_array.push(save_cav.toDataURL())*/
 
 	if(list_of_text.length > 0) 
 	{
