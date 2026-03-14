@@ -9,6 +9,7 @@ ctx.fillRect(0,0,canvas.width,canvas.height)
 
 const box_container = document.getElementById("box_box");
 const text_container = document.getElementById("text_box");
+const char_container = document.getElementById("char_box");
 
 let awesome_canvas = document.getElementById("canvasTrue");
 let awesome_canvas_Stacked = document.getElementById("canvasStack");
@@ -116,6 +117,7 @@ let cur_dw = new Image()
 
 let list_of_boxes = [];
 let list_of_text = [];
+let list_of_portraits = [];
 
 let prebaked_boxes = {
 	undertale: [578, 152, ["", "assets/textboxes/undertale.png", 0, 0, "#ffffff", "true"], "text", ["", 28, 26, 116, 0, true, false, false], ],
@@ -125,6 +127,13 @@ let prebaked_boxes = {
 	jumbo: [578, 188, ["", "assets/textboxes/jumbo.png", 0, 0, "#ffffff", "true"], "text", ["", 28, 26, 116, 0, true, false, false]],
 	cavestory: [488, 128, ["", "assets/textboxes/cave_story.png", 0, 0, "#ffffff", "true"], "text", ["", 27, 23, 110, 0, false, false, false], "port", 3, -11, false],
 }
+
+let exp_options = 
+{
+	"flowey": '<option value="spr_floweynice_0">Nice</option><option value="spr_floweywink_0">Wink</option><option value="spr_floweysassy_0">Sassy</option><option value="spr_floweyplain_0">D:</option><option value="spr_floweyniceside_0">Side (Smile)</option><option value="spr_floweynicesideum_0">Side (Uh)</option><option value="spr_floweygrin_0">Grin</option><option value="spr_floweyevil_0">Evil</option><option value="spr_floweylaugh_0">Laugh</option><option value="spr_floweyside_0">Side</option><option value="spr_floweysideshock_0">Side (Ah)</option><option value="spr_floweytoriel_0">Toriel</option><option value="spr_floweytoriel2_0">Toriel (Distorted)</option><option value="spr_floweyhurt_0">Hurt</option>',
+	"toriel": '<option value="default">Default</option><option value="looking-away">Looking Away</option><option value="sad">Sad</option>'
+}
+
 
 function refresh_box_list()
 {
@@ -479,6 +488,157 @@ function new_text(def_name="", def_x=0, def_y=0, def_x_off=0, def_y_off=0, def_o
 	list_of_text.push(newText)
 }
 
+function new_port(def_name="", def_x=0, def_y=0, def_x_off=0, def_y_off=0, def_o=true, def_d=false, def_a=false)
+{
+	var newText = {};
+	newText.border = document.createElement("div");
+	newText.border.classList.add("box")
+	newText.border.style.width = "370px"
+
+	var name_txt = document.createElement("span");
+	name_txt.innerHTML = "Name: "
+	name_txt.classList.add("complex")
+	newText.border.appendChild(name_txt)
+	newText.name_field = document.createElement("input");
+	newText.name_field.value = def_name;
+	newText.name_field.classList.add("complex")
+	newText.border.appendChild(newText.name_field)
+
+	newText.border.appendChild(complex_br())
+
+	/*var font_txt = document.createElement("span");
+	font_txt.innerHTML = "Font: "
+	newText.border.appendChild(font_txt)
+	
+	var placeholder = document.createElement("span");
+	placeholder.innerHTML = "[WIP]"
+	newText.border.appendChild(placeholder)
+	
+	newText.border.appendChild(document.createElement("br"))*/
+	newText.border.appendChild(document.createElement("br"))
+
+	var set_txt = document.createElement("span");
+	set_txt.innerHTML = "Text Settings: "
+	newText.border.appendChild(set_txt)
+
+	newText.border.appendChild(document.createElement("br"))
+
+	var x_txt = document.createElement("span");
+	x_txt.innerHTML = "Text X: "
+	newText.border.appendChild(x_txt)
+	newText.x_pos = document.createElement("input");
+	newText.x_pos.type = "number"
+	newText.x_pos.value = def_x
+	newText.x_pos.style = "width: 40px;"
+	newText.border.appendChild(newText.x_pos);
+
+	var y_txt = document.createElement("span");
+	y_txt.innerHTML = " Text Y: "
+	newText.border.appendChild(y_txt)
+	newText.y_pos = document.createElement("input");
+	newText.y_pos.type = "number"
+	newText.y_pos.value = def_y
+	newText.y_pos.style = "width: 40px;"
+	newText.border.appendChild(newText.y_pos);
+
+	newText.border.appendChild(complex_br())
+
+	var x_txt = document.createElement("span");
+	x_txt.innerHTML = "Portrait X-Offset: "
+	x_txt.classList.add("complex")
+	newText.border.appendChild(x_txt)
+	newText.x_pos_alt = document.createElement("input");
+	newText.x_pos_alt.type = "number"
+	newText.x_pos_alt.value = def_x_off
+	newText.x_pos_alt.style = "width: 40px;"
+	newText.x_pos_alt.classList.add("complex")
+	newText.border.appendChild(newText.x_pos_alt);
+
+	var y_txt = document.createElement("span");
+	y_txt.innerHTML = " Portrait Y-Offset: "
+	y_txt.classList.add("complex")
+	newText.border.appendChild(y_txt)
+	newText.y_pos_alt = document.createElement("input");
+	newText.y_pos_alt.type = "number"
+	newText.y_pos_alt.value = def_y_off
+	newText.y_pos_alt.style = "width: 40px;"
+	newText.y_pos_alt.classList.add("complex")
+	newText.border.appendChild(newText.y_pos_alt);
+
+	newText.border.appendChild(document.createElement("br"))
+
+	var out_txt = document.createElement("span");
+	out_txt.innerHTML = "Outline: "
+	newText.border.appendChild(out_txt)
+	newText.o_pos = document.createElement("input");
+	newText.o_pos.type = "checkbox"
+	newText.o_pos.checked = def_o
+	newText.border.appendChild(newText.o_pos)
+
+	var dark_txt = document.createElement("span");
+	dark_txt.innerHTML = " Dark World: "
+	newText.border.appendChild(dark_txt)
+	newText.d_pos = document.createElement("input");
+	newText.d_pos.type = "checkbox"
+	newText.d_pos.checked = def_d
+	newText.border.appendChild(newText.d_pos)
+
+	newText.border.appendChild(document.createElement("br"))
+
+	var auto_txt = document.createElement("span");
+	auto_txt.innerHTML = "Auto-Linebreak: "
+	newText.border.appendChild(auto_txt)
+	newText.a_pos = document.createElement("input");
+	newText.a_pos.type = "checkbox"
+	newText.a_pos.checked = def_a
+	newText.border.appendChild(newText.a_pos)
+
+	newText.border.appendChild(complex_br())
+
+	auto_txt = document.createElement("span");
+	auto_txt.innerHTML = "Color-Blend: "
+	auto_txt.classList.add("complex")
+	newText.border.appendChild(auto_txt)
+	newText.c_type = document.createElement("select");
+	newText.c_type.innerHTML = '<option value="white">(Replacing White)</option><option value="multi">(Multiplicative)</option>'
+	newText.c_type.classList.add("complex")
+	newText.border.appendChild(newText.c_type)
+
+	newText.border.appendChild(document.createElement("br"))
+	newText.border.appendChild(document.createElement("br"))
+	
+	var txt_txt = document.createElement("span");
+	txt_txt.innerHTML = "Text: "
+	newText.border.appendChild(txt_txt)
+	newText.border.appendChild(document.createElement("br"))
+	newText.text = document.createElement("input");
+	newText.text.type = "text"
+	newText.text.style = "width: 500px;"
+	newText.border.appendChild(newText.text)
+
+	newText.border.appendChild(complex_br())
+	newText.border.appendChild(complex_br())
+
+	newText.removeButt = document.createElement("button");
+	newText.removeButt.innerHTML = "Remove"
+	newText.removeButt.id ="text_" + String(list_of_text.length)
+	newText.removeButt.classList.add("complex")
+	newText.removeButt.onclick = function() 
+	{
+		var which_text = Number(this.id.substring(5))
+		list_of_text[which_text].border.remove()
+		list_of_text[which_text].linebreak.remove()
+		list_of_text.splice(which_text, 1)
+		refresh_text_list()
+	}
+	newText.border.appendChild(newText.removeButt)
+
+	char_container.appendChild(newText.border)
+	newText.linebreak = complex_br()
+	char_container.appendChild(newText.linebreak)
+	list_of_portraits.push(newText)
+}
+
 function loader_up(awesome_template)
 {
 	for(let i = 0; i < list_of_boxes.length; i++)
@@ -520,6 +680,7 @@ function loader_up(awesome_template)
 	}
 	
 	toggle_complex(homer.checked)
+	//toggle_complex(true)
 }
 
 loader_up(prebaked_boxes["undertale"])
@@ -606,7 +767,7 @@ function toggle_complex(complex)
 	}
 }
 
-toggle_complex(false)
+toggle_complex(homer.checked)
 
 homer.addEventListener('change', (event) => {
   toggle_complex(event.currentTarget.checked)
@@ -1250,7 +1411,7 @@ function save_box()
 	download("new_box", JSON.stringify(save_array))
 }
 
-let thatExists = false
+/*let thatExists = false
 
 textbox_exp_alt.addEventListener('change', function(ev) {
    if(ev.target.files) {
@@ -1271,9 +1432,7 @@ textbox_exp_alt.addEventListener('change', function(ev) {
 	}
       }
    }
-});
-
-let thatExistsAlso = false
+});*/
 
 textbox_bg_alt.addEventListener('change', function(ev) {
    if(ev.target.files) {
@@ -1283,12 +1442,11 @@ textbox_bg_alt.addEventListener('change', function(ev) {
       reader.onloadend = function (e) {
 	var awesome_template = JSON.parse(e.target.result)
 	loader_up(awesome_template)
-	
       }
    }
 });
 
-let ohAndThis = false
+/*let ohAndThis = false
 
 textbox_over_alt.addEventListener('change', function(ev) {
    if(ev.target.files) {
@@ -1311,9 +1469,6 @@ textbox_over_alt.addEventListener('change', function(ev) {
    }
 });
 
-const exp_options = {
-"flowey": '<option value="spr_floweynice_0">Nice</option><option value="spr_floweywink_0">Wink</option><option value="spr_floweysassy_0">Sassy</option><option value="spr_floweyplain_0">D:</option><option value="spr_floweyniceside_0">Side (Smile)</option><option value="spr_floweynicesideum_0">Side (Uh)</option><option value="spr_floweygrin_0">Grin</option><option value="spr_floweyevil_0">Evil</option><option value="spr_floweylaugh_0">Laugh</option><option value="spr_floweyside_0">Side</option><option value="spr_floweysideshock_0">Side (Ah)</option><option value="spr_floweytoriel_0">Toriel</option><option value="spr_floweytoriel2_0">Toriel (Distorted)</option><option value="spr_floweyhurt_0">Hurt</option>',
-"toriel": '<option value="default">Default</option><option value="looking-away">Looking Away</option><option value="sad">Sad</option>'}
 textbox_exp.innerHTML=exp_options[textbox_chr.value]
 textbox_chr.addEventListener("change", (event) => {
 	if(textbox_chr.value == "none")
@@ -1436,7 +1591,7 @@ this_is_gonna_suck_i_guess.addEventListener('change', function(ev) {
 	}
       }
    }
-});
+});*/
 
 draw_canvas()
 setTimeout(draw_canvas, 1080)
