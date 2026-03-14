@@ -1049,24 +1049,24 @@ function draw_text(pass_in)//(x,y,str)
 			{
 				if(what_to == "multi")
 				{
-					cool_pixels.data[j-3] *= new_color.r / 255
-					cool_pixels.data[j-2] *= new_color.g / 255
-					cool_pixels.data[j-1] *= new_color.b / 255
+					cool_pixels.data[j-3] *= color.r / 255
+					cool_pixels.data[j-2] *= color.g / 255
+					cool_pixels.data[j-1] *= color.b / 255
 				}
 				else if(what_to == "white")
 				{
 					if(cool_pixels.data[j-3] == 255 && cool_pixels.data[j-2] == 255 && cool_pixels.data[j-1] == 255)
 					{
-						cool_pixels.data[j-3] = new_color.r
-						cool_pixels.data[j-2] = new_color.g
-						cool_pixels.data[j-1] = new_color.b
+						cool_pixels.data[j-3] = color.r
+						cool_pixels.data[j-2] = color.g
+						cool_pixels.data[j-1] = color.b
 					}
 				}
 				else if(what_to == "whole")
 				{
-					cool_pixels.data[j-3] = new_color.r
-					cool_pixels.data[j-2] = new_color.g
-					cool_pixels.data[j-1] = new_color.b
+					cool_pixels.data[j-3] = color.r
+					cool_pixels.data[j-2] = color.g
+					cool_pixels.data[j-1] = color.b
 				}
 			}
 			portrait_blacka.putImageData(cool_pixels, 0, 0)
