@@ -1209,7 +1209,7 @@ function draw_canvas()
 			if(!list_of_portraits[i].image)
 			{continue}
 			any_portraits = true
-			var portrait_i_use = copy(list_of_portraits[i].image)
+			var portrait_i_use = list_of_portraits[i].image
 			portrait_blacked.width = portrait_i_use.width
 			portrait_blacked.height = portrait_i_use.height
 			var port_pos = [6+offset[0]+Number(list_of_portraits[i].x_pos.value), 6+offset[1]+Number(list_of_portraits[i].y_pos.value),134,140]
@@ -1322,9 +1322,15 @@ function draw_canvas()
 				}
 				portrait_blacka.putImageData(cool_pixels, 0, 0)
 				var blacked_out = portrait_blacked.toDataURL('image/png');
-				portrait_i_use.src = blacked_out
+				//portrait_i_use.src = blacked_out
+				img_a = document.createElement('img');
+				img_a.src = blacked_out;
+				ctx.drawImage(img_a, port_pos[0], port_pos[1], port_pos[2], port_pos[3])
 			}
-			ctx.drawImage(portrait_i_use, port_pos[0], port_pos[1], port_pos[2], port_pos[3])
+			else
+			{
+				ctx.drawImage(portrait_i_use, port_pos[0], port_pos[1], port_pos[2], port_pos[3])
+			}
 		}
 		//if(textbox_chr.value == "none")
 		//{offset[0] -= 144-28}
