@@ -1030,6 +1030,7 @@ function loader_up(awesome_template)
 		list_of_text[i].border.remove()
 		list_of_text[i].linebreak.remove()
 	}
+	alert("yep")
 	list_of_text.length = 0
 	var save_this_too = []
 	//i really should try saving the portraits
