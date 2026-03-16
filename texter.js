@@ -1044,7 +1044,7 @@ function loader_up(awesome_template)
 			{save_this_too[save_this_too.length-1].push(-1)}
 		else
 			{save_this_too[save_this_too.length-1].push(list_of_portraits[i].image.src)}
-		if(list_of_portraits[list_of_portraits.length-1].chara_pos.value != "none" && list_of_portraits[list_of_portraits.length-1].chara_pos.value != "custom"))
+		if(list_of_portraits[list_of_portraits.length-1].chara_pos.value != "none" && list_of_portraits[list_of_portraits.length-1].chara_pos.value != "custom")
 		{
 			save_this_too[save_this_too.length-1].push(list_of_portraits[i].exp_select.value)
 		}
