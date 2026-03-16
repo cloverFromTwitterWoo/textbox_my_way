@@ -1031,7 +1031,7 @@ function loader_up(awesome_template)
 		list_of_text[i].border.remove()
 		list_of_text[i].linebreak.remove()
 	}
-	alert("just wirk")
+	//alert("just wirk")
 	list_of_text.length = 0
 	var save_this_too = []
 	//i really should try saving the portraits
@@ -1087,7 +1087,7 @@ function loader_up(awesome_template)
 		{
 			if(save_this_too[list_of_portraits.length-1][1] != -1 && save_this_too[list_of_portraits.length-1][1] != undefined)
 			{
-				alert("uh")
+				//alert("uh")
 				list_of_portraits[list_of_portraits.length-1].chara_pos.value = save_this_too[list_of_portraits.length-1][0]
 				var image = new Image();
         		image.src = save_this_too[list_of_portraits.length-1][1]
@@ -1095,7 +1095,7 @@ function loader_up(awesome_template)
 				list_of_portraits[list_of_portraits.length-1].image.classList.add("image_border")
 				list_of_portraits[list_of_portraits.length-1].border.appendChild(list_of_portraits[list_of_portraits.length-1].linebreak_two)
 				list_of_portraits[list_of_portraits.length-1].border.appendChild(list_of_portraits[list_of_portraits.length-1].image)
-				alert(save_this_too[list_of_portraits.length-1].length)
+				//alert(save_this_too[list_of_portraits.length-1].length)
 				if(save_this_too[list_of_portraits.length-1].length > 2)
 				{
 					
@@ -1104,7 +1104,7 @@ function loader_up(awesome_template)
 					list_of_portraits[list_of_portraits.length-1].exp_select.style = "display: inline"
 					list_of_portraits[list_of_portraits.length-1].exp_select.innerHTML = exp_options[list_of_portraits[list_of_portraits.length-1].chara_pos.value]
 					list_of_portraits[list_of_portraits.length-1].exp_select.value = save_this_too[list_of_portraits.length-1][2]
-					alert("alright!")
+					//alert("alright!")
 					var event = new Event('change');
 					list_of_portraits[list_of_portraits.length-1].exp_select.dispatchEvent(event);
 				}
@@ -1113,7 +1113,7 @@ function loader_up(awesome_template)
 					var event = new Event('change');
 					list_of_portraits[list_of_portraits.length-1].chara_pos.dispatchEvent(event);
 				}
-				alert("oh")
+				//alert("oh")
 			}
 		}	
 		i++
