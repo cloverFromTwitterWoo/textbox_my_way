@@ -1038,8 +1038,8 @@ function loader_up(awesome_template)
 	for(let i = 0; i < list_of_portraits.length; i++)
 	{
 		save_this_too.push([])
-		alert("bleh")
-		save_this_too[save_this_too.length-1].push(list_of_portraits[i].chara.pos)
+		alert("bleh V2")
+		save_this_too[save_this_too.length-1].push(list_of_portraits[i].chara_pos)
 		alert("char's in")
 		if(list_of_portraits[i].image == false || list_of_portraits[list_of_portraits.length-1].chara_pos.value == "none")
 			{save_this_too[save_this_too.length-1].push(-1)}
