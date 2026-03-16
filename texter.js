@@ -1030,7 +1030,7 @@ function loader_up(awesome_template)
 		list_of_text[i].border.remove()
 		list_of_text[i].linebreak.remove()
 	}
-	alert("actully?!!!??")
+	alert("i love test?")
 	list_of_text.length = 0
 	var save_this_too = []
 	//i really should try saving the portraits
@@ -1044,12 +1044,13 @@ function loader_up(awesome_template)
 			{save_this_too[save_this_too.length-1].push(-1)}
 		else
 			{save_this_too[save_this_too.length-1].push(list_of_portraits[i].image.src)}
-		if(!(list_of_portraits[list_of_portraits.length-1].chara_pos.value == "none" || list_of_portraits[list_of_portraits.length-1].chara_pos.value == "custom"))
+		if(list_of_portraits[list_of_portraits.length-1].chara_pos.value != "none" && list_of_portraits[list_of_portraits.length-1].chara_pos.value != "custom"))
 		{
 			save_this_too[save_this_too.length-1].push(list_of_portraits[i].exp_select.value)
 		}
 		list_of_portraits[i].border.remove()
 		list_of_portraits[i].linebreak.remove()
+		alert(save_this_too[save_this_too.length-1])
 	}
 	list_of_portraits.length = 0
 	for(let i = 0; i < list_of_over.length; i++)
