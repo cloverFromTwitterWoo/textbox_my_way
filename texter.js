@@ -1031,7 +1031,7 @@ function loader_up(awesome_template)
 		list_of_text[i].border.remove()
 		list_of_text[i].linebreak.remove()
 	}
-	alert("i am still so mad vrap")
+	alert("just wirk")
 	list_of_text.length = 0
 	var save_this_too = []
 	//i really should try saving the portraits
@@ -1087,6 +1087,7 @@ function loader_up(awesome_template)
 		{
 			if(save_this_too[list_of_portraits.length-1][1] != -1 && save_this_too[list_of_portraits.length-1][1] != undefined)
 			{
+				alert("uh")
 				list_of_portraits[list_of_portraits.length-1].chara_pos.value = save_this_too[list_of_portraits.length-1][0]
 				var image = new Image();
         		image.src = save_this_too[list_of_portraits.length-1][1]
@@ -1112,6 +1113,7 @@ function loader_up(awesome_template)
 					var event = new Event('change');
 					list_of_portraits[list_of_portraits.length-1].chara_pos.dispatchEvent(event);
 				}
+				alert("oh")
 			}
 		}	
 		i++
@@ -1406,7 +1408,7 @@ function draw_text(pass_in)//(x,y,str)
 			canvas.imageSmoothingEnabled = false
 			portrait_blacka.drawImage(cur_font,letter_info[0],letter_info[1],letter_info[2],letter_info[3],0,0,letter_info[2],letter_info[3])
 			var what_to = pass_in.c_type.value
-			var cool_pixels = portrait_blacka.getImageData(0,0,letter_info[2],letter_info[3], "rgba-unorm8")
+			var cool_pixels = portrait_blacka.getImageData(0,0,letter_info[2],letter_info[3]) //does this need something?
 			for(var j = 3; j < cool_pixels.data.length; j += 4)
 			{
 				if(what_to == "multi")
