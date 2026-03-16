@@ -160,7 +160,7 @@ function refresh_box_list()
 		list_of_boxes[i].upButt.id = "boxU_" + String(i)
 		//list_of_boxes[i].downButt.className = "box_" + String(i)
 		box_container.appendChild(list_of_boxes[i].border)
-		box_container.appendChild(list_of_boxes[i].linebreak)
+		box_container.appendChild(list_of_boxes[i].linebreak
 	}
 }
 
@@ -176,6 +176,7 @@ function box_list_swap(which, dir)
 		var the_guy = list_of_boxes.splice(which, 1);
 		list_of_boxes.splice(which+1,0,the_guy[0])
 	}
+	console.log(list_of_boxes)
 	refresh_box_list()
 }
 
@@ -243,6 +244,9 @@ function new_box(def_name="", def_image=-1, def_x=0, def_y=0, def_w=578, def_h=1
 	newBox.image_sel.type = "file"
 	newBox.image_sel.accept = "image/png"
 	newBox.image_sel.classList.add("box_" + String(list_of_boxes.length))
+	newBox.image_post. = document.createElement("span")
+	newBox.image_post.innerHTML = "[Selected]"
+	newBox.image_post.style = "display: none"
 	newBox.image_sel.addEventListener('change', function(ev)
 	{
 		if(ev.target.files) {
@@ -265,6 +269,8 @@ function new_box(def_name="", def_image=-1, def_x=0, def_y=0, def_w=578, def_h=1
 				{
 					list_of_boxes[which_box].image.src=e.target.result;
 				}
+				list_of_boxes[which_box].image_post.style = "display: none"
+				list_of_boxes[which_box].image_sel.style.removeProperty("width")
       			}
    		}
 	});
@@ -286,8 +292,11 @@ function new_box(def_name="", def_image=-1, def_x=0, def_y=0, def_w=578, def_h=1
 			newBox.image = image
 			newBox.image.style.display='none'
 		}
+		newBox.image_post.style = "display: inline"
+		newBox.image_sel.style = "width: 90px"
 	}
 	newBox.border.appendChild(newBox.image_sel)
+	newBox.border.appendChild(newBox.image_post)
 
 	newBox.border.appendChild(document.createElement("br"))
 	newBox.border.appendChild(complex_br())
@@ -398,6 +407,8 @@ function new_box(def_name="", def_image=-1, def_x=0, def_y=0, def_w=578, def_h=1
 	newBox.border.appendChild(newBox.downButt)*/
 
 	box_container.appendChild(newBox.border)
+
+	newBox.number = list_of_boxes.length
 
 	newBox.linebreak = complex_br()
 	box_container.appendChild(newBox.linebreak)
