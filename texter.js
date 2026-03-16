@@ -244,7 +244,7 @@ function new_box(def_name="", def_image=-1, def_x=0, def_y=0, def_w=578, def_h=1
 	newBox.image_sel.type = "file"
 	newBox.image_sel.accept = "image/png"
 	newBox.image_sel.classList.add("box_" + String(list_of_boxes.length))
-	newBox.image_post. = document.createElement("span")
+	newBox.image_post = document.createElement("span")
 	newBox.image_post.innerHTML = "[Selected]"
 	newBox.image_post.style = "display: none"
 	newBox.image_sel.addEventListener('change', function(ev)
