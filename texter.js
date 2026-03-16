@@ -158,6 +158,7 @@ function refresh_box_list()
 		//list_of_boxes[i].upButt.className = "box_" + String(i)
 		list_of_boxes[i].removeButt.id = "box_" + String(i)
 		list_of_boxes[i].upButt.id = "boxU_" + String(i)
+		list_of_boxes[i].downButt.id = "boxD_" + String(i)
 		//list_of_boxes[i].downButt.className = "box_" + String(i)
 		box_container.appendChild(list_of_boxes[i].border)
 		box_container.appendChild(list_of_boxes[i].linebreak)
@@ -171,43 +172,115 @@ function box_list_swap(which, dir)
 		var the_guy = list_of_boxes.splice(which, 1);
 		list_of_boxes.splice(which-1,0,the_guy[0])
 	}
-	else if (dir == 1 && which < bonus_boxes.length)
+	else if (dir == 1 && which < list_of_boxes.length)
 	{
 		var the_guy = list_of_boxes.splice(which, 1);
 		list_of_boxes.splice(which+1,0,the_guy[0])
 	}
-	console.log(list_of_boxes)
 	refresh_box_list()
 }
 
 function refresh_text_list()
 {
+	for(var i = 0; i < list_of_boxes.length; i++)
+	{
+		list_of_text[i].border.remove()
+		list_of_text[i].linebreak.remove()
+	}
 	for(var i = 0; i < list_of_text.length; i++)
 	{
 		list_of_text[i].removeButt.id = "text_" + String(i)
+		list_of_text[i].downButt.id = "textD_" + String(i)
+		list_of_text[i].upButt.id = "textU_" + String(i)
+		text_container.appendChild(list_of_text[i].border)
+		text_container.appendChild(list_of_text[i].linebreak)
 	}
+}
+
+function text_list_swap(which, dir)
+{
+	if(dir == -1 && which > 0)
+	{
+		var the_guy = list_of_text.splice(which, 1);
+		list_of_text.splice(which-1,0,the_guy[0])
+	}
+	else if (dir == 1 && which < list_of_text.length)
+	{
+		var the_guy = list_of_text.splice(which, 1);
+		list_of_text.splice(which+1,0,the_guy[0])
+	}
+	refresh_text_list()
 }
 
 function refresh_char_list()
 {
 	for(var i = 0; i < list_of_portraits.length; i++)
 	{
+		list_of_portraits[i].border.remove()
+		list_of_portraits[i].linebreak.remove()
+	}
+	for(var i = 0; i < list_of_portraits.length; i++)
+	{
 		list_of_portraits[i].removeButt.id = "port_" + String(i)
+		list_of_portraits[i].downButt.id = "portW_" + String(i)
+		list_of_portraits[i].upButt.id = "portU_" + String(i)
 		list_of_portraits[i].chara_pos.className = "port_" + String(i)
 		list_of_portraits[i].exp_select.className = "port_" + String(i)
 		list_of_portraits[i].image_sel.className = "port_" + String(i)
 		list_of_portraits[i].s_pos.id = "portD_" + String(i)
+		char_container.appendChild(list_of_portraits[i].border)
+		char_container.appendChild(list_of_portraits[i].linebreak)
 	}
 }
+
+function port_list_swap(which, dir)
+{
+	if(dir == -1 && which > 0)
+	{
+		var the_guy = list_of_portraits.splice(which, 1);
+		list_of_portraits.splice(which-1,0,the_guy[0])
+	}
+	else if (dir == 1 && which < list_of_portraits.length)
+	{
+		var the_guy = list_of_portraits.splice(which, 1);
+		list_of_portraits.splice(which+1,0,the_guy[0])
+	}
+	refresh_char_list()
+}
+
 
 function refresh_over_list()
 {
 	for(var i = 0; i < list_of_over.length; i++)
 	{
+		list_of_over[i].border.remove()
+		list_of_over[i].linebreak.remove()
+	}
+	for(var i = 0; i < list_of_over.length; i++)
+	{
 		list_of_over[i].removeButt.id = "port_" + String(i)
+		list_of_over[i].upButt.id = "portU_" + String(i)
+		list_of_over[i].downButt.id = "portD_" + String(i)
 		list_of_over[i].chara_pos.className = "port_" + String(i)
 		list_of_over[i].image_sel.className = "port_" + String(i)
+		over_container.appendChild(list_of_over[i].border)
+		over_container.appendChild(list_of_over[i].linebreak)
 	}
+}
+
+function over_list_swap(which, dir)
+{
+	if(dir == -1 && which > 0)
+	{
+		var the_guy = list_of_over.splice(which, 1);
+		list_of_over.splice(which-1,0,the_guy[0])
+	}
+	else if (dir == 1 && which < list_of_over.length)
+	{
+		var the_guy = list_of_over.splice(which, 1);
+		list_of_over.splice(which+1,0,the_guy[0])
+	}
+	refresh_over_list()
 }
 
 function complex_br()
@@ -361,21 +434,6 @@ function new_box(def_name="", def_image=-1, def_x=0, def_y=0, def_w=578, def_h=1
 	newBox.border.appendChild(document.createElement("br"))
 	newBox.border.appendChild(document.createElement("br"))
 
-	/*newBox.upButt = document.createElement("button");
-	newBox.upButt.innerHTML = "^"
-	newBox.upButt.classList.add("box_" + String(list_of_boxes.length))
-	newBox.upButt.onclick = function() 
-	{
-		var which_box = Number(this.className.substring(4))
-		if(which_box > 0)
-		{
-			alert("?")
-			list_of_boxes.length = 0
-			refresh_box_list()
-		}
-	}
-	newBox.border.appendChild(newBox.upButt)*/
-
 	newBox.upButt = document.createElement("button");
 	newBox.upButt.innerHTML = "^"
 	newBox.upButt.id = "boxU_" + String(list_of_boxes.length)
@@ -384,12 +442,12 @@ function new_box(def_name="", def_image=-1, def_x=0, def_y=0, def_w=578, def_h=1
 	{
 		var which_box = Number(this.id.substring(5))
 		
-		box_list_swap(which_box)
+		box_list_swap(which_box, -1)
 	}
 	newBox.border.appendChild(newBox.upButt)
 
 	newBox.removeButt = document.createElement("button");
-	newBox.removeButt.innerHTML = "Remove"
+	newBox.removeButt.innerHTML = "X"
 	newBox.removeButt.id = "box_" + String(list_of_boxes.length)
 	newBox.removeButt.classList.add("complex")
 	newBox.removeButt.onclick = function() 
@@ -401,6 +459,18 @@ function new_box(def_name="", def_image=-1, def_x=0, def_y=0, def_w=578, def_h=1
 		refresh_box_list()
 	}
 	newBox.border.appendChild(newBox.removeButt)
+
+	newBox.downButt = document.createElement("button");
+	newBox.downButt.innerHTML = "v"
+	newBox.downButt.id = "boxD_" + String(list_of_boxes.length)
+	newBox.downButt.classList.add("complex")
+	newBox.downButt.onclick = function() 
+	{
+		var which_box = Number(this.id.substring(5))
+		
+		box_list_swap(which_box, 1)
+	}
+	newBox.border.appendChild(newBox.downButt)
 
 	/*newBox.downButt = document.createElement("button");
 	newBox.downButt.innerHTML = "v"
@@ -546,7 +616,7 @@ function new_text(def_name="", def_x=0, def_y=0, def_x_off=0, def_y_off=0, def_o
 	newText.border.appendChild(complex_br())
 	newText.border.appendChild(complex_br())
 
-	newText.removeButt = document.createElement("button");
+	/*newText.removeButt = document.createElement("button");
 	newText.removeButt.innerHTML = "Remove"
 	newText.removeButt.id ="text_" + String(list_of_text.length)
 	newText.removeButt.classList.add("complex")
@@ -558,7 +628,45 @@ function new_text(def_name="", def_x=0, def_y=0, def_x_off=0, def_y_off=0, def_o
 		list_of_text.splice(which_text, 1)
 		refresh_text_list()
 	}
+	newText.border.appendChild(newText.removeButt)*/
+
+	newText.upButt = document.createElement("button");
+	newText.upButt.innerHTML = "^"
+	newText.upButt.id = "textU_" + String(list_of_text.length)
+	newText.upButt.classList.add("complex")
+	newText.upButt.onclick = function() 
+	{
+		var which_text = Number(this.id.substring(6))
+		
+		text_list_swap(which_text, -1)
+	}
+	newText.border.appendChild(newText.upButt)
+
+	newText.removeButt = document.createElement("button");
+	newText.removeButt.innerHTML = "X"
+	newText.removeButt.id = "text_" + String(list_of_text.length)
+	newText.removeButt.classList.add("complex")
+	newText.removeButt.onclick = function() 
+	{
+		var which_text = Number(this.id.substring(5))
+		list_of_text[which_text].border.remove()
+		list_of_text[which_text].linebreak.remove()
+		list_of_text.splice(which_text, 1)
+		refresh_text_list()
+	}
 	newText.border.appendChild(newText.removeButt)
+
+	newText.downButt = document.createElement("button");
+	newText.downButt.innerHTML = "v"
+	newText.downButt.id = "textD_" + String(list_of_text.length)
+	newText.downButt.classList.add("complex")
+	newText.downButt.onclick = function() 
+	{
+		var which_text = Number(this.id.substring(6))
+		
+		text_list_swap(which_text, 1)
+	}
+	newText.border.appendChild(newText.downButt)
 
 	text_container.appendChild(newText.border)
 	newText.linebreak = complex_br()
@@ -834,8 +942,20 @@ function new_port(def_name="", def_x=0, def_y=0, def_s="2x_Scaling", def_o=true,
 	newPort.border.appendChild(complex_br())
 	newPort.border.appendChild(complex_br())
 
+	newPort.upButt = document.createElement("button");
+	newPort.upButt.innerHTML = "^"
+	newPort.upButt.id = "portU_" + String(list_of_portraits.length)
+	newPort.upButt.classList.add("complex")
+	newPort.upButt.onclick = function() 
+	{
+		var which_port = Number(this.id.substring(6))
+		
+		port_list_swap(which_port, -1)
+	}
+	newPort.border.appendChild(newPort.upButt)
+
 	newPort.removeButt = document.createElement("button");
-	newPort.removeButt.innerHTML = "Remove"
+	newPort.removeButt.innerHTML = "X"
 	newPort.removeButt.id = "port_" + String(list_of_portraits.length)
 	newPort.removeButt.classList.add("complex")
 	newPort.removeButt.onclick = function() 
@@ -847,6 +967,18 @@ function new_port(def_name="", def_x=0, def_y=0, def_s="2x_Scaling", def_o=true,
 		refresh_char_list()
 	}
 	newPort.border.appendChild(newPort.removeButt)
+
+	newPort.downButt = document.createElement("button");
+	newPort.downButt.innerHTML = "v"
+	newPort.downButt.id = "portW_" + String(list_of_portraits.length)
+	newPort.downButt.classList.add("complex")
+	newPort.downButt.onclick = function() 
+	{
+		var which_port = Number(this.id.substring(6))
+		
+		port_list_swap(which_port, 1)
+	}
+	newPort.border.appendChild(newPort.downButt)
 
 	char_container.appendChild(newPort.border)
 	newPort.linebreak = complex_br()
@@ -911,6 +1043,10 @@ function new_over(def_name="", def_image=-1, def_x=0, def_y=0, def_w=-1, def_h=-
 		}
 	})
 	newOver.border.appendChild(newOver.chara_pos)
+
+	/*newOver.image_post = document.createElement("span")
+	newOver.image_post.innerHTML = "[Selected]"
+	newOver.image_post.style = "display: none"*/
 
 	if(def_image != -1)
 	{
@@ -1042,7 +1178,7 @@ function new_over(def_name="", def_image=-1, def_x=0, def_y=0, def_w=-1, def_h=-
 	newOver.border.appendChild(complex_br())
 	newOver.border.appendChild(complex_br())
 
-	newOver.removeButt = document.createElement("button");
+	/*newOver.removeButt = document.createElement("button");
 	newOver.removeButt.innerHTML = "Remove"
 	newOver.removeButt.id = "over_" + String(list_of_over.length)
 	newOver.removeButt.classList.add("complex")
@@ -1054,7 +1190,45 @@ function new_over(def_name="", def_image=-1, def_x=0, def_y=0, def_w=-1, def_h=-
 		list_of_over.splice(which_char, 1)
 		refresh_over_list()
 	}
+	newOver.border.appendChild(newOver.removeButt)*/
+
+	newOver.upButt = document.createElement("button");
+	newOver.upButt.innerHTML = "^"
+	newOver.upButt.id = "overU_" + String(list_of_over.length)
+	newOver.upButt.classList.add("complex")
+	newOver.upButt.onclick = function() 
+	{
+		var which_over = Number(this.id.substring(6))
+		
+		over_list_swap(which_over, -1)
+	}
+	newOver.border.appendChild(newOver.upButt)
+
+	newOver.removeButt = document.createElement("button");
+	newOver.removeButt.innerHTML = "X"
+	newOver.removeButt.id = "over_" + String(list_of_over.length)
+	newOver.removeButt.classList.add("complex")
+	newOver.removeButt.onclick = function() 
+	{
+		var which_char = Number(this.id.substring(5))
+		list_of_over[which_char].border.remove()
+		list_of_over[which_char].linebreak.remove()
+		list_of_over.splice(which_char, 1)
+		refresh_over_list()
+	}
 	newOver.border.appendChild(newOver.removeButt)
+
+	newOver.downButt = document.createElement("button");
+	newOver.downButt.innerHTML = "v"
+	newOver.downButt.id = "overW_" + String(list_of_over.length)
+	newOver.downButt.classList.add("complex")
+	newOver.downButt.onclick = function() 
+	{
+		var which_over = Number(this.id.substring(6))
+		
+		over_list_swap(which_over, 1)
+	}
+	newOver.border.appendChild(newOver.downButt)
 
 	over_container.appendChild(newOver.border)
 	newOver.linebreak = complex_br()
