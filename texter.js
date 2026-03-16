@@ -599,6 +599,7 @@ function new_port(def_name="", def_x=0, def_y=0, def_s="2x_Scaling", def_o=true,
 
 	newPort.exp_select.addEventListener("change", function(event) 
 	{
+		alert("blep")
 		var which_char = Number(this.className.substring(5))
 		var prehold = copy(list_of_portraits[which_char].image)
 		if(prehold != false)
@@ -1030,7 +1031,7 @@ function loader_up(awesome_template)
 		list_of_text[i].border.remove()
 		list_of_text[i].linebreak.remove()
 	}
-	alert("i hate test?ing a lot")
+	alert("i am so mad")
 	list_of_text.length = 0
 	var save_this_too = []
 	//i really should try saving the portraits
@@ -1095,13 +1096,15 @@ function loader_up(awesome_template)
 				list_of_portraits[list_of_portraits.length-1].border.appendChild(list_of_portraits[list_of_portraits.length-1].image)
 				if(list_of_portraits[list_of_portraits.length-1].length > 2)
 				{
-					list_of_portraits[list_of_portraits.length-1].exp_select.value = save_this_too[list_of_portraits.length-1][2]
+					
 					list_of_portraits[list_of_portraits.length-1].exp_txt.style = "display: inline"
 			
-				list_of_portraits[list_of_portraits.length-1].exp_select.style = "display: inline"
-				list_of_portraits[list_of_portraits.length-1].exp_select.innerHTML = exp_options[list_of_portraits[list_of_portraits.length-1].chara_pos.value]
-				var event = new Event('change');
-				list_of_portraits[list_of_portraits.length-1].exp_select.dispatchEvent(event);
+					list_of_portraits[list_of_portraits.length-1].exp_select.style = "display: inline"
+					list_of_portraits[list_of_portraits.length-1].exp_select.innerHTML = exp_options[list_of_portraits[list_of_portraits.length-1].chara_pos.value]
+					list_of_portraits[list_of_portraits.length-1].exp_select.value = save_this_too[list_of_portraits.length-1][2]
+					alert("alright!")
+					var event = new Event('change');
+					list_of_portraits[list_of_portraits.length-1].exp_select.dispatchEvent(event);
 				}
 				else
 				{
