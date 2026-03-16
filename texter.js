@@ -149,11 +149,34 @@ function refresh_box_list()
 {
 	for(var i = 0; i < list_of_boxes.length; i++)
 	{
+		list_of_boxes[i].border.remove()
+		list_of_boxes[i].linebreak.remove()
+	}
+	for(var i = 0; i < list_of_boxes.length; i++)
+	{
 		list_of_boxes[i].image_sel.className = "box_" + String(i)
 		//list_of_boxes[i].upButt.className = "box_" + String(i)
 		list_of_boxes[i].removeButt.id = "box_" + String(i)
+		list_of_boxes[i].upButt.id = "boxU_" + String(i)
 		//list_of_boxes[i].downButt.className = "box_" + String(i)
+		box_container.appendChild(list_of_boxes[i].border)
+		box_container.appendChild(list_of_boxes[i].linebreak)
 	}
+}
+
+function box_list_swap(which, dir)
+{
+	if(dir == -1 && which > 0)
+	{
+		var the_guy = list_of_boxes.splice(which, 1);
+		list_of_boxes.splice(which-1,0,the_guy[0])
+	}
+	else if (dir == 1 && which < bonus_boxes.length)
+	{
+		var the_guy = list_of_boxes.splice(which, 1);
+		list_of_boxes.splice(which+1,0,the_guy[0])
+	}
+	refresh_box_list()
 }
 
 function refresh_text_list()
@@ -343,6 +366,18 @@ function new_box(def_name="", def_image=-1, def_x=0, def_y=0, def_w=578, def_h=1
 		}
 	}
 	newBox.border.appendChild(newBox.upButt)*/
+
+	newBox.upButt = document.createElement("button");
+	newBox.upButt.innerHTML = "^"
+	newBox.upButt.id = "boxU_" + String(list_of_boxes.length)
+	newBox.upButt.classList.add("complex")
+	newBox.upButt.onclick = function() 
+	{
+		var which_box = Number(this.id.substring(5))
+		
+		box_list_swap(which_box)
+	}
+	newBox.border.appendChild(newBox.upButt)
 
 	newBox.removeButt = document.createElement("button");
 	newBox.removeButt.innerHTML = "Remove"
@@ -599,7 +634,7 @@ function new_port(def_name="", def_x=0, def_y=0, def_s="2x_Scaling", def_o=true,
 
 	newPort.exp_select.addEventListener("change", function(event) 
 	{
-		alert("blep")
+		//alert("blep")
 		var which_char = Number(this.className.substring(5))
 		var prehold = copy(list_of_portraits[which_char].image)
 		if(prehold != false)
