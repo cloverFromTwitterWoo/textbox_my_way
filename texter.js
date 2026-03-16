@@ -1038,18 +1038,23 @@ function loader_up(awesome_template)
 	for(let i = 0; i < list_of_portraits.length; i++)
 	{
 		save_this_too.push([])
+		alert("bleh")
 		save_this_too[save_this_too.length-1].push(list_of_portraits[i].chara.pos)
+		alert("char's in")
 		if(list_of_portraits[i].image == false || list_of_portraits[list_of_portraits.length-1].chara_pos.value == "none")
 			{save_this_too[save_this_too.length-1].push(-1)}
 		else
 			{save_this_too[save_this_too.length-1].push(list_of_portraits[i].image.src)}
+		alert("img in")
 		if(!(list_of_portraits[list_of_portraits.length-1].chara_pos.value == "none" || list_of_portraits[list_of_portraits.length-1].chara_pos.value == "custom"))
 		{
 			save_this_too[save_this_too.length-1].push(list_of_portraits[i].exp_txt)
 		}
+		alert("exp in")
 		list_of_portraits[i].border.remove()
 		list_of_portraits[i].linebreak.remove()
 	}
+	alert("portrait alright?")
 	list_of_portraits.length = 0
 	for(let i = 0; i < list_of_over.length; i++)
 	{
