@@ -1030,7 +1030,7 @@ function loader_up(awesome_template)
 		list_of_text[i].border.remove()
 		list_of_text[i].linebreak.remove()
 	}
-	alert("i love test?")
+	alert("i hate test?ing a lot")
 	list_of_text.length = 0
 	var save_this_too = []
 	//i really should try saving the portraits
@@ -1050,7 +1050,7 @@ function loader_up(awesome_template)
 		}
 		list_of_portraits[i].border.remove()
 		list_of_portraits[i].linebreak.remove()
-		alert(save_this_too[save_this_too.length-1])
+		//alert(save_this_too[save_this_too.length-1])
 	}
 	list_of_portraits.length = 0
 	for(let i = 0; i < list_of_over.length; i++)
@@ -1093,15 +1093,21 @@ function loader_up(awesome_template)
 				list_of_portraits[list_of_portraits.length-1].image.classList.add("image_border")
 				list_of_portraits[list_of_portraits.length-1].border.appendChild(list_of_portraits[list_of_portraits.length-1].linebreak_two)
 				list_of_portraits[list_of_portraits.length-1].border.appendChild(list_of_portraits[list_of_portraits.length-1].image)
-				var event = new Event('change');
-				list_of_portraits[list_of_portraits.length-1].chara_pos.dispatchEvent(event);
 				if(list_of_portraits[list_of_portraits.length-1].length > 2)
 				{
 					list_of_portraits[list_of_portraits.length-1].exp_select.value = save_this_too[list_of_portraits.length-1][2]
-					var event = new Event('change');
+					list_of_portraits[list_of_portraits.length-1].exp_txt.style = "display: inline"
+			
+				list_of_portraits[list_of_portraits.length-1].exp_select.style = "display: inline"
+				list_of_portraits[list_of_portraits.length-1].exp_select.innerHTML = exp_options[list_of_portraits[list_of_portraits.length-1].chara_pos.value]
+				var event = new Event('change');
 				list_of_portraits[list_of_portraits.length-1].exp_select.dispatchEvent(event);
 				}
-				
+				else
+				{
+					var event = new Event('change');
+					list_of_portraits[list_of_portraits.length-1].chara_pos.dispatchEvent(event);
+				}
 			}
 		}	
 		i++
