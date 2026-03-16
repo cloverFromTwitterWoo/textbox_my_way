@@ -160,7 +160,7 @@ function refresh_box_list()
 		list_of_boxes[i].upButt.id = "boxU_" + String(i)
 		//list_of_boxes[i].downButt.className = "box_" + String(i)
 		box_container.appendChild(list_of_boxes[i].border)
-		box_container.appendChild(list_of_boxes[i].linebreak
+		box_container.appendChild(list_of_boxes[i].linebreak)
 	}
 }
 
