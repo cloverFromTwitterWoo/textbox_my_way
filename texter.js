@@ -1037,10 +1037,16 @@ function loader_up(awesome_template)
 	//really annoying lol
 	for(let i = 0; i < list_of_portraits.length; i++)
 	{
-		if(list_of_portraits[i].image == false || list_of_portraits == list_of_portraits[list_of_portraits.length-1].chara_pos.value == "none")
-			{save_this_too.push(-1)}
+		save_this_too.push([])
+		save_this_too[save_this_too.length-1].push(list_of_portraits[i].chara.pos)
+		if(list_of_portraits[i].image == false || list_of_portraits[list_of_portraits.length-1].chara_pos.value == "none")
+			{save_this_too[save_this_too.length-1].push(-1)}
 		else
-			{save_this_too.push(list_of_portraits[i].image.src)}
+			{save_this_too[save_this_too.length-1].push(list_of_portraits[i].image.src)}
+		if(!(list_of_portraits[list_of_portraits.length-1].chara_pos.value == "none" || list_of_portraits[list_of_portraits.length-1].chara_pos.value == "custom"))
+		{
+			save_this_too[save_this_too.length-1].push(list_of_portraits[i].exp_txt)
+		}
 		list_of_portraits[i].border.remove()
 		list_of_portraits[i].linebreak.remove()
 	}
@@ -1076,10 +1082,11 @@ function loader_up(awesome_template)
 		//console.log(list_of_portraits[list_of_portraits.length-1])
 		if(list_of_portraits.length-1 < save_this_too.length)
 		{
-			if(save_this_too[list_of_portraits.length-1] != -1 && save_this_too[list_of_portraits.length-1] != undefined)
+			if(save_this_too[list_of_portraits.length-1][1] != -1 && save_this_too[list_of_portraits.length-1][1] != undefined)
 			{
+				list_of_portraits[list_of_portraits.length-1].chara_pos.value = save_this_too[list_of_portraits.length-1][0]
 				var image = new Image();
-        			image.src = save_this_too[list_of_portraits.length-1]
+        		image.src = save_this_too[list_of_portraits.length-1][1]
 				list_of_portraits[list_of_portraits.length-1].image = image
 				list_of_portraits[list_of_portraits.length-1].image.classList.add("image_border")
 				list_of_portraits[list_of_portraits.length-1].border.appendChild(list_of_portraits[list_of_portraits.length-1].linebreak_two)
@@ -1087,6 +1094,10 @@ function loader_up(awesome_template)
 				list_of_portraits[list_of_portraits.length-1].chara_pos.value = "custom"
 				var event = new Event('change');
 				list_of_portraits[list_of_portraits.length-1].chara_pos.dispatchEvent(event);
+				if(list_of_portraits[list_of_portraits.length-1].length > 2)
+				{
+					list_of_portraits[list_of_portraits.length-1].exp_txt = save_this_too[list_of_portraits.length-1][2]
+				}
 			}
 		}	
 		i++
