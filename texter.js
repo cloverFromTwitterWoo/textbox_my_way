@@ -1091,12 +1091,12 @@ function loader_up(awesome_template)
 				list_of_portraits[list_of_portraits.length-1].image.classList.add("image_border")
 				list_of_portraits[list_of_portraits.length-1].border.appendChild(list_of_portraits[list_of_portraits.length-1].linebreak_two)
 				list_of_portraits[list_of_portraits.length-1].border.appendChild(list_of_portraits[list_of_portraits.length-1].image)
-				list_of_portraits[list_of_portraits.length-1].chara_pos.value = "custom"
+				
 				var event = new Event('change');
 				list_of_portraits[list_of_portraits.length-1].chara_pos.dispatchEvent(event);
 				if(list_of_portraits[list_of_portraits.length-1].length > 2)
 				{
-					list_of_portraits[list_of_portraits.length-1].exp_txt = save_this_too[list_of_portraits.length-1][2]
+					list_of_portraits[list_of_portraits.length-1].exp_txt.value = save_this_too[list_of_portraits.length-1][2]
 				}
 			}
 		}	
