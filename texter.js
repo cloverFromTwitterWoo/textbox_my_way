@@ -1031,7 +1031,7 @@ function loader_up(awesome_template)
 		list_of_text[i].border.remove()
 		list_of_text[i].linebreak.remove()
 	}
-	alert("i am so mad")
+	alert("i am still so mad")
 	list_of_text.length = 0
 	var save_this_too = []
 	//i really should try saving the portraits
@@ -1094,6 +1094,7 @@ function loader_up(awesome_template)
 				list_of_portraits[list_of_portraits.length-1].image.classList.add("image_border")
 				list_of_portraits[list_of_portraits.length-1].border.appendChild(list_of_portraits[list_of_portraits.length-1].linebreak_two)
 				list_of_portraits[list_of_portraits.length-1].border.appendChild(list_of_portraits[list_of_portraits.length-1].image)
+				alert(list_of_portraits[list_of_portraits.length-1].length)
 				if(list_of_portraits[list_of_portraits.length-1].length > 2)
 				{
 					
