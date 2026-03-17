@@ -1993,7 +1993,7 @@ function box_stack_update()
 		bonus_boxes[i][3].value = i
 		bonus_boxes[i][4].value = i
 	}
-	console.log("I got to Point 1")
+	//console.log("I got to Point 1")
 	var row_length = Number(stack_width_inp.value)
 	var row_heights = []
 	var column_widths = []
@@ -2016,9 +2016,9 @@ function box_stack_update()
 			column_widths[i % row_length] = bonus_boxes[i][1].width
 		}
 	}
-	console.log("I got to Point 2")
-	console.log(row_heights)
-	console.log(column_widths)
+	//console.log("I got to Point 2")
+	//console.log(row_heights)
+	//console.log(column_widths)
 	canvas_stack.width = marge.checked ? 6 : 0
 	for(let i = 0; i < column_widths.length; i++)
 	{
@@ -2030,7 +2030,7 @@ function box_stack_update()
 		canvas_stack.height += row_heights[i] + 6*marge.checked
 	}
 	if(marge.checked){ctx_stack.fillRect(0,0,canvas_stack.width,canvas_stack.height)}
-	console.log("I got to Point 3")
+	//console.log("I got to Point 3")
 	var x_pos = 0
 	var y_pos = marge.checked ? 6 : 0
 	for (let i = 0; i < bonus_boxes.length; i++) 
@@ -2053,16 +2053,19 @@ function box_stack_update()
 		var whole_length = right_point - left_point
 		var draw_y = (whole_length - bonus_boxes[i].height)/2
 		
+		console.log(String(i) + "X: " + String(draw_x))
+		console.log(String(i) + "Y: " + String(draw_y))
 		ctx_stack.drawImage(bonus_boxes[i][1], draw_x, draw_y)
+		//ctx_stack.fillRect(draw_x,draw_y,canvas_stack.width,canvas_stack.height)
 	
 		x_pos += column_widths[i % row_length]
 	}
-	console.log("I got to Point 4")
+	//console.log("I got to Point 4")
 
 	const dataURL = canvas_stack.toDataURL('image/png');
 	awesome_canvas_Stacked.style.display = 'block'
 	awesome_canvas_Stacked.src = dataURL;
-	console.log("I got to Point 5")
+	//console.log("I got to Point 5")
 }
 
 function box_stack_remove(which)
