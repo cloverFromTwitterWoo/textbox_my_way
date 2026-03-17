@@ -2047,9 +2047,9 @@ function box_stack_add()
     	save_cav.height = 6
 	var btx = save_cav.getContext('2d');
    	btx.drawImage(awesome_canvas, 0, 0);
-	var cool_pixels = save_cav.getImageData(0,0,6,6)
+	var cool_pixels = btx.getImageData(0,0,6,6)
 	var is_margin = true
-	for(var i = 3; i < save_cav.data.length; i += 7*4)
+	for(var i = 3; i < cool_pixels.data.length; i += 7*4)
 	{
 		if(cool_pixels.data[i-1] != 0 || cool_pixels.data[i-2] != 0 || cool_pixels.data[i-3] != 0)
 		{
