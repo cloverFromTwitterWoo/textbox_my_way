@@ -1993,17 +1993,71 @@ function box_stack_update()
 		bonus_boxes[i][3].value = i
 		bonus_boxes[i][4].value = i
 	}
-	var stack_width = Number(stack_width_inp.value)
-	canvas_stack.height = (box_size[3] + 12)*Math.ceil(bonus_boxes.length/stack_width)
-	canvas_stack.width = (box_size[2] + 12)*stack_width
-	ctx_stack.fillRect(0,0,canvas_stack.width,canvas_stack.height)
+	var row_length = Number(stack_width_inp.value)
+	/*canvas_stack.height = (box_size[3] + 12)*Math.ceil(bonus_boxes.length/stack_width)
+	canvas_stack.width = (box_size[2] + 12)*stack_width*/
+	var row_heights = []
+	var column_widths = []
+	for (let i = 0; i < bonus_boxes.length; i++)
+	{
+		if(i % row_length == 0)
+		{
+			row_heights.push(bonus_boxes[i].height)
+		}
+		else if (bonus_boxes[i].height > row_heights[Math.floor(i/row_length)])
+		{
+			row_heights[Math.floor(i/row_length)] = bonus_boxes[i].height
+		}
+		if(i % row_length >= column_widths.length)
+		{
+			column_widths.push(bonus_boxes[i].width)
+		}
+		else if (bonus_boxes[i].width > column_widths[i % row_length])
+		{
+			column_widths[i % row_length] = bonus_boxes[i].width
+		}
+	}
+	canvas_stack.width = marge.checked ? 6 : 0
+	for(let i = 0; i < column_widths.length; i++)
+	{
+		canvas_stack.width += column_widths[i] + 6*marge.checked
+	}
+	canvas_stack.height = marge.checked ? 6 : 0
+	for(let i = 0; i < row_heights.length; i++)
+	{
+		canvas_stack.height += row_heights[i] + 6*marge.checked
+	}
+	if(marge.checked){ctx_stack.fillRect(0,0,canvas_stack.width,canvas_stack.height)}
+	var x_pos = 0
+	var y_pos = marge.checked ? 6 : 0
 	for (let i = 0; i < bonus_boxes.length; i++) 
 	{
-		//to future me: check if the first 6 pixels diagonally are black
+		if(i % row_length == 0)
+		{
+			x_pos = marge.checked ? 6 : 0
+			if(i > 0)
+			{
+				y_pos += row_heights[Math.floor(i/row_length)-1]
+			}
+		}
+		var left_point = x_pos - 6*marge.checked
+		var right_point = column_widths[i % row_length] + 12*marge.checked
+		var whole_length = right_point - left_point
+		var draw_x = (whole_length - bonus_boxes[i].width)/2
+
+		var left_point = y_pos - 6*marge.checked
+		var right_point = row_heights[Math.floor(i/row_length)] + 12*marge.checked
+		var whole_length = right_point - left_point
+		var draw_y = (whole_length - bonus_boxes[i].height)/2
+		
+		ctx_stack.drawImage(bonus_boxes[i][1], draw_x, draw_y)
+	
+		x_pos += column_widths[i % row_length]
+		/*//to future me: check if the first 6 pixels diagonally are black
 		if(marge.checked)
   		{ctx_stack.drawImage(bonus_boxes[i][1], box_size[2]*(i%stack_width), (box_size[3] + 12)*Math.floor(i/stack_width))}
 		else
-  		{ctx_stack.drawImage(bonus_boxes[i][1], 6+(12+box_size[2])*(i%stack_width), 6+(box_size[3] + 12)*Math.floor(i/stack_width))}
+  		{ctx_stack.drawImage(bonus_boxes[i][1], 6+(12+box_size[2])*(i%stack_width), 6+(box_size[3] + 12)*Math.floor(i/stack_width))}*/
 	}
 
 	const dataURL = canvas_stack.toDataURL('image/png');
