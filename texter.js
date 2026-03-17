@@ -2040,7 +2040,31 @@ function box_stack_add()
 {
 	var new_stack = document.createElement('div')
 	const img = document.createElement('img');
-	img.src = awesome_canvas.src;
+	//img.src = awesome_canvas.src;
+	//new_stack.appendChild(img);
+	var save_cav = document.createElement('canvas');
+    save_cav.width = 6
+    save_cav.height = 6
+	var btx = save_cav.getContext('2d');
+    btx.drawImage(awesome_canvas.src, 0, 0);
+	var cool_pixels = portrait_blacka.getImageData(0,0,cur_font.width,cur_font.height)
+	var is_margin = true
+	for(var i = 3; i < save_cav.data.length; i += 7*4)
+	{
+		if(cool_pixels.data[i-1] != 0 || cool_pixels.data[i-2] != 0 || cool_pixels.data[i-3] != 0)
+		{
+			is_margin = false
+			break
+		}
+	}
+	if(is_margin)
+	{
+		//todo crop
+	}
+	else
+	{
+		img.src = awesome_canvas.src;
+	}
 	new_stack.appendChild(img);
 	//img.style.display = 'none'
 	//bonus_boxes.push(img)
