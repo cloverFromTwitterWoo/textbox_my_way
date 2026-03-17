@@ -2017,6 +2017,8 @@ function box_stack_update()
 		}
 	}
 	console.log("I got to Point 2")
+	console.log(row_heights)
+	console.log(column_heights)
 	canvas_stack.width = marge.checked ? 6 : 0
 	for(let i = 0; i < column_widths.length; i++)
 	{
