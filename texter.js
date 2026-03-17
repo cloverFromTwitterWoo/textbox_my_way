@@ -2040,25 +2040,18 @@ function box_stack_update()
 			x_pos = marge.checked ? 6 : 0
 			if(i > 0)
 			{
-				y_pos += row_heights[Math.floor(i/row_length)-1]
+				y_pos += row_heights[Math.floor(i/row_length)-1] + 6*marge.checked
 			}
 		}
-		var left_point = x_pos - 6*marge.checked
-		var right_point = column_widths[i % row_length] + 12*marge.checked
-		var whole_length = right_point - left_point
-		var draw_x = (whole_length - bonus_boxes[i][1].width)/2
-
-		var left_point = y_pos - 6*marge.checked
-		var right_point = row_heights[Math.floor(i/row_length)] + 12*marge.checked
-		var whole_length = right_point - left_point
-		var draw_y = (whole_length - bonus_boxes[i][1].height)/2
+		var draw_x = x_pos + ((column_widths[i % row_length] + 12*marge.checked) - bonus_boxes[i][1].width)/2
+		var draw_y = y_pos + ((row_heights[Math.floor(i/row_length)] + 12*marge.checked) - bonus_boxes[i][1].height)/2
 		
 		console.log(String(i) + "X: " + String(draw_x))
 		console.log(String(i) + "Y: " + String(draw_y))
 		ctx_stack.drawImage(bonus_boxes[i][1], draw_x, draw_y)
 		//ctx_stack.fillRect(draw_x,draw_y,canvas_stack.width,canvas_stack.height)
 	
-		x_pos += column_widths[i % row_length]
+		x_pos += column_widths[i % row_length] + 6*marge.checked
 	}
 	//console.log("I got to Point 4")
 
