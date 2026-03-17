@@ -2046,12 +2046,12 @@ function box_stack_update()
 		var left_point = x_pos - 6*marge.checked
 		var right_point = column_widths[i % row_length] + 12*marge.checked
 		var whole_length = right_point - left_point
-		var draw_x = (whole_length - bonus_boxes[i].width)/2
+		var draw_x = (whole_length - bonus_boxes[i][1].width)/2
 
 		var left_point = y_pos - 6*marge.checked
 		var right_point = row_heights[Math.floor(i/row_length)] + 12*marge.checked
 		var whole_length = right_point - left_point
-		var draw_y = (whole_length - bonus_boxes[i].height)/2
+		var draw_y = (whole_length - bonus_boxes[i][1].height)/2
 		
 		console.log(String(i) + "X: " + String(draw_x))
 		console.log(String(i) + "Y: " + String(draw_y))
