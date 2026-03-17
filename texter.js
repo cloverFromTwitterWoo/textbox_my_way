@@ -2043,11 +2043,11 @@ function box_stack_add()
 	//img.src = awesome_canvas.src;
 	//new_stack.appendChild(img);
 	var save_cav = document.createElement('canvas');
-    save_cav.width = 6
-    save_cav.height = 6
+    	save_cav.width = 6
+    	save_cav.height = 6
 	var btx = save_cav.getContext('2d');
-    btx.drawImage(awesome_canvas.src, 0, 0);
-	var cool_pixels = portrait_blacka.getImageData(0,0,cur_font.width,cur_font.height)
+   	btx.drawImage(awesome_canvas, 0, 0);
+	var cool_pixels = save_cav.getImageData(0,0,6,6)
 	var is_margin = true
 	for(var i = 3; i < save_cav.data.length; i += 7*4)
 	{
@@ -2059,7 +2059,10 @@ function box_stack_add()
 	}
 	if(is_margin)
 	{
-		//todo crop
+		save_cav.width = awesome_canvas.width - 12
+    		save_cav.height = awesome_canvas.height - 12
+		btx.drawImage(awesome_canvas, -6, -6);
+		img.src = save_cav.toDataURL('image/png');
 	}
 	else
 	{
