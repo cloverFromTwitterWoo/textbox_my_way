@@ -2001,24 +2001,24 @@ function box_stack_update()
 	{
 		if(i % row_length == 0)
 		{
-			row_heights.push(bonus_boxes[i].height)
+			row_heights.push(bonus_boxes[i][1].height)
 		}
-		else if (bonus_boxes[i].height > row_heights[Math.floor(i/row_length)])
+		else if (bonus_boxes[i][1].height > row_heights[Math.floor(i/row_length)])
 		{
-			row_heights[Math.floor(i/row_length)] = bonus_boxes[i].height
+			row_heights[Math.floor(i/row_length)] = bonus_boxes[i][1].height
 		}
 		if(i % row_length >= column_widths.length)
 		{
-			column_widths.push(bonus_boxes[i].width)
+			column_widths.push(bonus_boxes[i][1].width)
 		}
-		else if (bonus_boxes[i].width > column_widths[i % row_length])
+		else if (bonus_boxes[i][1].width > column_widths[i % row_length])
 		{
-			column_widths[i % row_length] = bonus_boxes[i].width
+			column_widths[i % row_length] = bonus_boxes[i][1].width
 		}
 	}
 	console.log("I got to Point 2")
 	console.log(row_heights)
-	console.log(column_heights)
+	console.log(column_widths)
 	canvas_stack.width = marge.checked ? 6 : 0
 	for(let i = 0; i < column_widths.length; i++)
 	{
