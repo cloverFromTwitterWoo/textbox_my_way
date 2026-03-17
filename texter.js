@@ -1993,9 +1993,8 @@ function box_stack_update()
 		bonus_boxes[i][3].value = i
 		bonus_boxes[i][4].value = i
 	}
+	console.log("I got to Point 1")
 	var row_length = Number(stack_width_inp.value)
-	/*canvas_stack.height = (box_size[3] + 12)*Math.ceil(bonus_boxes.length/stack_width)
-	canvas_stack.width = (box_size[2] + 12)*stack_width*/
 	var row_heights = []
 	var column_widths = []
 	for (let i = 0; i < bonus_boxes.length; i++)
@@ -2017,6 +2016,7 @@ function box_stack_update()
 			column_widths[i % row_length] = bonus_boxes[i].width
 		}
 	}
+	console.log("I got to Point 2")
 	canvas_stack.width = marge.checked ? 6 : 0
 	for(let i = 0; i < column_widths.length; i++)
 	{
@@ -2028,6 +2028,7 @@ function box_stack_update()
 		canvas_stack.height += row_heights[i] + 6*marge.checked
 	}
 	if(marge.checked){ctx_stack.fillRect(0,0,canvas_stack.width,canvas_stack.height)}
+	console.log("I got to Point 3")
 	var x_pos = 0
 	var y_pos = marge.checked ? 6 : 0
 	for (let i = 0; i < bonus_boxes.length; i++) 
@@ -2053,16 +2054,13 @@ function box_stack_update()
 		ctx_stack.drawImage(bonus_boxes[i][1], draw_x, draw_y)
 	
 		x_pos += column_widths[i % row_length]
-		/*//to future me: check if the first 6 pixels diagonally are black
-		if(marge.checked)
-  		{ctx_stack.drawImage(bonus_boxes[i][1], box_size[2]*(i%stack_width), (box_size[3] + 12)*Math.floor(i/stack_width))}
-		else
-  		{ctx_stack.drawImage(bonus_boxes[i][1], 6+(12+box_size[2])*(i%stack_width), 6+(box_size[3] + 12)*Math.floor(i/stack_width))}*/
 	}
+	console.log("I got to Point 4")
 
 	const dataURL = canvas_stack.toDataURL('image/png');
 	awesome_canvas_Stacked.style.display = 'block'
 	awesome_canvas_Stacked.src = dataURL;
+	console.log("I got to Point 5")
 }
 
 function box_stack_remove(which)
