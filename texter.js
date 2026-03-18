@@ -130,6 +130,18 @@ let prebaked_boxes = {
 	cavestory: [488, 128, ["", "assets/textboxes/cave_story.png", 0, 0, "#ffffff", "true"], "text", ["", 27, 23, 110, 0, false, false, false], "port", ["", 28, 20, "2x_Scaler", false], "over"],
 }
 
+let font_selection = '\
+<option value="assets/fonts/determination_mono.png">Default</option>\
+<option value="custom">Custom</option>\
+<option value="assets/fonts/papyrus.png">Papyrus</option>\
+<option value="assets/fonts/comic_sans.png">Comic Sans</option>\
+<option value="assets/fonts/silly.png">Silly Scribbles</option>\
+<option value="assets/fonts/omori_font.png">Omori (Normal)</option>\
+<option value="assets/fonts/omori_font2.png">Omori (Alt)</option>\
+<option value="assets/fonts/determination_upscale.png">Forever</option>\
+<option value="assets/fonts/arial.png">Arial</option>\
+<option value="assets/fonts/courier_new.png">Cave Story</option>'
+
 let char_options = '<option value="none">None</option><option value="custom">Custom</option><option value="flowey">Flowey</option><option value="toriel">Toriel</option>'
 
 let exp_options = 
@@ -143,7 +155,9 @@ let exp_options =
 	"toriel": '<option value="assets/characters/toriel/default.png">Default</option><option value="assets/characters/toriel/looking-away.png">Looking Away</option><option value="sad">Sad</option>'
 }
 
-let over_options = '<option value="none">None</option><option value="custom">Custom</option><option value="assets/overlays/fog.png">Fog</option><option value="assets/overlays/evil_glow.png">Red Glow</option><option value="assets/overlays/snowdin.png">Snow</option><option value="ssets/overlays/scanlines.png">Scanlines</option>'
+let over_options = '\
+<option value="none">None</option><option value="custom">Custom</option><option value="assets/overlays/fog.png">Fog</option>\
+<option value="assets/overlays/evil_glow.png">Red Glow</option><option value="assets/overlays/snowdin.png">Snow</option><option value="assets/overlays/scanlines.png">Scanlines</option>'
 
 function refresh_box_list()
 {
@@ -485,7 +499,48 @@ function new_box(def_name="", def_image=-1, def_x=0, def_y=0, def_w=578, def_h=1
 	list_of_boxes.push(newBox)
 }
 
-function new_text(def_name="", def_x=0, def_y=0, def_x_off=0, def_y_off=0, def_o=true, def_d=false, def_a=false)
+function generate_font(what_num)
+{
+	cur_font = list_of_text[what_num].cur_font
+	portrait_blacked.width = cur_font.width
+	portrait_blacked.height = cur_font.height
+	portrait_blacka.clearRect(0,0,cur_font.width,cur_font.height)
+	portrait_blacka.imageSmoothingEnabled = false
+	portrait_blacka.drawImage(cur_font,0,0)
+	var cool_pixels = portrait_blacka.getImageData(0,0,cur_font.width,cur_font.height)
+	for(var i = 3; i < cool_pixels.data.length; i += 4)
+	{
+		if(cool_pixels.data[i] > 0)
+		{
+			cool_pixels.data[i-3] = 0
+			cool_pixels.data[i-2] = 0
+			cool_pixels.data[i-1] = 0
+		}
+	}
+	portrait_blacka.putImageData(cool_pixels, 0, 0)
+	var blacked_out = portrait_blacked.toDataURL('image/png');
+	list_of_text[what_num].cur_outline.src = blacked_out;
+	portrait_blacked.width = cur_font.width
+	portrait_blacked.height = cur_font.height
+	portrait_blacka.clearRect(0,0,cur_font.width,cur_font.height)
+	portrait_blacka.imageSmoothingEnabled = false
+	portrait_blacka.drawImage(cur_font,0,0)
+	var cool_pixels = portrait_blacka.getImageData(0,0,cur_font.width,cur_font.height)
+	for(var i = 3; i < cool_pixels.data.length; i += 4)
+	{
+		if(cool_pixels.data[i] > 0)
+		{
+			cool_pixels.data[i-3] = 15
+			cool_pixels.data[i-2] = 15
+			cool_pixels.data[i-1] = 112
+		}
+	}
+	portrait_blacka.putImageData(cool_pixels, 0, 0)
+	var blacked_out = portrait_blacked.toDataURL('image/png');
+	list_of_text[what_num].cur_dw.src = blacked_out;
+}
+
+function new_text(def_name="", def_font="assets/fonts/determination_mono", def_spacing=false, def_x=0, def_y=0, def_x_off=0, def_y_off=0, def_o=true, def_d=false, def_a=false)
 {
 	var newText = {};
 	newText.border = document.createElement("div");
@@ -503,15 +558,63 @@ function new_text(def_name="", def_x=0, def_y=0, def_x_off=0, def_y_off=0, def_o
 
 	newText.border.appendChild(complex_br())
 
-	/*var font_txt = document.createElement("span");
+	var font_txt = document.createElement("span");
 	font_txt.innerHTML = "Font: "
 	newText.border.appendChild(font_txt)
+
+	//font_selection
+
+	newText.cur_font = new Image()
+	newText.cur_outline = new Image()
+	newText.cur_dw = new Image()
+
+	newText.chara_pos = document.createElement("select");
+	newText.chara_pos.innerHTML = font_selection
+	newText.chara_pos.classList.add("font_" + String(list_of_over.length))
+
+	newText.chara_pos.addEventListener("change", function(event) 
+	{
+		var which_char = Number(this.className.substring(5))
+		if(this.value == "custom")
+		{
+			list_of_text[which_char].image_sel.style = "display: inline"
+		}
+		else
+		{
+			//list_of_text[which_char].image_sel.style = "display: none"
+			list_of_text[which_char].cur_font.src = loadImage(this.value).src
+			
+			generate_font(which_char)
+			
+			/*if(this.value != "none")
+			{
+				if(list_of_over[which_char].image == false)
+				{
+					list_of_over[which_char].image = loadImage(this.value)
+					list_of_over[which_char].image.style = "display: none"
+				}
+				else
+				{
+					list_of_over[which_char].image = loadImage(this.value);
+				}
+			}*/
+		}
+	})
+	newText.border.appendChild(newText.chara_pos)
+
+	if(def_image.substring(0,7) == "assets/")
+	{
+		newText.chara_pos = def_image
+	}
+
+	var event = new Event('change');
+	newText.chara_pos.dispatchEvent(event);
 	
 	var placeholder = document.createElement("span");
 	placeholder.innerHTML = "[WIP]"
-	newText.border.appendChild(placeholder)
+	//newText.border.appendChild(placeholder)
 	
-	newText.border.appendChild(document.createElement("br"))*/
+	newText.border.appendChild(document.createElement("br"))
 	newText.border.appendChild(document.createElement("br"))
 
 	var set_txt = document.createElement("span");
@@ -616,20 +719,6 @@ function new_text(def_name="", def_x=0, def_y=0, def_x_off=0, def_y_off=0, def_o
 	newText.border.appendChild(complex_br())
 	newText.border.appendChild(complex_br())
 
-	/*newText.removeButt = document.createElement("button");
-	newText.removeButt.innerHTML = "Remove"
-	newText.removeButt.id ="text_" + String(list_of_text.length)
-	newText.removeButt.classList.add("complex")
-	newText.removeButt.onclick = function() 
-	{
-		var which_text = Number(this.id.substring(5))
-		list_of_text[which_text].border.remove()
-		list_of_text[which_text].linebreak.remove()
-		list_of_text.splice(which_text, 1)
-		refresh_text_list()
-	}
-	newText.border.appendChild(newText.removeButt)*/
-
 	newText.upButt = document.createElement("button");
 	newText.upButt.innerHTML = "^"
 	newText.upButt.id = "textU_" + String(list_of_text.length)
@@ -671,10 +760,11 @@ function new_text(def_name="", def_x=0, def_y=0, def_x_off=0, def_y_off=0, def_o
 	text_container.appendChild(newText.border)
 	newText.linebreak = complex_br()
 	text_container.appendChild(newText.linebreak)
+	text_container.appendChild(newText.cur_font)
 	list_of_text.push(newText)
 }
 
-function new_port(def_name="", def_x=0, def_y=0, def_s="2x_Scaling", def_o=true, def_w=-1, def_h=-1)
+function new_port(def_name="", def_font="determination_mono", def_x=0, def_y=0, def_s="2x_Scaling", def_o=true, def_w=-1, def_h=-1)
 {
 	var newPort = {};
 	newPort.border = document.createElement("div");
@@ -1352,49 +1442,9 @@ function loader_up(awesome_template)
 loader_up(prebaked_boxes["undertale"])
 list_of_text[0].text.value = "* Type in your text here!\\n* For colored text, do \\#ff0000T\\#ffa500H\\#ffff00I\\#00ff00S\\#0000ff!\\#a901c0!\\n  \\#ffffffIt uses the hex code. \\y-2]S\\y4]H\\y-4]A\\y4]K\\y-4]Y\\y2]!"
 
-function generate_font(new_fnt)
-{
-	portrait_blacked.width = cur_font.width
-	portrait_blacked.height = cur_font.height
-	portrait_blacka.clearRect(0,0,cur_font.width,cur_font.height)
-	portrait_blacka.imageSmoothingEnabled = false
-	portrait_blacka.drawImage(cur_font,0,0)
-	var cool_pixels = portrait_blacka.getImageData(0,0,cur_font.width,cur_font.height)
-	for(var i = 3; i < cool_pixels.data.length; i += 4)
-	{
-		if(cool_pixels.data[i] > 0)
-		{
-			cool_pixels.data[i-3] = 0
-			cool_pixels.data[i-2] = 0
-			cool_pixels.data[i-1] = 0
-		}
-	}
-	portrait_blacka.putImageData(cool_pixels, 0, 0)
-	var blacked_out = portrait_blacked.toDataURL('image/png');
-	cur_outline.src = blacked_out;
-	portrait_blacked.width = cur_font.width
-	portrait_blacked.height = cur_font.height
-	portrait_blacka.clearRect(0,0,cur_font.width,cur_font.height)
-	portrait_blacka.imageSmoothingEnabled = false
-	portrait_blacka.drawImage(cur_font,0,0)
-	var cool_pixels = portrait_blacka.getImageData(0,0,cur_font.width,cur_font.height)
-	for(var i = 3; i < cool_pixels.data.length; i += 4)
-	{
-		if(cool_pixels.data[i] > 0)
-		{
-			cool_pixels.data[i-3] = 15
-			cool_pixels.data[i-2] = 15
-			cool_pixels.data[i-1] = 112
-		}
-	}
-	portrait_blacka.putImageData(cool_pixels, 0, 0)
-	var blacked_out = portrait_blacked.toDataURL('image/png');
-	cur_dw.src = blacked_out;
-}
-
 //generate_font('assets/fonts/cfc determination_mono.png')
 
-cur_font = loadImage('assets/fonts/determination_mono.png')
+//cur_font = loadImage('assets/fonts/determination_mono.png')
 
 function toggle_complex(complex)
 {
@@ -1526,8 +1576,8 @@ function draw_text(pass_in)//(x,y,str)
 	var draw_pos_y = [y, y]
 	var color = hexToRgb("#ffffff")
 	var i = 0
-	var chr_length = cur_font.naturalWidth/10
-	var chr_height = cur_font.naturalHeight/9 //!REMEMBER TO CHANGE LATER!
+	var chr_length = pass_in.cur_font.naturalWidth/10
+	var chr_height = pass_in.cur_font.naturalHeight/9 //!REMEMBER TO CHANGE LATER!
 	var per_char_spacing = [] //this is empty so it's monospaced
 	var line_break_height = Math.floor(chr_height*18/13)
 	if(!mono_spaced_real.checked)
@@ -1605,19 +1655,19 @@ function draw_text(pass_in)//(x,y,str)
 		{
 			if(pass_in.o_pos.checked)
 			{
-   				ctx.drawImage(cur_outline,letter_info[0],letter_info[1],letter_info[2],letter_info[3], draw_pos_x[0]-1+letter_posed[0], draw_pos_y[0]-1+letter_posed[1], letter_info[2],letter_info[3])
-   				ctx.drawImage(cur_outline,letter_info[0],letter_info[1],letter_info[2],letter_info[3], draw_pos_x[0]-1+letter_posed[0], draw_pos_y[0]+1+letter_posed[1], letter_info[2],letter_info[3])
-				ctx.drawImage(cur_outline,letter_info[0],letter_info[1],letter_info[2],letter_info[3], draw_pos_x[0]+1+letter_posed[0], draw_pos_y[0]-1+letter_posed[1], letter_info[2],letter_info[3])
-				ctx.drawImage(cur_outline,letter_info[0],letter_info[1],letter_info[2],letter_info[3], draw_pos_x[0]+1+letter_posed[0], draw_pos_y[0]+1+letter_posed[1], letter_info[2],letter_info[3])
-				ctx.drawImage(cur_outline,letter_info[0],letter_info[1],letter_info[2],letter_info[3], draw_pos_x[0]-1+letter_posed[0], draw_pos_y[0]+letter_posed[1], letter_info[2],letter_info[3])
-				ctx.drawImage(cur_outline,letter_info[0],letter_info[1],letter_info[2],letter_info[3], draw_pos_x[0]+1+letter_posed[0], draw_pos_y[0]+letter_posed[1], letter_info[2],letter_info[3])
-				ctx.drawImage(cur_outline,letter_info[0],letter_info[1],letter_info[2],letter_info[3], draw_pos_x[0]+letter_posed[0], draw_pos_y[0]-1+letter_posed[1], letter_info[2],letter_info[3])
-				ctx.drawImage(cur_outline,letter_info[0],letter_info[1],letter_info[2],letter_info[3], draw_pos_x[0]+letter_posed[0], draw_pos_y[0]+1+letter_posed[1], letter_info[2],letter_info[3])
+   				ctx.drawImage(pass_in.cur_outline,letter_info[0],letter_info[1],letter_info[2],letter_info[3], draw_pos_x[0]-1+letter_posed[0], draw_pos_y[0]-1+letter_posed[1], letter_info[2],letter_info[3])
+   				ctx.drawImage(pass_in.cur_outline,letter_info[0],letter_info[1],letter_info[2],letter_info[3], draw_pos_x[0]-1+letter_posed[0], draw_pos_y[0]+1+letter_posed[1], letter_info[2],letter_info[3])
+				ctx.drawImage(pass_in.cur_outline,letter_info[0],letter_info[1],letter_info[2],letter_info[3], draw_pos_x[0]+1+letter_posed[0], draw_pos_y[0]-1+letter_posed[1], letter_info[2],letter_info[3])
+				ctx.drawImage(pass_in.cur_outline,letter_info[0],letter_info[1],letter_info[2],letter_info[3], draw_pos_x[0]+1+letter_posed[0], draw_pos_y[0]+1+letter_posed[1], letter_info[2],letter_info[3])
+				ctx.drawImage(pass_in.cur_outline,letter_info[0],letter_info[1],letter_info[2],letter_info[3], draw_pos_x[0]-1+letter_posed[0], draw_pos_y[0]+letter_posed[1], letter_info[2],letter_info[3])
+				ctx.drawImage(pass_in.cur_outline,letter_info[0],letter_info[1],letter_info[2],letter_info[3], draw_pos_x[0]+1+letter_posed[0], draw_pos_y[0]+letter_posed[1], letter_info[2],letter_info[3])
+				ctx.drawImage(pass_in.cur_outline,letter_info[0],letter_info[1],letter_info[2],letter_info[3], draw_pos_x[0]+letter_posed[0], draw_pos_y[0]-1+letter_posed[1], letter_info[2],letter_info[3])
+				ctx.drawImage(pass_in.cur_outline,letter_info[0],letter_info[1],letter_info[2],letter_info[3], draw_pos_x[0]+letter_posed[0], draw_pos_y[0]+1+letter_posed[1], letter_info[2],letter_info[3])
 			}
 		}
 		else
 		{
-			ctx.drawImage(cur_outline,letter_info[0],letter_info[1],letter_info[2],letter_info[3], draw_pos_x[0]+1+letter_posed[0], draw_pos_y[0]+1+letter_posed[1], letter_info[2],letter_info[3])
+			ctx.drawImage(pass_in.cur_dw,letter_info[0],letter_info[1],letter_info[2],letter_info[3], draw_pos_x[0]+1+letter_posed[0], draw_pos_y[0]+1+letter_posed[1], letter_info[2],letter_info[3])
 		}
 		if(doColorMath && (!(color.r == 255 && color.g == 255 && color.b == 255) || pass_in.c_type.value == "whole") )
 		{
@@ -1626,7 +1676,7 @@ function draw_text(pass_in)//(x,y,str)
 			portrait_blacka.clearRect(0,0,18,26)
 			portrait_blacka.imageSmoothingEnabled = false
 			canvas.imageSmoothingEnabled = false
-			portrait_blacka.drawImage(cur_font,letter_info[0],letter_info[1],letter_info[2],letter_info[3],0,0,letter_info[2],letter_info[3])
+			portrait_blacka.drawImage(pass_in.cur_font,letter_info[0],letter_info[1],letter_info[2],letter_info[3],0,0,letter_info[2],letter_info[3])
 			var what_to = pass_in.c_type.value
 			var cool_pixels = portrait_blacka.getImageData(0,0,letter_info[2],letter_info[3]) //does this need something?
 			for(var j = 3; j < cool_pixels.data.length; j += 4)
@@ -1660,7 +1710,7 @@ function draw_text(pass_in)//(x,y,str)
 			ctx.drawImage(img_a, draw_pos_x[0]+letter_posed[0], draw_pos_y[0]+letter_posed[1])
 		}
 		else
-		{ctx.drawImage(cur_font,letter_info[0],letter_info[1],letter_info[2],letter_info[3], draw_pos_x[0]+letter_posed[0], draw_pos_y[0]+letter_posed[1], letter_info[2],letter_info[3])}
+		{ctx.drawImage(pass_in.cur_font,letter_info[0],letter_info[1],letter_info[2],letter_info[3], draw_pos_x[0]+letter_posed[0], draw_pos_y[0]+letter_posed[1], letter_info[2],letter_info[3])}
 		i++
 		draw_pos_x[0] += letter_posed[2] //idk?
 		if(str.charAt(i-1) == " " && pass_in.a_pos.checked)
@@ -1698,7 +1748,7 @@ function draw_canvas()
 {
 	if(iters == 0)
 	{
-		generate_font(cur_font) //uncomment!
+		//generate_font(cur_font) //uncomment!
 		iters = 0.1
 	}
 	any_portraits = false
@@ -2046,8 +2096,8 @@ function box_stack_update()
 		var draw_x = x_pos + ((column_widths[i % row_length]) - bonus_boxes[i][1].width)/2
 		var draw_y = y_pos + ((row_heights[Math.floor(i/row_length)]) - bonus_boxes[i][1].height)/2
 		
-		console.log(String(i) + "X: " + String(draw_x))
-		console.log(String(i) + "Y: " + String(draw_y))
+		//console.log(String(i) + "X: " + String(draw_x))
+		//console.log(String(i) + "Y: " + String(draw_y))
 		ctx_stack.drawImage(bonus_boxes[i][1], draw_x, draw_y)
 		//ctx_stack.fillRect(draw_x,draw_y,canvas_stack.width,canvas_stack.height)
 	
