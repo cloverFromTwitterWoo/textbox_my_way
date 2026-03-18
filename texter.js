@@ -699,6 +699,7 @@ function new_text(def_name="", def_font="assets/fonts/determination_mono", def_s
      		 	reader.readAsText(file);
       			reader.onloadend = (e) => 
 			{
+				list_of_text[which_char].m_pos.checked = false
 				var which_char = Number(this.className.substring(5))
 				list_of_text[which_char].image_post_two.style = "display: none"
 				read_this_bozo_temp = e.target.result.split('\n')
@@ -725,7 +726,7 @@ function new_text(def_name="", def_font="assets/fonts/determination_mono", def_s
 		newText.space_sel.style = "width: 85px"
 		newText.image_post_two.style = "display: inline"
 		newText.m_pos.checked = false
-		read_this_bozo_temp = atob(custom_spaced_fonts[this.value]).split('\n')
+		read_this_bozo_temp = atob(def_spacing).split('\n')
 		newText.readThisBozo = []
 		for(var i = 0; i < read_this_bozo_temp.length; i++)
 		{
@@ -2384,7 +2385,7 @@ function save_box()
 
 	for(var i = 0; i < list_of_text.length; i++)
 	{
-		console.log(list_of_text[i])
+		//console.log(list_of_text[i])
 		save_array[save_array.length-1].push(list_of_text[i].name_field.value)
 		if(list_of_text[i].chara_pos.value != "custom")
 		{save_array[save_array.length-1].push(list_of_text[i].chara_pos.value)}
