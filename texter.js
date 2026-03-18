@@ -552,7 +552,7 @@ function generate_font(what_num)
 	list_of_text[what_num].cur_dw.src = blacked_out;
 }
 
-function new_text(def_name="", def_font="assets/fonts/determination_mono", def_spacing=false, def_x=0, def_y=0, def_x_off=0, def_y_off=0, def_o=true, def_d=false, def_a=false)
+function new_text(def_name="", def_font="assets/fonts/determination_mono.png", def_spacing=false, def_x=0, def_y=0, def_x_off=0, def_y_off=0, def_o=true, def_d=false, def_a=false)
 {
 	var newText = {};
 	newText.border = document.createElement("div");
