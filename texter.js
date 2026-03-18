@@ -699,7 +699,6 @@ function new_text(def_name="", def_font="assets/fonts/determination_mono", def_s
      		 	reader.readAsText(file);
       			reader.onloadend = (e) => 
 			{
-				list_of_text[which_char].m_pos.checked = false
 				var which_char = Number(this.className.substring(5))
 				list_of_text[which_char].image_post_two.style = "display: none"
 				read_this_bozo_temp = e.target.result.split('\n')
@@ -709,6 +708,7 @@ function new_text(def_name="", def_font="assets/fonts/determination_mono", def_s
 					list_of_text[which_char].readThisBozo[i] = read_this_bozo_temp[i].split(',')
 				}
 				list_of_text[which_char].space_sel.style.removeProperty("width")
+				list_of_text[which_char].m_pos.checked = false
 				//generate_font(which_char)
       			}
    		}
@@ -725,13 +725,13 @@ function new_text(def_name="", def_font="assets/fonts/determination_mono", def_s
 	{
 		newText.space_sel.style = "width: 85px"
 		newText.image_post_two.style = "display: inline"
-		newText.m_pos.checked = false
 		read_this_bozo_temp = atob(def_spacing).split('\n')
 		newText.readThisBozo = []
 		for(var i = 0; i < read_this_bozo_temp.length; i++)
 		{
 			newText.readThisBozo[i] = read_this_bozo_temp[i].split(',')
 		}
+		newText.m_pos.checked = false
 	}
 
 	newText.border.appendChild(newText.custom_spacing_hell)
