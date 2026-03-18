@@ -142,6 +142,15 @@ let font_selection = '\
 <option value="assets/fonts/arial.png">Arial</option>\
 <option value="assets/fonts/courier_new.png">Cave Story</option>'
 
+let custom_spaced_fonts = {"assets/fonts/arial.png": "\
+QSwwLDAsMTgKQiwtMSwwLDE2CkMsLTEsMCwxNwpELC0xLDAsMTcKRSwtMSwwLDE2CkYsLTIsMCwxNApHLC0xLDAsMTgKSCwtMiwwLDE2CkksLTIsMCw0CkosMCwwL\
+DEyCkssLTEsMCwxNQpMLC0xLDAsMTQKTSwtMSwwLDE4Ck4sLTEsMCwxNgpPLC0xLDAsMTcKUCwtMSwwLDE2ClEsLTEsMCwxOQpSLC0xLDAsMTcKUywtMSwwLDE2ClQsMCwwLDE3ClUsLTEsMCwxNwpWLDAsMCwxNwpXLDAs\
+MCwyNQpYLDAsMCwxOApZLDAsMCwxOApaLDAsMCwxNgphLDAsMCwxNApiLC0xLDAsMTQKYywtMSwwLDEzCmQsMCwwLDE0CmUsMCwwLDE1CmYsMCwwLDEwCmcsMCwwLDE0CmgsLTEsMCwxMwppLC0xLDAsNQpqLDAsMCw3CmssLT\
+EsMCwxMwpsLC0xLDAsNQptLC0xLDAsMjAKbiwtMSwwLDEzCm8sMCwwLDE1CnAsLTEsMCwxNApxLDAsMCwxNApyLC0xLDAsOApzLDAsMCwxMwp0LDAsMCw5CnUsLTEsMCwxMwp2LDAsMCwxNAp3LDAsMCwyMAp4LDAsMCwxNAp5LDAsM\
+CwxNAp6LDAsMCwxNAo/LC0xLDAsMTQKISwtMiwwLDUKKiwwLDAsMTEKKCwtMSwwLDkKKSwtMSwwLDkKMCwtMSwwLDE0CjEsLTIsMCw5CjIsMCwwLDE0CjMsLTEsMCwxNAo0LDAsMCwxNQo1LC0xLDAsMTQKNiwwLDAsMTUKNywtMSwwLDE0\
+CjgsLTEsMCwxNAo5LC0xLDAsMTQKICwwLDAsMTQKLiwtMiwwLDcKW2NvbW1hXSwtMiwwLDcKJywtMSwwLDUKIiwtMSwwLDcKPCwtMSwwLDE0Cj4sLTEsMCwxNAorLC0xLDAsMTQKLSwwLDAsOQovLDAsMCw3CiUsLTEsMCwyMQokLDAsMCwx\
+NAokLDAsMCwxNQo6LC0yLDAsOAo7LC0yLDAsOApeLDAsLTEsMTEKJiwtMSwwLDE2CkAsLTEsMCwyNQpfLDAsLTMsMTYKWywtMSwwLDgKXSwtMSwwLDgKfiwtMSwwLDE0Cj0sLTEsMCwxNAoyMA=="}
+
 let char_options = '<option value="none">None</option><option value="custom">Custom</option><option value="flowey">Flowey</option><option value="toriel">Toriel</option>'
 
 let exp_options = 
@@ -207,6 +216,7 @@ function refresh_text_list()
 		list_of_text[i].downButt.id = "textD_" + String(i)
 		list_of_text[i].upButt.id = "textU_" + String(i)
 		list_of_text[i].image_sel.className = "font_" + String(i)
+		list_of_text[i].space_sel.className = "font_" + String(i)
 		list_of_text[i].chara_pos.className = "font_" + String(i)
 		text_container.appendChild(list_of_text[i].border)
 		text_container.appendChild(list_of_text[i].linebreak)
@@ -382,7 +392,7 @@ function new_box(def_name="", def_image=-1, def_x=0, def_y=0, def_w=578, def_h=1
 			newBox.image.style.display='none'
 		}
 		newBox.image_post.style = "display: inline"
-		newBox.image_sel.style = "width: 90px"
+		newBox.image_sel.style = "width: 85px"
 	}
 	newBox.border.appendChild(newBox.image_sel)
 	newBox.border.appendChild(newBox.image_post)
@@ -577,14 +587,28 @@ function new_text(def_name="", def_font="assets/fonts/determination_mono", def_s
 	newText.chara_pos.addEventListener("change", function(event) 
 	{
 		var which_char = Number(this.className.substring(5))
+		list_of_text[which_char].m_pos.checked = true
 		if(this.value == "custom")
 		{
 			list_of_text[which_char].image_sel.style = "display: inline"
+			list_of_text[which_char].custom_spacing_hell.style = "display: inline"
 		}
 		else
 		{
+			list_of_text[which_char].custom_spacing_hell.style = "display: none"
 			//list_of_text[which_char].image_sel.style = "display: none"
 			list_of_text[which_char].cur_font.src = loadImage(this.value).src
+
+			if(this.value in custom_spaced_fonts)
+			{
+				list_of_text[which_char].m_pos.checked = false
+				read_this_bozo_temp = atob(custom_spaced_fonts[this.value]).split('\n')
+				list_of_text[which_char].readThisBozo = []
+				for(var i = 0; i < read_this_bozo_temp.length; i++)
+				{
+					list_of_text[which_char].readThisBozo[i] = read_this_bozo_temp[i].split(',')
+				}
+			}
 			
 			//generate_font(which_char)
 			
@@ -619,25 +643,98 @@ function new_text(def_name="", def_font="assets/fonts/determination_mono", def_s
       			reader.onloadend = (e) => 
 			{
 				var which_char = Number(this.className.substring(5))
+				list_of_text[which_char].image_post.style = "display: none"
 				list_of_text[which_char].cur_font.src = e.target.result
+				list_of_text[which_char].image_sel.style.removeProperty("width")
 				//generate_font(which_char)
       			}
    		}
 	});
 
-	
 	newText.border.appendChild(newText.image_sel)
+
+	newText.image_post = document.createElement("span")
+	newText.image_post.innerHTML = "[Selected]"
+	newText.image_post.style = "display: none"
+
+	newText.border.appendChild(newText.image_post)
 
 	if(def_font.substring(0,7) == "assets/")
 	{
 		newText.chara_pos.value = def_font
 	}
-	
-	var placeholder = document.createElement("span");
-	placeholder.innerHTML = "[WIP]"
-	//newText.border.appendChild(placeholder)
-	
+	else
+	{
+		newText.chara_pos.value = "custom"
+		newText.image_sel.style = "width: 85px"
+		newText.cur_font.src = def_font
+		newText.image_post.style = "display: inline"
+	}
+
 	newText.border.appendChild(document.createElement("br"))
+
+	newText.custom_spacing_hell = document.createElement("span");
+	newText.custom_spacing_hell.style = "display: none"
+	var spacing_txt = document.createElement("span");
+	spacing_txt.innerHTML = "Monospaced: "
+	newText.custom_spacing_hell.appendChild(spacing_txt)
+	newText.m_pos = document.createElement("input");
+	newText.m_pos.type = "checkbox"
+	newText.m_pos.checked = true
+	newText.custom_spacing_hell.appendChild(newText.m_pos)
+	spacing_txt = document.createElement("span");
+	spacing_txt.innerHTML = " or "
+	newText.custom_spacing_hell.appendChild(spacing_txt)
+	newText.readThisBozo = []
+	newText.space_sel = document.createElement("input");
+	newText.space_sel.type = "file"
+	newText.space_sel.accept = ".txt"
+	newText.space_sel.classList.add("font_" + String(list_of_portraits.length))
+	newText.space_sel.addEventListener('change', function(ev)
+	{
+		if(ev.target.files) {
+			let file = ev.target.files[0];
+			var reader = new FileReader();
+			
+     		 	reader.readAsText(file);
+      			reader.onloadend = (e) => 
+			{
+				var which_char = Number(this.className.substring(5))
+				list_of_text[which_char].image_post_two.style = "display: none"
+				read_this_bozo_temp = e.target.result.split('\n')
+				list_of_text[which_char].readThisBozo = []
+				for(var i = 0; i < read_this_bozo_temp.length; i++)
+				{
+					list_of_text[which_char].readThisBozo[i] = read_this_bozo_temp[i].split(',')
+				}
+				list_of_text[which_char].space_sel.style.removeProperty("width")
+				//generate_font(which_char)
+      			}
+   		}
+	});
+	newText.custom_spacing_hell.appendChild(document.createElement("br"))
+
+	newText.custom_spacing_hell.appendChild(newText.space_sel)
+	newText.image_post_two = document.createElement("span")
+	newText.image_post_two.innerHTML = "[Selected]"
+	newText.image_post_two.style = "display: none"
+	newText.custom_spacing_hell.appendChild(newText.image_post_two)	
+
+	if(def_spacing != false || def_spacing == "false")
+	{
+		newText.space_sel.style = "width: 85px"
+		newText.image_post_two.style = "display: inline"
+		newText.m_pos.checked = false
+		read_this_bozo_temp = atob(custom_spaced_fonts[this.value]).split('\n')
+		newText.readThisBozo = []
+		for(var i = 0; i < read_this_bozo_temp.length; i++)
+		{
+			newText.readThisBozo[i] = read_this_bozo_temp[i].split(',')
+		}
+	}
+
+	newText.border.appendChild(newText.custom_spacing_hell)
+	
 	newText.border.appendChild(document.createElement("br"))
 
 	var set_txt = document.createElement("span");
@@ -783,9 +880,11 @@ function new_text(def_name="", def_font="assets/fonts/determination_mono", def_s
 	text_container.appendChild(newText.border)
 	newText.linebreak = complex_br()
 	text_container.appendChild(newText.linebreak)
-	text_container.appendChild(newText.cur_font)
-	text_container.appendChild(newText.cur_outline)
-	text_container.appendChild(newText.cur_dw)
+
+	//text_container.appendChild(newText.cur_font)
+	//text_container.appendChild(newText.cur_outline)
+	//text_container.appendChild(newText.cur_dw)
+
 	list_of_text.push(newText)
 
 	var event = new Event('change');
@@ -1428,7 +1527,7 @@ function loader_up(awesome_template)
 				//alert("uh")
 				list_of_portraits[list_of_portraits.length-1].chara_pos.value = save_this_too[list_of_portraits.length-1][0]
 				var image = new Image();
-        		image.src = save_this_too[list_of_portraits.length-1][1]
+        			image.src = save_this_too[list_of_portraits.length-1][1]
 				list_of_portraits[list_of_portraits.length-1].image = image
 				list_of_portraits[list_of_portraits.length-1].image.classList.add("image_border")
 				list_of_portraits[list_of_portraits.length-1].border.appendChild(list_of_portraits[list_of_portraits.length-1].linebreak_two)
@@ -1608,9 +1707,9 @@ function draw_text(pass_in)//(x,y,str)
 	var chr_height = pass_in.cur_font.naturalHeight/9 //!REMEMBER TO CHANGE LATER!
 	var per_char_spacing = [] //this is empty so it's monospaced
 	var line_break_height = Math.floor(chr_height*18/13)
-	if(!mono_spaced_real.checked)
+	if(!pass_in.m_pos.checked)
 	{
-		per_char_spacing = JSON.parse(JSON.stringify(readThisBozo))
+		per_char_spacing = copy(pass_in.readThisBozo)
 		if(per_char_spacing.length > 90)
 		{line_break_height = Number(per_char_spacing[90][0])}
 	} //Just In Case Man
@@ -2285,8 +2384,25 @@ function save_box()
 
 	for(var i = 0; i < list_of_text.length; i++)
 	{
-		//console.log(list_of_text[i])
+		console.log(list_of_text[i])
 		save_array[save_array.length-1].push(list_of_text[i].name_field.value)
+		if(list_of_text[i].chara_pos.value != "custom")
+		{save_array[save_array.length-1].push(list_of_text[i].chara_pos.value)}
+		else
+		{
+			var save_cav = document.createElement('canvas');
+        		save_cav.width = list_of_text[i].cur_font.width;
+        		save_cav.height = list_of_text[i].cur_font.height;
+			//save_cav.style = "display: block"
+        		var btx = save_cav.getContext('2d');
+       			btx.drawImage(list_of_text[i].cur_font, 0, 0);	
+			//document.body.appendChild(save_cav);
+			save_array[save_array.length-1].push(save_cav.toDataURL())
+		}
+		if(list_of_text[i].m_pos.checked)
+		{save_array[save_array.length-1].push("false")}
+		else
+		{save_array[save_array.length-1].push(btoa(JSON.stringify(list_of_text[i].readThisBozo)))}
 		save_array[save_array.length-1].push(list_of_text[i].x_pos.value)
 		save_array[save_array.length-1].push(list_of_text[i].y_pos.value)
 		save_array[save_array.length-1].push(list_of_text[i].x_pos_alt.value)
@@ -2450,16 +2566,7 @@ textbox_over.addEventListener("change", (event) => {
 	}
 })*/
 
-let custom_spaced_fonts = {"arial": "\
-QSwwLDAsMTgKQiwtMSwwLDE2CkMsLTEsMCwxNwpELC0xLDAsMTcKRSwtMSwwLDE2CkYsLTIsMCwxNApHLC0xLDAsMTgKSCwtMiwwLDE2CkksLTIsMCw0CkosMCwwL\
-DEyCkssLTEsMCwxNQpMLC0xLDAsMTQKTSwtMSwwLDE4Ck4sLTEsMCwxNgpPLC0xLDAsMTcKUCwtMSwwLDE2ClEsLTEsMCwxOQpSLC0xLDAsMTcKUywtMSwwLDE2ClQsMCwwLDE3ClUsLTEsMCwxNwpWLDAsMCwxNwpXLDAs\
-MCwyNQpYLDAsMCwxOApZLDAsMCwxOApaLDAsMCwxNgphLDAsMCwxNApiLC0xLDAsMTQKYywtMSwwLDEzCmQsMCwwLDE0CmUsMCwwLDE1CmYsMCwwLDEwCmcsMCwwLDE0CmgsLTEsMCwxMwppLC0xLDAsNQpqLDAsMCw3CmssLT\
-EsMCwxMwpsLC0xLDAsNQptLC0xLDAsMjAKbiwtMSwwLDEzCm8sMCwwLDE1CnAsLTEsMCwxNApxLDAsMCwxNApyLC0xLDAsOApzLDAsMCwxMwp0LDAsMCw5CnUsLTEsMCwxMwp2LDAsMCwxNAp3LDAsMCwyMAp4LDAsMCwxNAp5LDAsM\
-CwxNAp6LDAsMCwxNAo/LC0xLDAsMTQKISwtMiwwLDUKKiwwLDAsMTEKKCwtMSwwLDkKKSwtMSwwLDkKMCwtMSwwLDE0CjEsLTIsMCw5CjIsMCwwLDE0CjMsLTEsMCwxNAo0LDAsMCwxNQo1LC0xLDAsMTQKNiwwLDAsMTUKNywtMSwwLDE0\
-CjgsLTEsMCwxNAo5LC0xLDAsMTQKICwwLDAsMTQKLiwtMiwwLDcKW2NvbW1hXSwtMiwwLDcKJywtMSwwLDUKIiwtMSwwLDcKPCwtMSwwLDE0Cj4sLTEsMCwxNAorLC0xLDAsMTQKLSwwLDAsOQovLDAsMCw3CiUsLTEsMCwyMQokLDAsMCwx\
-NAokLDAsMCwxNQo6LC0yLDAsOAo7LC0yLDAsOApeLDAsLTEsMTEKJiwtMSwwLDE2CkAsLTEsMCwyNQpfLDAsLTMsMTYKWywtMSwwLDgKXSwtMSwwLDgKfiwtMSwwLDE0Cj0sLTEsMCwxNAoyMA=="}
-
-textbox_font.addEventListener("change", (event) => {
+/*textbox_font.addEventListener("change", (event) => {
 	mono_spaced_real.checked = true
 	if(textbox_font.value == "custom")
 	{
@@ -2519,7 +2626,7 @@ this_is_gonna_suck_i_guess.addEventListener('change', function(ev) {
 	}
       }
    }
-});
+});*/
 
 draw_canvas()
 setTimeout(draw_canvas, 1080)
