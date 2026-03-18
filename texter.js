@@ -206,6 +206,8 @@ function refresh_text_list()
 		list_of_text[i].removeButt.id = "text_" + String(i)
 		list_of_text[i].downButt.id = "textD_" + String(i)
 		list_of_text[i].upButt.id = "textU_" + String(i)
+		list_of_text[i].image_sel.className = "font_" + String(i)
+		list_of_text[i].chara_pos.className = "font_" + String(i)
 		text_container.appendChild(list_of_text[i].border)
 		text_container.appendChild(list_of_text[i].linebreak)
 	}
@@ -602,6 +604,30 @@ function new_text(def_name="", def_font="assets/fonts/determination_mono", def_s
 	})
 	newText.border.appendChild(newText.chara_pos)
 
+	newText.image_sel = document.createElement("input");
+	newText.image_sel.type = "file"
+	newText.image_sel.accept = "image/png"
+	newText.image_sel.classList.add("font_" + String(list_of_portraits.length))
+	newText.image_sel.style = "display: none"
+	newText.image_sel.addEventListener('change', function(ev)
+	{
+		if(ev.target.files) {
+			let file = ev.target.files[0];
+			var reader = new FileReader();
+			
+     		 	reader.readAsDataURL(file);
+      			reader.onloadend = (e) => 
+			{
+				var which_char = Number(this.className.substring(5))
+				list_of_text[which_char].cur_font.src = e.target.result
+				generate_font(which_char)
+      			}
+   		}
+	});
+
+	
+	newText.border.appendChild(newText.image_sel)
+
 	if(def_font.substring(0,7) == "assets/")
 	{
 		newText.chara_pos.value = def_font
@@ -757,7 +783,9 @@ function new_text(def_name="", def_font="assets/fonts/determination_mono", def_s
 	text_container.appendChild(newText.border)
 	newText.linebreak = complex_br()
 	text_container.appendChild(newText.linebreak)
-	//text_container.appendChild(newText.cur_font)
+	text_container.appendChild(newText.cur_font)
+	text_container.appendChild(newText.cur_outline)
+	text_container.appendChild(newText.cur_dw)
 	list_of_text.push(newText)
 
 	var event = new Event('change');
