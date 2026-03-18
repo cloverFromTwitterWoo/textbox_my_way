@@ -122,12 +122,12 @@ let list_of_portraits = [];
 let list_of_over = [];
 
 let prebaked_boxes = {
-	undertale: [578, 152, ["", "assets/textboxes/undertale.png", 0, 0, "#ffffff", "true"], "text", ["", 28, 26, 116, 0, true, false, false], "port", ["", 67, 70, "2x_Scaling", true], "over"],
-	outertale: [578, 152, ["", "assets/textboxes/outertale.png", 0, 0, "#ffffff", "true"], "text", ["", 28, 26, 116, 0, true, false, false], "port", ["", 67, 70, "2x_Scaling", true], "over"],
-	underswap: [578, 152, ["", "assets/textboxes/underswap.png", 0, 0, "#ffffff", "true"], "text", ["", 28, 26, 116, 0, true, false, false], "port", ["", 67, 70, "2x_Scaling", true], "over"],
-	deltarune: [594,168, ["", "assets/textboxes/deltarune.png", 0, 0, "#ffffff", "true"], "text", ["", 36, 36, 116, 0, true, false, false], "port", ["", 84, 80, "2x_Scaling", true], "over"],
-	jumbo: [578, 188, ["", "assets/textboxes/jumbo.png", 0, 0, "#ffffff", "true"], "text", ["", 28, 26, 116, 0, true, false, false], "port", ["", 67, 70, "2x_Scaling", true], "over"],
-	cavestory: [488, 128, ["", "assets/textboxes/cave_story.png", 0, 0, "#ffffff", "true"], "text", ["", 27, 23, 110, 0, false, false, false], "port", ["", 28, 20, "2x_Scaler", false], "over"],
+	undertale: [578, 152, ["", "assets/textboxes/undertale.png", 0, 0, "#ffffff", "true"], "text", ["", "assets/fonts/determination_mono.png", false, 28, 26, 116, 0, true, false, false], "port", ["", 67, 70, "2x_Scaling", true], "over"],
+	outertale: [578, 152, ["", "assets/textboxes/outertale.png", 0, 0, "#ffffff", "true"], "text", ["", "assets/fonts/determination_mono.png", false, 28, 26, 116, 0, true, false, false], "port", ["", 67, 70, "2x_Scaling", true], "over"],
+	underswap: [578, 152, ["", "assets/textboxes/underswap.png", 0, 0, "#ffffff", "true"], "text", ["", "assets/fonts/determination_mono.png", false, 28, 26, 116, 0, true, false, false], "port", ["", 67, 70, "2x_Scaling", true], "over"],
+	deltarune: [594,168, ["", "assets/textboxes/deltarune.png", 0, 0, "#ffffff", "true"], "text", ["", "assets/fonts/determination_mono.png", false, 36, 36, 116, 0, true, false, false], "port", ["", 84, 80, "2x_Scaling", true], "over"],
+	jumbo: [578, 188, ["", "assets/textboxes/jumbo.png", 0, 0, "#ffffff", "true"], "text", ["", "assets/fonts/determination_mono.png", false, 28, 26, 116, 0, true, false, false], "port", ["", 67, 70, "2x_Scaling", true], "over"],
+	cavestory: [488, 128, ["", "assets/textboxes/cave_story.png", 0, 0, "#ffffff", "true"], "text", ["", "assets/fonts/courier_new.png", false, 27, 23, 110, 0, false, false, false], "port", ["", 28, 20, "2x_Scaler", false], "over"],
 }
 
 let font_selection = '\
@@ -602,13 +602,10 @@ function new_text(def_name="", def_font="assets/fonts/determination_mono", def_s
 	})
 	newText.border.appendChild(newText.chara_pos)
 
-	if(def_image.substring(0,7) == "assets/")
+	if(def_font.substring(0,7) == "assets/")
 	{
-		newText.chara_pos = def_image
+		newText.chara_pos.value = def_font
 	}
-
-	var event = new Event('change');
-	newText.chara_pos.dispatchEvent(event);
 	
 	var placeholder = document.createElement("span");
 	placeholder.innerHTML = "[WIP]"
@@ -760,11 +757,14 @@ function new_text(def_name="", def_font="assets/fonts/determination_mono", def_s
 	text_container.appendChild(newText.border)
 	newText.linebreak = complex_br()
 	text_container.appendChild(newText.linebreak)
-	text_container.appendChild(newText.cur_font)
+	//text_container.appendChild(newText.cur_font)
 	list_of_text.push(newText)
+
+	var event = new Event('change');
+	newText.chara_pos.dispatchEvent(event);
 }
 
-function new_port(def_name="", def_font="determination_mono", def_x=0, def_y=0, def_s="2x_Scaling", def_o=true, def_w=-1, def_h=-1)
+function new_port(def_name="", def_x=0, def_y=0, def_s="2x_Scaling", def_o=true, def_w=-1, def_h=-1)
 {
 	var newPort = {};
 	newPort.border = document.createElement("div");
@@ -1381,7 +1381,7 @@ function loader_up(awesome_template)
 	i++
 	while(i < awesome_template.length && typeof(awesome_template[i]) != "string")
 	{
-		new_text(awesome_template[i][0], awesome_template[i][1], awesome_template[i][2], awesome_template[i][3], awesome_template[i][4], awesome_template[i][5], awesome_template[i][6], awesome_template[i][7])
+		new_text(awesome_template[i][0], awesome_template[i][1], awesome_template[i][2], awesome_template[i][3], awesome_template[i][4], awesome_template[i][5], awesome_template[i][6], awesome_template[i][7], awesome_template[i][8], awesome_template[i][9])
 		if(list_of_text.length-1 < save_this_tho.length)
 		{
 			list_of_text[list_of_text.length-1].text.value = save_this_tho[list_of_text.length-1]
