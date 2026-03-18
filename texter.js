@@ -584,19 +584,22 @@ function new_text(def_name="", def_font="assets/fonts/determination_mono", def_s
 	newText.chara_pos.innerHTML = font_selection
 	newText.chara_pos.classList.add("font_" + String(list_of_over.length))
 
+	newText.this_value_idk = true
+
 	newText.chara_pos.addEventListener("change", function(event) 
 	{
 		var which_char = Number(this.className.substring(5))
-		list_of_text[which_char].m_pos.checked = true
 		if(this.value == "custom")
 		{
-			list_of_text[which_char].image_sel.style = "display: inline"
+			if(list_of_text[which_char].this_value_idk)
+			{list_of_text[which_char].image_sel.style = "display: inline"}
 			list_of_text[which_char].custom_spacing_hell.style = "display: inline"
 		}
 		else
 		{
+			list_of_text[which_char].m_pos.checked = true
 			list_of_text[which_char].custom_spacing_hell.style = "display: none"
-			//list_of_text[which_char].image_sel.style = "display: none"
+			list_of_text[which_char].image_sel.style = "display: none"
 			list_of_text[which_char].cur_font.src = loadImage(this.value).src
 
 			if(this.value in custom_spaced_fonts)
@@ -647,6 +650,7 @@ function new_text(def_name="", def_font="assets/fonts/determination_mono", def_s
 				list_of_text[which_char].cur_font.src = e.target.result
 				list_of_text[which_char].image_sel.style.removeProperty("width")
 				//generate_font(which_char)
+				list_of_text[which_char].this_value_idk = true
       			}
    		}
 	});
@@ -669,6 +673,7 @@ function new_text(def_name="", def_font="assets/fonts/determination_mono", def_s
 		newText.image_sel.style = "width: 85px"
 		newText.cur_font.src = def_font
 		newText.image_post.style = "display: inline"
+		newText.this_value_idk = false
 	}
 
 	newText.border.appendChild(document.createElement("br"))
@@ -2412,15 +2417,19 @@ function save_box()
 				{
 					for(var x = 0; x < 4; x++)
 					{
-						oh_boy += list_of_text[i].readThisBozo[z][x]
 						if(x < 3)
-						{oh_boy += ","}
+						{oh_boy += list_of_text[i].readThisBozo[z][x] + ","}
+						else
+						{
+							oh_boy += list_of_text[i].readThisBozo[z][x].substring(0, list_of_text[i].readThisBozo[z][x].length-1) + "\n"
+						}
 					}
 				}
 				else
 				{
 					oh_boy += list_of_text[i].readThisBozo[z][0]
 				}
+				console.log(oh_boy)
 				/*if(z+1 < list_of_text[i].readThisBozo.length)
 				{
 				}*/
