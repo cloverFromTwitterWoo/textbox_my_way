@@ -586,7 +586,7 @@ function new_text(def_name="", def_font="assets/fonts/determination_mono", def_s
 			//list_of_text[which_char].image_sel.style = "display: none"
 			list_of_text[which_char].cur_font.src = loadImage(this.value).src
 			
-			generate_font(which_char)
+			//generate_font(which_char)
 			
 			/*if(this.value != "none")
 			{
@@ -620,7 +620,7 @@ function new_text(def_name="", def_font="assets/fonts/determination_mono", def_s
 			{
 				var which_char = Number(this.className.substring(5))
 				list_of_text[which_char].cur_font.src = e.target.result
-				generate_font(which_char)
+				//generate_font(which_char)
       			}
    		}
 	});
@@ -1776,6 +1776,10 @@ function draw_canvas()
 {
 	if(iters == 0)
 	{
+		for(let i = 0; i < list_of_text.length; i++)
+		{
+			generate_font(i)
+		}
 		//generate_font(cur_font) //uncomment!
 		iters = 0.1
 	}
