@@ -582,7 +582,7 @@ function new_text(def_name="", def_font="assets/fonts/determination_mono", def_s
 
 	newText.chara_pos = document.createElement("select");
 	newText.chara_pos.innerHTML = font_selection
-	newText.chara_pos.classList.add("font_" + String(list_of_over.length))
+	newText.chara_pos.classList.add("font_" + String(list_of_text.length))
 
 	newText.this_value_idk = true
 
@@ -634,7 +634,7 @@ function new_text(def_name="", def_font="assets/fonts/determination_mono", def_s
 	newText.image_sel = document.createElement("input");
 	newText.image_sel.type = "file"
 	newText.image_sel.accept = "image/png"
-	newText.image_sel.classList.add("font_" + String(list_of_portraits.length))
+	newText.image_sel.classList.add("font_" + String(list_of_text.length))
 	newText.image_sel.style = "display: none"
 	newText.image_sel.addEventListener('change', function(ev)
 	{
@@ -694,7 +694,7 @@ function new_text(def_name="", def_font="assets/fonts/determination_mono", def_s
 	newText.space_sel = document.createElement("input");
 	newText.space_sel.type = "file"
 	newText.space_sel.accept = ".txt"
-	newText.space_sel.classList.add("font_" + String(list_of_portraits.length))
+	newText.space_sel.classList.add("font_" + String(list_of_text.length))
 	newText.space_sel.addEventListener('change', function(ev)
 	{
 		if(ev.target.files) {
