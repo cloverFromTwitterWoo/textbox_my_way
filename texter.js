@@ -2403,7 +2403,31 @@ function save_box()
 		if(list_of_text[i].m_pos.checked)
 		{save_array[save_array.length-1].push("false")}
 		else
-		{save_array[save_array.length-1].push(btoa(JSON.stringify(list_of_text[i].readThisBozo)))}
+		{
+			//console.log(list_of_text[i].readThisBozo)
+			var oh_boy = ""
+			for(var z = 0; z < list_of_text[i].readThisBozo.length; z++)
+			{
+				if(z+1 < list_of_text[i].readThisBozo.length)
+				{
+					for(var x = 0; x < 4; x++)
+					{
+						oh_boy += list_of_text[i].readThisBozo[z][x]
+						if(x < 3)
+						{oh_boy += ","}
+					}
+				}
+				else
+				{
+					oh_boy += list_of_text[i].readThisBozo[z][0]
+				}
+				/*if(z+1 < list_of_text[i].readThisBozo.length)
+				{
+				}*/
+			}
+			//alert(oh_boy)
+			save_array[save_array.length-1].push(btoa(oh_boy))
+		}
 		save_array[save_array.length-1].push(list_of_text[i].x_pos.value)
 		save_array[save_array.length-1].push(list_of_text[i].y_pos.value)
 		save_array[save_array.length-1].push(list_of_text[i].x_pos_alt.value)
