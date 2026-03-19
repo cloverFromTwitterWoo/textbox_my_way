@@ -2562,7 +2562,7 @@ function save_box()
 		}
 	}
 
-	download("new_box", JSON.stringify(save_array))
+	download("new_box.ctbt", JSON.stringify(save_array))
 }
 
 textbox_exp_alt.addEventListener('change', function(ev) {
