@@ -889,7 +889,7 @@ function new_text(def_name="", def_font="assets/fonts/determination_mono.png", d
 	newText.linebreak = complex_br()
 	text_container.appendChild(newText.linebreak)
 
-	//text_container.appendChild(newText.cur_font)
+	text_container.appendChild(newText.cur_font) //COMMENT OUT THIS IS JUST FOR TESTING
 	//text_container.appendChild(newText.cur_outline)
 	//text_container.appendChild(newText.cur_dw)
 
@@ -923,6 +923,8 @@ function new_port(def_name="", def_x=0, def_y=0, def_s="2x_Scaling", def_o=true,
 
 	newPort.image = false
 
+	newPort.no_dont = false
+
 	newPort.chara_pos = document.createElement("select");
 	newPort.chara_pos.innerHTML = char_options
 	newPort.chara_pos.classList.add("port_" + String(list_of_portraits.length))
@@ -931,6 +933,11 @@ function new_port(def_name="", def_x=0, def_y=0, def_s="2x_Scaling", def_o=true,
 	newPort.chara_pos.addEventListener("change", function(event) 
 	{
 		var which_char = Number(this.className.substring(5))
+		if(list_of_portraits[which_char].no_dont)
+		{
+			list_of_portraits[which_char].no_dont = false
+			return
+		}
 		if(this.value == "none")
 		{
 			list_of_portraits[which_char].exp_txt.style = "display: none"
@@ -2524,7 +2531,10 @@ textbox_exp_alt.addEventListener('change', function(ev) {
 
 	for(let i = 0; i < list_of_portraits.length; i++)
 	{
+		list_of_portraits[i].no_dont = true
+		var save_dis = list_of_portraits[i].chara_pos.value
 		list_of_portraits[i].chara_pos.innerHTML = char_options
+		list_of_portraits[i].chara_pos.value = save_dis
 	}
       }
    }
