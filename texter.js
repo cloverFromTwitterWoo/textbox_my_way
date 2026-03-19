@@ -4,6 +4,8 @@ const ctx = canvas.getContext("2d");
 const canvas_stack = document.getElementById("stack_work");
 const ctx_stack = canvas_stack.getContext("2d");
 
+alert("V1")
+
 ctx.fillStyle = "black"
 ctx.fillRect(0,0,canvas.width,canvas.height)
 
@@ -889,7 +891,7 @@ function new_text(def_name="", def_font="assets/fonts/determination_mono.png", d
 	newText.linebreak = complex_br()
 	text_container.appendChild(newText.linebreak)
 
-	text_container.appendChild(newText.cur_font) //COMMENT OUT THIS IS JUST FOR TESTING
+	//text_container.appendChild(newText.cur_font) //COMMENT OUT THIS IS JUST FOR TESTING
 	//text_container.appendChild(newText.cur_outline)
 	//text_container.appendChild(newText.cur_dw)
 
@@ -1820,7 +1822,7 @@ function draw_text(pass_in)//(x,y,str)
 			canvas.imageSmoothingEnabled = false
 			portrait_blacka.drawImage(pass_in.cur_font,letter_info[0],letter_info[1],letter_info[2],letter_info[3],0,0,letter_info[2],letter_info[3])
 			var what_to = pass_in.c_type.value
-			var cool_pixels = portrait_blacka.getImageData(0,0,letter_info[2],letter_info[3]) //does this need something?
+			var cool_pixels = portrait_blacka.getImageData(0,0,letter_info[2],letter_info[3], { colorSpace: "srgb", pixelFormat: "rgba-unorm8"}) //does this need something?
 			for(var j = 3; j < cool_pixels.data.length; j += 4)
 			{
 				if(what_to == "multi")
