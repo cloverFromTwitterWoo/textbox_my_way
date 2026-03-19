@@ -35,6 +35,39 @@ const homer = document.getElementById("complexmode");
 
 //todo: impliment cookies!!!  but thats super optional so dw abut it
 
+function setCookie(cname, cvalue, exdays) {
+  const d = new Date();
+  d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+  let expires = "expires="+d.toUTCString();
+  document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+}
+
+function getCookie(cname) {
+  let name = cname + "=";
+  let ca = document.cookie.split(';');
+  for(let i = 0; i < ca.length; i++) {
+    let c = ca[i];
+    while (c.charAt(0) == ' ') {
+      c = c.substring(1);
+    }
+    if (c.indexOf(name) == 0) {
+      return c.substring(name.length, c.length);
+    }
+  }
+  return "";
+}
+
+var does_complex = getCookie("complex");
+
+alert(does_complex)
+
+if(does_complex == "")
+{setCookie("complex", false, 365*10)}
+else
+{
+	homer.checked = does_complex
+}
+
 function hexToRgb(hex) {
   var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
   return result ? {
@@ -1642,6 +1675,7 @@ function toggle_complex(complex)
 			}
 		}
 	}
+	setCookie("complex", homer.checked, 365*10)
 }
 
 toggle_complex(homer.checked)
