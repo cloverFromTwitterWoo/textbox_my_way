@@ -48,9 +48,11 @@ function refresh_exp()
 	}
 	for(let i = 0; i < exp_list.length; i++)
 	{
+		exp_list[i].upButtp.className = "exp_" + String(i)
 		exp_list[i].upButt.className = "exp_" + String(i)
 		exp_list[i].removeButt.className = "exp_" + String(i)
 		exp_list[i].downButt.className = "exp_" + String(i)
+		exp_list[i].downButtp.className = "exp_" + String(i)
 		exp_list[i].exp_img.className = "exp_" + String(i)
 		exp_box.appendChild(exp_list[i].border)
 		//exp_box.appendChild(exp_list[i].linebreak)
@@ -59,7 +61,12 @@ function refresh_exp()
 
 function exp_list_swap(which, dir)
 {
-	if(dir == -1 && which > 0)
+	if(dir == -2)
+	{
+		var the_guy = exp_list.splice(which, 1);
+		exp_list.splice(0,0,the_guy[0])
+	}
+	else if(dir == -1 && which > 0)
 	{
 		var the_guy = exp_list.splice(which, 1);
 		exp_list.splice(which-1,0,the_guy[0])
@@ -68,6 +75,11 @@ function exp_list_swap(which, dir)
 	{
 		var the_guy = exp_list.splice(which, 1);
 		exp_list.splice(which+1,0,the_guy[0])
+	}
+	else if (dir == 2)
+	{
+		var the_guy = exp_list.splice(which, 1);
+		exp_list.splice(exp_list.length-1,0,the_guy[0])
 	}
 	refresh_exp()
 }
@@ -128,6 +140,17 @@ function new_exp(exp_name = "", exp_img=-1)
 	newExp.border.appendChild(document.createElement("br"))
 	newExp.border.appendChild(document.createElement("br"))
 
+	newExp.upButtp = document.createElement("button");
+	newExp.upButtp.innerHTML = "|^|"
+	newExp.upButtp.classList.add("exp_" + String(exp_list.length))
+	newExp.upButtp.onclick = function() 
+	{
+		var which_box = Number(this.className.substring(4))
+		
+		exp_list_swap(which_box, -2)
+	}
+	newExp.border.appendChild(newExp.upButtp)
+
 	newExp.upButt = document.createElement("button");
 	newExp.upButt.innerHTML = "^"
 	newExp.upButt.classList.add("exp_" + String(exp_list.length))
@@ -162,6 +185,17 @@ function new_exp(exp_name = "", exp_img=-1)
 		exp_list_swap(which_box, 1)
 	}
 	newExp.border.appendChild(newExp.downButt)
+
+	newExp.downButtp = document.createElement("button");
+	newExp.downButtp.innerHTML = "|v|"
+	newExp.downButtp.classList.add("exp_" + String(exp_list.length))
+	newExp.downButtp.onclick = function() 
+	{
+		var which_box = Number(this.className.substring(4))
+		
+		exp_list_swap(which_box, 2)
+	}
+	newExp.border.appendChild(newExp.downButtp)
 
 	exp_box.appendChild(newExp.border)
 
