@@ -57,6 +57,21 @@ function getCookie(cname) {
   return "";
 }
 
+const cyrb53 = (str, seed = 0) => {
+    let h1 = 0xdeadbeef ^ seed, h2 = 0x41c6ce57 ^ seed;
+    for(let i = 0, ch; i < str.length; i++) {
+        ch = str.charCodeAt(i);
+        h1 = Math.imul(h1 ^ ch, 2654435761);
+        h2 = Math.imul(h2 ^ ch, 1597334677);
+    }
+    h1  = Math.imul(h1 ^ (h1 >>> 16), 2246822507);
+    h1 ^= Math.imul(h2 ^ (h2 >>> 13), 3266489909);
+    h2  = Math.imul(h2 ^ (h2 >>> 16), 2246822507);
+    h2 ^= Math.imul(h1 ^ (h1 >>> 13), 3266489909);
+  
+    return 4294967296 * (2097151 & h2) + (h1 >>> 0);
+};
+
 var does_complex = getCookie("complex");
 
 //alert(does_complex)
@@ -167,13 +182,25 @@ let list_of_text = [];
 let list_of_portraits = [];
 let list_of_over = [];
 
+let styler = document.getElementById("style_name")
+
+let box_selection = '\
+<option value="undertale">Undertale</option>\
+<option value="outertale">PS!Outertale</option>\
+<option value="deltarune">Deltarune</option>\
+<option value="underswap">TS!Underswap</option>\
+<option value="jumbo">Jumbo</option>\
+<option value="cavestory">Cave Story</option>'
+
+textbox_bg.innerHTML = box_selection
+
 let prebaked_boxes = {
-	undertale: [578, 152, ["", "assets/textboxes/undertale.png", 0, 0, "#ffffff", "true"], "text", ["", "assets/fonts/determination_mono.png", false, 28, 26, 116, 0, true, false, false], "port", ["", 72, 74, "2x_Scaling", true], "over"],
-	outertale: [578, 152, ["", "assets/textboxes/outertale.png", 0, 0, "#ffffff", "true"], "text", ["", "assets/fonts/determination_mono.png", false, 28, 26, 116, 0, true, false, false], "port", ["", 72, 74, "2x_Scaling", true], "over"],
-	underswap: [578, 152, ["", "assets/textboxes/underswap.png", 0, 0, "#ffffff", "true"], "text", ["", "assets/fonts/determination_mono.png", false, 28, 26, 116, 0, true, false, false], "port", ["", 72, 74, "2x_Scaling", true], "over"],
-	deltarune: [594,168, ["", "assets/textboxes/deltarune.png", 0, 0, "#ffffff", "true"], "text", ["", "assets/fonts/determination_mono.png", false, 36, 34, 116, 0, false, true, false], "port", ["", 80, 82, "2x_Scaling", true], "over"],
-	jumbo: [578, 188, ["", "assets/textboxes/jumbo.png", 0, 0, "#ffffff", "true"], "text", ["", "assets/fonts/determination_mono.png", false, 28, 26, 116, 0, true, false, false], "port", ["", 72, 74, "2x_Scaling", true], "over"],
-	cavestory: [488, 128, ["", "assets/textboxes/cave_story.png", 0, 0, "#ffffff", "true"], "text", ["", "assets/fonts/courier_new.png", false, 27, 23, 110, 0, false, false, false], "port", ["", 28, 20, "2x_Scaler", false], "over"],
+	undertale: [578, 152, "Undertale", "undertale", ["", "assets/textboxes/undertale.png", 0, 0, "#ffffff", "true"], "text", ["", "assets/fonts/determination_mono.png", false, 28, 26, 116, 0, true, false, false], "port", ["", 72, 74, "2x_Scaling", true], "over"],
+	outertale: [578, 152, "PS!Outertale", "outertale", ["", "assets/textboxes/outertale.png", 0, 0, "#ffffff", "true"], "text", ["", "assets/fonts/determination_mono.png", false, 28, 26, 116, 0, true, false, false], "port", ["", 72, 74, "2x_Scaling", true], "over"],
+	underswap: [578, 152, "TS!Underswap", "underswap", ["", "assets/textboxes/underswap.png", 0, 0, "#ffffff", "true"], "text", ["", "assets/fonts/determination_mono.png", false, 28, 26, 116, 0, true, false, false], "port", ["", 72, 74, "2x_Scaling", true], "over"],
+	deltarune: [594, 168, "Deltarune", "deltarune", ["", "assets/textboxes/deltarune.png", 0, 0, "#ffffff", "true"], "text", ["", "assets/fonts/determination_mono.png", false, 36, 34, 116, 0, false, true, false], "port", ["", 80, 82, "2x_Scaling", true], "over"],
+	jumbo: [578, 188, "Undertale But Big", "jumbo", ["", "assets/textboxes/jumbo.png", 0, 0, "#ffffff", "true"], "text", ["", "assets/fonts/determination_mono.png", false, 28, 26, 116, 0, true, false, false], "port", ["", 72, 74, "2x_Scaling", true], "over"],
+	cavestory: [488, 128, "Cave Story", "cavestory", ["", "assets/textboxes/cave_story.png", 0, 0, "#ffffff", "true"], "text", ["", "assets/fonts/courier_new.png", false, 27, 23, 110, 0, false, false, false], "port", ["", 28, 20, "2x_Scaler", false], "over"],
 }
 
 let font_selection = '\
@@ -1559,7 +1586,8 @@ function loader_up(awesome_template)
 	list_of_over.length = 0
 	origin_w.value = awesome_template[0]
 	origin_h.value = awesome_template[1]
-	let i = 2
+	styler.value = awesome_template[2]
+	let i = 4
 	while(i < awesome_template.length && typeof(awesome_template[i]) != "string")
 	{
 		new_box(awesome_template[i][0], awesome_template[i][1], awesome_template[i][2], awesome_template[i][3], awesome_template[i][4], awesome_template[i][5], awesome_template[i][6], awesome_template[i][7])
@@ -2403,6 +2431,7 @@ function save_box()
 	var save_array = []
 	save_array.push(textbox_bg_w.value)
 	save_array.push(textbox_bg_h.value)
+	save_array.push(styler.value)
 
 	if(list_of_boxes.length > 0) 
 	{
@@ -2562,7 +2591,9 @@ function save_box()
 		}
 	}
 
-	download("new_box.ctbt", JSON.stringify(save_array))
+	save_array.splice(3, 0, styler.value + "-" + cyrb53(JSON.stringify(save_array)))
+
+	download("box-"+styler.value+".ctbt", JSON.stringify(save_array))
 }
 
 textbox_exp_alt.addEventListener('change', function(ev) {
@@ -2572,8 +2603,9 @@ textbox_exp_alt.addEventListener('change', function(ev) {
       reader.readAsText(file);
       reader.onloadend = function (e) {
 	read_this_bozo_temp = e.target.result.split('\n')
-	char_options += '<option value="' + read_this_bozo_temp[1] + '">' + read_this_bozo_temp[0] + '</option>'
 	exp_options[read_this_bozo_temp[1]] = read_this_bozo_temp[2]
+	if(!(read_this_bozo_temp[1] in char_options))
+	{char_options += '<option value="' + read_this_bozo_temp[1] + '">' + read_this_bozo_temp[0] + '</option>'
 
 	for(let i = 0; i < list_of_portraits.length; i++)
 	{
@@ -2582,9 +2614,13 @@ textbox_exp_alt.addEventListener('change', function(ev) {
 		list_of_portraits[i].chara_pos.innerHTML = char_options
 		list_of_portraits[i].chara_pos.value = save_dis
 	}
+	}
+	textbox_exp_alt.value = ""
       }
    }
 });
+
+let dont_man = false
 
 textbox_bg_alt.addEventListener('change', function(ev) {
    if(ev.target.files) {
@@ -2592,128 +2628,50 @@ textbox_bg_alt.addEventListener('change', function(ev) {
       var reader  = new FileReader();
       reader.readAsText(file);
       reader.onloadend = function (e) {
-	var awesome_template = JSON.parse(e.target.result)
-	loader_up(awesome_template)
+	var awesome_template = JSON.parse(e.target.result)	
+
+	//<option value="cavestory">Cave Story</option>
+
+	if(!(awesome_template[3] in prebaked_boxes))
+	{
+
+		box_selection += '<option value="' + awesome_template[3] + '">' + awesome_template[2] + '</option>'
+
+		my_val = textbox_bg.value
+
+		textbox_bg.innerHTML = box_selection
+
+		textbox_bg.value = my_val
+	}
+	
+	textbox_bg_alt.value = ""
+
+	prebaked_boxes[awesome_template[3]] = awesome_template
+
+	dont_man = true
+	//loader_up(awesome_template)
       }
    }
 });
 
 textbox_bg.addEventListener("change", (event) => {
+	if(dont_man)
+	{
+		dont_man = false
+		return
+	}
 	if(textbox_bg.value == "custom")
 	{
-		textbox_bg_alt.style.display = "inline"
+	//	textbox_bg_alt.style.display = "inline"
 	}
 	else
 	{
 		var awesome_template = prebaked_boxes[textbox_bg.value]
 		loader_up(awesome_template)
 		
-		textbox_bg_alt.style.display = "none"
+		//textbox_bg_alt.style.display = "none"
 	}
 })
-
-let ohAndThis = false
-
-/*textbox_over_alt.addEventListener('change', function(ev) {
-   if(ev.target.files) {
-      let file = ev.target.files[0];
-      var reader  = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onloadend = function (e) {
-	if(ohAndThis == false)
-	{
-		var image = new Image();
-		image.src = e.target.result;
-		ohAndThis = image
-		ohAndThis.style.display='none'
-	}
-	else
-	{
-		ohAndThis.src=e.target.result;
-	}
-      }
-   }
-});
-
-const box_sizes = {
-"undertale": [0,0,578,152,0,0],
-"outertale": [0,0,578,152,0,0],
-"jumbo": [0,0,578,188,0,0],
-"deltarune": [8,10,594,168,0,0]
-}
-
-textbox_over.addEventListener("change", (event) => {
-	if(textbox_over.value == "custom")
-	{
-		textbox_over_alt.style.display = "inline"
-	}
-	else
-	{
-		textbox_over_alt.style.display = "none"
-	}
-})*/
-
-/*textbox_font.addEventListener("change", (event) => {
-	mono_spaced_real.checked = true
-	if(textbox_font.value == "custom")
-	{
-		textbox_font_alt.style.display = "inline"
-		font_box_hidden.style.display = "inline"
-	}
-	else
-	{
-		if(textbox_font.value in custom_spaced_fonts)
-		{
-			mono_spaced_real.checked = false
-			read_this_bozo_temp = atob(custom_spaced_fonts[textbox_font.value]).split('\n')
-			readThisBozo = []
-			for(var i = 0; i < read_this_bozo_temp.length; i++)
-			{
-				readThisBozo[i] = read_this_bozo_temp[i].split(',')
-			}
-		}
-		font_box_hidden.style.display = "none"
-		textbox_font_alt.style.display = "none"
-		cur_font = loadImage('assets/fonts/'+textbox_font.value+'.png')
-	}
-})
-
-textbox_font_alt.addEventListener('change', function(ev) {
-   if(ev.target.files) {
-      let file = ev.target.files[0];
-      var reader  = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onloadend = function (e) {
-	if(true)
-	{
-        	var image = new Image();
-    		image.src = e.target.result;
-		cur_font = image
-	}
-	else
-	{
-		ohAndThis.src=e.target.result;
-	}
-      }
-   }
-});
-
-this_is_gonna_suck_i_guess.addEventListener('change', function(ev) {
-   if(ev.target.files) {
-      let file = ev.target.files[0];
-      var reader  = new FileReader();
-      reader.readAsText(file);
-      reader.onloadend = function (e) {
-	//read_this_bozo = alert(e.target.result)
-	read_this_bozo_temp = e.target.result.split('\n')
-	readThisBozo = []
-	for(var i = 0; i < read_this_bozo_temp.length; i++)
-	{
-		readThisBozo[i] = read_this_bozo_temp[i].split(',')
-	}
-      }
-   }
-});*/
 
 draw_canvas()
 setTimeout(draw_canvas, 1080)
