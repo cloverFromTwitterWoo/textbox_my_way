@@ -504,7 +504,7 @@ function new_box(def_name="", def_image=-1, def_x=0, def_y=0, def_w=578, def_h=1
 
 	box_container.appendChild(newBox.border)
 
-	newBox.number = list_of_boxes.length
+	//newBox.number = list_of_boxes.length
 
 	newBox.linebreak = complex_br()
 	box_container.appendChild(newBox.linebreak)
@@ -2429,7 +2429,7 @@ function save_box()
 				{
 					oh_boy += list_of_text[i].readThisBozo[z][0]
 				}
-				console.log(oh_boy)
+				//console.log(oh_boy)
 				/*if(z+1 < list_of_text[i].readThisBozo.length)
 				{
 				}*/
@@ -2510,28 +2510,23 @@ function save_box()
 	download("new_box", JSON.stringify(save_array))
 }
 
-/*let thatExists = false
-
 textbox_exp_alt.addEventListener('change', function(ev) {
    if(ev.target.files) {
       let file = ev.target.files[0];
-      var reader  = new FileReader();
-      reader.readAsDataURL(file);
+      var reader = new FileReader();
+      reader.readAsText(file);
       reader.onloadend = function (e) {
-	if(thatExists == false)
+	read_this_bozo_temp = e.target.result.split('\n')
+	char_options += '<option value="' + read_this_bozo_temp[1] + '">' + read_this_bozo_temp[0] + '</option>'
+	exp_options[read_this_bozo_temp[1]] = read_this_bozo_temp[2]
+
+	for(let i = 0; i < list_of_portraits.length; i++)
 	{
-       		var image = new Image();
-        	image.src = e.target.result;
-		thatExists = image
-		thatExists.style.display='none'
-	}
-	else
-	{
-		thatExists.src=e.target.result;
+		list_of_portraits[i].chara_pos.innerHTML = char_options
 	}
       }
    }
-});*/
+});
 
 textbox_bg_alt.addEventListener('change', function(ev) {
    if(ev.target.files) {

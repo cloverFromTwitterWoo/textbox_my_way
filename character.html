@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <meta charset="utf-8" />
+    <title>Character Creator</title>
+  </head>
+  <body>
+	<a href="base.html">Back</a>
+	<br><br>
+	<div class="box">
+		<span>Character: </span> <input type="text" id="char_name">
+		<br>
+		<!--span>Load: </span> <input type="file" id="char_thing">
+		<br--->
+		<button onclick="destroy_all()">Reset Character</button>
+		<br>
+		<br>
+		<div class="box" id="expression_box" style="width: 360px; border: none; padding: 0px">
+		</div>
+		<button onclick="new_exp()">New Expression</button>
+		<br>
+		<button onclick="download_it()">Download</button>
+	</div>
+	<script src="character.js"></script>
+  </body>
+</html>
