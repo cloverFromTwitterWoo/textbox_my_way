@@ -1,5 +1,6 @@
 const exp_box = document.getElementById("expression_box");
 const char_name = document.getElementById("char_name");
+const char_loader = document.getElementById("char_thing");
 
 function loadImage(filePath)
 {
@@ -71,7 +72,7 @@ function exp_list_swap(which, dir)
 	refresh_exp()
 }
 
-function new_exp()
+function new_exp(exp_name = "", exp_img=-1)
 {
 	var newExp = {}
 	newExp.border = document.createElement("div");
@@ -80,6 +81,12 @@ function new_exp()
 
 	newExp.expression = loadImage("assets/characters/test_portrait.png")
 	newExp.expression.classList.add("image_border")
+
+	if(exp_img != -1)
+	{
+		newExp.expression.src = exp_img
+	}
+
 	newExp.border.appendChild(newExp.expression)
 
 	newExp.border.appendChild(document.createElement("br"))
@@ -89,6 +96,7 @@ function new_exp()
 	newExp.border.appendChild(info_txt)
 	newExp.exp_name = document.createElement("input")
 	newExp.exp_name.type = "text"
+	newExp.exp_name.value = exp_name
 	newExp.border.appendChild(newExp.exp_name)
 
 	newExp.border.appendChild(document.createElement("br"))
@@ -200,3 +208,31 @@ function destroy_all()
 	}
 	refresh_exp()
 }
+
+char_loader.addEventListener('change', function(ev) {
+   if(ev.target.files) {
+      let file = ev.target.files[0];
+      var reader = new FileReader();
+      reader.readAsText(file);
+      reader.onloadend = function (e) {
+	destroy_all()
+	
+	linz = e.target.result.split('\n')
+	
+	char_name.value = linz[0]
+
+	oh_goodness = linz[2].split('"')
+
+	var the_img = ""
+	for(let i = 1; i < oh_goodness.length; i++)
+	{
+		if(i % 2 == 1) {the_img = oh_goodness[i]}
+		else
+		{
+			new_exp(oh_goodness[i].split("<")[0].substring(1), the_img)
+		}	
+	}
+	char_loader.value = ""
+      }
+   }
+});
