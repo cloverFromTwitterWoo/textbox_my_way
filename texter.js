@@ -124,11 +124,11 @@ let list_of_portraits = [];
 let list_of_over = [];
 
 let prebaked_boxes = {
-	undertale: [578, 152, ["", "assets/textboxes/undertale.png", 0, 0, "#ffffff", "true"], "text", ["", "assets/fonts/determination_mono.png", false, 28, 26, 116, 0, true, false, false], "port", ["", 67, 70, "2x_Scaling", true], "over"],
-	outertale: [578, 152, ["", "assets/textboxes/outertale.png", 0, 0, "#ffffff", "true"], "text", ["", "assets/fonts/determination_mono.png", false, 28, 26, 116, 0, true, false, false], "port", ["", 67, 70, "2x_Scaling", true], "over"],
-	underswap: [578, 152, ["", "assets/textboxes/underswap.png", 0, 0, "#ffffff", "true"], "text", ["", "assets/fonts/determination_mono.png", false, 28, 26, 116, 0, true, false, false], "port", ["", 67, 70, "2x_Scaling", true], "over"],
-	deltarune: [594,168, ["", "assets/textboxes/deltarune.png", 0, 0, "#ffffff", "true"], "text", ["", "assets/fonts/determination_mono.png", false, 36, 36, 116, 0, true, false, false], "port", ["", 84, 80, "2x_Scaling", true], "over"],
-	jumbo: [578, 188, ["", "assets/textboxes/jumbo.png", 0, 0, "#ffffff", "true"], "text", ["", "assets/fonts/determination_mono.png", false, 28, 26, 116, 0, true, false, false], "port", ["", 67, 70, "2x_Scaling", true], "over"],
+	undertale: [578, 152, ["", "assets/textboxes/undertale.png", 0, 0, "#ffffff", "true"], "text", ["", "assets/fonts/determination_mono.png", false, 28, 26, 116, 0, true, false, false], "port", ["", 72, 74, "2x_Scaling", true], "over"],
+	outertale: [578, 152, ["", "assets/textboxes/outertale.png", 0, 0, "#ffffff", "true"], "text", ["", "assets/fonts/determination_mono.png", false, 28, 26, 116, 0, true, false, false], "port", ["", 72, 74, "2x_Scaling", true], "over"],
+	underswap: [578, 152, ["", "assets/textboxes/underswap.png", 0, 0, "#ffffff", "true"], "text", ["", "assets/fonts/determination_mono.png", false, 28, 26, 116, 0, true, false, false], "port", ["", 72, 74, "2x_Scaling", true], "over"],
+	deltarune: [594,168, ["", "assets/textboxes/deltarune.png", 0, 0, "#ffffff", "true"], "text", ["", "assets/fonts/determination_mono.png", false, 36, 34, 116, 0, false, true, false], "port", ["", 80, 82, "2x_Scaling", true], "over"],
+	jumbo: [578, 188, ["", "assets/textboxes/jumbo.png", 0, 0, "#ffffff", "true"], "text", ["", "assets/fonts/determination_mono.png", false, 28, 26, 116, 0, true, false, false], "port", ["", 72, 74, "2x_Scaling", true], "over"],
 	cavestory: [488, 128, ["", "assets/textboxes/cave_story.png", 0, 0, "#ffffff", "true"], "text", ["", "assets/fonts/courier_new.png", false, 27, 23, 110, 0, false, false, false], "port", ["", 28, 20, "2x_Scaler", false], "over"],
 }
 
