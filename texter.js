@@ -59,13 +59,13 @@ function getCookie(cname) {
 
 var does_complex = getCookie("complex");
 
-alert(does_complex)
+//alert(does_complex)
 
 if(does_complex == "")
 {setCookie("complex", false, 365*10)}
 else
 {
-	homer.checked = does_complex
+	homer.checked = does_complex != "false"
 }
 
 function hexToRgb(hex) {
