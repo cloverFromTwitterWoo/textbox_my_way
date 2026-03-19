@@ -1,10 +1,15 @@
 const canvas = document.getElementById("textbox_work");
-const ctx = canvas.getContext("2d");
+const ctx = canvas.getContext("2d", {
+  antialias: false,
+  colorSpace: "srgb",
+  colorType: "unorm8",
+  alpha: true
+});
 
 const canvas_stack = document.getElementById("stack_work");
 const ctx_stack = canvas_stack.getContext("2d");
 
-alert("V1")
+alert("V3")
 
 ctx.fillStyle = "black"
 ctx.fillRect(0,0,canvas.width,canvas.height)
@@ -17,7 +22,13 @@ const over_container = document.getElementById("over_box");
 let awesome_canvas = document.getElementById("canvasTrue");
 let awesome_canvas_Stacked = document.getElementById("canvasStack");
 
-let portrait_blacka = document.getElementById("portrait_outline").getContext("2d");
+let portrait_blacka = document.getElementById("portrait_outline").getContext("2d", {
+  antialias: false,
+  colorSpace: "srgb",
+  colorType: "unorm8",
+  alpha: true,
+  willReadFrequently: true
+});
 let portrait_blacked = document.getElementById("portrait_outline");
 
 const marge = document.getElementById("margesimpson");
@@ -832,6 +843,7 @@ function new_text(def_name="", def_font="assets/fonts/determination_mono.png", d
 	newText.c_type = document.createElement("select");
 	newText.c_type.innerHTML = '<option value="white">(Replacing White)</option><option value="multi">(Multiplicative)</option><option value="whole">(All Of It)</option>'
 	newText.c_type.classList.add("complex")
+	newText.c_type.value = "multi"
 	newText.border.appendChild(newText.c_type)
 
 	newText.border.appendChild(document.createElement("br"))
