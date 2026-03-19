@@ -9,8 +9,6 @@ const ctx = canvas.getContext("2d", {
 const canvas_stack = document.getElementById("stack_work");
 const ctx_stack = canvas_stack.getContext("2d");
 
-alert("V3")
-
 ctx.fillStyle = "black"
 ctx.fillRect(0,0,canvas.width,canvas.height)
 
