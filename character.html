@@ -7,20 +7,21 @@
   </head>
   <body>
 	<a href="base.html">Back</a>
+	<a href="char_help.html" onclick="window.open(this.href,'targetWindow', 'width=500, height=500'); return false;">Help</a>
 	<br><br>
 	<div class="box" style="width: 800px">
-		<span>Character: </span> <input type="text" id="char_name">
-		<br>
 		<span>Load: </span> <input type="file" id="char_thing" accept=".ctbc">
 		<br>
 		<button onclick="destroy_all()">Reset Character</button>
+		<br><br>
+		<span>Character: </span> <input type="text" id="char_name">
 		<br>
 		<br>
 		<div class="box" id="expression_box" style="width: 760px; border: none; padding: 0px">
 		</div>
-		<button onclick="new_exp()">New Expression</button>
 		<br>
-		<button onclick="download_it()">Download</button>
+		<button onclick="new_exp()">New Expression</button>
+		<button onclick="download_it()">Save Character</button>
 	</div>
 	<script src="character.js"></script>
   </body>
