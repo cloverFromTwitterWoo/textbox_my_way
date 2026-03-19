@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset=’UTF-8’>
+  </head>
+  <body>
+<p>Welcome to my <em> Text Box Generator </em> . Lemme tell you all about how this thing works, anything that's <strong> COMPLEX </strong> will be marked in&nbsp; <span style="color: #ff0000;"> red <em> (like this) </em> <span style="color: #000000;"> to make what you have to worry about more clear. </span> </span></p>
+<p><span style="color: #ff0000;"> <span style="color: #000000;"> <em> Complex Mode </em> gives you more customizability, however it isn't as clean, and <strong> might not play well on devices like phones </strong> . Anything that uses more than one of each "element" should probably be done in complex&nbsp;mode. </span> </span></p>
+<h1><span style="color: #ff0000;"> <span style="color: #000000;"> Base Settings </span> </span></h1>
+<p><span style="color: #ff0000;"> <span style="color: #000000;"> There's a few basic settings, such as the width and height of the generated image, and if you want a <em> margin </em> around the image. If checked,&nbsp;before anything is generated, the image will be filled with black, including a 6px border. This will <strong> remove transparency </strong> however, so don't turn this on if you want your final image to be see through! </span> </span></p>
+<p><span style="color: #ff0000;"> <span style="color: #000000;"> You can also pick the <em> Style </em> of the image, which'll set up a bunch of other stuff. You can pick from the built in presets, or import your own from a file of the <em> ctbt format. </em> &nbsp;More on creating those later. </span> </span> <span style="color: #ff0000;"> <span style="color: #000000;"> <br /> </span> </span></p>
+<p><span style="color: #ff0000;"> <span style="color: #000000;"> The order in which each element renders is <em> boxes, portraits, text, and overlays </em> , and&nbsp; <span style="color: #ff0000;"> within those groups, higher elements are rendered first. </span> </span> </span></p>
+<h1><span style="color: #ff0000;"> <span style="color: #000000;"> Box Settings </span> </span></h1>
+<p><span style="color: #ff0000;"> <span style="color: #000000;"> Each box will have these settings. </span> </span></p>
+<ul>
+<li><span style="color: #ff0000;"> <span style="color: #000000;"> <span style="color: #ff0000;"> Image: You can upload an image to use for the box, <em> though if it says [Selected], you're using the one set in the style for it. </em> </span> </span> </span></li>
+<li><span style="color: #ff0000;"> <span style="color: #000000;"> <span style="color: #ff0000;"> Box X: The&nbsp; <em> horizontal </em> distance of the box's <strong> left edge&nbsp; </strong> from the left side of the image. </span> </span> </span></li>
+<li><span style="color: #ff0000;"> <span style="color: #000000;"> <span style="color: #ff0000;"> Box Y: The&nbsp; <em> vertical </em> distance of the box's <strong> top edge </strong> from the top side of the image. </span> </span> </span></li>
+<li><span style="color: #ff0000;"> <span style="color: #000000;"> <span style="color: #ff0000;"> Color Type: How color changes will be applied, <strong> only </strong> to pixels of <em> pure #ffffff, </em> &nbsp; <strong> multiplied </strong> with each pixel, or <strong> replacing </strong> &nbsp;every pixel. Default is only white. </span> </span> </span></li>
+<li><span style="color: #000000;"> Color: The color the box will be, by hex color. </span></li>
+<li><span style="color: #ff0000;"> Visible: If unchecked, box will not render. Default is checked. </span></li>
+</ul>
+<h1><span style="color: #000000;"> Portrait Settings </span></h1>
+<p style="text-align: left;"><span style="color: #000000;"> To begin, you'll notice the <em> Import Character </em> field. This allows you to upload <em> ctbc files </em> , which contain a character and their expressions. More on that elsewhere. </span></p>
+<p style="text-align: left;">The settings for each portrait is as follows.</p>
+<ul>
+<li><span style="color: #ff0000;"> <span style="color: #000000;"> Portrait X and Y: The <em> position </em> of the portrait from the top left of the image, either it's center&nbsp; <span style="color: #ff0000;"> or the top left, depending on the scaling option. </span> </span> </span></li>
+<li>Expression: The expression to use! You can see a <em> preview </em> of it at the bottom&nbsp; <span style="color: #ff0000;"> of each portrait box <span style="color: #000000;"> . </span> </span></li>
+<li>Character: The character to pick&nbsp;expressions from. If set to <em> none, </em> &nbsp;the portrait <em> will not render at all </em> , and if set to custom, you will be given a field to <em> upload an image </em> . Otherwise...</li>
+<li><span style="color: #ff0000;"> Portrait Scaling: Lets you decide how to handle the <strong> rendering </strong> the image. In order: </span></li>
+</ul>
+<ul style="list-style-type: square;">
+<li><span style="color: #ff0000;"> <span style="color: #000000;"> <span style="color: #ff0000;"> 2X Size (Centered): <em> Scales the image up by 2X </em> , before <strong> centering </strong> it at the position. </span> </span> </span></li>
+<li><span style="color: #ff0000;"> <span style="caret-color: #ff0000;"> 2X Size: Same as ^, but the position is the <strong> top left corner </strong> . </span> </span></li>
+<li><span style="color: #ff0000;"> <span style="caret-color: #ff0000;"> Centered: Like 2X Centered, but <strong> no scaling is done </strong> . </span> </span></li>
+<li><span style="color: #ff0000;"> <span style="caret-color: #ff0000;"> Unchanged: Uses the position as top left corner <strong> with no scaling </strong> . </span> </span></li>
+<li><span style="color: #ff0000;"> <span style="caret-color: #ff0000;"> 0.5X Size (Centered): Like 2X Centered, but scales <strong> DOWN </strong> instead. </span> </span></li>
+<li><span style="color: #ff0000;"> <span style="caret-color: #ff0000;"> 0.5 Size: Same as ^, with position as top left. </span> </span></li>
+<li><span style="color: #ff0000;"> <span style="caret-color: #ff0000;"> Arbitary Scaling (Centered): Lets you set the <strong> scaling factor </strong> for <em> each axis, </em> &nbsp;before centering. </span> </span></li>
+<li><span style="color: #ff0000;"> <span style="caret-color: #ff0000;"> Arbitary Scaling: Same, but with <strong> no </strong> centering. </span> </span></li>
+<li><span style="color: #ff0000;"> <span style="caret-color: #ff0000;"> Arbitary Size (Centered): Lets you set the <em> width and height in <strong> pixels </strong> </em> , and <strong> squishes and stretches to fit </strong> before centering. </span> </span></li>
+<li><span style="color: #ff0000;"> <span style="caret-color: #ff0000;"> Arbitary Size: Same, no centering. </span> </span></li>
+<li><span style="color: #ff0000;"> <span style="caret-color: #ff0000;"> Scale Evenly to Fit: You set the width and height, and it does math to <em> scale both up by the same factor </em> , so the width <strong> or </strong> height is the same as set. Centered. </span> </span></li>
+</ul>
+<ul>
+<li><span style="color: #000000;"> Outline: Generates a <strong> 1px black outline </strong> around the portrait if checked. </span></li>
+<li><span style="color: #ff0000;"> Color Type: Same settings as with the box. </span></li>
+<li><span style="color: #000000;"> Color: Color in hex. </span></li>
+</ul>
+<h1><span style="color: #000000;"> Text Options </span></h1>
+<p><span style="color: #000000;"> Text is what you've come here to make, so of course it's got options AND <em> commands </em> ! </span></p>
+<ul>
+<li><span style="color: #000000;"> <span style="caret-color: #000000;"> Font: Choose the font to use, you can pick from the presets, <em> or upload an image </em> to use as the font. More on that elsewhere. </span> </span></li>
+<li><span style="color: #ff0000;"> <span style="caret-color: #000000;"> Monospaced: If custom, then you can choose if it's the <strong> same&nbsp;spacing between each letter </strong> , or if unchecked, <strong> defined in a file </strong> . More elsewhere. </span> </span></li>
+<li><span style="color: #000000;"> <span style="caret-color: #000000;"> Text X and Y: Top left corner of text. Duh. </span> </span></li>
+<li><span style="color: #ff0000;"> <span style="caret-color: #000000;"> Portrait X and Y Offset: How much to move the text IF a <strong> portrait is being used </strong> (not set to none). </span> </span></li>
+<li><span style="color: #000000;"> <span style="caret-color: #000000;"> Outline: If checked, each letter has a <em> 1px black outline </em> . Good for complex boxes. </span> </span></li>
+<li><span style="color: #000000;"> <span style="caret-color: #000000;"> Dark World: Adds a blue drop shadow if checked. <em> Not compatable with Outline </em> . </span> </span></li>
+<li><span style="color: #000000;"> <span style="caret-color: #000000;"> Auto-Linebreak: Attempts to automatically line break <strong> if a certain width is reached </strong> , <em> with * awareness </em> .&nbsp; <strong> <span style="color: #000000;"> Can be buggy </span> </strong> <span style="color: #000000;"> . </span> </span> </span></li>
+<li><span style="color: #ff0000;"> <span style="caret-color: #000000;"> Color Blend: Same options as boxes. </span> </span></li>
+</ul>
+<p><span style="color: #ff0000;"> <span style="caret-color: #000000;"> <span style="color: #000000;"> The text itself is... the text itself, duh. You write letters in. However, it has a few commands you can <em> insert mid text </em> !&nbsp; <br /> </span> </span> </span></p>
+<ul>
+<li><span style="color: #ff0000;"> <span style="caret-color: #000000;"> <span style="color: #000000;"> \n: Linebreak. </span> </span> </span></li>
+<li><span style="color: #ff0000;"> <span style="caret-color: #000000;"> <span style="color: #000000;"> \#(hex): Changes color from then onward. </span> </span> </span></li>
+<li><span style="color: #ff0000;"> <span style="caret-color: #000000;"> <span style="color: #000000;"> \x(int)]: Moves the text position that amount to the <strong> right. </strong> <br /> </span> </span> </span></li>
+<li>\y(int)]: Moves the text position that amount <strong> downwards </strong> .</li>
+</ul>
+<h1>Overlay Options</h1>
+<p>Overlays are the last element type, going above everything else.</p>
+<ul>
+<li>Overlay: Pick from a <em> preset </em> image, or upload your own.</li>
+<li><span style="color: #ff0000;"> X and Y: The <em> top left </em> position of the image. </span></li>
+<li><span style="color: #ff0000;"> Width and Height: How many pixels to draw <strong> from the top left </strong> . <em> -1 is the whole axis </em> . </span></li>
+<li><span style="color: #ff0000;"> Visible: If unchecked, <strong> will not render </strong> . </span></li>
+</ul>
+<h1><span style="color: #ff0000;"> Every Element </span></h1>
+<p><span style="color: #ff0000;"> In complex mode, you'll see <em> there can be multiple </em> of each type. In simple mode, you <strong> only see the highest element </strong> of each type. You'll also have a button that will add a new element of said type, <em> appended to the bottom </em> . </span></p>
+<p><span style="color: #ff0000;"> In addition, <em> every </em> element will have the name setting.&nbsp;This property is <strong> purely cosmetic </strong> , and used for specifying the <em> purpose </em> of the element within the style. </span></p>
+<p><span style="color: #ff0000;"> Alongside that, every element has <em> three buttons </em> at their bottom. In order, the ^ button will move it <strong> up </strong> by one (rendered before any lower elements of the same type), the x button will <strong> remove </strong> the element entirely, and the v button will move the element <strong> down </strong> by one (rendered after any higher elements of the same type.) </span></p>
+<h1>Generating</h1>
+<p>Generating the box is as simple as clicking the button! Just know, it won't update <strong> until you click, </strong> and <strong> it could take a few clicks </strong> if everything doesn't render out!</p>
+<h1><span style="color: #000000;"> Box Stacking </span></h1>
+<p><span style="color: #000000;"> You can stack boxes into one image!&nbsp;Click <em> Add to Stack </em> to append the <strong> currently generated </strong> box to the stack. Each box will be added <em> without a margin, </em> &nbsp;though <strong> it cannot readd transparency </strong> ! </span></p>
+<p><span style="color: #000000;"> <em> Refresh Stack </em> will regenerate the stack image, and <em> Clear Stack </em> removes all the boxes. </span></p>
+<p><span style="color: #000000;"> <span style="caret-color: #000000;"> Each box has three buttons next to it. In order, the <em> ^ button </em> will move the box <strong> up </strong> one, the <em> x button </em> <strong> removes </strong> it from the stack, and the <em> v </em> &nbsp; <em> button </em> will move the box <strong> down </strong> one. </span> </span></p>
+<p><span style="color: #000000;"> <span style="caret-color: #000000;"> Boxes are put into the stack from the <em> top most box to the bottom most </em> , and in <strong> reading order </strong> (ie, go left to right, then down one, repeat). The amount of times it'll go right before going down one and to the left is determined by the <em> Stack Width </em> . </span> </span></p>
+<p><span style="color: #000000;"> <span style="caret-color: #000000;"> If the boxes aren't all the same size, it'll do it's best to center them in their spots. If <em> Margin </em> 's on, there'll be a 6px black margin between <strong> each </strong> box (alongside the 6px border for the whole image). </span> </span></p>
+<h1><span style="color: #ff0000;"> <span style="color: #000000;"> <span style="caret-color: #000000;"> <span style="color: #ff0000;"> Custom Styles </span> </span> </span> </span></h1>
+<p><span style="color: #ff0000;"> <span style="color: #000000;"> <span style="caret-color: #000000;"> <span style="color: #ff0000;"> To save a custom style, just click the Save Custom Box button next to the Generate Box button, and it'll make a ctbt file with all your settings (aside from portrait contents and the such). </span> </span> </span> </span></p>
+</body></html>
