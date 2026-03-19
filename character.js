@@ -229,7 +229,7 @@ function download_it()
 
 	awesome_str += hold_it
 
-	download("char-" + char_name.value + ".txt", awesome_str)
+	download("char-" + char_name.value + ".ctbc", awesome_str)
 }
 
 function destroy_all()
