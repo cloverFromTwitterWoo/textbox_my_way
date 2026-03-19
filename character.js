@@ -79,7 +79,7 @@ function exp_list_swap(which, dir)
 	else if (dir == 2)
 	{
 		var the_guy = exp_list.splice(which, 1);
-		exp_list.splice(exp_list.length-1,0,the_guy[0])
+		exp_list.splice(exp_list.length,0,the_guy[0])
 	}
 	refresh_exp()
 }
