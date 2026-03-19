@@ -2408,7 +2408,7 @@ function save_box()
 			save_array[save_array.length-1].push(save_cav.toDataURL())
 		}
 		if(list_of_text[i].m_pos.checked)
-		{save_array[save_array.length-1].push(falses)}
+		{save_array[save_array.length-1].push(false)}
 		else
 		{
 			//console.log(list_of_text[i].readThisBozo)
