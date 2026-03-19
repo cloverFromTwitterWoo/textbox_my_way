@@ -90,7 +90,7 @@ function new_exp(exp_name = "", exp_img=-1)
 	newExp.border = document.createElement("div");
 	newExp.border.classList.add("box")
 	newExp.border.style.width = "330px"
-	newExp.border.style.display = "inline"
+	newExp.border.style.display = "inline-block"
 
 	newExp.expression = loadImage("assets/characters/test_portrait.png")
 	newExp.expression.classList.add("image_border")
