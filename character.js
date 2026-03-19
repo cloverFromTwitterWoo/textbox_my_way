@@ -44,7 +44,7 @@ function refresh_exp()
 	for(let i = 0; i < exp_list.length; i++)
 	{
 		exp_list[i].border.remove()
-		exp_list[i].linebreak.remove()
+		//exp_list[i].linebreak.remove()
 	}
 	for(let i = 0; i < exp_list.length; i++)
 	{
@@ -53,7 +53,7 @@ function refresh_exp()
 		exp_list[i].downButt.className = "exp_" + String(i)
 		exp_list[i].exp_img.className = "exp_" + String(i)
 		exp_box.appendChild(exp_list[i].border)
-		exp_box.appendChild(exp_list[i].linebreak)
+		//exp_box.appendChild(exp_list[i].linebreak)
 	}
 }
 
@@ -78,6 +78,7 @@ function new_exp(exp_name = "", exp_img=-1)
 	newExp.border = document.createElement("div");
 	newExp.border.classList.add("box")
 	newExp.border.style.width = "330px"
+	newExp.border.style.display = "inline"
 
 	newExp.expression = loadImage("assets/characters/test_portrait.png")
 	newExp.expression.classList.add("image_border")
@@ -165,7 +166,7 @@ function new_exp(exp_name = "", exp_img=-1)
 	exp_box.appendChild(newExp.border)
 
 	newExp.linebreak = document.createElement("br");
-	exp_box.appendChild(newExp.linebreak)
+	///exp_box.appendChild(newExp.linebreak)
 	
 	exp_list.push(newExp)
 }
