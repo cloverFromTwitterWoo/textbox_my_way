@@ -2639,6 +2639,9 @@ textbox_bg_alt.addEventListener('change', function(ev) {
 
 		my_val = textbox_bg.value
 
+		if(my_val != "undertale")
+		{dont_man = true}
+
 		textbox_bg.innerHTML = box_selection
 
 		textbox_bg.value = my_val
@@ -2647,8 +2650,6 @@ textbox_bg_alt.addEventListener('change', function(ev) {
 	textbox_bg_alt.value = ""
 
 	prebaked_boxes[awesome_template[3]] = awesome_template
-
-	dont_man = true
 	//loader_up(awesome_template)
       }
    }
