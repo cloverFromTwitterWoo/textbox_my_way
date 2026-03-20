@@ -2603,8 +2603,7 @@ textbox_exp_alt.addEventListener('change', function(ev) {
       reader.readAsText(file);
       reader.onloadend = function (e) {
 	read_this_bozo_temp = e.target.result.split('\n')
-	exp_options[read_this_bozo_temp[1]] = read_this_bozo_temp[2]
-	if(!(read_this_bozo_temp[1] in char_options))
+	if(!(read_this_bozo_temp[1] in exp_options))
 	{char_options += '<option value="' + read_this_bozo_temp[1] + '">' + read_this_bozo_temp[0] + '</option>'
 
 	for(let i = 0; i < list_of_portraits.length; i++)
@@ -2615,6 +2614,7 @@ textbox_exp_alt.addEventListener('change', function(ev) {
 		list_of_portraits[i].chara_pos.value = save_dis
 	}
 	}
+	exp_options[read_this_bozo_temp[1]] = read_this_bozo_temp[2]
 	textbox_exp_alt.value = ""
       }
    }
@@ -2673,5 +2673,5 @@ textbox_bg.addEventListener("change", (event) => {
 	}
 })
 
-draw_canvas()
-setTimeout(draw_canvas, 1080)
+//draw_canvas()
+//setTimeout(draw_canvas, 1080)
