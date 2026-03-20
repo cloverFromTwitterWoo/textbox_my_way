@@ -2639,8 +2639,8 @@ textbox_bg_alt.addEventListener('change', function(ev) {
 
 		my_val = textbox_bg.value
 
-		if(my_val != "undertale")
-		{dont_man = true}
+		//if(my_val != "undertale")
+		//{dont_man = true}
 
 		textbox_bg.innerHTML = box_selection
 
