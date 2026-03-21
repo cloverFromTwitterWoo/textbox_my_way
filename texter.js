@@ -1008,7 +1008,7 @@ function new_port(def_name="", def_x=0, def_y=0, def_s="2x_Scaling", def_o=true,
 		if(list_of_portraits[which_char].no_dont)
 		{
 			list_of_portraits[which_char].no_dont = false
-			return
+			//return
 		}
 		if(this.value == "none")
 		{
