@@ -227,7 +227,7 @@ CwxNAp6LDAsMCwxNAo/LC0xLDAsMTQKISwtMiwwLDUKKiwwLDAsMTEKKCwtMSwwLDkKKSwtMSwwLDkKM
 CjgsLTEsMCwxNAo5LC0xLDAsMTQKICwwLDAsMTQKLiwtMiwwLDcKW2NvbW1hXSwtMiwwLDcKJywtMSwwLDUKIiwtMSwwLDcKPCwtMSwwLDE0Cj4sLTEsMCwxNAorLC0xLDAsMTQKLSwwLDAsOQovLDAsMCw3CiUsLTEsMCwyMQokLDAsMCwx\
 NAokLDAsMCwxNQo6LC0yLDAsOAo7LC0yLDAsOApeLDAsLTEsMTEKJiwtMSwwLDE2CkAsLTEsMCwyNQpfLDAsLTMsMTYKWywtMSwwLDgKXSwtMSwwLDgKfiwtMSwwLDE0Cj0sLTEsMCwxNAoyMA=="}
 
-let char_options = '<option value="none">None</option><option value="custom">Custom</option><option value="flowey">Flowey</option><option value="toriel">Toriel</option>'
+let char_options = '<option value="none">None</option><option value="custom">Custom</option><option value="blank">Blank</option><option value="flowey">Flowey</option><option value="toriel">Toriel</option>'
 
 let exp_options = 
 {
@@ -237,7 +237,8 @@ let exp_options =
 <option value="assets/characters/flowey/spr_floweynicesideum_0.png">Side (Uh)</option><option value="assets/characters/flowey/spr_floweygrin_0.png">Grin</option><option value="assets/characters/flowey/spr_floweyevil_0.png">Evil</option>\
 <option value="assets/characters/flowey/spr_floweylaugh_0.png">Laugh</option><option value="assets/characters/flowey/spr_floweyside_0.png">Side</option><option value="assets/characters/flowey/spr_floweysideshock_0.png">Side (Ah)</option>\
 <option value="assets/characters/flowey/spr_floweytoriel_0.png">Toriel</option><option value="assets/characters/flowey/spr_floweytoriel2_0.png">Toriel (Distorted)</option><option value="assets/characters/flowey/spr_floweyhurt_0.png">Hurt</option>',
-	"toriel": '<option value="assets/characters/toriel/default.png">Default</option><option value="assets/characters/toriel/looking-away.png">Looking Away</option><option value="sad">Sad</option>'
+	"toriel": '<option value="assets/characters/toriel/default.png">Default</option><option value="assets/characters/toriel/looking-away.png">Looking Away</option><option value="sad">Sad</option>',
+	"blank": '<option value="assets/textboxes/transparent.png">Blank</option>'
 }
 
 let over_options = '\
@@ -1330,7 +1331,10 @@ function new_over(def_name="", def_image=-1, def_x=0, def_y=0, def_w=-1, def_h=-
 		var which_char = Number(this.className.substring(5))
 		if(this.value == "custom")
 		{
-			list_of_over[which_char].image_sel.style = "display: inline"
+			if('image_sel' in list_of_over[which_char])
+			{
+				list_of_over[which_char].image_sel.style = "display: inline"
+			}
 		}
 		else
 		{
