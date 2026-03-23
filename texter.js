@@ -194,6 +194,9 @@ let box_selection = '\
 
 textbox_bg.innerHTML = box_selection
 
+
+let import_on_top = document.getElementById("text_bg_alt_est")
+
 let prebaked_boxes = {
 	undertale: [578, 152, "Undertale", "undertale", ["", "assets/textboxes/undertale.png", 0, 0, "#ffffff", "true"], "text", ["", "assets/fonts/determination_mono.png", false, 28, 26, 116, 0, true, false, false], "port", ["", 72, 74, "2x_Scaling", true], "over"],
 	outertale: [578, 152, "PS!Outertale", "outertale", ["", "assets/textboxes/outertale.png", 0, 0, "#ffffff", "true"], "text", ["", "assets/fonts/determination_mono.png", false, 28, 26, 116, 0, true, false, false], "port", ["", 72, 74, "2x_Scaling", true], "over"],
@@ -1540,53 +1543,61 @@ function new_over(def_name="", def_image=-1, def_x=0, def_y=0, def_w=-1, def_h=-
 	list_of_over.push(newOver)
 }
 
-function loader_up(awesome_template)
+function loader_up(awesome_template, remove_old=true)
 {
-	for(let i = 0; i < list_of_boxes.length; i++)
+	if(remove_old)
 	{
-		list_of_boxes[i].border.remove()
-		list_of_boxes[i].linebreak.remove()
-	}
-	list_of_boxes.length = 0
-	var save_this_tho = []
-	for(let i = 0; i < list_of_text.length; i++)
-	{
-		save_this_tho.push(copy(list_of_text[i].text.value))
-		list_of_text[i].border.remove()
-		list_of_text[i].linebreak.remove()
-	}
-	//alert("just wirk")
-	list_of_text.length = 0
-	var save_this_too = []
-	//i really should try saving the portraits
-	//but that seems like
-	//really annoying lol
-	for(let i = 0; i < list_of_portraits.length; i++)
-	{
-		save_this_too.push([])
-		save_this_too[save_this_too.length-1].push(list_of_portraits[i].chara_pos.value)
-		if(list_of_portraits[i].image == false || list_of_portraits[list_of_portraits.length-1].chara_pos.value == "none")
-			{save_this_too[save_this_too.length-1].push(-1)}
-		else
-			{save_this_too[save_this_too.length-1].push(list_of_portraits[i].image.src)}
-		if(list_of_portraits[list_of_portraits.length-1].chara_pos.value != "none" && list_of_portraits[list_of_portraits.length-1].chara_pos.value != "custom")
+		for(let i = 0; i < list_of_boxes.length; i++)
 		{
-			save_this_too[save_this_too.length-1].push(list_of_portraits[i].exp_select.value)
+			list_of_boxes[i].border.remove()
+			list_of_boxes[i].linebreak.remove()
 		}
-		list_of_portraits[i].border.remove()
-		list_of_portraits[i].linebreak.remove()
-		//alert(save_this_too[save_this_too.length-1])
+		list_of_boxes.length = 0
+		var save_this_tho = []
+		for(let i = 0; i < list_of_text.length; i++)
+		{
+			save_this_tho.push(copy(list_of_text[i].text.value))
+			list_of_text[i].border.remove()
+			list_of_text[i].linebreak.remove()
+		}
+		//alert("just wirk")
+		list_of_text.length = 0
+		var save_this_too = []
+		//i really should try saving the portraits
+		//but that seems like
+		//really annoying lol
+		for(let i = 0; i < list_of_portraits.length; i++)
+		{
+			save_this_too.push([])
+			save_this_too[save_this_too.length-1].push(list_of_portraits[i].chara_pos.value)
+			if(list_of_portraits[i].image == false || list_of_portraits[list_of_portraits.length-1].chara_pos.value == "none")
+				{save_this_too[save_this_too.length-1].push(-1)}
+			else
+				{save_this_too[save_this_too.length-1].push(list_of_portraits[i].image.src)}
+			if(list_of_portraits[list_of_portraits.length-1].chara_pos.value != "none" && list_of_portraits[list_of_portraits.length-1].chara_pos.value != "custom")
+			{
+				save_this_too[save_this_too.length-1].push(list_of_portraits[i].exp_select.value)
+			}
+			list_of_portraits[i].border.remove()
+			list_of_portraits[i].linebreak.remove()
+			//alert(save_this_too[save_this_too.length-1])
+		}
+		list_of_portraits.length = 0
+		for(let i = 0; i < list_of_over.length; i++)
+		{
+			list_of_over[i].border.remove()
+			list_of_over[i].linebreak.remove()
+		}
+		list_of_over.length = 0
+		origin_w.value = awesome_template[0]
+		origin_h.value = awesome_template[1]
+		styler.value = awesome_template[2]
 	}
-	list_of_portraits.length = 0
-	for(let i = 0; i < list_of_over.length; i++)
+	else
 	{
-		list_of_over[i].border.remove()
-		list_of_over[i].linebreak.remove()
+		var save_this_tho = []
+		var save_this_too = []
 	}
-	list_of_over.length = 0
-	origin_w.value = awesome_template[0]
-	origin_h.value = awesome_template[1]
-	styler.value = awesome_template[2]
 	let i = 4
 	while(i < awesome_template.length && typeof(awesome_template[i]) != "string")
 	{
@@ -2651,6 +2662,22 @@ textbox_bg_alt.addEventListener('change', function(ev) {
 
 	prebaked_boxes[awesome_template[3]] = awesome_template
 	//loader_up(awesome_template)
+      }
+   }
+});
+
+import_on_top.addEventListener('change', function(ev) {
+   if(ev.target.files) {
+      let file = ev.target.files[0];
+      var reader  = new FileReader();
+      reader.readAsText(file);
+      reader.onloadend = function (e) {
+	var awesome_template = JSON.parse(e.target.result)	
+
+	//<option value="cavestory">Cave Story</option>
+	import_on_top.value = ""
+
+	loader_up(awesome_template, false)
       }
    }
 });
