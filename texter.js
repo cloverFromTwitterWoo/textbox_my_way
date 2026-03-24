@@ -188,10 +188,12 @@ let box_selection = '\
 <option value="undertale">Undertale</option>\
 <option value="outertale">PS!Outertale</option>\
 <option value="deltarune">Deltarune</option>\
-<option value="delta2une">Deltarune (Mini-Portraits)</option>\
 <option value="underswap">TS!Underswap</option>\
 <option value="jumbo">Jumbo</option>\
 <option value="cavestory">Cave Story</option>'
+
+
+//<option value="delta2une">Deltarune (Mini-Portraits)</option>\
 
 textbox_bg.innerHTML = box_selection
 
