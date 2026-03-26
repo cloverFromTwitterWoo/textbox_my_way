@@ -1810,6 +1810,8 @@ function draw_text(pass_in)//(x,y,str)
 	var draw_pos_x = [x, x]
 	var draw_pos_y = [y, y]
 	var color = hexToRgb("#ffffff")
+	var out_color = hexToRgb("#000000")
+	var dark_color = {r: 15, g: 15, b: 112}
 	var i = 0
 	var chr_length = pass_in.cur_font.naturalWidth/10
 	var chr_height = pass_in.cur_font.naturalHeight/9 //!REMEMBER TO CHANGE LATER!
@@ -1831,13 +1833,35 @@ function draw_text(pass_in)//(x,y,str)
 			}
 			else if(str.charAt(i+1) == "#")
 			{
-				color = "#"
-				for(var j = 2; j < 8; j++)
+				var going_for = 0
+				var temp_color = "#"
+				if(str.charAt(i+2) == "o")
 				{
-					color += str.charAt(i+j)
+					going_for = 1
+				}
+				else if(str.charAt(i+2) == "w")
+				{
+					going_for = 2
+				}
+				for(var j = 2 + math.ceil(going_for/2); j < 8 + math.ceil(going_for/2); j++)
+				{
+					temp_color += str.charAt(i+j)
 				}
 				i += 6
-				color = hexToRgb(color)
+				if(going_for == 0)
+				{color = hexToRgb(temp_color)}
+				else
+				{
+					i += 1
+					if(going_for == 1)
+					{
+						out_color = hexToRgb(temp_color)
+					}
+					else if(going_for == 2)
+					{
+						dark_color = hexToRgb(temp_color)
+					}
+				}
 			}
 			else if(str.charAt(i+1) == "x")
 			{
@@ -1890,19 +1914,74 @@ function draw_text(pass_in)//(x,y,str)
 		{
 			if(pass_in.o_pos.checked)
 			{
-   				ctx.drawImage(pass_in.cur_outline,letter_info[0],letter_info[1],letter_info[2],letter_info[3], draw_pos_x[0]-1+letter_posed[0], draw_pos_y[0]-1+letter_posed[1], letter_info[2],letter_info[3])
-   				ctx.drawImage(pass_in.cur_outline,letter_info[0],letter_info[1],letter_info[2],letter_info[3], draw_pos_x[0]-1+letter_posed[0], draw_pos_y[0]+1+letter_posed[1], letter_info[2],letter_info[3])
-				ctx.drawImage(pass_in.cur_outline,letter_info[0],letter_info[1],letter_info[2],letter_info[3], draw_pos_x[0]+1+letter_posed[0], draw_pos_y[0]-1+letter_posed[1], letter_info[2],letter_info[3])
-				ctx.drawImage(pass_in.cur_outline,letter_info[0],letter_info[1],letter_info[2],letter_info[3], draw_pos_x[0]+1+letter_posed[0], draw_pos_y[0]+1+letter_posed[1], letter_info[2],letter_info[3])
-				ctx.drawImage(pass_in.cur_outline,letter_info[0],letter_info[1],letter_info[2],letter_info[3], draw_pos_x[0]-1+letter_posed[0], draw_pos_y[0]+letter_posed[1], letter_info[2],letter_info[3])
-				ctx.drawImage(pass_in.cur_outline,letter_info[0],letter_info[1],letter_info[2],letter_info[3], draw_pos_x[0]+1+letter_posed[0], draw_pos_y[0]+letter_posed[1], letter_info[2],letter_info[3])
-				ctx.drawImage(pass_in.cur_outline,letter_info[0],letter_info[1],letter_info[2],letter_info[3], draw_pos_x[0]+letter_posed[0], draw_pos_y[0]-1+letter_posed[1], letter_info[2],letter_info[3])
-				ctx.drawImage(pass_in.cur_outline,letter_info[0],letter_info[1],letter_info[2],letter_info[3], draw_pos_x[0]+letter_posed[0], draw_pos_y[0]+1+letter_posed[1], letter_info[2],letter_info[3])
+				if(out_color.r == 0 && out_color.g == 0 && out_color.b == 0)
+				{
+					for(var k = -1; k < 2; k++)
+					{
+						for(var l = -1; l < 2; l++)
+						{
+							ctx.drawImage(pass_in.cur_outline,letter_info[0],letter_info[1],letter_info[2],letter_info[3], draw_pos_x[0]+k+letter_posed[0], draw_pos_y[0]+l+letter_posed[1], letter_info[2],letter_info[3])
+						}
+					}
+				}
+				else
+				{
+					portrait_blacked.width = letter_info[2]
+					portrait_blacked.height = letter_info[3]
+					portrait_blacka.clearRect(0,0,18,26)
+					portrait_blacka.imageSmoothingEnabled = false
+					canvas.imageSmoothingEnabled = false
+					portrait_blacka.drawImage(pass_in.cur_font,letter_info[0],letter_info[1],letter_info[2],letter_info[3],0,0,letter_info[2],letter_info[3])
+					var what_to = "whole"
+					var cool_pixels = portrait_blacka.getImageData(0,0,letter_info[2],letter_info[3], { colorSpace: "srgb", pixelFormat: "rgba-unorm8"}) //does this need something?
+					for(var j = 3; j < cool_pixels.data.length; j += 4)
+					{
+						cool_pixels.data[j-3] = out_color.r
+						cool_pixels.data[j-2] = out_color.g
+						cool_pixels.data[j-1] = out_color.b
+					}
+					portrait_blacka.putImageData(cool_pixels, 0, 0)
+					var blacked_out = portrait_blacked.toDataURL('image/png');
+					const img_a = document.createElement('img');
+					img_a.src = blacked_out;
+					for(var k = -1; k < 2; k++)
+					{
+						for(var l = -1; l < 2; l++)
+						{
+							ctx.drawImage(img_a,letter_info[0],letter_info[1],letter_info[2],letter_info[3], draw_pos_x[0]+k+letter_posed[0], draw_pos_y[0]+l+letter_posed[1], letter_info[2],letter_info[3])
+						}
+					}
+				}
 			}
 		}
 		else
 		{
-			ctx.drawImage(pass_in.cur_dw,letter_info[0],letter_info[1],letter_info[2],letter_info[3], draw_pos_x[0]+1+letter_posed[0], draw_pos_y[0]+1+letter_posed[1], letter_info[2],letter_info[3])
+			if(dark_color.r == 15 && out_color.g == 15 && out_color.b == 112)
+			{
+				ctx.drawImage(pass_in.cur_dw,letter_info[0],letter_info[1],letter_info[2],letter_info[3], draw_pos_x[0]+1+letter_posed[0], draw_pos_y[0]+1+letter_posed[1], letter_info[2],letter_info[3])
+			}
+			else
+			{
+				portrait_blacked.width = letter_info[2]
+				portrait_blacked.height = letter_info[3]
+				portrait_blacka.clearRect(0,0,18,26)
+				portrait_blacka.imageSmoothingEnabled = false
+				canvas.imageSmoothingEnabled = false
+				portrait_blacka.drawImage(pass_in.cur_font,letter_info[0],letter_info[1],letter_info[2],letter_info[3],0,0,letter_info[2],letter_info[3])
+				var what_to = "whole"
+				var cool_pixels = portrait_blacka.getImageData(0,0,letter_info[2],letter_info[3], { colorSpace: "srgb", pixelFormat: "rgba-unorm8"}) //does this need something?
+				for(var j = 3; j < cool_pixels.data.length; j += 4)
+				{
+					cool_pixels.data[j-3] = dark_color.r
+					cool_pixels.data[j-2] = dark_color.g
+					cool_pixels.data[j-1] = dark_color.b
+				}
+				portrait_blacka.putImageData(cool_pixels, 0, 0)
+				var blacked_out = portrait_blacked.toDataURL('image/png');
+				const img_a = document.createElement('img');
+				img_a.src = blacked_out;
+				ctx.drawImage(img_a,letter_info[0],letter_info[1],letter_info[2],letter_info[3], draw_pos_x[0]+1+letter_posed[0], draw_pos_y[0]+1+letter_posed[1], letter_info[2],letter_info[3])
+			}
 		}
 		if(doColorMath && (!(color.r == 255 && color.g == 255 && color.b == 255) || pass_in.c_type.value == "whole") )
 		{
