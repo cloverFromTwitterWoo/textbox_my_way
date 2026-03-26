@@ -1948,7 +1948,7 @@ function draw_text(pass_in)//(x,y,str)
 					{
 						for(var l = -1; l < 2; l++)
 						{
-							ctx.drawImage(img_a,letter_info[0],letter_info[1],letter_info[2],letter_info[3], draw_pos_x[0]+k+letter_posed[0], draw_pos_y[0]+l+letter_posed[1], letter_info[2],letter_info[3])
+							ctx.drawImage(img_a, draw_pos_x[0]+letter_posed[0]+k, draw_pos_y[0]+letter_posed[1]+l)
 						}
 					}
 				}
@@ -1980,7 +1980,7 @@ function draw_text(pass_in)//(x,y,str)
 				var blacked_out = portrait_blacked.toDataURL('image/png');
 				const img_a = document.createElement('img');
 				img_a.src = blacked_out;
-				ctx.drawImage(img_a,letter_info[0],letter_info[1],letter_info[2],letter_info[3], draw_pos_x[0]+1+letter_posed[0], draw_pos_y[0]+1+letter_posed[1], letter_info[2],letter_info[3])
+				ctx.drawImage(img_a, draw_pos_x[0]+letter_posed[0]+1, draw_pos_y[0]+letter_posed[1]+1)
 			}
 		}
 		if(doColorMath && (!(color.r == 255 && color.g == 255 && color.b == 255) || pass_in.c_type.value == "whole") )
