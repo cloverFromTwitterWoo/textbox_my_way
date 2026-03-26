@@ -1843,7 +1843,7 @@ function draw_text(pass_in)//(x,y,str)
 				{
 					going_for = 2
 				}
-				for(var j = 2 + math.ceil(going_for/2); j < 8 + math.ceil(going_for/2); j++)
+				for(var j = 2 + Math.ceil(going_for/2); j < 8 + Math.ceil(going_for/2); j++)
 				{
 					temp_color += str.charAt(i+j)
 				}
