@@ -1839,7 +1839,7 @@ function draw_text(pass_in)//(x,y,str)
 				{
 					going_for = 1
 				}
-				else if(str.charAt(i+2) == "w")
+				else if(str.charAt(i+2) == "s")
 				{
 					going_for = 2
 				}
