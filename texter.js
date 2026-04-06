@@ -2061,6 +2061,8 @@ let iters = 0
 
 let any_portraits = false
 
+let box_margin_num = 0
+
 function draw_canvas()
 {
 	if(iters == 0)
@@ -2105,6 +2107,7 @@ function draw_canvas()
 	if(draw_it)
 	{
 		var this_value = Number(marge_second.value)
+		box_margin_num = marge.checked ? this_value : 0
 		//box_size = [Number(textbox_bg_x.value), Number(textbox_bg_y.value), Number(textbox_bg_w.value), Number(textbox_bg_h.value), Number(portrait_x.value), Number(portrait_y.value)]
 		box_size = [0,0, Number(textbox_bg_w.value), Number(textbox_bg_h.value)]//, Number(portrait_x.value), Number(portrait_y.value)]
 		if(marge.checked)
@@ -2466,10 +2469,10 @@ function box_stack_add()
 	//img.src = awesome_canvas.src;
 	//new_stack.appendChild(img);
 	var save_cav = document.createElement('canvas');
-    	save_cav.width = 6
+    	save_cav.width = box_margin_num
     	save_cav.height = 6
 	var btx = save_cav.getContext('2d');
-   	btx.drawImage(awesome_canvas, 0, 0);
+   	/*btx.drawImage(awesome_canvas, 0, 0);
 	var cool_pixels = btx.getImageData(0,0,6,6)
 	var is_margin = true
 	for(var i = 3; i < cool_pixels.data.length; i += 7*4)
@@ -2479,12 +2482,12 @@ function box_stack_add()
 			is_margin = false
 			break
 		}
-	}
-	if(is_margin)
+	}*/
+	if(box_margin_num > 0)
 	{
-		save_cav.width = awesome_canvas.width - 12
-    		save_cav.height = awesome_canvas.height - 12
-		btx.drawImage(awesome_canvas, -6, -6);
+		save_cav.width = awesome_canvas.width - box_margin_num*2
+    		save_cav.height = awesome_canvas.height - box_margin_num*2
+		btx.drawImage(awesome_canvas, -box_margin_num, -box_margin_num);
 		img.src = save_cav.toDataURL('image/png');
 	}
 	else
