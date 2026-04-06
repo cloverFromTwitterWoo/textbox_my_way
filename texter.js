@@ -2423,8 +2423,8 @@ function box_stack_update()
 				y_pos += row_heights[Math.floor(i/row_length)-1] + this_value*marge_stack.checked
 			}
 		}
-		var draw_x = x_pos + ((column_widths[i % row_length]) - bonus_boxes[i][1].width)/2
-		var draw_y = y_pos + ((row_heights[Math.floor(i/row_length)]) - bonus_boxes[i][1].height)/2
+		var draw_x = x_pos + ((column_widths[i % row_length]) - bonus_boxes[i][1].width)/2 + this_value*marge_green.checked*marge_stack.checked*(i % row_length != 0)
+		var draw_y = y_pos + ((row_heights[Math.floor(i/row_length)]) - bonus_boxes[i][1].height)/2 + this_value*marge_green.checked*marge_stack.checked*(i % row_length == 0)
 		
 		//console.log(String(i) + "X: " + String(draw_x))
 		//console.log(String(i) + "Y: " + String(draw_y))
