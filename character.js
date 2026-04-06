@@ -1,6 +1,7 @@
 const exp_box = document.getElementById("expression_box");
 const char_name = document.getElementById("char_name");
 const char_loader = document.getElementById("char_thing");
+const mass_load = document.getElementById("files_thing");
 
 function loadImage(filePath)
 {
@@ -270,4 +271,22 @@ char_loader.addEventListener('change', function(ev) {
 	char_loader.value = ""
       }
    }
+});
+
+mass_load.addEventListener("change", function(ev)
+{
+	if(ev.target.files) {
+		for(let i = 0; i < ev.target.files.length; i++)
+		{
+			let file = ev.target.files[i];
+			var reader = new FileReader();
+		
+     	 		reader.readAsDataURL(file);
+      			reader.onloadend = (e) => 
+			{
+				new_exp("", e.target.result)
+      			}
+		}
+		mass_load.value = ""
+   	}
 });
