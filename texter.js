@@ -35,6 +35,7 @@ const homer = document.getElementById("complexmode");
 
 const marge_second = document.getElementById("marger");
 const marge_stack = document.getElementById("margersimpson");
+const marge_second_stack = document.getElementById("marger_stack");
 
 //todo: impliment cookies!!!  but thats super optional so dw abut it
 
@@ -2394,7 +2395,7 @@ function box_stack_update()
 	//console.log("I got to Point 2")
 	//console.log(row_heights)
 	//console.log(column_widths)
-	var this_value = Number(marge_second.value)
+	var this_value = Number(marge_second_stack.value)
 	canvas_stack.width = marge_stack.checked ? this_value : 0
 	for(let i = 0; i < column_widths.length; i++)
 	{
