@@ -33,6 +33,9 @@ const marge = document.getElementById("margesimpson");
 const bart = document.getElementById("outtheline");
 const homer = document.getElementById("complexmode");
 
+const marge_second = document.getElementById("marger");
+const marge_stack = document.getElementById("margersimpson");
+
 //todo: impliment cookies!!!  but thats super optional so dw abut it
 
 function setCookie(cname, cvalue, exdays) {
@@ -2036,7 +2039,7 @@ function draw_text(pass_in)//(x,y,str)
 				total_pos += Math.floor(chr_length*8/9)
 				j++
 			}
-			if(total_pos >= box_size[2] - 6)
+			if(total_pos >= box_size[2] - 12)
 			{
 				var look_str = str.slice(0, i)
 				draw_pos_x[0] = draw_pos_x[1]
@@ -2101,15 +2104,16 @@ function draw_canvas()
 	}*/
 	if(draw_it)
 	{
+		var this_value = Number(marge_second.value)
 		//box_size = [Number(textbox_bg_x.value), Number(textbox_bg_y.value), Number(textbox_bg_w.value), Number(textbox_bg_h.value), Number(portrait_x.value), Number(portrait_y.value)]
 		box_size = [0,0, Number(textbox_bg_w.value), Number(textbox_bg_h.value)]//, Number(portrait_x.value), Number(portrait_y.value)]
 		if(marge.checked)
 		{
-			canvas.height = box_size[3] + 12
-			canvas.width = box_size[2] + 12
-			awesome_canvas.height = box_size[3] + 12
-			awesome_canvas.width = box_size[2] + 12
-			offset = [6,6]
+			canvas.height = box_size[3] + this_value*2
+			canvas.width = box_size[2] + this_value*2
+			awesome_canvas.height = box_size[3] + this_value*2
+			awesome_canvas.width = box_size[2] + this_value*2
+			offset = [this_value,this_value]
 			ctx.fillRect(0,0,canvas.width,canvas.height)
 		}
 		else
@@ -2387,28 +2391,29 @@ function box_stack_update()
 	//console.log("I got to Point 2")
 	//console.log(row_heights)
 	//console.log(column_widths)
-	canvas_stack.width = marge.checked ? 6 : 0
+	var this_value = Number(marge_second.value)
+	canvas_stack.width = marge_stack.checked ? this_value : 0
 	for(let i = 0; i < column_widths.length; i++)
 	{
-		canvas_stack.width += column_widths[i] + 6*marge.checked
+		canvas_stack.width += column_widths[i] + this_value*marge_stack.checked
 	}
-	canvas_stack.height = marge.checked ? 6 : 0
+	canvas_stack.height = marge_stack.checked ? this_value : 0
 	for(let i = 0; i < row_heights.length; i++)
 	{
-		canvas_stack.height += row_heights[i] + 6*marge.checked
+		canvas_stack.height += row_heights[i] + this_value*marge_stack.checked
 	}
-	if(marge.checked){ctx_stack.fillRect(0,0,canvas_stack.width,canvas_stack.height)}
+	if(marge_stack.checked){ctx_stack.fillRect(0,0,canvas_stack.width,canvas_stack.height)}
 	//console.log("I got to Point 3")
 	var x_pos = 0
-	var y_pos = marge.checked ? 6 : 0
+	var y_pos = marge_stack.checked ? this_value : 0
 	for (let i = 0; i < bonus_boxes.length; i++) 
 	{
 		if(i % row_length == 0)
 		{
-			x_pos = marge.checked ? 6 : 0
+			x_pos = marge_stack.checked ? this_value : 0
 			if(i > 0)
 			{
-				y_pos += row_heights[Math.floor(i/row_length)-1] + 6*marge.checked
+				y_pos += row_heights[Math.floor(i/row_length)-1] + this_value*marge_stack.checked
 			}
 		}
 		var draw_x = x_pos + ((column_widths[i % row_length]) - bonus_boxes[i][1].width)/2
@@ -2419,7 +2424,7 @@ function box_stack_update()
 		ctx_stack.drawImage(bonus_boxes[i][1], draw_x, draw_y)
 		//ctx_stack.fillRect(draw_x,draw_y,canvas_stack.width,canvas_stack.height)
 	
-		x_pos += column_widths[i % row_length] + 6*marge.checked
+		x_pos += column_widths[i % row_length] + this_value*marge_stack.checked
 	}
 	//console.log("I got to Point 4")
 

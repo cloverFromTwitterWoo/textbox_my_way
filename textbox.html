@@ -32,6 +32,7 @@
 	<span>Image Height: </span><input type="number" id="origin_h" value="152" style="width: 40px;" min="0"/>
 	<br>
 	<span>Margin:</span><input type="checkbox" id="margesimpson">
+	<span> Pixels: <span><input type="number" min="0" id="marger" value="6" style="width: 30px;"><span>px</span>
 	<br class="complex">
 	<span class="complex">Style Name:</span> <input type="text" class="complex" id="style_name">
 	<br class="complex"><br class="complex">
@@ -82,7 +83,8 @@
 	<button onclick="box_stack_add()">Add to Stack</button>
 	<button onclick="box_stack_update()">Refresh Stack</button>
 	<button onclick="stack_reset()">Clear Stack</button> 
-	<span>Stack Width:</span><input type="number" id="stack_width" value="1" style="width: 25px;" min="1" max="9"/>
+	<span>Stack Width: </span><input type="number" id="stack_width" value="1" style="width: 25px;" min="1" max="9"/>
+	<span> Margin: </span><input type="checkbox" id="margersimpson">
 	<br>
 	<canvas id="stack_work" style="display:none" width="590" height="0"></canvas>
 	<img id="canvasStack" style="display:none"></img>
