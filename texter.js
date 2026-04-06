@@ -36,6 +36,7 @@ const homer = document.getElementById("complexmode");
 const marge_second = document.getElementById("marger");
 const marge_stack = document.getElementById("margersimpson");
 const marge_second_stack = document.getElementById("marger_stack");
+const marge_green = document.getElementById("greensimpson");
 
 //todo: impliment cookies!!!  but thats super optional so dw abut it
 
@@ -2399,13 +2400,15 @@ function box_stack_update()
 	canvas_stack.width = marge_stack.checked ? this_value : 0
 	for(let i = 0; i < column_widths.length; i++)
 	{
-		canvas_stack.width += column_widths[i] + this_value*marge_stack.checked
+		canvas_stack.width += column_widths[i] + this_value*marge_stack.checked + this_value*marge_green.checked*marge_stack.checked
 	}
+	canvas_stack.width -= this_value*marge_green.checked*marge_stack.checked
 	canvas_stack.height = marge_stack.checked ? this_value : 0
 	for(let i = 0; i < row_heights.length; i++)
 	{
-		canvas_stack.height += row_heights[i] + this_value*marge_stack.checked
+		canvas_stack.height += row_heights[i] + this_value*marge_stack.checked + this_value*marge_green.checked*marge_stack.checked
 	}
+	canvas_stack.height -= this_value*marge_green.checked*marge_stack.checked
 	if(marge_stack.checked){ctx_stack.fillRect(0,0,canvas_stack.width,canvas_stack.height)}
 	//console.log("I got to Point 3")
 	var x_pos = 0
