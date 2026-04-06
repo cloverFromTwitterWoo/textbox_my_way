@@ -2420,11 +2420,11 @@ function box_stack_update()
 			x_pos = marge_stack.checked ? this_value : 0
 			if(i > 0)
 			{
-				y_pos += row_heights[Math.floor(i/row_length)-1] + this_value*marge_stack.checked
+				y_pos += row_heights[Math.floor(i/row_length)-1] + this_value*marge_stack.checked + this_value*marge_green.checked*marge_stack.checked
 			}
 		}
 		var draw_x = x_pos + ((column_widths[i % row_length]) - bonus_boxes[i][1].width)/2 + this_value*marge_green.checked*marge_stack.checked*(i % row_length != 0)
-		var draw_y = y_pos + ((row_heights[Math.floor(i/row_length)]) - bonus_boxes[i][1].height)/2 + this_value*marge_green.checked*marge_stack.checked*(i % row_length == 0)
+		var draw_y = y_pos + ((row_heights[Math.floor(i/row_length)]) - bonus_boxes[i][1].height)/2
 		
 		//console.log(String(i) + "X: " + String(draw_x))
 		//console.log(String(i) + "Y: " + String(draw_y))
