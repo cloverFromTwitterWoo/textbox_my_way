@@ -2290,7 +2290,7 @@ function draw_canvas()
 			}
 			if(["B", "BL", "BR"].includes(list_of_portraits[i].s_posr.value))
 			{
-				port_pos[1] -= Math.floor(port_pos[3]/2)
+				port_pos[1] -= port_pos[3]
 			}
 			if(list_of_portraits[i].o_pos.checked)
 			{
