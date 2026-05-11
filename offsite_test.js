@@ -2,7 +2,7 @@ alert("ill do this properly later")
 
 
 async function getData(url) {
-  alert("function is running!!!)
+  alert("function is running!!!")
   try {
     const response = await fetch(url);
     if (!response.ok) {
