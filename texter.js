@@ -534,7 +534,7 @@ function new_box(def_name="", def_image=-1, def_x=0, def_y=0, def_w=578, def_h=1
 	newBox.border.appendChild(complex_br())
 
 	var vis_txt = document.createElement("span");
-	vis_txt.innerHTML = "Visible: "
+	vis_txt.innerHTML = "Visible: HEY YEP MID TEST"
 	vis_txt.classList.add("complex")
 	newBox.border.appendChild(vis_txt)
 	newBox.v_pos = document.createElement("input");
@@ -1687,6 +1687,7 @@ function loader_up(awesome_template, remove_old=true)
 	i++
 	while(i < awesome_template.length && typeof(awesome_template[i]) != "string")
 	{
+		alert("die pos 3")
 		new_text(awesome_template[i][0], awesome_template[i][1], awesome_template[i][2], awesome_template[i][3], awesome_template[i][4], awesome_template[i][5], awesome_template[i][6], awesome_template[i][7], awesome_template[i][8], awesome_template[i][9])
 		if(list_of_text.length-1 < save_this_tho.length)
 		{
@@ -1697,7 +1698,6 @@ function loader_up(awesome_template, remove_old=true)
 	i++
 	while(i < awesome_template.length && typeof(awesome_template[i]) != "string")
 	{
-		alert("die pos 3")
 		new_port(...awesome_template[i])
 		//console.log(list_of_portraits[list_of_portraits.length-1])
 		if(list_of_portraits.length-1 < save_this_too.length)
