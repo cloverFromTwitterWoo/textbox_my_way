@@ -1,6 +1,6 @@
-alert("was itnuust the typo")
+alert("ill do this properly later")
 
-
+/*
 async function getData(url) {
   alert("function is running!!!)
   try {
@@ -24,3 +24,4 @@ function destroy_all()
   getData(char_name.innerHTML)
 }
 
+*/
