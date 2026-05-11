@@ -1679,8 +1679,7 @@ function loader_up(awesome_template, remove_old=true)
 	i++
 	while(i < awesome_template.length && typeof(awesome_template[i]) != "string")
 	{
-		alert(awesome_template[i].length)
-		new_port(awesome_template[i][0], awesome_template[i][1], awesome_template[i][2], awesome_template[i][3], awesome_template[i][4])
+		new_port(...awesome_template[i])
 		//console.log(list_of_portraits[list_of_portraits.length-1])
 		if(list_of_portraits.length-1 < save_this_too.length)
 		{
@@ -2276,10 +2275,21 @@ function draw_canvas()
 				}
 			}
 			//replace with proper anchor options!!
-			alert(list_of_portraits[i].s_posr.value)
-			if(["Center_It", "2x_Scaling", "0.5x_Scaling", "Whatever_Scaling", "Fit_Square", "Fit_Basic", "ohgoodness"].includes(list_of_portraits[i].s_pos.value))
+			//alert(list_of_portraits[i].s_posr.value)
+			if(["C", "T", "B"].includes(list_of_portraits[i].s_posr.value))
 			{
 				port_pos[0] -= Math.floor(port_pos[2]/2)
+			}
+			if(["R", "TR", "BR"].includes(list_of_portraits[i].s_posr.value))
+			{
+				port_pos[0] -= port_pos[2]
+			}
+			if(["C", "L", "R"].includes(list_of_portraits[i].s_posr.value))
+			{
+				port_pos[1] -= Math.floor(port_pos[3]/2)
+			}
+			if(["B", "BL", "BR"].includes(list_of_portraits[i].s_posr.value))
+			{
 				port_pos[1] -= Math.floor(port_pos[3]/2)
 			}
 			if(list_of_portraits[i].o_pos.checked)
@@ -2717,6 +2727,9 @@ function save_box()
 		save_array[save_array.length-1].push(list_of_portraits[i].y_pos.value)
 		save_array[save_array.length-1].push(list_of_portraits[i].s_pos.value)
 		save_array[save_array.length-1].push(list_of_portraits[i].o_pos.checked)
+		save_array[save_array.length-1].push(list_of_portraits[i].w_pos.value)
+		save_array[save_array.length-1].push(list_of_portraits[i].h_pos.value)
+		save_array[save_array.length-1].push(list_of_portraits[i].s_posr.value)
 		if(i + 1 < list_of_portraits.length)
 		{
 			save_array.push([])
