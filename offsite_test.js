@@ -1,10 +1,10 @@
 alert("ill do this properly later")
 
 
-async function getData(url) {
+async function getData(my_url) {
   alert("function is running!!!")
   try {
-    const response = await fetch(url);
+    const response = await fetch(my_url);
     if (!response.ok) {
       throw new Error(`Response status: ${response.status}`);
     }
@@ -21,7 +21,7 @@ const char_name = document.getElementById("char_name");
 
 function destroy_all()
 {
-  getData(char_name.innerHTML)
+  getData(char_name.value)
 }
 
 
