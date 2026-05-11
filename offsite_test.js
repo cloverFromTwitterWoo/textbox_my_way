@@ -1,5 +1,6 @@
-alert("YES I LOADED")
+alert("okay wait is it the rest of thr thing causing issues")
 
+/*
 async function getData(url) {
   alert("function is running!!!)
   try {
@@ -22,3 +23,4 @@ function destroy_all()
 {
   getData(char_name.innerHTML)
 }
+*/
