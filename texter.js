@@ -902,6 +902,7 @@ function new_text(def_name="", def_font="assets/fonts/determination_mono.png", d
 	newText.border.appendChild(auto_txt)
 	newText.a_pos = document.createElement("input");
 	newText.a_pos.type = "checkbox"
+	alert("die pos 1")
 	if (def_a != False)
 	{newText.a_pos.checked = (def_a != -1)}
 	else
@@ -921,6 +922,7 @@ function new_text(def_name="", def_font="assets/fonts/determination_mono.png", d
 	newText.a_val.classList.add("complex")
 	newText.border.appendChild(newText.a_val);
 
+	alert("die pos 2")
 	newText.border.appendChild(complex_br())
 
 	auto_txt = document.createElement("span");
@@ -1695,6 +1697,7 @@ function loader_up(awesome_template, remove_old=true)
 	i++
 	while(i < awesome_template.length && typeof(awesome_template[i]) != "string")
 	{
+		alert("die pos 3")
 		new_port(...awesome_template[i])
 		//console.log(list_of_portraits[list_of_portraits.length-1])
 		if(list_of_portraits.length-1 < save_this_too.length)
