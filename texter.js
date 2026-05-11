@@ -984,7 +984,7 @@ function new_text(def_name="", def_font="assets/fonts/determination_mono.png", d
 	newText.chara_pos.dispatchEvent(event);
 }
 
-function new_port(def_name="", def_x=0, def_y=0, def_s="2x_Scaling", def_o=true, def_w=-1, def_h=-1)
+function new_port(def_name="", def_x=0, def_y=0, def_s="2x_Scaling", def_o=true, def_w=-1, def_h=-1, def_ss="TL")
 {
 	var newPort = {};
 	newPort.border = document.createElement("div");
@@ -1162,13 +1162,38 @@ function new_port(def_name="", def_x=0, def_y=0, def_s="2x_Scaling", def_o=true,
 	newPort.border.appendChild(s_txt)
 	newPort.s_pos = document.createElement("select");
 	newPort.s_pos.innerHTML = '\
-<option value="2x_Scaling">2X Size (Centered)</option><option value="2x_Scaler">2X Size</option>\
-<option value="Center_It">Centered</option><option value="Unchanged_Anything">Unchanged</option>\
-<option value="0.5x_Scaling">0.5X Size (Centered)</option><option value="0.5x_Scaler">0.5X Size</option>\
-<option value="Whatever_Scaling">Arbitary Scale (Centered)</option><option value="Whatever_Scaler">Arbitary Scale</option>\
-<option value="ohgoodness">Arbitary Size (Centered)</option><option value="ohgoodness2">Arbitary Size</option>\
+<option value="2x_Scaler">2X Size</option>\
+<option value="Unchanged_Anything">Unchanged</option>\
+<option value="0.5x_Scaler">0.5X Size</option>\
+<option value="Whatever_Scaler">Arbitary Scale</option>\
+<option value="ohgoodness2">Arbitary Size</option>\
 <option value="Fit_Square">Scale Evenly to Fit</option>'
 	newPort.s_pos.classList.add("complex")
+	if(def_s == "2x_Scaling")
+	{
+		def_s = "2x_Scaler"
+		def_ss = "C"
+	}
+	if(def_s == "Center_It")
+	{
+		def_s = "Unchanged_Anything"
+		def_ss = "C"
+	}
+	if(def_s == "2x_Scaling")
+	{
+		def_s = "2x_Scaler"
+		def_ss = "C"
+	}
+	if(def_s == "Whatever_Scaling")
+	{
+		def_s = "Whatever_Scaler"
+		def_ss = "C"
+	}
+	if(def_s == "ohgoodness")
+	{
+		def_s = "ohgoodness2"
+		def_ss = "C"
+	}
 	newPort.s_pos.value = def_s
 	newPort.s_pos.id = "portS_" + String(list_of_portraits.length)
 	newPort.s_pos.addEventListener('change', function(ev)
@@ -1195,6 +1220,30 @@ function new_port(def_name="", def_x=0, def_y=0, def_s="2x_Scaling", def_o=true,
 	});
 	newPort.border.appendChild(newPort.s_pos)
 
+	newPort.border.appendChild(complex_br())
+
+	var s_txt = document.createElement("span");
+	s_txt.innerHTML = "Portrait Anchor: "
+	s_txt.classList.add("complex")
+	newPort.border.appendChild(s_txt)
+	newPort.s_posr = document.createElement("select");
+	newPort.s_posr.innerHTML = '\
+<option value="C">Centered</option>\
+<option value="TL">Top Left</option>\
+<option value="T">Top</option>\
+<option value="TR">Top Right</option>\
+<option value="L">Left</option>\
+<option value="R">Right</option>\
+<option value="BL">Bottom Left</option>\
+<option value="B">Bottom</option>\
+<option value="BR">Bottom Right</option>'
+	newPort.s_posr.classList.add("complex")
+	newPort.s_posr.value = def_ss
+	newPort.s_posr.id = "portSS_" + String(list_of_portraits.length)
+	newPort.border.appendChild(newPort.s_posr)
+
+	newPort.border.appendChild(complex_br())
+	
 	newPort.size_controls = document.createElement("span");
 	newPort.size_controls.appendChild(document.createElement("br"))
 	s_txt = document.createElement("span");
@@ -1630,6 +1679,7 @@ function loader_up(awesome_template, remove_old=true)
 	i++
 	while(i < awesome_template.length && typeof(awesome_template[i]) != "string")
 	{
+		alert(awesome_template[i].length)
 		new_port(awesome_template[i][0], awesome_template[i][1], awesome_template[i][2], awesome_template[i][3], awesome_template[i][4])
 		//console.log(list_of_portraits[list_of_portraits.length-1])
 		if(list_of_portraits.length-1 < save_this_too.length)
@@ -2225,6 +2275,8 @@ function draw_canvas()
 					port_pos[3] = Math.floor(port_pos[3] * height_power)
 				}
 			}
+			//replace with proper anchor options!!
+			alert(list_of_portraits[i].s_posr.value)
 			if(["Center_It", "2x_Scaling", "0.5x_Scaling", "Whatever_Scaling", "Fit_Square", "Fit_Basic", "ohgoodness"].includes(list_of_portraits[i].s_pos.value))
 			{
 				port_pos[0] -= Math.floor(port_pos[2]/2)
