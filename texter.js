@@ -206,7 +206,7 @@ textbox_bg.innerHTML = box_selection
 let import_on_top = document.getElementById("text_bg_alt_est")
 
 let prebaked_boxes = {
-	undertale: [578, 152, "Undertale", "undertale", ["", "assets/textboxes/undertale.png", 0, 0, "#ffffff", "true"], "text", ["", "assets/fonts/determination_mono.png", false, 28, 26, 116, 0, true, false, false], "port", ["", 72, 74, "2x_Scaling", true], "over"],
+	undertale: [578, 152, "Undertale", "undertale", ["", "assets/textboxes/undertale.png", 0, 0, "#ffffff", "true"], "text", ["", "assets/fonts/determination_mono.png", false, 28, 26, 116, 0, true, false, false], "port", ["", 72, 74, "2x_Scaling", true], "over", ["",-1,0,0,-1,-1,true]],
 	outertale: [578, 152, "PS!Outertale", "outertale", ["", "assets/textboxes/outertale.png", 0, 0, "#ffffff", "true"], "text", ["", "assets/fonts/determination_mono.png", false, 28, 26, 116, 0, true, false, false], "port", ["", 72, 74, "2x_Scaling", true], "over"],
 	underswap: [578, 152, "TS!Underswap", "underswap", ["", "assets/textboxes/underswap.png", 0, 0, "#ffffff", "true"], "text", ["", "assets/fonts/determination_mono.png", false, 28, 26, 116, 0, true, false, false], "port", ["", 72, 74, "2x_Scaling", true], "over"],
 	deltarune: [593, 167, "Deltarune", "deltarune", ["", "assets/textboxes/deltarune.png", 0, 0, "#ffffff", "true"], "text", ["", "assets/fonts/determination_mono.png", false, 36, 34, 116, 0, false, true, false], "port", ["", 80, 82, "2x_Scaling", true], "over"],
@@ -2371,6 +2371,11 @@ function box_stack_update()
 		bonus_boxes[i][4].value = i
 	}
 	//console.log("I got to Point 1")
+	if(Number(stack_width_inp.value) < -1)
+	{
+		stack_width_inp.value = "1"
+		marge_second_stack.value= "6"
+	}
 	var row_length = Number(stack_width_inp.value)
 	var row_heights = []
 	var column_widths = []
