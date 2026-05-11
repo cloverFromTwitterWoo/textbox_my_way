@@ -638,7 +638,7 @@ function generate_font(what_num)
 	list_of_text[what_num].cur_dw.src = blacked_out;
 }
 
-function new_text(def_name="", def_font="assets/fonts/determination_mono.png", def_spacing=false, def_x=0, def_y=0, def_x_off=0, def_y_off=0, def_o=true, def_d=false, def_a=false)
+function new_text(def_name="", def_font="assets/fonts/determination_mono.png", def_spacing=false, def_x=0, def_y=0, def_x_off=0, def_y_off=0, def_o=true, def_d=false, def_a=-1)
 {
 	var newText = {};
 	newText.border = document.createElement("div");
@@ -902,8 +902,24 @@ function new_text(def_name="", def_font="assets/fonts/determination_mono.png", d
 	newText.border.appendChild(auto_txt)
 	newText.a_pos = document.createElement("input");
 	newText.a_pos.type = "checkbox"
-	newText.a_pos.checked = def_a
+	if (def_a != False)
+	{newText.a_pos.checked = (def_a != -1)}
+	else
+	{newText.a_pos.checked = False}
 	newText.border.appendChild(newText.a_pos)
+	var auto_txt = document.createElement("span");
+	auto_txt.innerHTML = " Text Width: "
+	auto_txt.classList.add("complex")
+	newText.border.appendChild(auto_txt)
+	newText.a_val = document.createElement("input");
+	newText.a_val.type = "number"
+	if (def_a != False)
+	{newText.a_val.value = def_a}
+	else
+	{newText.a_val.value = -1}
+	newText.a_val.style = "width: 40px;"
+	newText.a_val.classList.add("complex")
+	newText.border.appendChild(newText.a_val);
 
 	newText.border.appendChild(complex_br())
 
@@ -1228,11 +1244,11 @@ function new_port(def_name="", def_x=0, def_y=0, def_s="2x_Scaling", def_o=true,
 	newPort.border.appendChild(s_txt)
 	newPort.s_posr = document.createElement("select");
 	newPort.s_posr.innerHTML = '\
-<option value="C">Centered</option>\
 <option value="TL">Top Left</option>\
 <option value="T">Top</option>\
 <option value="TR">Top Right</option>\
 <option value="L">Left</option>\
+<option value="C">Centered</option>\
 <option value="R">Right</option>\
 <option value="BL">Bottom Left</option>\
 <option value="B">Bottom</option>\
@@ -2081,16 +2097,58 @@ function draw_text(pass_in)//(x,y,str)
 		{ctx.drawImage(pass_in.cur_font,letter_info[0],letter_info[1],letter_info[2],letter_info[3], draw_pos_x[0]+letter_posed[0], draw_pos_y[0]+letter_posed[1], letter_info[2],letter_info[3])}
 		i++
 		draw_pos_x[0] += letter_posed[2] //idk?
-		if(str.charAt(i-1) == " " && pass_in.a_pos.checked)
+		if(str.charAt(i-1) == " " && pass_in.a_pos.checked && Number(pass_in.a_val.value) > 0)
 		{
 			var total_pos = draw_pos_x[0]
 			var j = 1
+			var give_up = false
 			while(str.charAt(i+j) != " " && i+j < str.length)
 			{
-				total_pos += Math.floor(chr_length*8/9)
-				j++
+				if (str.charAt(j+i) != "\\")
+				{
+				   total_pos += Math.floor(chr_length*8/9)
+				   j++
+				}
+				else
+				{
+					if(str.charAt(i+j+1) == "n")
+			    {
+					give_up = True
+					break
+				}
+			else if(str.charAt(i+j+1) == "#")
+			{
+				var going_for = 0
+				var temp_color = "#"
+				if(str.charAt(j+i+2) == "o")
+				{
+					going_for = 1
+				}
+				else if(str.charAt(j+i+2) == "s")
+				{
+					going_for = 2
+				}
+				
+				j += 6
+				if(going_for != 0
+				   {
+					j += 1
+					
+				}
 			}
-			if(total_pos >= box_size[2] - 12)
+			else if(str.charAt(i+j+1) == "x" || str.charAt(i+1) == "y")
+			{
+				var h = 2
+				while(str.charAt(i+h+j) != "]")
+				{
+					h++
+				}
+				j += h-1
+			}
+			
+				}
+			}
+			if(total_pos - draw_pos_x[1] >= Number(pass_in.a_val.value) - draw_pos_x[1] && !give_up)
 			{
 				var look_str = str.slice(0, i)
 				draw_pos_x[0] = draw_pos_x[1]
@@ -2704,7 +2762,7 @@ function save_box()
 		save_array[save_array.length-1].push(list_of_text[i].y_pos_alt.value)
 		save_array[save_array.length-1].push(list_of_text[i].o_pos.checked)
 		save_array[save_array.length-1].push(list_of_text[i].d_pos.checked)
-		save_array[save_array.length-1].push(list_of_text[i].a_pos.checked)
+		save_array[save_array.length-1].push(list_of_text[i].a_val.value)
 		if(i + 1 < list_of_text.length)
 		{
 			save_array.push([])
