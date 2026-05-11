@@ -534,8 +534,8 @@ function new_box(def_name="", def_image=-1, def_x=0, def_y=0, def_w=578, def_h=1
 	newBox.border.appendChild(complex_br())
 
 	var vis_txt = document.createElement("span");
-	vis_txt.innerHTML = "Visible: HEY YEP MID TEST"
-	//vis_txt.classList.add("complex")
+	vis_txt.innerHTML = "Visible: "
+	vis_txt.classList.add("complex")
 	newBox.border.appendChild(vis_txt)
 	newBox.v_pos = document.createElement("input");
 	newBox.v_pos.type = "checkbox"
@@ -903,10 +903,10 @@ function new_text(def_name="", def_font="assets/fonts/determination_mono.png", d
 	newText.a_pos = document.createElement("input");
 	newText.a_pos.type = "checkbox"
 	alert("die pos 1")
-	if (def_a != False)
+	if (def_a != false)
 	{newText.a_pos.checked = (def_a != -1)}
 	else
-	{newText.a_pos.checked = False}
+	{newText.a_pos.checked = false}
 	newText.border.appendChild(newText.a_pos)
 	var auto_txt = document.createElement("span");
 	auto_txt.innerHTML = " Text Width: "
@@ -914,7 +914,7 @@ function new_text(def_name="", def_font="assets/fonts/determination_mono.png", d
 	newText.border.appendChild(auto_txt)
 	newText.a_val = document.createElement("input");
 	newText.a_val.type = "number"
-	if (def_a != False)
+	if (def_a != false)
 	{newText.a_val.value = def_a}
 	else
 	{newText.a_val.value = -1}
@@ -2115,40 +2115,24 @@ function draw_text(pass_in)//(x,y,str)
 				else
 				{
 					if(str.charAt(i+j+1) == "n")
-			    {
-					give_up = True
-					break
-				}
-			else if(str.charAt(i+j+1) == "#")
-			{
-				var going_for = 0
-				var temp_color = "#"
-				if(str.charAt(j+i+2) == "o")
+			    	{
+						give_up = True
+						break
+					}
+				else if(str.charAt(i+j+1) == "#")
 				{
-					going_for = 1
+					if(str.charAt(j+i+2) == "o" || str.charAt(j+i+2) == "s")
+					{j++}
+					j += 6
 				}
-				else if(str.charAt(j+i+2) == "s")
+				else if(str.charAt(i+j+1) == "x" || str.charAt(i+1) == "y")
 				{
-					going_for = 2
-				}
-				
-				j += 6
-				if(going_for != 0
-				   {
-					j += 1
-					
-				}
-			}
-			else if(str.charAt(i+j+1) == "x" || str.charAt(i+1) == "y")
-			{
-				var h = 2
-				while(str.charAt(i+h+j) != "]")
-				{
-					h++
-				}
-				j += h-1
-			}
-			
+					var h = 2
+					while(str.charAt(i+h+j) != "]")
+					{
+						h++
+					}
+					j += h-1
 				}
 			}
 			if(total_pos - draw_pos_x[1] >= Number(pass_in.a_val.value) - draw_pos_x[1] && !give_up)
