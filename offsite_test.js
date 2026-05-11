@@ -1,6 +1,6 @@
-alert("okay wait is it the rest of thr thing causing issues")
+alert("was itnuust the typo")
 
-/*
+
 async function getData(url) {
   alert("function is running!!!)
   try {
@@ -16,11 +16,11 @@ async function getData(url) {
     console.error(error.message);
   }
 }
-alrrt("man i wish i could console log")
+alert("man i wish i could console log")
 const char_name = document.getElementById("char_name");
 
 function destroy_all()
 {
   getData(char_name.innerHTML)
 }
-*/
+
