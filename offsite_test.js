@@ -1,8 +1,6 @@
-alert("ill do this properly later")
-
-
 async function getData(my_url) {
   alert("function is running!!!")
+  alert(my_url)
   try {
     const response = await fetch(my_url);
     if (!response.ok) {
@@ -21,6 +19,7 @@ const char_name = document.getElementById("char_name");
 
 function destroy_all()
 {
+alert(char_name.value)
   getData(char_name.value)
 }
 
