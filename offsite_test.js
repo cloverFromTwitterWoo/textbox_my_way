@@ -7,7 +7,7 @@ async function getData(my_url) {
       throw new Error(`Response status: ${response.status}`);
     }
 
-    const result = await response.text();
+    const result = await response.json();
     alert(result);
     alert(result.body); //mayve?
   } catch (error) {
