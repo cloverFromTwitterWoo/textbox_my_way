@@ -902,16 +902,15 @@ function new_text(def_name="", def_font="assets/fonts/determination_mono.png", d
 	newText.border.appendChild(auto_txt)
 	newText.a_pos = document.createElement("input");
 	newText.a_pos.type = "checkbox"
-	alert("die pos 1")
 	if (def_a != false)
 	{newText.a_pos.checked = (def_a != -1)}
 	else
 	{newText.a_pos.checked = false}
 	newText.border.appendChild(newText.a_pos)
-	var auto_txt = document.createElement("span");
-	auto_txt.innerHTML = " Text Width: "
-	auto_txt.classList.add("complex")
-	newText.border.appendChild(auto_txt)
+	aauto_txt = document.createElement("span");
+	aauto_txt.innerHTML = " Text Width: "
+	aauto_txt.classList.add("complex")
+	newText.border.appendChild(aauto_txt)
 	newText.a_val = document.createElement("input");
 	newText.a_val.type = "number"
 	if (def_a != false)
@@ -922,7 +921,6 @@ function new_text(def_name="", def_font="assets/fonts/determination_mono.png", d
 	newText.a_val.classList.add("complex")
 	newText.border.appendChild(newText.a_val);
 
-	alert("die pos 2")
 	newText.border.appendChild(complex_br())
 
 	auto_txt = document.createElement("span");
@@ -1179,8 +1177,7 @@ function new_port(def_name="", def_x=0, def_y=0, def_s="2x_Scaling", def_o=true,
 	s_txt.classList.add("complex")
 	newPort.border.appendChild(s_txt)
 	newPort.s_pos = document.createElement("select");
-	newPort.s_pos.innerHTML = '\
-<option value="2x_Scaler">2X Size</option>\
+	newPort.s_pos.innerHTML = '<option value="2x_Scaler">2X Size</option>\
 <option value="Unchanged_Anything">Unchanged</option>\
 <option value="0.5x_Scaler">0.5X Size</option>\
 <option value="Whatever_Scaler">Arbitary Scale</option>\
@@ -1245,8 +1242,7 @@ function new_port(def_name="", def_x=0, def_y=0, def_s="2x_Scaling", def_o=true,
 	s_txt.classList.add("complex")
 	newPort.border.appendChild(s_txt)
 	newPort.s_posr = document.createElement("select");
-	newPort.s_posr.innerHTML = '\
-<option value="TL">Top Left</option>\
+	newPort.s_posr.innerHTML = '<option value="TL">Top Left</option>\
 <option value="T">Top</option>\
 <option value="TR">Top Right</option>\
 <option value="L">Left</option>\
@@ -1687,7 +1683,7 @@ function loader_up(awesome_template, remove_old=true)
 	i++
 	while(i < awesome_template.length && typeof(awesome_template[i]) != "string")
 	{
-		alert("die pos 3")
+		//alert("die pos 3")
 		new_text(awesome_template[i][0], awesome_template[i][1], awesome_template[i][2], awesome_template[i][3], awesome_template[i][4], awesome_template[i][5], awesome_template[i][6], awesome_template[i][7], awesome_template[i][8], awesome_template[i][9])
 		if(list_of_text.length-1 < save_this_tho.length)
 		{
@@ -2119,20 +2115,21 @@ function draw_text(pass_in)//(x,y,str)
 						give_up = True
 						break
 					}
-				else if(str.charAt(i+j+1) == "#")
-				{
-					if(str.charAt(j+i+2) == "o" || str.charAt(j+i+2) == "s")
-					{j++}
-					j += 6
-				}
-				else if(str.charAt(i+j+1) == "x" || str.charAt(i+1) == "y")
-				{
-					var h = 2
-					while(str.charAt(i+h+j) != "]")
+					else if(str.charAt(i+j+1) == "#")
 					{
-						h++
+						if(str.charAt(j+i+2) == "o" || str.charAt(j+i+2) == "s")
+						{j++}
+						j += 6
 					}
-					j += h-1
+					else if(str.charAt(i+j+1) == "x" || str.charAt(i+1) == "y")
+					{
+						var h = 2
+						while(str.charAt(i+h+j) != "]")
+						{
+							h++
+						}
+						j += h-1
+					}
 				}
 			}
 			if(total_pos - draw_pos_x[1] >= Number(pass_in.a_val.value) - draw_pos_x[1] && !give_up)
