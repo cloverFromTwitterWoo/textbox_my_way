@@ -1,4 +1,5 @@
 async function getData(url) {
+  alert("function is running!!!)
   try {
     const response = await fetch(url);
     if (!response.ok) {
@@ -13,4 +14,9 @@ async function getData(url) {
   }
 }
 
-getData('https://paste.c-net.org/OfferedUnclear')
+const char_name = document.getElementById("char_name");
+
+function destroy_all()
+{
+  getData(char_name.innerHTML)
+}
