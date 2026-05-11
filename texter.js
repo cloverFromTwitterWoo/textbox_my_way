@@ -535,7 +535,7 @@ function new_box(def_name="", def_image=-1, def_x=0, def_y=0, def_w=578, def_h=1
 
 	var vis_txt = document.createElement("span");
 	vis_txt.innerHTML = "Visible: HEY YEP MID TEST"
-	vis_txt.classList.add("complex")
+	//vis_txt.classList.add("complex")
 	newBox.border.appendChild(vis_txt)
 	newBox.v_pos = document.createElement("input");
 	newBox.v_pos.type = "checkbox"
