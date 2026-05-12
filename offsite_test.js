@@ -1,3 +1,5 @@
+im_Sorry = []
+
 async function getData(my_url) {
   //alert("function is running!!!")
   //alert(my_url)
@@ -8,7 +10,9 @@ async function getData(my_url) {
     }
 
     const result = response.text();
-    return result
+	
+    //return result
+	im_Sorry.push(result)
   } catch (error) {
     console.error(error.message);
   }
@@ -18,8 +22,11 @@ const char_name = document.getElementById("char_name");
 
 function destroy_all()
 {
- 	okay = await getData(char_name.value)
-	console.log(okay)
+ 	getData(char_name.value)s
 }
 
 
+function destroy()
+{
+console.log(im_Sorry)
+}
