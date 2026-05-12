@@ -37,12 +37,12 @@ else
 
 function set_textbox()
 {
-	setCookie("auto_boxes", box_links.innerHTML, 365*10)
+	setCookie("auto_boxes", box_links.value, 365*10)
 	alert("Box auto-load updated!")
 }
 
 function set_characters()
 {
-	setCookie("auto_chars", char_links.innerHTML, 365*10)
+	setCookie("auto_chars", char_links.value, 365*10)
 	alert("Character auto-load updated!")
 }
