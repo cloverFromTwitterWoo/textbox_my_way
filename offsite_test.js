@@ -22,7 +22,7 @@ const char_name = document.getElementById("char_name");
 
 function destroy_all()
 {
- 	getData(char_name.value)s
+ 	getData(char_name.value)
 }
 
 
