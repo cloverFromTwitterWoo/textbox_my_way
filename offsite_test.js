@@ -10,9 +10,9 @@ async function getData(my_url) {
     }
 
     const result = response.text();
-	
-    //return result
-	im_Sorry.push(result)
+
+	result.then((resu) => {
+	im_Sorry.push(resu)}
   } catch (error) {
     console.error(error.message);
   }
