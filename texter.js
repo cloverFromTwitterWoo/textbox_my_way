@@ -2818,25 +2818,31 @@ function save_box()
 	download("box-"+styler.value+".ctbt", JSON.stringify(save_array))
 }
 
+function add_new_char(e_target)
+{
+	read_this_bozo_temp = e_target.split('\n')
+	if(!(read_this_bozo_temp[1] in exp_options))
+	{
+		char_options += '<option value="' + read_this_bozo_temp[1] + '">' + read_this_bozo_temp[0] + '</option>'
+
+		for(let i = 0; i < list_of_portraits.length; i++)
+		{
+			list_of_portraits[i].no_dont = true
+			var save_dis = list_of_portraits[i].chara_pos.value
+			list_of_portraits[i].chara_pos.innerHTML = char_options
+			list_of_portraits[i].chara_pos.value = save_dis
+		}
+	}
+	exp_options[read_this_bozo_temp[1]] = read_this_bozo_temp[2]
+}
+
 textbox_exp_alt.addEventListener('change', function(ev) {
    if(ev.target.files) {
       let file = ev.target.files[0];
       var reader = new FileReader();
       reader.readAsText(file);
       reader.onloadend = function (e) {
-	read_this_bozo_temp = e.target.result.split('\n')
-	if(!(read_this_bozo_temp[1] in exp_options))
-	{char_options += '<option value="' + read_this_bozo_temp[1] + '">' + read_this_bozo_temp[0] + '</option>'
-
-	for(let i = 0; i < list_of_portraits.length; i++)
-	{
-		list_of_portraits[i].no_dont = true
-		var save_dis = list_of_portraits[i].chara_pos.value
-		list_of_portraits[i].chara_pos.innerHTML = char_options
-		list_of_portraits[i].chara_pos.value = save_dis
-	}
-	}
-	exp_options[read_this_bozo_temp[1]] = read_this_bozo_temp[2]
+	add_new_char(e.target.result)
 	textbox_exp_alt.value = ""
       }
    }
@@ -2846,9 +2852,7 @@ let dont_man = false
 
 function add_new_box(e_target)
 {
-	var awesome_template = JSON.parse(e_target)	
-
-	//<option value="cavestory">Cave Story</option>
+	var awesome_template = JSON.parse(e_target)
 
 	if(!(awesome_template[3] in prebaked_boxes))
 	{
@@ -2856,9 +2860,6 @@ function add_new_box(e_target)
 		box_selection += '<option value="' + awesome_template[3] + '">' + awesome_template[2] + '</option>'
 
 		my_val = textbox_bg.value
-
-		//if(my_val != "undertale")
-		//{dont_man = true}
 
 		textbox_bg.innerHTML = box_selection
 
@@ -2874,31 +2875,7 @@ textbox_bg_alt.addEventListener('change', function(ev) {
       var reader  = new FileReader();
       reader.readAsText(file);
       reader.onloadend = function (e) {
-	/*var awesome_template = JSON.parse(e.target.result)	
-
-	//<option value="cavestory">Cave Story</option>
-
-	if(!(awesome_template[3] in prebaked_boxes))
-	{
-
-		box_selection += '<option value="' + awesome_template[3] + '">' + awesome_template[2] + '</option>'
-
-		my_val = textbox_bg.value
-
-		//if(my_val != "undertale")
-		//{dont_man = true}
-
-		textbox_bg.innerHTML = box_selection
-
-		textbox_bg.value = my_val
-	}
-	
-	textbox_bg_alt.value = ""*/
-
 	add_new_box(e.target.result)
-
-	prebaked_boxes[awesome_template[3]] = awesome_template
-	//loader_up(awesome_template)
       }
    }
 });

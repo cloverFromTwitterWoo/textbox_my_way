@@ -9,7 +9,7 @@ async function getData(my_url) {
 
     const result = response.json();
     console.log(response)
-    console.log(response.body)
+    console.log(response.text())
 
   } catch (error) {
     console.error(error.message);
