@@ -2954,7 +2954,7 @@ async function getData_Char(my_url) {
 var auto_load_boxes = getCookie("auto_boxes");
 if(auto_load_boxes != "")
 {
-	var the_boxes = auto_load_boxes.split('\n')
+	var the_boxes = atob(auto_load_boxes).split('\n')
 	for(let i = 0; i < the_boxes.length; i++)
 	{
 		//console.log(the_boxes)
@@ -2965,7 +2965,7 @@ if(auto_load_boxes != "")
 auto_load_boxes = getCookie("auto_chars");
 if(auto_load_boxes != "")
 {
-	var the_boxes = auto_load_boxes.split('\n')
+	var the_boxes = atob(auto_load_boxes).split('\n')
 	for(let i = 0; i < the_boxes.length; i++)
 	{
 		getData_Char(the_boxes[i])

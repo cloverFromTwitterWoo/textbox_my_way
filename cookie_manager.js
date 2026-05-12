@@ -27,23 +27,23 @@ var auto_boxes = getCookie("auto_boxes");
 if(auto_boxes == "")
 {setCookie("auto_boxes", "", 365*10)}
 else
-{box_links.innerHTML = auto_boxes}
+{box_links.innerHTML = atob(auto_boxes)}
 
 auto_boxes = getCookie("auto_chars");
 if(auto_boxes == "")
 {setCookie("auto_chars", "", 365*10)}
 else
-{char_links.innerHTML = auto_boxes}
+{char_links.innerHTML = atob(auto_boxes)}
 
 function set_textbox()
 {
 	//console.log(box_links.value)
-	setCookie("auto_boxes", box_links.value, 365*10)
+	setCookie("auto_boxes", btoa(box_links.value), 365*10)
 	alert("Box auto-load updated!")
 }
 
 function set_characters()
 {
-	setCookie("auto_chars", char_links.value, 365*10)
+	setCookie("auto_chars", btoa(char_links.value), 365*10)
 	alert("Character auto-load updated!")
 }
