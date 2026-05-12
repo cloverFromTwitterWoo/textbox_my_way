@@ -2099,13 +2099,31 @@ function draw_text(pass_in)//(x,y,str)
 		if(str.charAt(i-1) == " " && pass_in.a_pos.checked && Number(pass_in.a_val.value) > 0)
 		{
 			var total_pos = draw_pos_x[0]
+			total_pos += Math.floor(chr_length*8/9)
 			var j = 1
 			var give_up = false
 			while(str.charAt(i+j) != " " && i+j < str.length)
 			{
 				if (str.charAt(j+i) != "\\")
 				{
-				   total_pos += Math.floor(chr_length*8/9)
+					cur_letter = letter_to_index(str, j+i)
+				if(per_char_spacing.length == 0)
+				{
+					letter_posed = [0, 0, Math.floor(chr_length*8/9)]
+				}
+				else
+				{
+					letter_posed = [Number(per_char_spacing[cur_letter][1]), Number(per_char_spacing[cur_letter][2])]
+					if(per_char_spacing[cur_letter][3] == "default")
+					{
+						letter_posed.push(Math.floor(chr_length*8/9))
+					}
+					else
+					{
+						letter_posed.push(Number(per_char_spacing[cur_letter][3]))
+					}
+				}
+			       total_pos += letter_posed[2]
 				   j++
 				}
 				else
