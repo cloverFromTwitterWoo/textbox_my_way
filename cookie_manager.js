@@ -37,6 +37,7 @@ else
 
 function set_textbox()
 {
+	console.log(box_links.value)
 	setCookie("auto_boxes", box_links.value, 365*10)
 	alert("Box auto-load updated!")
 }

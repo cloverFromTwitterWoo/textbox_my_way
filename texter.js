@@ -2915,5 +2915,11 @@ textbox_bg.addEventListener("change", (event) => {
 	}
 })
 
+var auto_load_boxes = getCookie("auto_boxes");
+if(auto_load_boxes != "")
+{
+	console.log(auto_load_boxes)
+}
+
 //draw_canvas()
 //setTimeout(draw_canvas, 1080)
