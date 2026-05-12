@@ -12,7 +12,7 @@ async function getData(my_url) {
     const result = response.text();
 
 	result.then((resu) => {
-	im_Sorry.push(resu)}
+	im_Sorry.push(resu)})
   } catch (error) {
     console.error(error.message);
   }
