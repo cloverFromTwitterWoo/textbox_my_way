@@ -8,7 +8,8 @@ async function getData(my_url) {
     }
 
     const result = response.json();
-    console.log(result)
+    console.log(response)
+
   } catch (error) {
     console.error(error.message);
   }
