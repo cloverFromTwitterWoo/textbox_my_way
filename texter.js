@@ -2112,7 +2112,7 @@ function draw_text(pass_in)//(x,y,str)
 				{
 					if(str.charAt(i+j+1) == "n")
 			    	{
-						give_up = True
+						give_up = true
 						break
 					}
 					else if(str.charAt(i+j+1) == "#")
@@ -2915,10 +2915,51 @@ textbox_bg.addEventListener("change", (event) => {
 	}
 })
 
+async function getData(my_url) {
+  //alert("function is running!!!")
+  //alert(my_url)
+  try {
+    const response = await fetch(my_url);
+    if (!response.ok) {
+      throw new Error(`Response status: ${response.status}`);
+    }
+
+    const result = response.text();
+
+	result.then((resu) => {
+	add_new_box(resu)})
+  } catch (error) {
+    console.error(error.message);
+  }
+}
+
+async function getData_Char(my_url) {
+  //alert("function is running!!!")
+  //alert(my_url)
+  try {
+    const response = await fetch(my_url);
+    if (!response.ok) {
+      throw new Error(`Response status: ${response.status}`);
+    }
+
+    const result = response.text();
+
+	result.then((resu) => {
+	add_new_char(resu)})
+  } catch (error) {
+    console.error(error.message);
+  }
+}
+
 var auto_load_boxes = getCookie("auto_boxes");
 if(auto_load_boxes != "")
 {
-	console.log(auto_load_boxes)
+	var the_boxes = auto_load_boxes.split('\n')
+	for(let i = 0; i < the_boxes.length; i++)
+	{
+		console.log(the_boxes)
+		getData(the_boxes[i])
+	}
 }
 
 //draw_canvas()
