@@ -25,13 +25,13 @@ const char_links = document.getElementById("char_area");
 
 var auto_boxes = getCookie("auto_boxes");
 if(auto_boxes == "")
-{setCookie("auto_boxes", "", 365*10)}}
+{setCookie("auto_boxes", "", 365*10)}
 else
 {box_links.innerHTML = auto_boxes}
 
 auto_boxes = getCookie("auto_chars");
 if(auto_boxes == "")
-{setCookie("auto_chars", "", 365*10)}}
+{setCookie("auto_chars", "", 365*10)}
 else
 {char_links.innerHTML = auto_boxes}
 
