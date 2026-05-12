@@ -2844,13 +2844,37 @@ textbox_exp_alt.addEventListener('change', function(ev) {
 
 let dont_man = false
 
+function add_new_box(e_target)
+{
+	var awesome_template = JSON.parse(e_target)	
+
+	//<option value="cavestory">Cave Story</option>
+
+	if(!(awesome_template[3] in prebaked_boxes))
+	{
+
+		box_selection += '<option value="' + awesome_template[3] + '">' + awesome_template[2] + '</option>'
+
+		my_val = textbox_bg.value
+
+		//if(my_val != "undertale")
+		//{dont_man = true}
+
+		textbox_bg.innerHTML = box_selection
+
+		textbox_bg.value = my_val
+	}
+
+	prebaked_boxes[awesome_template[3]] = awesome_template
+}
+
 textbox_bg_alt.addEventListener('change', function(ev) {
    if(ev.target.files) {
       let file = ev.target.files[0];
       var reader  = new FileReader();
       reader.readAsText(file);
       reader.onloadend = function (e) {
-	var awesome_template = JSON.parse(e.target.result)	
+	/*var awesome_template = JSON.parse(e.target.result)	
 
 	//<option value="cavestory">Cave Story</option>
 
@@ -2869,7 +2893,9 @@ textbox_bg_alt.addEventListener('change', function(ev) {
 		textbox_bg.value = my_val
 	}
 	
-	textbox_bg_alt.value = ""
+	textbox_bg_alt.value = ""*/
+
+	add_new_box(e.target.result)
 
 	prebaked_boxes[awesome_template[3]] = awesome_template
 	//loader_up(awesome_template)

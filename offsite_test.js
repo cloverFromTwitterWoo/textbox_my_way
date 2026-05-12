@@ -9,12 +9,13 @@ async function getData(my_url) {
 
     const result = response.json();
     console.log(response)
+    console.log(response.body)
 
   } catch (error) {
     console.error(error.message);
   }
 }
-alert("IS WORKS?")
+alert("oh???")
 const char_name = document.getElementById("char_name");
 
 function destroy_all()
