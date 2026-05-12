@@ -9,8 +9,7 @@ async function getData(my_url) {
 
     const result = response.text();
     console.log(result)
-    console.log(response.text())
-
+    return String(result)
   } catch (error) {
     console.error(error.message);
   }
@@ -20,7 +19,7 @@ const char_name = document.getElementById("char_name");
 
 function destroy_all()
 {
-  getData(char_name.value)
+  alert(getData(char_name.value))
 }
 
 
