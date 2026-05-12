@@ -10,7 +10,7 @@
 <p><span style="color: #ff0000;"> <span style="color: #000000;"> There's a few basic settings, such as the width and height of the generated image, and if you want a <em> margin </em> around the image. If checked,&nbsp;before anything is generated, the image will be filled with black, including a border <strong>around it</strong> that's as many pixels wide as <em>you type in</em>. This will <strong> remove transparency </strong> however, so don't turn this on if you want your final image to be see through! </span> </span></p>
 <p><span style="color: #ff0000;"> <span style="color: #000000;"> You can also pick the <em> Style </em> of the image, which'll set up a bunch of other stuff. You can pick from the built in presets, or import your own from a file of the <em> ctbt format. </em> &nbsp;More on creating those later. </span> </span> <span style="color: #ff0000;"> <span style="color: #000000;"> <br /> </span> </span></p>
 <p><span style="color: #ff0000;"> <span style="color: #000000;"> The order in which each element renders is <em> boxes, portraits, text, and overlays</em>, and <span style="color: #ff0000;"> within those groups, higher elements are rendered first. </span> </span> </span></p>
-<p><span style="color: #ff0000;"> One last note, at the top is an <em>Import</em> option, where you can put a <em>ctbt file</em> to add the elements within <strong>without removing the current ones</strong>, which could be handy!</span><p>
+<p><span style="color: #ff0000;"> One last note, at the top is an <em>Import</em> option, where you can put a <em>ctbt file</em> to add the elements within <strong>without removing the current ones</strong>, which could be handy!</span><br>(PSST! You can also set certain styles to be <em>automatically imported</em> in the <a href="cookie_manager.html" target="_blank">Account</a> page!)
 <h1><span style="color: #ff0000;"> <span style="color: #000000;"> Box Settings </span> </span></h1>
 <p><span style="color: #ff0000;"> <span style="color: #000000;"> Each box will have these settings. </span> </span></p>
 <ul>
@@ -30,19 +30,19 @@
 <li>Character: The character to pick expressions from. If set to <em> none, </em> the portrait <em> will not render at all</em>, and if set to custom, you will be given a field to <em> upload an image</em>. Otherwise...</li>
 <li><span style="color: #ff0000;"> Portrait Scaling: Lets you decide how to handle the <strong> rendering </strong> the image. In order: </span></li>
 
+<span style="color: #ff0000;">
 <ul style="list-style-type: square;">
-<li><span style="color: #ff0000;"> <span style="color: #000000;"> <span style="color: #ff0000;"> 2X Size (Centered): <em> Scales the image up by 2X</em>, before <strong> centering </strong> it at the position. </span> </span> </span></li>
-<li><span style="color: #ff0000;"> <span style="caret-color: #ff0000;"> 2X Size: Same as ^, but the position is the <strong> top left corner</strong>. </span> </span></li>
-<li><span style="color: #ff0000;"> <span style="caret-color: #ff0000;"> Centered: Like 2X Centered, but <strong> no scaling is done</strong>. </span> </span></li>
-<li><span style="color: #ff0000;"> <span style="caret-color: #ff0000;"> Unchanged: Uses the position as top left corner <strong> with no scaling</strong>. </span> </span></li>
-<li><span style="color: #ff0000;"> <span style="caret-color: #ff0000;"> 0.5X Size (Centered): Like 2X Centered, but scales <strong> DOWN </strong> instead. </span> </span></li>
-<li><span style="color: #ff0000;"> <span style="caret-color: #ff0000;"> 0.5 Size: Same as ^, with position as top left. </span> </span></li>
-<li><span style="color: #ff0000;"> <span style="caret-color: #ff0000;"> Arbitary Scaling (Centered): Lets you set the <strong> scaling factor </strong> for <em> each axis, </em> before centering. </span> </span></li>
-<li><span style="color: #ff0000;"> <span style="caret-color: #ff0000;"> Arbitary Scaling: Same, but with <strong> no </strong> centering. </span> </span></li>
-<li><span style="color: #ff0000;"> <span style="caret-color: #ff0000;"> Arbitary Size (Centered): Lets you set the <em> width and height in <strong> pixels</strong></em>, and <strong> squishes and stretches to fit </strong> before centering. </span> </span></li>
-<li><span style="color: #ff0000;"> <span style="caret-color: #ff0000;"> Arbitary Size: Same, no centering. </span> </span></li>
-<li><span style="color: #ff0000;"> <span style="caret-color: #ff0000;"> Scale Evenly to Fit: You set the width and height, and it does math to <em> scale both up by the same factor </em> , so the width <strong> or </strong> height is the same as set. Centered. </span> </span></li>
+<li>2X Size: Scales the image <strong>UP</strong> by <em>2X</em>, nearest neighbor.</li>
+<li>Unchanged: Does nothing.</li>
+<li>0.5X Size: Scales the image <strong>DOWN</strong> by half.</li>
+<li>Arbitary Scaling: Lets you set the <strong> scaling factor </strong> for <em> each axis.</li>
+<li>Arbitary Size: Lets you set the <em> width and height in <strong> pixels</strong></em>, and <strong> squishes and stretches to fit</strong>.</li>
+<li>Scale Evenly to Fit: You set the width and height, and it does math to <em> scale both up by the same factor </em> , so the width <strong> or </strong> height is the same as set.</li>
+<li>2X Size: Scales the image up by 2X.</li>
+<li>2X Size: Scales the image up by 2X.</li>
 </ul>
+<li>Portrait Anchor: Determines which way the image <em>extends out</em> from the X and Y set.</li>
+</span>
 <li><span style="color: #000000;"> Outline: Generates a <strong> 1px black outline </strong> around the portrait if checked. </span></li>
 <li><span style="color: #ff0000;"> Color Type: Same settings as with the box. </span></li>
 <li><span style="color: #000000;"> Color: Color in hex. </span></li>
@@ -56,7 +56,7 @@
 <li><span style="color: #ff0000;"> <span style="caret-color: #000000;"> Portrait X and Y Offset: How much to move the text IF a <strong> portrait is being used </strong> (not set to none). </span> </span></li>
 <li><span style="color: #000000;"> <span style="caret-color: #000000;"> Outline: If checked, each letter has a <em> 1px black outline</em>. Good for complex boxes. </span> </span></li>
 <li><span style="color: #000000;"> <span style="caret-color: #000000;"> Dark World: Adds a blue drop shadow if checked. <em> Not compatable with the outline</em>. </span> </span></li>
-<li><span style="color: #000000;"> <span style="caret-color: #000000;"> Auto-Linebreak: Attempts to automatically line break <strong> if a certain width is reached</strong>, <em> with * awareness </em> . <strong> <span style="color: #000000;"> Can be buggy</span></strong><span style="color: #000000;">. </span> </span> </span></li>
+<li><span style="color: #000000;"> <span style="caret-color: #000000;"> Auto-Linebreak: Attempts to automatically line break <strong> if a certain width is reached</strong>, <em> with * awareness </em> . <strong> <span style="color: #000000;"> Can be buggy</span></strong><span style="color: #000000;">. <span style="color: #ff0000;">You can set the width yourself!</span> </span> </span> </span></li>
 <li><span style="color: #ff0000;"> <span style="caret-color: #000000;"> Color Blend: Same options as boxes. </span> </span></li>
 </ul>
 <p><span style="color: #ff0000;"> <span style="caret-color: #000000;"> <span style="color: #000000;"> The text itself is... the text itself, duh. You write letters in. However, it has a few commands you can <em> insert mid text</em>! <br /> </span> </span> </span></p>
