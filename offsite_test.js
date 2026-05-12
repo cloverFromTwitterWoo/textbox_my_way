@@ -1,6 +1,6 @@
 async function getData(my_url) {
   //alert("function is running!!!")
-  alert(my_url)
+  //alert(my_url)
   try {
     const response = await fetch(my_url);
     if (!response.ok) {
@@ -8,18 +8,18 @@ async function getData(my_url) {
     }
 
     const result = response.text();
-    console.log(result)
-    return String(result)
+    return result
   } catch (error) {
     console.error(error.message);
   }
 }
-alert("okay just do the thing already for fucks")
+alert("does this work")
 const char_name = document.getElementById("char_name");
 
 function destroy_all()
 {
-  alert(getData(char_name.value))
+ 	okay = await getData(char_name.value)
+	console.log(okay)
 }
 
 
