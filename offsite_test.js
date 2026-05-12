@@ -7,15 +7,15 @@ async function getData(my_url) {
       throw new Error(`Response status: ${response.status}`);
     }
 
-    const result = response.json();
-    console.log(response)
+    const result = response.text();
+    console.log(result)
     console.log(response.text())
 
   } catch (error) {
     console.error(error.message);
   }
 }
-alert("oh???")
+alert("okay just do the thing already for fucks")
 const char_name = document.getElementById("char_name");
 
 function destroy_all()
