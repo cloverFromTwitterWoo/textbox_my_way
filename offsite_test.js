@@ -7,7 +7,7 @@ async function getData(my_url) {
       throw new Error(`Response status: ${response.status}`);
     }
 
-    const result = await response().json();
+    const result = await response.json();
     alert("is exist?")
  
     alert(result);
