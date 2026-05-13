@@ -206,13 +206,13 @@ textbox_bg.innerHTML = box_selection
 let import_on_top = document.getElementById("text_bg_alt_est")
 
 let prebaked_boxes = {
-	undertale: [578, 152, "Undertale", "undertale", ["", "assets/textboxes/undertale.png", 0, 0, "#ffffff", "true"], "text", ["", "assets/fonts/determination_mono.png", false, 28, 26, 116, 0, true, false, 510], "port", ["", 72, 74, "2x_Scaling", true], "over", ["",-1,0,0,-1,-1,true]],
-	outertale: [578, 152, "PS!Outertale", "outertale", ["", "assets/textboxes/outertale.png", 0, 0, "#ffffff", "true"], "text", ["", "assets/fonts/determination_mono.png", false, 28, 26, 116, 0, true, false, 510], "port", ["", 72, 74, "2x_Scaling", true], "over"],
-	underswap: [578, 152, "TS!Underswap", "underswap", ["", "assets/textboxes/underswap.png", 0, 0, "#ffffff", "true"], "text", ["", "assets/fonts/determination_mono.png", false, 28, 26, 116, 0, true, false, 510], "port", ["", 72, 74, "2x_Scaling", true], "over"],
-	deltarune: [593, 167, "Deltarune", "deltarune", ["", "assets/textboxes/deltarune.png", 0, 0, "#ffffff", "true"], "text", ["", "assets/fonts/determination_mono.png", false, 36, 34, 116, 0, false, true, 510], "port", ["", 80, 82, "2x_Scaling", true], "over"],
+	undertale: [578, 152, "Undertale", "undertale", ["", "assets/textboxes/undertale.png", 0, 0, "#ffffff", "true"], "text", ["", "assets/fonts/determination_mono.png", false, 28, 26, 116, 0, true, false, 570], "port", ["", 72, 74, "2x_Scaling", true], "over", ["",-1,0,0,-1,-1,true]],
+	outertale: [578, 152, "PS!Outertale", "outertale", ["", "assets/textboxes/outertale.png", 0, 0, "#ffffff", "true"], "text", ["", "assets/fonts/determination_mono.png", false, 28, 26, 116, 0, true, false, 570], "port", ["", 72, 74, "2x_Scaling", true], "over"],
+	underswap: [578, 152, "TS!Underswap", "underswap", ["", "assets/textboxes/underswap.png", 0, 0, "#ffffff", "true"], "text", ["", "assets/fonts/determination_mono.png", false, 28, 26, 116, 0, true, false, 570], "port", ["", 72, 74, "2x_Scaling", true], "over"],
+	deltarune: [593, 167, "Deltarune", "deltarune", ["", "assets/textboxes/deltarune.png", 0, 0, "#ffffff", "true"], "text", ["", "assets/fonts/determination_mono.png", false, 36, 34, 116, 0, false, true, 570], "port", ["", 80, 82, "2x_Scaling", true], "over"],
 	delta2une: [593, 167, "Deltarune (Mini-Portraits)", "delta2une",["","assets/textboxes/deltarune.png",0,0,"#ffffff",true],"text",["","assets/fonts/determination_mono.png",false,36,34,44,0,false,true,false],"port",["1st",26,24,"2x_Scaler",true],["2nd",26,60,"2x_Scaler",true],["3rd",26,96,"2x_Scaler",true],"over"],
-	jumbo: [578, 188, "Undertale But Big", "jumbo", ["", "assets/textboxes/jumbo.png", 0, 0, "#ffffff", "true"], "text", ["", "assets/fonts/determination_mono.png", false, 28, 26, 116, 0, true, false, 510], "port", ["", 72, 74, "2x_Scaling", true], "over"],
-	cavestory: [488, 128, "Cave Story", "cavestory", ["", "assets/textboxes/cave_story.png", 0, 0, "#ffffff", "true"], "text", ["", "assets/fonts/courier_new.png", false, 27, 23, 110, 0, false, false, 430], "port", ["", 28, 20, "2x_Scaler", false], "over"],
+	jumbo: [578, 188, "Undertale But Big", "jumbo", ["", "assets/textboxes/jumbo.png", 0, 0, "#ffffff", "true"], "text", ["", "assets/fonts/determination_mono.png", false, 28, 26, 116, 0, true, false, 570], "port", ["", 72, 74, "2x_Scaling", true], "over"],
+	cavestory: [488, 128, "Cave Story", "cavestory", ["", "assets/textboxes/cave_story.png", 0, 0, "#ffffff", "true"], "text", ["", "assets/fonts/courier_new.png", false, 27, 23, 110, 0, false, false, 470], "port", ["", 28, 20, "2x_Scaler", false], "over"],
 }
 
 let font_selection = '\
@@ -1886,7 +1886,7 @@ function draw_text(pass_in)//(x,y,str)
 	var chr_height = pass_in.cur_font.naturalHeight/9 //!REMEMBER TO CHANGE LATER!
 	var per_char_spacing = [] //this is empty so it's monospaced
 	var line_break_height = Math.floor(chr_height*18/13)
-	var draw_line = true; //dont keep this on my man
+	var draw_line = false; //dont keep this on my man
 	var leftest_most = Number(copy(pass_in.x_pos.value)) + offset[0];
 	if(!pass_in.m_pos.checked)
 	{
