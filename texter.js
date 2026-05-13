@@ -2156,8 +2156,8 @@ function draw_text(pass_in)//(x,y,str)
 			{
 				ctx.strokeStyle = "red";
 				ctx.beginPath(); // Start a new path
-				ctx.moveTo(ctx.Number(pass_in.a_val.value) - leftest_most, 0);
-				ctx.lineTo(ctx.Number(pass_in.a_val.value) - leftest_most, 1000);
+				ctx.moveTo(Number(pass_in.a_val.value) - leftest_most, 0);
+				ctx.lineTo(Number(pass_in.a_val.value) - leftest_most, 1000);
 				ctx.stroke();
 			}
 			if(total_pos - leftest_most >= Number(pass_in.a_val.value) - leftest_most && !give_up)
