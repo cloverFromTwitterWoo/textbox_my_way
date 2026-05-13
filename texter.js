@@ -1886,6 +1886,8 @@ function draw_text(pass_in)//(x,y,str)
 	var chr_height = pass_in.cur_font.naturalHeight/9 //!REMEMBER TO CHANGE LATER!
 	var per_char_spacing = [] //this is empty so it's monospaced
 	var line_break_height = Math.floor(chr_height*18/13)
+	var draw_line = true; //dont keep this on my man
+	var leftest_most = Number(copy(pass_in.x_pos.value)) + offset[0];
 	if(!pass_in.m_pos.checked)
 	{
 		per_char_spacing = copy(pass_in.readThisBozo)
@@ -2150,7 +2152,15 @@ function draw_text(pass_in)//(x,y,str)
 					}
 				}
 			}
-			if(total_pos - draw_pos_x[1] >= Number(pass_in.a_val.value) - draw_pos_x[1] && !give_up)
+			if(draw_line)
+			{
+				ctx.strokeStyle = "red";
+				ctx.beginPath(); // Start a new path
+				ctx.moveTo(ctx.Number(pass_in.a_val.value) - leftest_most, 0);
+				ctx.lineTo(ctx.Number(pass_in.a_val.value) - leftest_most, 1000);
+				ctx.stroke();
+			}
+			if(total_pos - leftest_most >= Number(pass_in.a_val.value) - leftest_most && !give_up)
 			{
 				var look_str = str.slice(0, i)
 				draw_pos_x[0] = draw_pos_x[1]
