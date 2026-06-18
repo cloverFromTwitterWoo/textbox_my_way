@@ -2986,7 +2986,7 @@ if(auto_load_boxes != "")
 	for(let i = 0; i < the_boxes.length; i++)
 	{
 		//console.log(the_boxes)
-		getData(the_boxes[i])
+		getData(the_boxes[i].split('|')[0])
 	}
 }
 
@@ -2996,7 +2996,7 @@ if(auto_load_boxes != "")
 	var the_boxes = atob(auto_load_boxes).split('\n')
 	for(let i = 0; i < the_boxes.length; i++)
 	{
-		getData_Char(the_boxes[i])
+		getData_Char(the_boxes[i].split('|')[0])
 	}
 }
 
