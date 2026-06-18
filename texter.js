@@ -1427,6 +1427,16 @@ function new_over(def_name="", def_image=-1, def_x=0, def_y=0, def_w=-1, def_h=-
 	})
 	newOver.border.appendChild(newOver.chara_pos)
 
+	var vis_txt = document.createElement("span");
+	vis_txt.innerHTML = " Visible: "
+	//vis_txt.classList.add("complex")
+	newOver.border.appendChild(vis_txt)
+	newOver.v_pos = document.createElement("input");
+	newOver.v_pos.type = "checkbox"
+	newOver.v_pos.checked = def_v
+	//newOver.v_pos.classList.add("complex")
+	newOver.border.appendChild(newOver.v_pos)
+
 	/*newOver.image_post = document.createElement("span")
 	newOver.image_post.innerHTML = "[Selected]"
 	newOver.image_post.style = "display: none"*/
@@ -1488,10 +1498,6 @@ function new_over(def_name="", def_image=-1, def_x=0, def_y=0, def_w=-1, def_h=-
 	
 	newOver.border.appendChild(newOver.image_sel)
 
-	var cool_txt = document.createElement("span");
-	cool_txt.innerHTML = " "
-	newOver.border.appendChild(cool_txt)
-
 	newOver.border.appendChild(complex_br())
 	newOver.border.appendChild(complex_br())
 
@@ -1549,18 +1555,6 @@ function new_over(def_name="", def_image=-1, def_x=0, def_y=0, def_w=-1, def_h=-
 	newOver.h_pos.style = "width: 40px;"
 	newOver.h_pos.min = "-1"
 	newOver.border.appendChild(newOver.h_pos);
-
-	newOver.border.appendChild(complex_br())
-
-	var vis_txt = document.createElement("span");
-	vis_txt.innerHTML = "Visible: "
-	//vis_txt.classList.add("complex")
-	newOver.border.appendChild(vis_txt)
-	newOver.v_pos = document.createElement("input");
-	newOver.v_pos.type = "checkbox"
-	newOver.v_pos.checked = def_v
-	//newOver.v_pos.classList.add("complex")
-	newOver.border.appendChild(newOver.v_pos)
 
 	newOver.border.appendChild(complex_br())
 	newOver.border.appendChild(complex_br())
