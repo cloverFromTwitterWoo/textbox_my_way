@@ -2062,8 +2062,10 @@ function draw_text(pass_in)//(x,y,str)
 			portrait_blacka.drawImage(pass_in.cur_font,letter_info[0],letter_info[1],letter_info[2],letter_info[3],0,0,letter_info[2],letter_info[3])
 			var what_to = pass_in.c_type.value
 			var cool_pixels = portrait_blacka.getImageData(0,0,letter_info[2],letter_info[3], { colorSpace: "srgb", pixelFormat: "rgba-unorm8"}) //does this need something?
+			//var cool_pixels.data.length / letter_info[2]
 			for(var j = 3; j < cool_pixels.data.length; j += 4)
 			{
+				var letter_y = Math.floor(j / 4 / letter_info[2])
 				if(what_to == "multi")
 				{
 					cool_pixels.data[j-3] *= color.r / 255
@@ -2084,6 +2086,22 @@ function draw_text(pass_in)//(x,y,str)
 					cool_pixels.data[j-3] = color.r
 					cool_pixels.data[j-2] = color.g
 					cool_pixels.data[j-1] = color.b
+				}
+				if(pass_in.d_pos.checked && (what_to != "white" || (cool_pixels.data[j-3] == 255 && cool_pixels.data[j-2] == 255 && cool_pixels.data[j-1] == 255))
+				{
+					var white_to_add = 255 - (letter_y*128)
+					if(white_to_add > 0)
+					{
+						cool_pixels.data[j-3] += white_to_add
+						cool_pixels.data[j-2] += white_to_add
+						cool_pixels.data[j-1] += white_to_add
+						if(cool_pixels.data[j-3] > 255)
+						{cool_pixels.data[j-3] = 255}
+						if(cool_pixels.data[j-2] > 255)
+						{cool_pixels.data[j-2] = 255}
+						if(cool_pixels.data[j-1] > 255)
+						{cool_pixels.data[j-1] = 255}
+					}
 				}
 			}
 			portrait_blacka.putImageData(cool_pixels, 0, 0)
