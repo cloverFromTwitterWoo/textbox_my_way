@@ -2087,7 +2087,7 @@ function draw_text(pass_in)//(x,y,str)
 					cool_pixels.data[j-2] = color.g
 					cool_pixels.data[j-1] = color.b
 				}
-				if(pass_in.d_pos.checked)
+				if(pass_in.d_pos.checked || (what_to != "white" || (cool_pixels.data[j-3] == 255 && cool_pixels.data[j-2] == 255 && cool_pixels.data[j-1] == 255)))
 				{
 					var white_to_add = 255 - (letter_y*letter_info[3]/2)
 					if(white_to_add > 0)
