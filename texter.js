@@ -2087,6 +2087,22 @@ function draw_text(pass_in)//(x,y,str)
 					cool_pixels.data[j-2] = color.g
 					cool_pixels.data[j-1] = color.b
 				}
+				if(pass_in.d_pos.checked)
+				{
+					var white_to_add = 255 - (letter_y*128)
+					if(white_to_add > 0)
+					{
+						cool_pixels.data[j-3] += white_to_add
+						cool_pixels.data[j-2] += white_to_add
+						cool_pixels.data[j-1] += white_to_add
+						if(cool_pixels.data[j-3] > 255)
+						{cool_pixels.data[j-3] = 255}
+						if(cool_pixels.data[j-2] > 255)
+						{cool_pixels.data[j-2] = 255}
+						if(cool_pixels.data[j-1] > 255)
+						{cool_pixels.data[j-1] = 255}
+					}
+				}
 			}
 			portrait_blacka.putImageData(cool_pixels, 0, 0)
 			var blacked_out = portrait_blacked.toDataURL('image/png');
