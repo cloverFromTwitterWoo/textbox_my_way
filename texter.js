@@ -2089,7 +2089,7 @@ function draw_text(pass_in)//(x,y,str)
 				}
 				if(pass_in.d_pos.checked)
 				{
-					var white_to_add = 255 - (letter_y*128)
+					var white_to_add = 255 - (letter_y*letter_info[3]/2)
 					if(white_to_add > 0)
 					{
 						cool_pixels.data[j-3] += white_to_add
