@@ -2042,8 +2042,6 @@ function draw_text(pass_in)//(x,y,str)
 				{
 					if (dark_color.r == 15 && dark_color.g == 15 && dark_color.b == 112)
 					{
-						console.log(Math.floor(color.r * 0.3))
-						console.log(color.r)
 						cool_pixels.data[j-3] = Math.floor(color.r * 0.3)
 						cool_pixels.data[j-2] = Math.floor(color.g * 0.3)
 						cool_pixels.data[j-1] = Math.floor(color.b * 0.3)
@@ -2088,7 +2086,7 @@ function draw_text(pass_in)//(x,y,str)
 						bottom_most = Math.floor(j/4/letter_info[2])
 					}
 				}
-				console.log(top_most, bottom_most)
+				var letter_height = bottom_most - top_most
 			}
 			for(var j = 3; j < cool_pixels.data.length; j += 4)
 			{
@@ -2116,7 +2114,8 @@ function draw_text(pass_in)//(x,y,str)
 				}
 				if(pass_in.d_pos.checked && (what_to != "white" || (cool_pixels.data[j-3] == 255 && cool_pixels.data[j-2] == 255 && cool_pixels.data[j-1] == 255)))
 				{
-					var white_to_add = 255 - (letter_y*letter_info[3]/2)
+					var white_to_add = Math.floor(255 - (255/letter_height)*(letter_y-top_most))
+					console.log(white_to_add)
 					if(white_to_add > 0)
 					{
 						cool_pixels.data[j-3] += white_to_add
