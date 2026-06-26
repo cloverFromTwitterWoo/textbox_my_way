@@ -2115,18 +2115,11 @@ function draw_text(pass_in)//(x,y,str)
 				if(pass_in.d_pos.checked && (what_to != "white" || (cool_pixels.data[j-3] == 255 && cool_pixels.data[j-2] == 255 && cool_pixels.data[j-1] == 255)))
 				{
 					var white_to_add = (255/letter_height)*(letter_y-top_most)
-					console.log(white_to_add)
-					if(white_to_add > 0)
+					if(letter_y >= top_most && letter_y <= bottom_most)
 					{
-						cool_pixels.data[j-3] += white_to_add
-						cool_pixels.data[j-2] += white_to_add
-						cool_pixels.data[j-1] += white_to_add
-						if(cool_pixels.data[j-3] > 255)
-						{cool_pixels.data[j-3] = 255}
-						if(cool_pixels.data[j-2] > 255)
-						{cool_pixels.data[j-2] = 255}
-						if(cool_pixels.data[j-1] > 255)
-						{cool_pixels.data[j-1] = 255}
+						cool_pixels.data[j-3] = cool_pixels.data[j-3] + (255 - cool_pixels.data[j-3])*((letter_y-top_most)/bottom_most)
+						cool_pixels.data[j-2] = cool_pixels.data[j-2] + (255 - cool_pixels.data[j-2])*((letter_y-top_most)/bottom_most)
+						cool_pixels.data[j-1] = cool_pixels.data[j-1] + (255 - cool_pixels.data[j-1])*((letter_y-top_most)/bottom_most)
 					}
 				}
 			}
