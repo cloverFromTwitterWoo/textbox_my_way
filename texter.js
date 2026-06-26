@@ -3056,6 +3056,15 @@ if(auto_load_boxes != "")
 		button_container.appendChild(new_button);
 	}
 }
+else
+{
+	paste_br = document.getElementById("paste_line")
+	paste_hr = document.getElementById("paste_break")
+	button_container.remove();
+	clipboard_display.remove();
+	paste_hr.remove();
+	paste_br.remove();
+}
 
 //draw_canvas()
 //setTimeout(draw_canvas, 1080)

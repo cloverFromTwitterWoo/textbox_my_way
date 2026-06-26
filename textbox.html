@@ -79,22 +79,21 @@
 	<button onclick="draw_canvas()">Generate Box</button>
 	<button class="complex" onclick="save_box()">Save Custom Box</button>
 	<br>
+	<canvas id="stack_work" style="display:none" width="590" height="0"></canvas>
+	<img id="canvasStack" style="display:none"></img>
+	<hr id="paste_line">
+	<div id="paste_holder">[CLIPBOARD PASTE GOES HERE]</div>
+	<br id="paste_break">
+	<div class="container" id="quick_paste"></div>
 	<hr>
 	<br>
 	<span>Stack Width: </span><input type="number" id="stack_width" value="1" style="width: 25px;" min="1" max="9"/>
 	<span> Margin: </span><input type="checkbox" id="margersimpson" checked="true"><span> Pixels: <span><input type="number" min="0" id="marger_stack" value="6" style="width: 30px;"><span>px </span><span> Double-Margin: </span><input type="checkbox" checked="true" id="greensimpson">
 	<br>
-	<canvas id="stack_work" style="display:none" width="590" height="0"></canvas>
-	<img id="canvasStack" style="display:none"></img>
-	<hr>
-	<div id="paste_holder">[CLIPBOARD PASTE GOES HERE]</div>
-	<br>
-	<div class="container" id="quick_paste">
-	</div>
-	<hr>
 	<button onclick="box_stack_add()">Add to Stack</button>
 	<button onclick="box_stack_update()">Refresh Stack</button>
 	<button onclick="stack_reset()">Clear Stack</button> 
+	<img id="canvasStack" style="display:none"></img>
     </main>
     <script src="texter.js"></script>
   </body>
