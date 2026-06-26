@@ -2045,8 +2045,8 @@ function draw_text(pass_in)//(x,y,str)
 						console.log(Math.floor(color.r * 0.3))
 						console.log(color.r)
 						cool_pixels.data[j-3] = Math.floor(color.r * 0.3)
-						cool_pixels.data[j-2] = color.g//Math.floor(color.g * 0.3)
-						cool_pixels.data[j-1] = color.b//Math.floor(color.b * 0.3)
+						cool_pixels.data[j-2] = Math.floor(color.g * 0.3)
+						cool_pixels.data[j-1] = Math.floor(color.b * 0.3)
 					}
 					else
 					{
@@ -2073,6 +2073,23 @@ function draw_text(pass_in)//(x,y,str)
 			var what_to = pass_in.c_type.value
 			var cool_pixels = portrait_blacka.getImageData(0,0,letter_info[2],letter_info[3], { colorSpace: "srgb", pixelFormat: "rgba-unorm8"}) //does this need something?
 			//var cool_pixels.data.length / letter_info[2]
+			if(pass_in.d_pos.checked && !(cool_pixels.data[j-3] == 255 && cool_pixels.data[j-2] == 255 && cool_pixels.data[j-1] == 255))
+			{
+				var top_most = -1
+				var bottom_most = 0
+				for(var j = 3; j < cool_pixels.data.length; j += 4)
+				{
+					if(cool_pixels.data[j] != 0)
+					{
+						if(top_most == -1)
+						{
+							top_most = Math.floor(j/4/letter_info[2])
+						}
+						bottom_most = Math.floor(j/4/letter_info[2])
+					}
+				}
+				console.log(top_most, bottom_most)
+			}
 			for(var j = 3; j < cool_pixels.data.length; j += 4)
 			{
 				var letter_y = Math.floor(j / 4 / letter_info[2])
