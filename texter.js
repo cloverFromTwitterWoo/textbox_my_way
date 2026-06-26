@@ -2025,7 +2025,7 @@ function draw_text(pass_in)//(x,y,str)
 		}
 		else
 		{
-			if(dark_color.r == 15 && out_color.g == 15 && out_color.b == 112)
+			if(dark_color.r == 15 && out_color.g == 15 && out_color.b == 112 && color.r == 255 && color.g == 255 && color.b == 255)
 			{
 				ctx.drawImage(pass_in.cur_dw,letter_info[0],letter_info[1],letter_info[2],letter_info[3], draw_pos_x[0]+1+letter_posed[0], draw_pos_y[0]+1+letter_posed[1], letter_info[2],letter_info[3])
 			}
@@ -2037,13 +2037,21 @@ function draw_text(pass_in)//(x,y,str)
 				portrait_blacka.imageSmoothingEnabled = false
 				canvas.imageSmoothingEnabled = false
 				portrait_blacka.drawImage(pass_in.cur_font,letter_info[0],letter_info[1],letter_info[2],letter_info[3],0,0,letter_info[2],letter_info[3])
-				var what_to = "whole"
 				var cool_pixels = portrait_blacka.getImageData(0,0,letter_info[2],letter_info[3], { colorSpace: "srgb", pixelFormat: "rgba-unorm8"}) //does this need something?
 				for(var j = 3; j < cool_pixels.data.length; j += 4)
 				{
-					cool_pixels.data[j-3] = dark_color.r
-					cool_pixels.data[j-2] = dark_color.g
-					cool_pixels.data[j-1] = dark_color.b
+					if (dark_color.r == 15 && out_color.g == 15 && out_color.b == 112)
+					{
+						cool_pixels.data[j-3] = Math.floor(color.r * 0.3)
+						cool_pixels.data[j-2] = Math.floor(color.g * 0.3)
+						cool_pixels.data[j-1] = Math.floor(color.b * 0.3)
+					}
+					else
+					{
+						cool_pixels.data[j-3] = dark_color.r
+						cool_pixels.data[j-2] = dark_color.g
+						cool_pixels.data[j-1] = dark_color.b
+					}
 				}
 				portrait_blacka.putImageData(cool_pixels, 0, 0)
 				var blacked_out = portrait_blacked.toDataURL('image/png');
