@@ -38,7 +38,8 @@ const marge_stack = document.getElementById("margersimpson");
 const marge_second_stack = document.getElementById("marger_stack");
 const marge_green = document.getElementById("greensimpson");
 
-//todo: impliment cookies!!!  but thats super optional so dw abut it
+const button_container = document.getElementById("quick_paste");
+const clipboard_display = document.getElementById("paste_holder");
 
 function setCookie(cname, cvalue, exdays) {
   const d = new Date();
@@ -3032,6 +3033,27 @@ if(auto_load_boxes != "")
 	for(let i = 0; i < the_boxes.length; i++)
 	{
 		getData_Char(the_boxes[i].split('|')[0])
+	}
+}
+
+function show_clipboard(new_value)
+{
+	clipboard_display.innerHTML = new_value
+}
+
+auto_load_boxes = getCookie("paste_saves");
+//auto_load_boxes = btoa("Bleh|Bleh")
+if(auto_load_boxes != "")
+{
+	var the_boxes = atob(auto_load_boxes).split('\n')
+	for(let i = 0; i < the_boxes.length; i++)
+	{
+		var textssss = the_boxes[i].split('|')
+		const new_button = document.createElement('button')
+		new_button.innerHTML = textssss[0]
+		new_button.value = textssss[1]
+		new_button.onclick = function() {show_clipboard(this.value)}
+		button_container.appendChild(new_button);
 	}
 }
 

@@ -22,6 +22,7 @@ function getCookie(cname) {
 
 const box_links = document.getElementById("box_area");
 const char_links = document.getElementById("char_area");
+const paste_saves = document.getElementById("paste_area");
 
 var auto_boxes = getCookie("auto_boxes");
 if(auto_boxes == "")
@@ -35,6 +36,12 @@ if(auto_boxes == "")
 else
 {char_links.innerHTML = atob(auto_boxes)}
 
+auto_boxes = getCookie("paste_saves");
+if(auto_boxes == "")
+{setCookie("paste_saves", "", 365*10)}
+else
+{paste_saves.innerHTML = atob(auto_boxes)}
+
 function set_textbox()
 {
 	//console.log(box_links.value)
@@ -46,4 +53,10 @@ function set_characters()
 {
 	setCookie("auto_chars", btoa(char_links.value), 365*10)
 	alert("Character auto-load updated!")
+}
+
+function set_paste()
+{
+	setCookie("paste_saves", btoa(paste_saves.value), 365*10)
+	alert("Clipboard updated!")
 }

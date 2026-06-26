@@ -33,3 +33,10 @@ textarea {
   border: 2px dashed lightGray;
   padding: 2px;
 }
+
+.container {
+  display: grid;
+  width: 500px;
+  grid-template-columns: auto auto auto;
+  border: 2px solid Gray;
+}
