@@ -2117,9 +2117,9 @@ function draw_text(pass_in)//(x,y,str)
 					var white_to_add = (255/letter_height)*(letter_y-top_most)
 					if(letter_y >= top_most && letter_y <= bottom_most)
 					{
-						cool_pixels.data[j-3] = 255 - (cool_pixels.data[j-3] + (255 - cool_pixels.data[j-3])*((letter_y-top_most)/bottom_most))
-						cool_pixels.data[j-2] = 255 - (cool_pixels.data[j-2] + (255 - cool_pixels.data[j-2])*((letter_y-top_most)/bottom_most))
-						cool_pixels.data[j-1] = 255 - (cool_pixels.data[j-1] + (255 - cool_pixels.data[j-1])*((letter_y-top_most)/bottom_most))
+						cool_pixels.data[j-3] = (255 + (cool_pixels.data[j-3] - 255)*((letter_y-top_most)/bottom_most))
+						cool_pixels.data[j-2] = (255 + (cool_pixels.data[j-2] - 255)*((letter_y-top_most)/bottom_most))
+						cool_pixels.data[j-1] = (255 + (cool_pixels.data[j-1] - 255)*((letter_y-top_most)/bottom_most))
 					}
 				}
 			}
