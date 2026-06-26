@@ -2042,6 +2042,8 @@ function draw_text(pass_in)//(x,y,str)
 				{
 					if (dark_color.r == 15 && dark_color.g == 15 && dark_color.b == 112)
 					{
+						console.log(Math.floor(color.r * 0.3))
+						console.log(color.r)
 						cool_pixels.data[j-3] = color.r//Math.floor(color.r * 0.3)
 						cool_pixels.data[j-2] = color.g//Math.floor(color.g * 0.3)
 						cool_pixels.data[j-1] = color.b//Math.floor(color.b * 0.3)
