@@ -2025,7 +2025,7 @@ function draw_text(pass_in)//(x,y,str)
 		}
 		else
 		{
-			if(dark_color.r == 15 && out_color.g == 15 && out_color.b == 112 && color.r == 255 && color.g == 255 && color.b == 255)
+			if(dark_color.r == 15 && dark_color.g == 15 && dark_color.b == 112 && color.r == 255 && color.g == 255 && color.b == 255)
 			{
 				ctx.drawImage(pass_in.cur_dw,letter_info[0],letter_info[1],letter_info[2],letter_info[3], draw_pos_x[0]+1+letter_posed[0], draw_pos_y[0]+1+letter_posed[1], letter_info[2],letter_info[3])
 			}
@@ -2040,7 +2040,7 @@ function draw_text(pass_in)//(x,y,str)
 				var cool_pixels = portrait_blacka.getImageData(0,0,letter_info[2],letter_info[3], { colorSpace: "srgb", pixelFormat: "rgba-unorm8"}) //does this need something?
 				for(var j = 3; j < cool_pixels.data.length; j += 4)
 				{
-					if (dark_color.r == 15 && out_color.g == 15 && out_color.b == 112)
+					if (dark_color.r == 15 && dark_color.g == 15 && dark_color.b == 112)
 					{
 						cool_pixels.data[j-3] = Math.floor(color.r * 0.3)
 						cool_pixels.data[j-2] = Math.floor(color.g * 0.3)
