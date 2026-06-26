@@ -2114,7 +2114,7 @@ function draw_text(pass_in)//(x,y,str)
 				}
 				if(pass_in.d_pos.checked && (what_to != "white" || (cool_pixels.data[j-3] == 255 && cool_pixels.data[j-2] == 255 && cool_pixels.data[j-1] == 255)))
 				{
-					var white_to_add = Math.floor(255 - (255/letter_height)*(letter_y-top_most))
+					var white_to_add = (255/letter_height)*(letter_y-top_most)
 					console.log(white_to_add)
 					if(white_to_add > 0)
 					{
