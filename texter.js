@@ -255,6 +255,9 @@ let over_options = '\
 <option value="none">None</option><option value="custom">Custom</option><option value="assets/overlays/fog.png">Fog</option>\
 <option value="assets/overlays/evil_glow.png">Red Glow</option><option value="assets/overlays/snowdin.png">Snow</option><option value="assets/overlays/scanlines.png">Scanlines</option>'
 
+let over_blend_options = '\
+<option value="source-over">Default</option><option value="multiply">Multiply</option>'
+
 function refresh_box_list()
 {
 	for(var i = 0; i < list_of_boxes.length; i++)
@@ -1371,7 +1374,7 @@ function new_port(def_name="", def_x=0, def_y=0, def_s="2x_Scaling", def_o=true,
 	newPort.s_pos.dispatchEvent(event);
 }
 
-function new_over(def_name="", def_image=-1, def_x=0, def_y=0, def_w=-1, def_h=-1, def_v=true)
+function new_over(def_name="", def_image=-1, def_x=0, def_y=0, def_w=-1, def_h=-1, def_v=true, def_c="source-over")
 {
 	var newOver = {};
 	newOver.border = document.createElement("div");
@@ -1558,6 +1561,20 @@ function new_over(def_name="", def_image=-1, def_x=0, def_y=0, def_w=-1, def_h=-
 	newOver.border.appendChild(newOver.h_pos);
 
 	newOver.border.appendChild(complex_br())
+
+	var c_txt = document.createElement("span");
+	c_txt.innerHTML = "Blend Mode: "
+	c_txt.classList.add("complex")
+	newOver.border.appendChild(c_txt)
+
+	newOver.c_pos = document.createElement("select");
+	newOver.c_pos.innerHTML = over_blend_options
+	newOver.c_pos.value = def_c
+	newOver.c_pos.classList.add("complex")
+	
+	newOver.border.appendChild(newOver.c_pos)
+
+	newOver.border.appendChild(complex_br())
 	newOver.border.appendChild(complex_br())
 
 	/*newOver.removeButt = document.createElement("button");
@@ -1733,7 +1750,14 @@ function loader_up(awesome_template, remove_old=true)
 	i++
 	while(i < awesome_template.length && typeof(awesome_template[i]) != "string")
 	{
-		new_over(awesome_template[i][0], awesome_template[i][1], awesome_template[i][2], awesome_template[i][3], awesome_template[i][4], awesome_template[i][5], awesome_template[i][6])
+		if(awesome_template[i].length == 7)
+		{
+			new_over(awesome_template[i][0], awesome_template[i][1], awesome_template[i][2], awesome_template[i][3], awesome_template[i][4], awesome_template[i][5], awesome_template[i][6])
+		}
+		else
+		{
+			new_over(awesome_template[i][0], awesome_template[i][1], awesome_template[i][2], awesome_template[i][3], awesome_template[i][4], awesome_template[i][5], awesome_template[i][6], awesome_template[i][7])
+		}
 		i++
 	}
 	
@@ -2494,6 +2518,7 @@ function draw_canvas()
 				var my_y_pos = Number(list_of_over[i].y_pos.value)
 				var my_w_pos = Number(list_of_over[i].w_pos.value)
 				var my_h_pos = Number(list_of_over[i].h_pos.value)
+				var my_c_pos = Number(list_of_over[i].c_pos.value)
 				if(my_w_pos == -1)
 				{
 					my_w_pos = box_size[2]
@@ -2502,7 +2527,9 @@ function draw_canvas()
 				{
 					my_h_pos = box_size[3]
 				}
+				if(my_c_pos == "multiply") { ctx.globalCompositeOperation = "multiply" }
 				ctx.drawImage(list_of_over[i].image,0,0,my_w_pos-my_x_pos,my_h_pos-my_y_pos,offset[0]+my_x_pos,offset[1]+my_y_pos,my_w_pos-my_x_pos,my_h_pos-my_y_pos)
+				ctx.globalCompositeOperation = "source-over"
 			}
 		}
 		const dataURL = canvas.toDataURL('image/png');
@@ -2871,6 +2898,7 @@ function save_box()
 		save_array[save_array.length-1].push(list_of_over[i].w_pos.value)
 		save_array[save_array.length-1].push(list_of_over[i].h_pos.value)
 		save_array[save_array.length-1].push(list_of_over[i].v_pos.checked)
+		save_array[save_array.length-1].push(list_of_over[i].c_pos.value)
 		if(i + 1 < list_of_over.length)
 		{
 			save_array.push([])
