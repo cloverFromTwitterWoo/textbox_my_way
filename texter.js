@@ -203,6 +203,7 @@ let box_selection = '\
 
 textbox_bg.innerHTML = box_selection
 
+let paste_what = ""
 
 let import_on_top = document.getElementById("text_bg_alt_est")
 
@@ -989,6 +990,21 @@ function new_text(def_name="", def_font="assets/fonts/determination_mono.png", d
 		text_list_swap(which_text, 1)
 	}
 	newText.border.appendChild(newText.downButt)
+
+	var space_txt = document.createElement("span");
+	space_txt.innerHTML = " "
+	newText.border.appendChild(space_txt)
+
+	newText.pasteButt = document.createElement("button");
+	newText.pasteButt.innerHTML = "Paste"
+	newText.pasteButt.id = "textP_" + String(list_of_text.length)
+	newText.pasteButt.onclick = function() 
+	{
+		var which_text = Number(this.id.substring(6))
+		
+		list_of_text[which_text].text.value = list_of_text[which_text].text.value + paste_what
+	}
+	newText.border.appendChild(newText.pasteButt)
 
 	text_container.appendChild(newText.border)
 	newText.linebreak = complex_br()
@@ -2527,7 +2543,6 @@ function draw_canvas()
 				{
 					my_h_pos = box_size[3]
 				}
-				console.log(my_c_pos)
 				if(my_c_pos == "multiply") { ctx.globalCompositeOperation = "multiply" }
 				ctx.drawImage(list_of_over[i].image,0,0,my_w_pos-my_x_pos,my_h_pos-my_y_pos,offset[0]+my_x_pos,offset[1]+my_y_pos,my_w_pos-my_x_pos,my_h_pos-my_y_pos)
 				ctx.globalCompositeOperation = "source-over"
@@ -3065,15 +3080,18 @@ if(auto_load_boxes != "")
 	}
 }
 
-function show_clipboard(new_value)
+/*function show_clipboard(new_value)
 {
 	clipboard_display.innerHTML = new_value
-}
+}*/
 
 auto_load_boxes = getCookie("paste_saves");
 //auto_load_boxes = btoa("Bleh|Bleh")
 if(auto_load_boxes != "")
 {
+	clipboard_display.remove();
+	paste_hr = document.getElementById("paste_break")
+	paste_br.remove();
 	var the_boxes = atob(auto_load_boxes).split('\n')
 	for(let i = 0; i < the_boxes.length; i++)
 	{
@@ -3081,7 +3099,7 @@ if(auto_load_boxes != "")
 		const new_button = document.createElement('button')
 		new_button.innerHTML = textssss[0]
 		new_button.value = textssss[1]
-		new_button.onclick = function() {show_clipboard(this.value)}
+		new_button.onclick = function() {paste_what = this.value}
 		button_container.appendChild(new_button);
 	}
 }
