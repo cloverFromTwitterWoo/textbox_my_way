@@ -3091,7 +3091,7 @@ if(auto_load_boxes != "")
 {
 	clipboard_display.remove();
 	paste_hr = document.getElementById("paste_break")
-	paste_br.remove();
+	paste_hr.remove();
 	var the_boxes = atob(auto_load_boxes).split('\n')
 	for(let i = 0; i < the_boxes.length; i++)
 	{
