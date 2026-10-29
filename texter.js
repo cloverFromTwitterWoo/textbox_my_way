@@ -2527,6 +2527,7 @@ function draw_canvas()
 				{
 					my_h_pos = box_size[3]
 				}
+				alert(my_c_pos)
 				if(my_c_pos == "multiply") { ctx.globalCompositeOperation = "multiply" }
 				ctx.drawImage(list_of_over[i].image,0,0,my_w_pos-my_x_pos,my_h_pos-my_y_pos,offset[0]+my_x_pos,offset[1]+my_y_pos,my_w_pos-my_x_pos,my_h_pos-my_y_pos)
 				ctx.globalCompositeOperation = "source-over"
