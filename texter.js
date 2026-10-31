@@ -3086,7 +3086,10 @@ if(auto_load_boxes != "")
 }*/
 
 auto_load_boxes = getCookie("paste_saves");
-//auto_load_boxes = btoa("Bleh|Bleh")
+//auto_load_boxes = btoa("Bleh|Bleh\nBleh|Bleh")
+
+let paste_boxes = []
+
 if(auto_load_boxes != "")
 {
 	clipboard_display.remove();
@@ -3099,8 +3102,24 @@ if(auto_load_boxes != "")
 		const new_button = document.createElement('button')
 		new_button.innerHTML = textssss[0]
 		new_button.value = textssss[1]
-		new_button.onclick = function() {paste_what = this.value}
+		new_button.style.backgroundColor = "#EEEEEE"
+		new_button.style.border = "2px outset #ccc"
+		new_button.onclick = function() 
+		{
+			paste_what = this.value
+			console.log("TEST")
+			for(var i = 0; i < paste_boxes.length; i++)
+			{
+				paste_boxes[i].style.backgroundColor = "#EEEEEE"
+				paste_boxes[i].style.border = "2px outset #ccc"
+			}
+			//this.style.backgroundColor = "#C1C1C1"
+
+			this.style.backgroundColor = "#eeeec4"
+			new_button.style.border = "2px outset #cccca0"
+		}
 		button_container.appendChild(new_button);
+		paste_boxes.push(new_button);
 	}
 }
 else
